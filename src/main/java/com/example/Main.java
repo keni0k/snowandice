@@ -25,6 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -48,10 +49,26 @@ public class Main {
     SpringApplication.run(Main.class, args);
   }
 
-  @RequestMapping("/")
+  @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
   String index() {
     return "index";
   }
+
+  @RequestMapping("/shop")
+  String shop() {
+    return "shop";
+  }
+
+  @RequestMapping("/cart")
+  String cart() {
+    return "cart";
+  }
+
+  @RequestMapping("single-product")
+  String singleProduct(){ return "single-product"; }
+
+  @RequestMapping("checkout")
+  String checkout(){ return "checkout"; }
 
   @RequestMapping("/db")
   String db(Map<String, Object> model) {

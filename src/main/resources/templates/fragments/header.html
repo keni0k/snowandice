@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="header (template, menu)">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Магазин-мастерская Цифровой Центр</title>
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'/>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+
+    <link rel="shortcut icon" href="/img/icon.ico">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/owl.carousel.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/responsive.css"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div class="header-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="header-left">
+                    <ul class="list-unstyled list-inline">
+                        <li class="dropdown dropdown-small">
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">Ваш город: </span><span class="value">Горно-Алтайск </span><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Барнаул</a></li>
+                                <li><a href="#">Бийск</a></li>
+                                <li><a href="#">Новосибирск</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+                <div class="user-menu">
+                    <ul>
+                        <li><a href="#">О магазине</a></li>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#" style="display: inline;padding-right:0;margin-right:1px;">
+                            <i class="fa fa-user"></i> Вход</a>
+                            <span style="color: #888;">/</span>
+                            <a href="#" style="display: inline;padding-left:0;"> Регистрация</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End header area -->
+
+<div class="site-branding-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="logo">
+                    <a href="/index">
+                        <img src="/img/logo.png"/>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="shopping-item">
+                    <a href="/cart"><i class="fa fa-shopping-cart"></i><span class="cart-amunt">$800</span>  <span class="product-count">5</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End site branding area -->
+
+<div class="mainmenu-area">
+    <div class="container">
+        <div class="row">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li th:class="${menu}=='index'?'active':''"><a href="/index">Home</a></li>
+                    <li th:class="${menu}=='shop'?'active':''"><a href="/shop">Shop page</a></li>
+                    <li th:class="${menu}=='single-product'?'active':''"><a href="/single-product">Single product</a></li>
+                    <li th:class="${menu}=='cart'?'active':''"><a href="/cart">Cart</a></li>
+                    <li th:class="${menu}=='checkout'?'active':''"><a href="/checkout">Checkout</a></li>
+                    <li th:class="${menu}=='category'?'active':''"><a href="#">Category</a></li>
+                    <li th:class="${menu}=='others'?'active':''"><a href="#">Others</a></li>
+                    <li th:class="${menu}=='contact'?'active':''"><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> <!-- End mainmenu area -->
+
+<div th:replace="${template}"></div>
+
+</body>
+</html>

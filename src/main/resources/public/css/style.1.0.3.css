@@ -12,7 +12,7 @@
     display: block;
     margin: 0 auto 15px;
 }
-a:focus { outline: 0px solid }
+a:focus { outline: 0 solid }
 img {
     max-width: 100%;
     height: auto;
@@ -91,8 +91,13 @@ z-index: 999;}
     float: right;
     font-size: 18px;
     margin-top: 40px;
-    padding: 10px;
+    padding: 7px 10px;
     position: relative;
+    border-radius: 21px;
+}
+
+.shopping-item a{
+    color: #05318c;
 }
 
 .cart-amunt {
@@ -183,9 +188,9 @@ z-index: 9;
   top: 0;
   width: 100%;
 }
-.slide-one {background-image: url(../../WEB-INF/img/slide-1.jpg)}
-.slide-two {background-image: url(../../WEB-INF/img/slide-2.jpg)}
-.slide-three {background-image: url(../../WEB-INF/img/slide-3.jpg)}
+.slide-one {background-image: url(../img/slide-1.jpg)}
+.slide-two {background-image: url(../img/slide-2.jpg)}
+.slide-three {background-image: url(../img/slide-3.jpg)}
 .slide-text {color: #fff;font-size: 18px;font-weight: 200}
 .slide-text h2 {
   font-size: 45px;font-weight: 200
@@ -229,7 +234,7 @@ z-index: 9;
 .brands-area {
   background: none repeat scroll 0 0 #05318c;
   color: #fff;
-  padding: 0px 0 200px;
+  padding: 0 0 200px;
 }
 
 .promo-area .zigzag-bottom, .brands-area .zigzag-bottom{background: #fff}
@@ -291,8 +296,9 @@ z-index: 9;
     width: 80%;z-index: 99;transition: .4s;
 }
 .product-hover a:hover {
-  background: #000;
-  text-decoration: none;border-color: #444;
+    color: #05318c;;
+    background: #ffffff;
+    text-decoration: none;border-color: #444;
 }
 .product-carousel-price ins {
   color: #05318c;
@@ -364,7 +370,7 @@ z-index: 9;
 .maincontent-area {padding-bottom: 170px}
 
 .product-wid-title {
-  font-family: raleway;
+    font-family: raleway, serif;
   font-size: 30px;
   font-weight: 100;
   margin-bottom: 40px;
@@ -429,7 +435,7 @@ padding: 35px 0 180px;}
   color: #05318c;
 }
 .footer-wid-title {
-  font-family: raleway;
+    font-family: raleway, serif;
   font-size: 30px;
   font-weight: 100;color: #fff
 }
@@ -479,19 +485,19 @@ padding: 35px 0 180px;}
 }
 .newsletter-form input[type="submit"] {
     background: none repeat scroll 0 0 #05318c;
-    border: medium none;
     color: #fff;
     display: inline-block;
     font-size: 18px;
     padding: 7px 20px;
-    text-transform: uppercase;border: 1px solid #05318c;
+    text-transform: uppercase;
+    border: 1px solid #05318c;
 }
 .newsletter-form input[type="submit"]:hover {background: #222;border-color: #666}
 .newsletter-form {
     margin-top: 25px;
 }
-a {color: #05318c}
-a:hover, a:focus {color: #17a78b}
+a {color: #008ec6}
+a:hover, a:focus {color: #05318c;text-decoration: none;}
 .footer-bottom-area {
   background: none repeat scroll 0 0 #000;
   color: #fff;
@@ -551,10 +557,10 @@ width: 10px;
   margin: 10px 0 0;
 }
 
-.product-big-title-area {background: url(../../WEB-INF/img/crossword.png) repeat scroll 0 0 #05318c}
+.product-big-title-area {background: url(../img/crossword.png) repeat scroll 0 0 #05318c}
 
 .product-bit-title h2 {
-  font-family: raleway;
+    font-family: raleway, serif;
   font-size: 50px;
   font-weight: 200;
   margin: 0;
@@ -567,7 +573,7 @@ width: 10px;
   padding: 24px 0 130px;
 }
 .sidebar-title {
-    color: #3dc6ab;
+    color: #1556aa;
     font-size: 25px;
     margin-bottom: 30px;
     text-transform: uppercase;
@@ -581,12 +587,12 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
 }
 input[type="submit"], button[type=submit] {
     background: none repeat scroll 0 0 #05318c;
-    border: medium none;
+    border: 1px solid #ddd;
     color: #fff;
     padding: 11px 20px;
     text-transform: uppercase;
 }
-input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
+input[type="submit"]:hover, button[type=submit]:hover {background-color: #fff;color:#05318c}
 .single-sidebar input[type="text"] {
     margin-bottom: 10px;
     width: 100%;
@@ -675,7 +681,8 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
 .quantity input[type="number"] {
     border: 1px solid #05318c;
     padding: 5px;
-    width: 50px;
+    height: 44px;
+    width: 60px;
 }
 .add_to_cart_button {
     background: none repeat scroll 0 0 #05318c;
@@ -748,7 +755,7 @@ form.cart {
 .related-products-wrapper {
   margin-top: 30px;
 }
-.related-products-title {color: #3dc6ab;
+.related-products-title {color: #05318c;
 font-size: 25px;
 margin-bottom: 30px;
 text-transform: uppercase;}
@@ -1011,4 +1018,56 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 
 .login-registr span{
     color: #888;
+}
+
+.search-button {
+    height: 42px;
+    width: 42px;
+    position: absolute;
+    top: 0;
+    right: 15px;
+    cursor: pointer;
+    border-radius: 21px;
+}
+.search-button:before {
+    content: "\f002";
+    font-family: FontAwesome, serif;
+    font-size: 16px;
+    right: 12px;
+    top: 8px;
+    position: absolute;
+}
+
+.search-placeholder{
+    border-radius: 21px;
+    width: -webkit-fill-available;
+}
+
+.q-phone-block{
+    float: right;
+    margin-top: 40px;
+}
+
+.q-phone-block .number {
+    font-size: 22px;
+    font-weight: bold;
+    color: #3f454b;
+    font-family: Schlange, Helvetica, Arial, sans-serif;
+    margin: 0;
+}
+
+.headerCallback a{
+    border-bottom: 1px dotted;
+    height: 20px;
+    text-decoration: none;
+    font-size: 11px;
+}
+
+.headerCallback a:hover{
+    border-bottom: none;
+}
+
+.headerCallback {
+    right: 34px;
+    position: absolute;
 }

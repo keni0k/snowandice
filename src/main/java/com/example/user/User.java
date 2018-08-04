@@ -6,15 +6,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
+@Table(name = "user", schema = "public")
 public class User implements UserDetails{
 
     public long getId() {
@@ -23,6 +21,7 @@ public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
     @LoginConstraint
     private String login = "";
@@ -32,20 +31,13 @@ public class User implements UserDetails{
     private int type = 0;
     private String email = "";
     private String firstName = "";
-    private float rate = 0;
     private String phoneNumber = "";
-    private String about = "";
     private String city = "";
     private String token = "";
-    private String imageUrl = "";
     private String role = "";
     private String time = "";
     private String vk = "";
-    private String telegram = "";
     private int reviewsCount = 0;
-
-    private String dateAndPlaceOfPassport = "";
-    private String seriesAndNumberOfPassport = "";
 
 
     public String getTime() {
@@ -125,28 +117,12 @@ public class User implements UserDetails{
         this.firstName = firstName;
     }
 
-    public float getRate() {
-        return rate;
-    }
-
-    public void setRate(float rate) {
-        this.rate = rate;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
     }
 
     public String getCity() {
@@ -165,18 +141,6 @@ public class User implements UserDetails{
         this.token = token;
     }
 
-    public String getImageUrl() {
-        return Consts.URL_PATH + imageUrl;
-    }
-
-    public String getImageToken(){
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public int getReviewsCount() {
         return reviewsCount;
     }
@@ -185,23 +149,16 @@ public class User implements UserDetails{
         this.reviewsCount = reviewsCount;
     }
 
-    public float getFloatRate(){
-        return (float)rate/reviewsCount;
-    }
-
-    public User(String login, String pass, String lastName, int type, String email, String firstName, int rate, String phoneNumber, String about, String city, String token, String imageUrl) {
+    public User(String login, String pass, String lastName, int type, String email, String firstName, String phoneNumber, String city, String token) {
         this.login = login;
         this.pass = pass;
         this.lastName = lastName;
         this.type = type;
         this.email = email;
         this.firstName = firstName;
-        this.rate = rate;
         this.phoneNumber = phoneNumber;
-        this.about = about;
         this.city = city;
         this.token = token;
-        this.imageUrl = imageUrl;
     }
 
     @Override
@@ -217,11 +174,8 @@ public class User implements UserDetails{
                 "\t\"type\":\"" + type + "\",\n" +
                 "\t\"email\":\"" + email + "\",\n" +
                 "\t\"phoneNumber\":\"" + phoneNumber + "\",\n" +
-                "\t\"rate\":\"" + rate + "\",\n" +
-                "\t\"about\":\"" + about + "\",\n" +
                 "\t\"city\":\"" + city + "\",\n" +
                 "\t\"token\":\"" + token + "\",\n" +
-                "\t\"imageUrl\":\"" + getImageUrl() + "\"\n" +
                 "}";
     }
 
@@ -267,23 +221,7 @@ public class User implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return true;
-    }
-
-    public String getDateAndPlaceOfPassport() {
-        return dateAndPlaceOfPassport;
-    }
-
-    public void setDateAndPlaceOfPassport(String dateAndPlaceOfPassport) {
-        this.dateAndPlaceOfPassport = dateAndPlaceOfPassport;
-    }
-
-    public String getSeriesAndNumberOfPassport() {
-        return seriesAndNumberOfPassport;
-    }
-
-    public void setSeriesAndNumberOfPassport(String seriesAndNumberOfPassport) {
-        this.seriesAndNumberOfPassport = seriesAndNumberOfPassport;
+        return type>0;
     }
 
     public String getVk() {
@@ -294,11 +232,4 @@ public class User implements UserDetails{
         this.vk = vk;
     }
 
-    public String getTelegram() {
-        return telegram;
-    }
-
-    public void setTelegram(String telegram) {
-        this.telegram = telegram;
-    }
-}
+   }

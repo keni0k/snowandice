@@ -97,10 +97,49 @@
           <artifactId>hibernate-jpa-2.1-api</artifactId>
           <version>1.0.0.Final</version>
       </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.2.10.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-commons</artifactId>
+      <version>2.0.8.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>2.0.8.RELEASE</version>
+    </dependency>
       <dependency>
-          <groupId>org.springframework.data</groupId>
-          <artifactId>spring-data-commons</artifactId>
-          <version>2.0.8.RELEASE</version>
+          <groupId>com.mailjet</groupId>
+          <artifactId>mailjet-client</artifactId>
+          <version>4.0.5</version>
+      </dependency>
+      <dependency>
+          <groupId>joda-time</groupId>
+          <artifactId>joda-time</artifactId>
+          <version>2.9.2</version>
       </dependency>
   </dependencies>
 

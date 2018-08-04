@@ -34,6 +34,6 @@ public interface UserService {
 
     Iterable<User> getAll();
 
-    List<User> getByFilter(Integer type, Long rateDown, Long rateUp, String firstName, String lastName, String city, Integer sortBy);
+    List<User> getByFilter(Integer type, String firstName, String lastName, String city, Integer sortBy);
 
 }

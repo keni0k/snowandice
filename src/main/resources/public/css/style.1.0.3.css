@@ -134,7 +134,9 @@ z-index: 999;}
     color: #fff;
 }
 .shopping-item:hover .product-count {
-    background: none repeat scroll 0 0 #000;
+    background: none repeat scroll 0 0 #ffffff;
+    color: #05318c;
+    border: 1px solid #ddd;
 }
 
 
@@ -149,8 +151,7 @@ z-index: 999;}
 .mainmenu-area .nav > li > a:focus {color: #000}
 
 .slider-area {clear: both}
-.slider-area, .promo-area, .brands-area, .maincontent-area, .footer-top-area, .product-widget-area, .product-breadcroumb-area, .single-product-area {position: relative;overflow: hidden}
-.zigzag-bottom {}
+.slider-area, .promo-area, .brands-area, .maincontent-area, .footer-top-area, .product-widget-area, .product-breadcroumb-area, .single-product-area, .contacts-area {position: relative;overflow: hidden}
 .slide-text-wrapper {
   height: 700px;
 }
@@ -161,8 +162,8 @@ z-index: 999;}
 .slide-text {display: table-cell;vertical-align: middle}
 
 .zigzag-bottom {
-background: none repeat scroll 0 0 #05318c;
-bottom: -80px;
+background: none repeat scroll 0 0 #333333;
+bottom: -120px;
 height: 165px;
 left: -5%;
 position: absolute;
@@ -268,7 +269,7 @@ z-index: 9;
     left: 0;
     position: absolute;
     top: 0;
-    width: 100%;overflow: hidden;border: 1px solid #ddd;
+    width: 100%;overflow: hidden;border: none;
 }
 .product-hover:after {
   background: none repeat scroll 0 0 #000;
@@ -367,7 +368,7 @@ z-index: 9;
   padding: 1px 10px;
 }
 
-.maincontent-area {padding-bottom: 170px}
+.maincontent-area {padding-bottom: 120px}
 
 .product-wid-title {
     font-family: raleway, serif;
@@ -412,7 +413,7 @@ z-index: 9;
     color: #fff;
     padding: 3px 15px;
     position: absolute;
-    right: 10px;
+    right: 0;
     top: 3px;
 }
 .wid-view-more:hover {color: #fff;background-color: #222;text-decoration: none}
@@ -457,9 +458,13 @@ padding: 35px 0 180px;}
     padding: 5px 0;color: #999
 }
 
+.footer-menu a:hover {
+    color: #fff;
+}
+
 
 .footer-social a {
-  background: none repeat scroll 0 0 #05318c;
+  background-color:#05318c;
   color: #fff;
   display: inline-block;
   font-size: 20px;
@@ -468,10 +473,10 @@ padding: 35px 0 180px;}
   margin-right: 10px;
   padding-top: 5px;
   text-align: center;
-  width: 40px;border: 1px solid #05318c;
+  width: 40px;
 }
 
-.footer-social a:hover {background-color: #222;border-color: #666}
+.footer-social a:hover {background-color: #fff;border-color: #05318c;color: #05318c}
 
 .footer-social {margin-top: 20px}
 
@@ -492,7 +497,7 @@ padding: 35px 0 180px;}
     text-transform: uppercase;
     border: 1px solid #05318c;
 }
-.newsletter-form input[type="submit"]:hover {background: #222;border-color: #666}
+.newsletter-form input[type="submit"]:hover {background: #fff;border-color: #05318c; color: #05318c}
 .newsletter-form {
     margin-top: 25px;
 }
@@ -570,7 +575,7 @@ width: 10px;
 .single-product-area .zigzag-bottom {background-color: #333333}
 
 .single-product-area {
-  padding: 24px 0 130px;
+  padding: 0 0 90px;
 }
 .sidebar-title {
     color: #1556aa;
@@ -671,6 +676,7 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #fff;co
 .product-inner-price > ins {
     color: #05318c;
     font-weight: 700;
+    font-size: 24px;
     margin-right: 10px;
     text-decoration: none;
 }
@@ -815,11 +821,6 @@ td.actions div.coupon {
     margin-right: 3%;
     width: 57%;
 }
-.cart_totals {
-    float: right;
-    margin-bottom: 50px;
-    width: 40%;
-}
 .cart-collaterals h2 {
     color: #05318c;
     font-size: 25px;
@@ -845,9 +846,10 @@ div.cart-collaterals ul.products li.product {
 .cart_totals table th, .cart_totals table td {
     border-left: 1px solid #ddd;
     border-top: 1px solid #ddd;
-    padding: 10px;
+    padding: 8px 15px;
 }
 .cart_totals table th {
+    font-weight: 400;
     background: none repeat scroll 0 0 #f4f4f4;
 }
 .onsale {
@@ -900,7 +902,7 @@ div.cart-collaterals ul.products li.product .price ins {
     display: block;
     margin: 0 0 5px;
 }
-#customer_details input[type="text"], #customer_details textarea, .shipping_calculator input[type=text] {
+#customer_details input[type="text"], #customer_details textarea {
     margin-bottom: 10px;
     width: 100%;
 }
@@ -935,8 +937,6 @@ a.about_paypal {
 
 #customer_details select, .shipping_calculator select {
   border: 1px solid #ddd;
-  margin-bottom: 15px;
-  padding: 10px;
   width: 100%;
 }
 
@@ -948,7 +948,7 @@ table.shop_table td.product-remove a {
 }
 
 
-table.shop_table td.product-remove a:hover {color: #fff;background: red;text-decoration: none}
+table.shop_table td.product-remove a:hover {color: #fff;background: #05318c;text-decoration: none}
 table.shop_table td.product-name a{color: #222;}
 table.shop_table td.product-name a:hover {color: #05318c;text-decoration: none}
 div.quantity input.plus:hover, div.quantity input.minus:hover {background-color: #222}
@@ -956,12 +956,6 @@ div.cart-collaterals ul.products li.product a:hover h3 {color: #05318c}
 div.cart-collaterals ul.products li.product a:hover {text-decoration: none}
 
 div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background-color: #222}
-
-
-.cart-collaterals .shipping_calculator {
-  float: right;
-  width: 40%;
-}
 
 
 #login-form-wrap, #coupon-collapse-wrap {
@@ -1029,6 +1023,16 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     cursor: pointer;
     border-radius: 21px;
 }
+.search-button:focus {
+    outline: none;
+    border-radius: 21px;
+    border: 1px solid darkorchid;
+}
+.search-placeholder:focus {
+    outline: none;
+    border-radius: 21px;
+    border: 1px solid darkorchid;
+}
 .search-button:before {
     content: "\f002";
     font-family: FontAwesome, serif;
@@ -1037,7 +1041,9 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     top: 8px;
     position: absolute;
 }
-
+.search-button:hover {
+    border-color: darkorchid;
+}
 .search-placeholder{
     border-radius: 21px;
     width: -webkit-fill-available;
@@ -1070,4 +1076,166 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .headerCallback {
     right: 34px;
     position: absolute;
+}
+
+
+.tab {
+    float: left;
+    height: 340px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 16px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #8dd7e7;
+    color: #000;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+    background-color: #05318c;
+    color: white;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0 12px;
+    border-left: none;
+    height: 360px;
+}
+
+.tabcontent {
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.table-history {
+    width: 100%;
+    font-size: 18px;
+}
+
+.table-history th {
+    color: #039;
+    padding: 0 15px 12px 15px
+}
+.table-history td {
+    color: #008ac6;
+    border-top: 1px solid #e8edff;
+    padding: 10px 15px;
+}
+.table-history tr:hover td {background: #e8edff;}
+
+.table-history a{
+    color: #05318c;
+    border-bottom: 1px dotted;
+}
+
+.table-history a:hover{
+    border-bottom: none;
+}
+
+#i1 span {
+    width: 135px;
+}
+
+#i2 span {
+    width: 170px;
+}
+
+#i3 span {
+    width: 180px;
+}
+
+#i1, #i1 .input-group, #i2, #i2 .input-group, #i3, #i3 .input-group {
+    width: 100%;
+}
+#i1 .btn, #i2 .btn, #i3 .btn {
+    width: 40%;
+}
+.contacts-area {
+    padding-bottom: 100px;
+    font-size: 13px;
+}
+
+.mt-40{
+    margin-top: 40px;
+}
+
+.registration-placeholder span {
+    width: 155px;
+}
+
+.registration-placeholder .input-group {
+    width: 100%;
+}
+
+.update_cart {
+    float: right;
+}
+
+input#coupon_code.input-text{
+    width: 40%;
+}
+
+.button.order_success {
+    margin-top: 15px;
+    float: right;
+}
+
+.shipping_calculator .input-group {
+    width: 100%;
+}
+
+.shipping_calculator .input-group-addon {
+    width: 150px;
+}
+
+.main-block {
+    padding-top:60px;
+    padding-bottom: 40px;
+}
+
+.container .page-header {
+    margin: 0;
+}
+
+.cart-collaterals h2 {
+    text-align: center;
+}
+
+.gis2 {
+    background-color: #f7f3df;
+    width: 350px;
+    height: 350px;
+}
+
+.gis2 h1 {
+    position: absolute;
+    top: 48%;
+    left: 42%;
+}
+
+.col-centred{
+    float: none;
+    margin: 0 auto;
 }

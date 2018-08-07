@@ -32,7 +32,6 @@ input[type="submit"], button[type="submit"] {
   margin-bottom: 60px;
 }
     
-    
 .product-widget-area .zigzag-bottom {
   bottom: -50px;
   height: 100px;
@@ -58,8 +57,31 @@ div.cart-collaterals ul.products li.product {
     
 }
 /* Mobile Layout: 320px. */
-@media only screen and (max-width: 767px) { 
-    
+@media only screen and (max-width: 767px) {
+
+  .gis2 h1 {
+    left: 21%;
+  }
+
+  .login-registr {
+    float: initial;
+    text-align: center;
+  }
+
+  .q-phone-block {
+    float: right;
+    margin-top: -150px;
+    margin-right: 3%
+  }
+
+  .mt-40 {
+    margin-top: 5px;
+  }
+
+  .headerCallback{
+    right: 10%
+  }
+
 .user-menu, .header-right ul.list-inline {
   text-align: center;
 }  
@@ -85,7 +107,7 @@ div.cart-collaterals ul.products li.product {
 }
 .navbar-toggle .icon-bar { background: none repeat scroll 0 0 #fff }  
 .navbar-collapse.collapse.in {
-  background: none repeat scroll 0 0 #1abc9c;
+  background: none repeat scroll 0 0 #05318c;
   position: relative;
   z-index: 99;
 } 
@@ -194,7 +216,6 @@ div.coupon input[type="text"] {
 .cart_totals, .cart-collaterals .shipping_calculator {
   float: none;
   margin-bottom: 40px;
-  width: 100%;
 }  
     
     

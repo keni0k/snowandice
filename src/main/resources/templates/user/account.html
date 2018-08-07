@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/header :: header (~{::body},'account')}">
+<body>
+<!--/*@thymesVar id="user" type="com.example.user.User"*/-->
+<div class="container main-block">
+    <!--<div class="page-header">
+        <h2>
+            Личный кабинет
+        </h2>
+    </div>-->
+    <!--/* /* Handling the flash message */-->
+    <th:block th:if="${message != null}">
+        <!--/*@thymesVar id="message" type="com.example.utils.MessageUtil"*/-->
+
+        <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
+            &nbsp;
+        </div>
+    </th:block>
+    <div class="row">
+        <div class="col-sm-4 col-md-3" style="padding-top: 5px;">
+            <div class="tab">
+                <button class="tablinks" onclick="openCity(event, 'i0')" id="defaultOpen">История заказов</button>
+                <button class="tablinks" onclick="openCity(event, 'i1')">Общая информация</button>
+                <button class="tablinks" onclick="openCity(event, 'i2')">Ваш адрес</button>
+                <button class="tablinks" onclick="openCity(event, 'i3')">Смена пароля</button>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-6">
+
+            <div id="i0" class="tabcontent">
+                <table class="table-history">
+                    <tr><th>№</th><th>Статус</th><th>Доставка</th><th>Дата заказа</th><th>Стоимость</th></tr>
+                    <tr><td><a href="#">0001</a></td><td>Доставлено</td><td>SPSR</td><td>12.08.17</td><td>₽350</td></tr>
+                    <tr><td><a href="#">0022</a></td><td>Доставлено</td><td>Курьер</td><td>13.09.17</td><td>₽500</td></tr>
+                    <tr><td><a href="#">0043</a></td><td>Отменен</td><td>Самовывоз</td><td>01.12.17</td><td>₽2050</td></tr>
+                    <tr><td><a href="#">0121</a></td><td>В пути</td><td>Почта России</td><td>18.03.18</td><td>₽210</td></tr>
+                </table>
+            </div>
+
+            <div id="i1" class="tabcontent">
+                <form action="/users/edit_data" method="post">
+                    <div class="input-group">
+                        <span class="input-group-addon">E-mail</span>
+                        <input name="first_name" th:value="${user.getEmail()}" type="text" class="form-control input-md" disabled="">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Имя</span>
+                        <input name="first_name" th:value="${user.getFirstName()}" type="text" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Фамилия</span>
+                        <input name="last_name" th:value="${user.getLastName()}" type="text" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Номер телефона</span>
+                        <input name="phone_number" th:value="${user.getPhoneNumber()}" type="text" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Дата рождения</span>
+                        <input name="birthday" th:value="${user.getBirthday()}" type="date" class="form-control input-md">
+                    </div>
+                    <br/>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="subscription" style="margin-left: -20px; visibility: visible; left:20px;"><span>Подписка на новости и акции</span>
+                        </label>
+                    </div>
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить">
+                </form>
+            </div>
+
+            <div id="i2" class="tabcontent">
+                <form action="/users/edit_address">
+                    <div class="input-group">
+                        <span class="input-group-addon">Страна *</span>
+                        <input name="country" type="text" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Регион *</span>
+                        <input name="region" type="text" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Район</span>
+                        <input name="district" type="text" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Населенный пункт *</span>
+                        <input name="city" type="text" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Улица, дом, квартира *</span>
+                        <input name="address" type="text" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Индекс *</span>
+                        <input name="postcode" type="text" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить">
+                </form>
+            </div>
+
+            <div id="i3" class="tabcontent">
+                <form action="/users/edit_pass">
+                    <div class="input-group">
+                        <span class="input-group-addon">Старый пароль</span>
+                        <input autocomplete="off" name="lastPassword" type="password" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Новый пароль</span>
+                        <input autocomplete="off" name="newPassword" type="password" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">Новый пароль (еще раз)</span>
+                        <input autocomplete="off" name="newPasswordConfirm" type="password" class="form-control input-md" required="">
+                    </div>
+                    <br/>
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить">
+                </form>
+            </div>
+
+            <script>
+                function openCity(evt, cityName) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }
+
+                // Get the element with id="defaultOpen" and click on it
+                document.getElementById("defaultOpen").click();
+            </script>
+        </div>
+    </div>
+</div>
+</body>
+</html>

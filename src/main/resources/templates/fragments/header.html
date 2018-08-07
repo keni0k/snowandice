@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" th:fragment="header (template, menu)">
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="header (template, menu)">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -7,15 +7,15 @@
     <title>Магазин-мастерская Цифровой Центр</title>
 
     <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'/>
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'/>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'/>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
 
     <link rel="shortcut icon" href="/img/icon.ico">
 
@@ -31,12 +31,12 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 
-<div class="header-area">
-    <div class="container">
+<div class="header-area" th:with="isUserOrAdmin = ${isUser or isAdmin}">
+    <div class="container" style="width: 100%">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-xs-5">
                 <div class="header-left">
                     <ul class="list-unstyled list-inline">
                         <li class="dropdown dropdown-small">
@@ -50,21 +50,30 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-5 col-xs-7">
                 <div class="user-menu">
                     <ul>
-                        <li><a href="/index">Контакты</a></li>
-                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="/contacts">Контакты</a></li>
+                        <li><a href="/ship_and_pay">Доставка и оплата</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 col-xs-12">
                 <div class="login-registr">
-                    <a href="#">
-                        <i class="fa fa-user"></i> Вход
-                    </a>
-                    <span>/</span>
-                    <a href="#"> Регистрация</a>
+                    <th:block th:unless="${isUserOrAdmin}">
+                        <a href="/users/login">
+                            <i class="fa fa-user"></i> Вход
+                        </a>
+                        <span>/</span>
+                        <a href="/users/registration"> Регистрация</a>
+                    </th:block>
+                    <th:block th:if="${isUserOrAdmin}">
+                        <a href="/users/account">
+                            <i class="fa fa-user"></i> Аккаунт
+                        </a>
+                        <span>/</span>
+                        <a href="/users/logout"> Выход</a>
+                    </th:block>
                 </div>
             </div>
 
@@ -73,7 +82,7 @@
 </div> <!-- End header area -->
 
 <div class="site-branding-area">
-    <div class="container">
+    <div class="container" style="width: 100%">
         <div class="row">
             <div class="col-sm-4">
                 <div class="logo">
@@ -83,11 +92,17 @@
                 </div>
             </div>
 
-            <div class="col-sm-3" style="margin-top: 40px;">
-                <form action="">
+            <div class="col-sm-3 col-xs-8 mt-40">
+                <form action="/search">
                     <input type="text" placeholder="Поиск товара" class="search-placeholder"/>
                     <button type="submit" class="search-button"></button>
                 </form>
+            </div>
+
+            <div class="col-sm-2 col-xs-4">
+                <div class="shopping-item">
+                    <a href="/cart"><i class="fa fa-shopping-cart"></i><span class="cart-amunt">800 ₽</span>  <span class="product-count">5</span></a>
+                </div>
             </div>
 
             <div class="col-sm-3">
@@ -97,11 +112,6 @@
                 </div>
             </div>
 
-            <div class="col-sm-2">
-                <div class="shopping-item">
-                    <a href="/cart"><i class="fa fa-shopping-cart"></i><span class="cart-amunt">$800</span>  <span class="product-count">5</span></a>
-                </div>
-            </div>
         </div>
     </div>
 </div> <!-- End site branding area -->
@@ -120,7 +130,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li th:class="${menu}=='index'?'active':''"><a href="/index">О магазине</a></li>
-                    <li th:class="${menu}=='shop'?'active':''"><a href="/shop">Каталог</a></li>
+                    <li th:class="${menu}=='shop'?'active':''"><a href="/products">Каталог</a></li>
                     <li th:class="${menu}=='single-product'?'active':''"><a href="/single-product">Страница товара</a></li>
                     <li th:class="${menu}=='checkout'?'active':''"><a href="/checkout">Статус заказа/ремонта</a></li>
                 </ul>
@@ -135,47 +145,29 @@
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-4 col-sm-6">
                 <div class="footer-about-us">
                     <h2>Цифровой центр</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
                     <div class="footer-social">
-                        <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
-                        <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
-                        <a href="#" target="_blank"><i class="fa fa-youtube"></i></a>
-                        <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
-                        <a href="#" target="_blank"><i class="fa fa-pinterest"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-vk"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-odnoklassniki"></i></a>
+                        <a href="#" target="_blank"><i class="fa fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-4 col-sm-6">
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">Навигация пользователя </h2>
                     <ul>
-                        <li><a href="">Вход</a></li>
-                        <li><a href="">Регистрация</a></li>
-                        <li><a href="">О нас</a></li>
-                        <li><a href="">Политика конфидециальности</a></li>
-                        <li><a href="">Обмен и возврат товара</a></li>
+                        <li><a href="/privacy_policy">Политика конфидециальности</a></li>
+                        <li><a href="/exchange_and_returns">Обмен и возврат товара</a></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6">
-                <div class="footer-menu">
-                    <h2 class="footer-wid-title">Категории</h2>
-                    <ul>
-                        <li><a href="">Смартфоны</a></li>
-                        <li><a href="">Телевизоры</a></li>
-                        <li><a href="">Компьютеры</a></li>
-                        <li><a href="">Ноутбуки</a></li>
-                        <li><a href="">Комплктующие</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-4 col-sm-6" th:if="${!isUser}">
                 <div class="footer-newsletter">
                     <h2 class="footer-wid-title">Подписка</h2>
                     <p>Узнавайте о новостях и акциях первыми. Получайте индивидуальные предложения и скидки</p>

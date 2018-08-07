@@ -37,6 +37,9 @@ public class User implements UserDetails{
     private String role = "";
     private String time = "";
     private String vk = "";
+    private String address = "";
+    private String birthday = "";
+    private boolean subscription = false;
     private int reviewsCount = 0;
 
 
@@ -232,4 +235,27 @@ public class User implements UserDetails{
         this.vk = vk;
     }
 
-   }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public boolean isSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(boolean subscription) {
+        this.subscription = subscription;
+    }
+}

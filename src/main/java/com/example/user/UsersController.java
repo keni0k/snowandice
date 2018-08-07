@@ -31,6 +31,9 @@ import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.Principal;
 import org.joda.time.LocalTime;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import static com.example.utils.Utils.randomToken;
@@ -52,8 +55,8 @@ public class UsersController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String persons(ModelMap model) {
-        model.addAttribute("insertPerson", new User());
-        return "registration";
+        model.addAttribute("insertUser", new User());
+        return "user/registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
@@ -73,7 +76,7 @@ public class UsersController {
             model.addAttribute("insertPerson", person);
             model.addAttribute("utils", new UtilsForWeb());
             model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.add", null, locale)));
-            return "registration";
+            return "user/registration";
         }
         person.setEmail(person.getEmail().toLowerCase());
         person.setLogin(person.getLogin().toLowerCase());
@@ -98,9 +101,41 @@ public class UsersController {
         User user = utils.getUser(principal);
         modelMap.addAttribute("user", user);
         if (user == null)
-            return "login";
+            return "user/login";
         else
-            return "index";
+            return account(modelMap, principal);
+    }
+
+    @RequestMapping(value = "/edit_data", method = RequestMethod.POST)
+    public String editData(ModelMap modelMap, Principal principal,
+                           @RequestParam("first_name") String firstName,
+                           @RequestParam("last_name") String lastName,
+                           @RequestParam("phone_number") String phoneNumber,
+                           @RequestParam(value = "birthday", required = false)
+                                       String birthday){
+        User user = utils.getUser(principal);
+        if (user==null) return "user/login";
+        if (!user.getFirstName().equals(firstName)) user.setFirstName(firstName);
+        if (!user.getLastName().equals(lastName)) user.setLastName(lastName);
+        if (!user.getPhoneNumber().equals(phoneNumber)) user.setPhoneNumber(phoneNumber);
+        if (!user.getBirthday().equals(birthday)) user.setBirthday(birthday);
+        userService.editUser(user);
+        return account(modelMap, principal);
+    }
+
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    public String account(ModelMap model, Principal principal) {
+
+        User user = utils.getUser(principal);
+        if (user == null) return signIn(model, principal);
+
+        model.addAttribute("user", user);
+        model.addAttribute("consts", new Consts());
+        model.addAttribute("utils", new UtilsForWeb());
+        model.addAttribute("answersCount", 1);
+        model.addAttribute("ordersWaitCount", 2);
+        model.addAttribute("ordersCompliteCount", 3);
+        return "user/account";
     }
 
     private String sendMail(String token, String emailStr) throws MailjetSocketTimeoutException, MailjetException {
@@ -113,10 +148,10 @@ public class UsersController {
                 .put(new JSONObject().put(Contact.EMAIL, emailStr));
 
         email = new MailjetRequest(Email.resource)
-                .property(Email.FROMNAME, "Excursium")
+                .property(Email.FROMNAME, "Цифровой центр")
                 .property(Email.FROMEMAIL, "elishanto@gmail.com")
                 .property(Email.SUBJECT, "Подтвердите свой e-mail")
-                .property(Email.TEXTPART, "Вы зарегистрировались на сайте excursium.me и для завершения регистрации должны нажать на ссылку: http://excursium.me/users/confirm?token=" + token)
+                .property(Email.TEXTPART, "Вы зарегистрировались на сайте cifracentr.ru и для завершения регистрации должны нажать на ссылку: http://cifracentr.ru/users/confirm?token=" + token)
                 .property(Email.RECIPIENTS, recipients)
                 .property(Email.MJCUSTOMID, "JAVA-Email");
 
@@ -124,5 +159,15 @@ public class UsersController {
         return response.getData() + " " + response.getStatus();
     }
 
+    @RequestMapping(value = "/add_admin", method = RequestMethod.GET)
+    public String addAdmin(@RequestParam("email") String email, Principal principal, ModelMap modelMap){
+        User nowUser = utils.getUser(principal);
+        if (nowUser == null || nowUser.getType() != Consts.USER_ADMIN) return signIn(modelMap, principal);
 
+        User u = userService.getByLoginOrEmail(email);
+        u.setRole("ROLE_ADMIN");
+        u.setType(Consts.USER_ADMIN);
+        modelMap.addAttribute("message", new MessageUtil("success", u.getFullName()+" получил роль ADMIN"));
+        return account(modelMap, principal);
+    }
 }

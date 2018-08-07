@@ -2,9 +2,9 @@ package com.example.user;
 
 import com.example.repo.UserRepository;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Keni0k on 25.07.2017.
@@ -19,9 +19,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User addUser(User user) {
-        userRepository.save(user);
-        return user;
+    public void addUser(User user) {
+        userRepository.saveAndFlush(user);
     }
 
     @Override
@@ -29,32 +28,9 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-    @Override
-    public User getByToken(String token) {
-        Iterable<User> list = userRepository.findAll();
-        for (User p : list)
-            if (p.getToken().equals(token))
-                return p;
-        return null;
-    }
-
-    @Override
-    public User getByEmail(String email) {
-        Iterable<User> list = userRepository.findAll();
-        for (User p : list)
-            if (p.getEmail().equals(email))
-                return p;
-        return null;
-    }
-
     public User getByLoginOrEmail(String loginOrEmail) {
-        Iterable<User> list = userRepository.findAll();
-        for (User p : list)
-            if (p.getLogin().toLowerCase().equals(loginOrEmail.toLowerCase()))
-                return p;
-            else if (p.getEmail().toLowerCase().equals(loginOrEmail.toLowerCase()))
-                return p;
-        return null;
+        loginOrEmail = loginOrEmail.toLowerCase();
+        return userRepository.getUserByLoginOrEmail(loginOrEmail, loginOrEmail);
     }
 
     @Override
@@ -64,7 +40,7 @@ public class UserServiceImpl implements UserService {
         if (firstName==null) firstName = "";
         if (lastName==null) lastName = "";
         if (city==null) city="";
-        Iterable<User> list = getAll();
+        List<User> list = getAll();
 
         List<User> copy = new ArrayList<>();
         for (User aList : list) {
@@ -107,34 +83,26 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Optional<User> getById(long id) {
-        return userRepository.findById(id);
+    public User getById(long id) {
+        return userRepository.getOne(id);
     }
 
     @Override
-    public User editUser(User User) {
-        return userRepository.save(User);
+    public void editUser(User User) {
+        userRepository.saveAndFlush(User);
     }
 
 
     @Override
     public Boolean isLoginFree(String login) {
-        Iterable<User> list = userRepository.findAll();
-        boolean isFree = true;
-        for (User p : list)
-            if (p.getLogin().equals(login))
-                isFree = false;
-        return isFree;
+        User user = userRepository.getUserByLogin(login);
+        return user == null;
     }
 
     @Override
     public Boolean isEmailFree(String email) {
-        Iterable<User> list = userRepository.findAll();
-        boolean isFree = true;
-        for (User p : list)
-            if (p.getEmail().equals(email))
-                isFree = false;
-        return isFree;
+        User user = userRepository.getUserByEmail(email);
+        return user == null;
     }
 
     @Override
@@ -149,28 +117,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean isPhoneFree(String phone) {
-        Iterable<User> list = getAll();
-        boolean isFree = true;
-        for (User p : list)
-            if (p.getPhoneNumber().equals(phone))
-                isFree = false;
-        return isFree;
+        User user = userRepository.getUserByPhoneNumber(phone);
+        return user == null;
     }
 
 
     @Override
-    public Boolean authorization(String login, String pass) {
-        login = login.toLowerCase();
-        Iterable<User> list = userRepository.findAll();
-        for (User p : list)
-            if (p.getLogin().equals(login) || p.getEmail().equals(login))
-                if (p.getPass().equals(pass))
-                    return true;
-        return false;
-    }
-
-    @Override
-    public Iterable<User> getAll() {
+    public List<User> getAll() {
         return userRepository.findAll();
     }
 

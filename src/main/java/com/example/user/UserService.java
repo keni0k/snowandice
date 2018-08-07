@@ -1,24 +1,19 @@
 package com.example.user;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Keni0k on 25.07.2018.
  */
 
 public interface UserService {
-    User addUser(User User);
+    void addUser(User User);
 
     void delete(long id);
 
-    User getByToken(String token);
+    User getById(long id);
 
-    User getByEmail(String email);
-
-    Optional<User> getById(long id);
-
-    User editUser(User User);
+    void editUser(User User);
 
     Boolean isLoginFree(String login);
 
@@ -30,9 +25,7 @@ public interface UserService {
 
     Boolean isPhoneFree(String login);
 
-    Boolean authorization(String login, String pass);
-
-    Iterable<User> getAll();
+    List<User> getAll();
 
     List<User> getByFilter(Integer type, String firstName, String lastName, String city, Integer sortBy);
 

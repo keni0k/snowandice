@@ -16,11 +16,6 @@
 
 package com.example;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,17 +27,6 @@ public class Main {
   String index() {
     return "index";
   }
-
-  @RequestMapping("/cart")
-  String cart() {
-    return "cart";
-  }
-
-  @RequestMapping("/single-product")
-  String singleProduct(){ return "single-product"; }
-
-  @RequestMapping("/checkout")
-  String checkout(){ return "checkout"; }
 
   @RequestMapping("/contacts")
   String contacts(){

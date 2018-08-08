@@ -15,13 +15,24 @@ public class ProductController {
 
     private ProductServiceImpl productService;
 
-    ProductController (ProductRepository productRepository){
+    ProductController (ProductRepository productRepository) {
         this.productService = new ProductServiceImpl(productRepository);
     }
 
+    @RequestMapping("/cart")
+    String cart() {
+        return "cart";
+    }
+
+    @RequestMapping("/checkout")
+    String checkout(){ return "checkout"; }
+
     @RequestMapping(method = RequestMethod.GET)
-    String index(ModelMap modelMap){
-        return "shop";
+    String singleProduct(ModelMap modelMap, @RequestParam(value = "id", required = false) Long id){
+        if (id == null) return "shop";
+        Product p = productService.getById(id);
+        modelMap.addAttribute("product", p);
+        return "single-product";
     }
 
     @RequestMapping("/list")

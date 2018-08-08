@@ -84,20 +84,24 @@
                                             <option value="1">Самовывоз</option>
                                             <option value="2">Курьер</option>
                                             <option value="3">Почта России</option>
+                                            <option value="4">СДЭК</option>
+                                            <option value="5">DPD</option>
+                                            <option value="6">Энергия</option>
+                                            <option value="7">РАТЭК</option>
                                         </select>
                                     </div>
                                     <br/>
                                     <div class="input-group">
-                                        <span class="input-group-addon">Страна *</span>
-                                        <input name="calc_shipping_country" type="text" class="form-control" value=""
+                                        <span class="input-group-addon">Регион *</span>
+                                        <input name="calc_shipping_region" type="text" class="form-control" value=""
                                                required="">
                                     </div>
 
                                     <br/>
 
                                     <div class="input-group">
-                                        <span class="input-group-addon">Регион *</span>
-                                        <input name="calc_shipping_region" type="text" class="form-control" value=""
+                                        <span class="input-group-addon">Почтовый индекс *</span>
+                                        <input name="calc_shipping_postcode" type="text" class="form-control" value=""
                                                required="">
                                     </div>
 
@@ -146,5 +150,23 @@
         </div>
     </div>
 </div>
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
 </body>
 </html>

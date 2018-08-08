@@ -82,7 +82,7 @@
 </div> <!-- End header area -->
 
 <div class="site-branding-area">
-    <div class="container" style="width: 100%">
+    <div class="container w-full">
         <div class="row">
             <div class="col-sm-4">
                 <div class="logo">
@@ -101,7 +101,7 @@
 
             <div class="col-sm-2 col-xs-4">
                 <div class="shopping-item">
-                    <a href="/cart"><i class="fa fa-shopping-cart"></i><span class="cart-amunt">800 ₽</span>  <span class="product-count">5</span></a>
+                    <a href="/products/cart"><i class="fa fa-shopping-cart"></i><span class="cart-amunt">800 ₽</span>  <span class="product-count">5</span></a>
                 </div>
             </div>
 
@@ -117,7 +117,7 @@
 </div> <!-- End site branding area -->
 
 <div class="mainmenu-area">
-    <div class="container">
+    <div class="container w-full">
         <div class="row">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -131,8 +131,9 @@
                 <ul class="nav navbar-nav">
                     <li th:class="${menu}=='index'?'active':''"><a href="/index">О магазине</a></li>
                     <li th:class="${menu}=='shop'?'active':''"><a href="/products">Каталог</a></li>
-                    <li th:class="${menu}=='single-product'?'active':''"><a href="/single-product">Страница товара</a></li>
-                    <li th:class="${menu}=='checkout'?'active':''"><a href="/checkout">Статус заказа/ремонта</a></li>
+                    <li th:class="${menu}=='single-product'?'active':''"><a href="/products?id=0">Страница товара</a></li>
+                    <li th:class="${menu}=='checkout'?'active':''"><a href="/products/checkout">Детали доставки</a></li>
+                    <li th:class="${menu}=='status'?'active':''"><a href="/status">Статус заказа/ремонта</a></li>
                 </ul>
             </div>
         </div>

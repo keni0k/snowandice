@@ -12,6 +12,7 @@ import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mailjet.client.resource.Contact;
 import com.mailjet.client.resource.Email;
+import org.joda.time.LocalTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.security.InvalidKeyException;
 import java.security.Principal;
-import org.joda.time.LocalTime;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import static com.example.utils.Utils.randomToken;
@@ -60,7 +54,7 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String signUp(@ModelAttribute("insertPerson") @Valid User person,
+    public String signUp(@ModelAttribute("insertUser") @Valid User person,
                          BindingResult result,
                          @RequestParam(value = "file", required = false) MultipartFile file,
                          @ModelAttribute("pass2") String pass2,
@@ -73,7 +67,7 @@ public class UsersController {
             model.addAttribute("error_pass", !person.getPass().equals(pass2));
             model.addAttribute("error_email_free", !userService.isEmailFree(person.getEmail()));
             model.addAttribute("error_email_valid", !userService.isEmailCorrect(person.getEmail()));
-            model.addAttribute("insertPerson", person);
+            model.addAttribute("insertUser", person);
             model.addAttribute("utils", new UtilsForWeb());
             model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("error.user.add", null, locale)));
             return "user/registration";

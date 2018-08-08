@@ -913,7 +913,7 @@ div.cart-collaterals ul.products li.product .price ins {
 }
 .create-account {
     background: none repeat scroll 0 0 #f4f4f4;
-    margin-bottom: 50px;
+    margin-bottom: 15px;
     padding: 15px;
 }
 #order_review_heading {
@@ -1026,12 +1026,12 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .search-button:focus {
     outline: none;
     border-radius: 21px;
-    border: 1px solid darkorchid;
+    border: 1px solid #05318c;
 }
 .search-placeholder:focus {
     outline: none;
     border-radius: 21px;
-    border: 1px solid darkorchid;
+    border: 1px solid #05318c;
 }
 .search-button:before {
     content: "\f002";
@@ -1042,7 +1042,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     position: absolute;
 }
 .search-button:hover {
-    border-color: darkorchid;
+    border-color: #05318c;
 }
 .search-placeholder{
     border-radius: 21px;
@@ -1101,7 +1101,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #8dd7e7;
+    background-color: #05318c2e;
     color: #000;
 }
 
@@ -1238,4 +1238,16 @@ input#coupon_code.input-text{
 .col-centred{
     float: none;
     margin: 0 auto;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.shipping_calculator .input-group-addon {
+    width: 150px;
+}
+
+.login-form .input-group-addon {
+    width: 75px;
 }

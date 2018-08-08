@@ -164,4 +164,17 @@ public class UsersController {
         modelMap.addAttribute("message", new MessageUtil("success", u.getFullName()+" получил роль ADMIN"));
         return account(modelMap, principal);
     }
+
+    @RequestMapping(value = "edit_address", method = RequestMethod.POST)
+    public String editAddress(ModelMap modelMap, Principal principal,
+                              @RequestParam("region") String region,
+                              @RequestParam(value = "district", required = false) String district,
+                              @RequestParam("city") String city,
+                              @RequestParam("address") String address,
+                              @RequestParam("postcode") String postcode){
+        User user = utils.getUser(principal);
+        user.setAddress(region, district, city, address, postcode);
+        userService.editUser(user);
+        return account(modelMap, principal);
+    }
 }

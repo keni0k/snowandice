@@ -74,35 +74,36 @@
             </div>
 
             <div id="i2" class="tabcontent">
-                <form action="/users/edit_address">
-                    <div class="input-group">
-                        <span class="input-group-addon">Страна *</span>
-                        <input name="country" type="text" class="form-control input-md" required="">
-                    </div>
-                    <br/>
+                <form action="/users/edit_address" method="post" th:with="address = ${user.getListOfAddress()}">
+                    <!--/*@thymesVar id="address" type="java.lang.String[]"*/-->
                     <div class="input-group">
                         <span class="input-group-addon">Регион *</span>
-                        <input name="region" type="text" class="form-control input-md" required="">
+                        <input name="region" type="text" class="form-control input-md" 
+                               required="" th:value="${address[1]}">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Район</span>
-                        <input name="district" type="text" class="form-control input-md" required="">
+                        <input name="district" type="text" class="form-control input-md"
+                               th:value="${address[2]}">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Населенный пункт *</span>
-                        <input name="city" type="text" class="form-control input-md" required="">
+                        <input name="city" type="text" class="form-control input-md"
+                               required="" th:value="${address[3]}">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Улица, дом, квартира *</span>
-                        <input name="address" type="text" class="form-control input-md" required="">
+                        <input name="address" type="text" class="form-control input-md"
+                               required="" th:value="${address[4]}">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Индекс *</span>
-                        <input name="postcode" type="text" class="form-control input-md" required="">
+                        <input name="postcode" type="text" class="form-control input-md"
+                               required="" th:value="${address[5]}">
                     </div>
                     <br/>
                     <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить">

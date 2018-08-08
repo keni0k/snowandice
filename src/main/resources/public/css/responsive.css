@@ -79,6 +79,24 @@
 /* Mobile Layout: 320px. */
 @media only screen and (max-width: 767px) {
 
+    .tab {
+        height: auto;
+        display: inline-flex;
+        padding-bottom: 40px;
+    }
+
+    .tabcontent {
+        height: auto;
+    }
+
+    .tab button {
+        width: max-content;
+    }
+
+    .tab-content-padding-bottom {
+        padding-bottom: 0;
+    }
+
     .gis2 h1 {
         left: 21%;
     }

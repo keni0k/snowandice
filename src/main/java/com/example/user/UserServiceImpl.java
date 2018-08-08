@@ -2,7 +2,6 @@ package com.example.user;
 
 import com.example.repo.UserRepository;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,8 +87,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void editUser(User User) {
-        userRepository.saveAndFlush(User);
+    public void editUser(User user) {
+        userRepository.saveAndFlush(user);
     }
 
 

@@ -1251,3 +1251,11 @@ input#coupon_code.input-text{
 .login-form .input-group-addon {
     width: 75px;
 }
+
+.ship_and_pay-area .tabcontent {
+    font-size: 16px;
+}
+
+.tab-content-padding-bottom {
+    padding-bottom: 60px;
+}

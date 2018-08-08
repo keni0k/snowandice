@@ -243,6 +243,17 @@ public class User implements UserDetails{
         this.address = address;
     }
 
+    public void setAddress(String region, String district, String city, String address, String postcode){
+        this.address = "РФ" + "$" + region + "$" + district + "$" + city + "$" + address + "$" + postcode;
+    }
+
+    public String[] getListOfAddress(){
+        if (address != null)
+            return address.split("\\$");
+        else
+            return new String[]{"","","","","",""};
+    }
+
     public String getBirthday() {
         return birthday;
     }

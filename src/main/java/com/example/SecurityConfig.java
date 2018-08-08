@@ -35,10 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/", "/index", "/resources/**",
-                        "/products", "/css/**", "/js/**", "/img/**", "/products/cart",
-                        "/products/checkout", "/users/account", "/contacts", "/ship_and_pay", "/privacy_policy",
-                        "/exchange_and_returns", "/users/edit_data", "/users/edit_address").permitAll()
+                        "/products", "/css/**", "/js/**", "/img/**", "/orders/cart",
+                        "/orders/checkout", "/orders/add", "/contacts", "/ship_and_pay", "/privacy_policy",
+                        "/exchange_and_returns", "/fix").permitAll()
                 .antMatchers("/users/registration").anonymous()
+                .antMatchers("/users/account", "/users/edit_data", "/users/edit_address").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -47,7 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutUrl("/users/logout").logoutSuccessUrl("/users/login").permitAll()
                 .and()
-                .rememberMe().tokenValiditySeconds(1209600)
+                .rememberMe().tokenValiditySeconds(1209600).rememberMeParameter("remember-me").rememberMeCookieName("remember_me")
+                .tokenRepository(repository)
                 .and()
                 .exceptionHandling().accessDeniedPage("/error/403")
                 .and()

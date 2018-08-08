@@ -66,7 +66,7 @@
                     <br/>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="subscription" style="margin-left: -20px; visibility: visible; left:20px;"><span>Подписка на новости и акции</span>
+                            <input type="checkbox" name="subscription" style="margin-left: -20px; visibility: visible; left:20px;" th:checked="${user.isSubscription()}" value="true"><span>Подписка на новости и акции</span>
                         </label>
                     </div>
                     <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить">

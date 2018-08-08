@@ -74,7 +74,8 @@
 
                             <div class="row">
 
-                                <form method="post" action="#" class="shipping_calculator col-sm-6 col-xs-8">
+                                <form method="post" action="/orders/checkout" class="shipping_calculator">
+                                    <div class="col-sm-6 col-xs-8">
                                     <h2>Калькулятор доставки</h2>
 
                                     <div class="input-group">
@@ -93,7 +94,7 @@
                                     <br/>
                                     <div class="input-group">
                                         <span class="input-group-addon">Регион *</span>
-                                        <input name="calc_shipping_region" type="text" class="form-control" value=""
+                                        <input name="region" type="text" class="form-control" value=""
                                                required="">
                                     </div>
 
@@ -101,45 +102,44 @@
 
                                     <div class="input-group">
                                         <span class="input-group-addon">Почтовый индекс *</span>
-                                        <input name="calc_shipping_postcode" type="text" class="form-control" value=""
+                                        <input name="postcode" type="text" class="form-control" value=""
                                                required="">
                                     </div>
 
                                     <br/>
 
-                                    <button class="button" value="1" name="calc_shipping" type="submit" style="float:right;">Обновить
-                                        стоимость
-                                    </button>
+                                    </div>
+
+                                    <div class="cart_totals col-sm-6 col-xs-8">
+                                        <h2>Подсчет стоимости</h2>
+
+                                        <table cellspacing="0">
+                                            <tbody>
+                                            <tr class="cart-subtotal">
+                                                <th>Стоимость товаров</th>
+                                                <td><span class="amount" id="goods_cost">1500 ₽</span></td>
+                                            </tr>
+
+                                            <tr class="shipping">
+                                                <th>Способ доставки</th>
+                                                <td id="shipping_type">Самовывоз</td>
+                                            </tr>
+
+                                            <tr class="shipping">
+                                                <th>Стоимость доставки</th>
+                                                <td id="shipping_count">Бесплатная</td>
+                                            </tr>
+
+                                            <tr class="order-total">
+                                                <th>Итог</th>
+                                                <td><strong><span class="amount" id="order_total">1500 ₽</span></strong></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <button class="button order_success" value="success" name="order_success" type="submit">Оформить заказ</button>
 
                                 </form>
 
-                                <div class="cart_totals col-sm-6 col-xs-8">
-                                <h2>Подсчет стоимости</h2>
-
-                                <table cellspacing="0">
-                                    <tbody>
-                                    <tr class="cart-subtotal">
-                                        <th>Стоимость товаров</th>
-                                        <td><span class="amount" id="goods_cost">1500 ₽</span></td>
-                                    </tr>
-
-                                    <tr class="shipping">
-                                        <th>Способ доставки</th>
-                                        <td id="shipping_type">Самовывоз</td>
-                                    </tr>
-
-                                    <tr class="shipping">
-                                        <th>Стоимость доставки</th>
-                                        <td id="shipping_count">Бесплатная</td>
-                                    </tr>
-
-                                    <tr class="order-total">
-                                        <th>Итог</th>
-                                        <td><strong><span class="amount" id="order_total">1500 ₽</span></strong></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <button class="button order_success" value="1" name="order_success" type="submit">Оформить заказ</button>
                             </div>
 
                             </div>

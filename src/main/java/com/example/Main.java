@@ -28,6 +28,11 @@ public class Main {
     return "index";
   }
 
+  @RequestMapping("/fix")
+  String fix(){
+    return "fix";
+  }
+
   @RequestMapping("/contacts")
   String contacts(){
     return "contacts";

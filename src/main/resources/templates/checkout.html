@@ -2,21 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/header :: header (~{::body},'checkout')}">
 <body>
 
-<div class="single-product-area">
+<div class="single-product-area" th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
     <div class="zigzag-bottom"></div>
-    <div class="container main-block">
+    <div class="container main-block" th:with="isUserOrAdmin = ${isUser or isAdmin}">
         <div class="row">
             <div class="col-md-10 col-centred">
                 <div class="product-content-right">
                     <div class="woocommerce">
-                        <div class="woocommerce-info">У вас есть учетная запись? <a class="showlogin"
+                        <div class="woocommerce-info" th:unless="${isUserOrAdmin}">У вас есть учетная запись? <a class="showlogin"
                                                                                     data-toggle="collapse"
                                                                                     href="#login-form-wrap"
                                                                                     aria-expanded="false"
                                                                                     aria-controls="login-form-wrap">Войти</a>
                         </div>
 
-                        <form id="login-form-wrap" class="login collapse" method="post" action="/users/login">
+                        <form id="login-form-wrap" th:unless="${isUserOrAdmin}" class="login collapse" method="post" action="/users/login">
 
 
                             <p>Если вы покупали раньше в нашем онлайн магазине, то введите, пожалуйста, ваши логин и
@@ -48,14 +48,15 @@
                             <div class="clear"></div>
                         </form>
 
-                        <div class="woocommerce-info">У вас есть купон? <a class="showcoupon" data-toggle="collapse"
+                        <!--/*@thymesVar id="isHaveACoupon" type="java.lang.Boolean"*/-->
+                        <div class="woocommerce-info" th:unless="${isHaveACoupon}">У вас есть купон? <a class="showcoupon" data-toggle="collapse"
                                                                            href="#coupon-collapse-wrap"
                                                                            aria-expanded="false"
                                                                            aria-controls="coupon-collapse-wrap">Ввести
                             код купона</a>
                         </div>
 
-                        <form id="coupon-collapse-wrap" method="post" class="checkout_coupon collapse">
+                        <form id="coupon-collapse-wrap" th:unless="${isHaveACoupon}" method="post" class="checkout_coupon collapse">
 
                             <p class="form-row form-row-first">
                                 <input type="text" value="" id="coupon_code" placeholder="Код купона" class="input-text"
@@ -72,6 +73,7 @@
                         <form enctype="multipart/form-data" action="#" class="checkout" method="post" name="checkout">
 
                             <div id="customer_details">
+                                <!--/*@thymesVar id="user" type="com.example.user.User"*/-->
                                 <div class="woocommerce-billing-fields">
                                     <h3>Детали доставки</h3>
                                     <div class="row">
@@ -81,7 +83,7 @@
                                                 <label class="" for="billing_first_name">Имя <abbr title="Обязательное поле"
                                                                                                    class="required">*</abbr>
                                                 </label>
-                                                <input type="text" value="" placeholder="" id="billing_first_name"
+                                                <input type="text" th:value="${isUserOrAdmin?user.getFirstName():''}" placeholder="" id="billing_first_name"
                                                        name="billing_first_name" class="input-text ">
                                             </p>
                                         </div>
@@ -91,7 +93,7 @@
                                                 <label class="" for="billing_last_name">Фамилия <abbr title="Обязательное поле"
                                                                                                       class="required">*</abbr>
                                                 </label>
-                                                <input type="text" value="" placeholder="" id="billing_last_name"
+                                                <input type="text" th:value="${isUserOrAdmin?user.getLastName():''}" placeholder="" id="billing_last_name"
                                                        name="billing_last_name" class="input-text ">
                                             </p>
                                         </div>
@@ -105,7 +107,7 @@
                                         <div class="col-sm-6">
                                             <p id="billing_address_1_field"
                                                class="form-row form-row-wide address-field validate-required">
-                                                <input type="text" value="" placeholder="Район (если не город)"
+                                                <input type="text" th:value="${isUserOrAdmin?user.getListOfAddress()[2]:''}" placeholder="Район (если не город)"
                                                        id="billing_address_1"
                                                        name="billing_address_1" class="input-text ">
                                             </p>
@@ -114,7 +116,7 @@
                                             <p id="billing_city_field"
                                                class="form-row form-row-wide address-field validate-required"
                                                data-o_class="form-row form-row-wide address-field validate-required">
-                                                <input type="text" value="" placeholder="Населённый пункт"
+                                                <input type="text" th:value="${isUserOrAdmin?user.getListOfAddress()[3]:''}" placeholder="Населённый пункт"
                                                        id="billing_city"
                                                        name="billing_city" class="input-text ">
                                             </p>
@@ -122,31 +124,19 @@
                                     </div>
 
                                     <p id="billing_address_2_field" class="form-row form-row-wide address-field">
-                                        <input type="text" value="" placeholder="Улица, дом, квартира"
+                                        <input type="text" th:value="${isUserOrAdmin?user.getListOfAddress()[4]:''}" placeholder="Улица, дом, квартира"
                                                id="billing_address_2" name="billing_address_2" class="input-text ">
                                     </p>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <p id="billing_postcode_field"
-                                               class="form-row form-row-last address-field validate-required validate-postcode"
-                                               data-o_class="form-row form-row-last address-field validate-required validate-postcode">
-                                                <label class="" for="billing_postcode">Почтовый индекс <abbr
-                                                        title="Обязательное поле"
-                                                        class="required">*</abbr>
-                                                </label>
-                                                <input type="text" value="" id="billing_postcode"
-                                                       name="billing_postcode" class="input-text ">
-                                            </p>
-                                        </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <p id="billing_phone_field"
                                                class="form-row form-row-last validate-required validate-phone">
                                                 <label class="" for="billing_phone">Номер телефона <abbr
                                                         title="Обязательное поле"
                                                         class="required">*</abbr>
                                                 </label>
-                                                <input type="text" value="" placeholder="" id="billing_phone"
+                                                <input type="text" th:value="${isUserOrAdmin?user.getPhoneNumber():''}" placeholder="" id="billing_phone"
                                                        name="billing_phone" class="input-text ">
                                             </p>
                                         </div>
@@ -155,7 +145,7 @@
                                     <div class="clear"></div>
 
 
-                                    <div class="create-account">
+                                    <div class="create-account" th:unless="${isUserOrAdmin}">
                                         <p>Когда вы снова решите что-нибудь
                                             купить, войдите в аккаунт, и вам не придётся заполнять контактные данные</p>
                                         <div class="row">
@@ -184,8 +174,8 @@
 
                                     <p id="order_comments_field" class="form-row notes">
                                         <label class="" for="order_comments">Комментарий к заказу</label>
-                                        <textarea cols="5" rows="2"
-                                                  id="order_comments" class="input-text "
+                                        <textarea cols="5" rows="2" placeholder="Для пожеланий насчет товара и доставки"
+                                                  id="order_comments" class="input-text"
                                                   name="order_comments"></textarea>
                                     </p>
 

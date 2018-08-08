@@ -19,14 +19,6 @@ public class ProductController {
         this.productService = new ProductServiceImpl(productRepository);
     }
 
-    @RequestMapping("/cart")
-    String cart() {
-        return "cart";
-    }
-
-    @RequestMapping("/checkout")
-    String checkout(){ return "checkout"; }
-
     @RequestMapping(method = RequestMethod.GET)
     String singleProduct(ModelMap modelMap, @RequestParam(value = "id", required = false) Long id){
         if (id == null) return "shop";

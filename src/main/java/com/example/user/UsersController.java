@@ -15,6 +15,8 @@ import com.mailjet.client.resource.Email;
 import org.joda.time.LocalTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -39,6 +41,7 @@ public class UsersController {
     private Utils utils;
     private UserServiceImpl userService;
     private final MessageSource messageSource;
+    private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 
     @Autowired
     public UsersController(UserRepository userRepository, MessageSource messageSource){
@@ -106,13 +109,16 @@ public class UsersController {
                            @RequestParam("last_name") String lastName,
                            @RequestParam("phone_number") String phoneNumber,
                            @RequestParam(value = "birthday", required = false)
-                                       String birthday){
+                                       String birthday,
+                           @RequestParam(value = "subscription", required = false) Boolean subscription){
         User user = utils.getUser(principal);
         if (user==null) return "user/login";
-        if (!user.getFirstName().equals(firstName)) user.setFirstName(firstName);
-        if (!user.getLastName().equals(lastName)) user.setLastName(lastName);
-        if (!user.getPhoneNumber().equals(phoneNumber)) user.setPhoneNumber(phoneNumber);
-        if (!user.getBirthday().equals(birthday)) user.setBirthday(birthday);
+        if (subscription==null) subscription = false;
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPhoneNumber(phoneNumber);
+        user.setBirthday(birthday);
+        user.setSubscription(subscription);
         userService.editUser(user);
         return account(modelMap, principal);
     }
@@ -165,7 +171,7 @@ public class UsersController {
         return account(modelMap, principal);
     }
 
-    @RequestMapping(value = "edit_address", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit_address", method = RequestMethod.POST)
     public String editAddress(ModelMap modelMap, Principal principal,
                               @RequestParam("region") String region,
                               @RequestParam(value = "district", required = false) String district,
@@ -173,6 +179,7 @@ public class UsersController {
                               @RequestParam("address") String address,
                               @RequestParam("postcode") String postcode){
         User user = utils.getUser(principal);
+        if (district == null) district = "";
         user.setAddress(region, district, city, address, postcode);
         userService.editUser(user);
         return account(modelMap, principal);

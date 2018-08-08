@@ -248,7 +248,7 @@ public class User implements UserDetails{
     }
 
     public String[] getListOfAddress(){
-        if (address != null)
+        if (address != null && !address.equals(""))
             return address.split("\\$");
         else
             return new String[]{"","","","","",""};

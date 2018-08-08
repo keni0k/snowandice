@@ -101,7 +101,7 @@
 
             <div class="col-sm-2 col-xs-4">
                 <div class="shopping-item">
-                    <a href="/products/cart"><i class="fa fa-shopping-cart"></i><span class="cart-amunt">800 ₽</span>  <span class="product-count">5</span></a>
+                    <a href="/orders/cart"><i class="fa fa-shopping-cart"></i><span class="cart-amunt">800 ₽</span>  <span class="product-count">5</span></a>
                 </div>
             </div>
 
@@ -132,7 +132,7 @@
                     <li th:class="${menu}=='index'?'active':''"><a href="/index">О магазине</a></li>
                     <li th:class="${menu}=='shop'?'active':''"><a href="/products">Каталог</a></li>
                     <li th:class="${menu}=='single-product'?'active':''"><a href="/products?id=0">Страница товара</a></li>
-                    <li th:class="${menu}=='checkout'?'active':''"><a href="/products/checkout">Детали доставки</a></li>
+                    <li th:class="${menu}=='fix'?'active':''"><a href="/fix">Мастерская</a></li>
                     <li th:class="${menu}=='status'?'active':''"><a href="/status">Статус заказа/ремонта</a></li>
                 </ul>
             </div>
@@ -218,6 +218,10 @@
 
 <!-- Main Script -->
 <script src="/js/main.js"></script>
+
+<script src="/js/masked_input.min.js"></script>
+<script>$(document).ready(function () {$("#phone_number").mask("+7 (999) 999-9999");});</script>
+
 
 </body>
 </html>

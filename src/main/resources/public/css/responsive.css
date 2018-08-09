@@ -1,5 +1,9 @@
 @media only screen and (min-width: 992px) and (max-width: 1280px) {
 
+    main nav label.down{
+        height: 60px;
+    }
+
     div.cart-collaterals ul.products li.product {
         float: left;
         margin-left: 30px;
@@ -19,16 +23,17 @@
         width: 293px;
     }
 
+    .nav.navbar-nav {
+        margin-left: 186px;
+    }
+
 }
 
 /* Tablet Layout: 768px. */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
     .nav.navbar-nav {
-        float: none;
-        margin: 0 auto;
-        width: fit-content;
-        width: -moz-fit-content;
+        margin-left: 186px;
     }
 
     .user-menu, .header-right ul.list-inline {
@@ -78,6 +83,10 @@
 
 /* Mobile Layout: 320px. */
 @media only screen and (max-width: 767px) {
+
+    main {
+        top: 0;
+    }
 
     .tab {
         height: auto;
@@ -143,8 +152,6 @@
 
     .navbar-toggle {
         border-color: #fff;
-        float: none;
-        margin: 10px auto;
     }
 
     .navbar-toggle .icon-bar {
@@ -289,6 +296,24 @@
 }
 
 /* Wide Mobile Layout: 480px. */
-@media only screen and (min-width: 480px) and (max-width: 767px) {
+@media only screen and (min-width: 521px) and (max-width: 767px) {
 
+}
+
+@media only screen and (min-width: 360px) and (max-width: 520px) {
+    .logo img {
+        max-width: 230px;
+    }
+    .q-phone-block .number {
+        font-size: 16px;
+    }
+    .headerCallback a {
+        font-size: 8px;
+    }
+    .q-phone-block {
+        margin-right: 2px;
+    }
+    nav label, nav a {
+        background: #ffffff;
+    }
 }

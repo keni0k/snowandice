@@ -20,6 +20,8 @@
     <link rel="shortcut icon" href="/img/icon.ico">
 
     <!-- Custom CSS -->
+
+    <link rel="stylesheet" href="/css/categories.css">
     <link rel="stylesheet" href="/css/owl.carousel.css"/>
     <link rel="stylesheet" href="/css/style.1.0.3.css"/>
     <link rel="stylesheet" href="/css/responsive.css"/>
@@ -34,9 +36,9 @@
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 
 <div class="header-area" th:with="isUserOrAdmin = ${isUser or isAdmin}">
-    <div class="container" style="width: 100%">
+    <div class="container" style="width: 80%">
         <div class="row">
-            <div class="col-sm-4 col-xs-5">
+            <!--<div class="col-sm-4 col-xs-5">
                 <div class="header-left">
                     <ul class="list-unstyled list-inline">
                         <li class="dropdown dropdown-small">
@@ -49,8 +51,8 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="col-sm-5 col-xs-7">
+            </div>-->
+            <div class="col-sm-7 col-xs-12">
                 <div class="user-menu">
                     <ul>
                         <li><a href="/contacts">Контакты</a></li>
@@ -58,7 +60,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-3 col-xs-12">
+            <div class="col-sm-5 col-xs-12">
                 <div class="login-registr">
                     <th:block th:unless="${isUserOrAdmin}">
                         <a href="/users/login">
@@ -127,13 +129,201 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
+
+            <main ontouchstart>
+                <nav>
+                    <input id='link-top' type='checkbox' th:checked="${menu}=='index'">
+                    <label class='down' for='link-top'>
+                        <h4>Категории</h4>
+                    </label>
+                    <ul>
+                        <li>
+                            <input id='link-phones' type='checkbox'>
+                            <label class='right' for='link-phones'>Смартфоны и сотовые телефоны</label>
+                            <ul>
+                                <li>
+                                    <a>Смартфоны</a>
+                                </li>
+                                <li>
+                                    <a>Сотовые телефоны</a>
+                                </li>
+                                <li>
+                                    <a>Чехлы</a>
+                                </li>
+                                <li>
+                                    <a>Зарядные устройства</a>
+                                </li>
+                                <li>
+                                    <a>Наушники</a>
+                                </li>
+                                <li>
+                                    <a>Аккумуляторы</a>
+                                </li>
+                                <li>
+                                    <a>Защитные плёнки и стёкла</a>
+                                </li>
+                                <li>
+                                    <a>Брелки, стилусы</a>
+                                </li>
+                                <li><a>Комплектующие</a></li>
+                            </ul>
+                        </li><!--Смартфоны и сотовые телефоны-->
+                        <li>
+                            <input id='link-laptops' type='checkbox'>
+                            <label class='right' for='link-laptops'>Ноутбуки</label>
+                            <ul>
+                                <li>
+                                    <a>Ноутбуки</a>
+                                </li>
+                                <li>
+                                    <a>Разъемы</a>
+                                </li>
+                                <li>
+                                    <a>Шлейфы</a>
+                                </li>
+                                <li>
+                                    <a>Аккумуляторы</a>
+                                </li>
+                                <li>
+                                    <a>Адаптеры и блоки питания</a>
+                                </li>
+                            </ul>
+                        </li><!--Ноутбуки-->
+                        <li>
+                            <input id='link-auto' type='checkbox'>
+                            <label class='right' for='link-auto'>Автотовары</label>
+                            <ul>
+                                <li>
+                                    <a>Магнитолы</a>
+                                </li>
+                                <li>
+                                    <a>GPS навигаторы</a>
+                                </li>
+                                <li>
+                                    <a>Акустика</a>
+                                </li>
+                                <li>
+                                    <a>Антенны</a>
+                                </li>
+                                <li>
+                                    <a>Видеорегистраторы</a>
+                                </li>
+                                <li><a>Инверторы</a></li>
+                                <li><a>Автодержатели</a></li>
+                            </ul>
+                        </li><!--Автотовары-->
+                        <li>
+                            <input id='link-video-audio' type='checkbox'>
+                            <label class='right' for='link-video-audio'>Видео/аудио/ТВ</label>
+                            <ul>
+                                <li><a>Телевизоры</a></li>
+                                <li>
+                                    <a>Спутниковое ТВ</a>
+                                </li>
+                                <li>
+                                    <a>Радиоприемники</a>
+                                </li>
+                                <li>
+                                    <a>Фототехника</a>
+                                </li>
+                                <li>
+                                    <a>Плееры</a>
+                                </li>
+                                <li>
+                                    <a>Портативные колонки</a>
+                                </li>
+                                <li>
+                                    <a>Комплектующие</a>
+                                </li>
+                            </ul>
+                        </li><!--Видео/аудио/ТВ-->
+                        <li>
+                            <input id="pk" type="checkbox">
+                            <label class="right" for="pk">Компьютеры</label>
+                            <ul>
+                                <li><a>Компьютеры</a></li>
+                                <li><a>Мониторы</a></li>
+                                <li>
+                                    <input id="pereferia" type="checkbox">
+                                    <label class="right mb-0" for="pereferia">Переферия</label>
+                                    <ul>
+                                        <li><a>Мыши</a></li>
+                                        <li><a>Клавиатуры</a></li>
+                                        <li><a>USB HUB</a></li>
+                                        <li><a>Веб-камеры</a></li>
+                                        <li><a>Внешние накопители</a></li>
+                                        <li><a>Картридеры</a></li>
+                                        <li><a>Колонки</a></li>
+                                        <li><a>Микрофоны</a></li>
+                                    </ul>
+                                </li>
+                                <li><a>Комплектующее</a></li>
+                                <li><a>Программное обеспечение</a></li>
+                                <li><a>Сетевое оборудование</a></li>
+                                <li><a>Шнуры/Кабели</a></li>
+                            </ul>
+                        </li><!--Компьютеры-->
+                        <li>
+                            <input id="intruments" type="checkbox">
+                            <label class="right" for="intruments">Инструменты</label>
+                            <ul>
+                                <li><a>Измерительные инструменты</a></li>
+                                <li><a>Инструменты для ремонта</a></li>
+                                <li><a>Мультиметры</a></li>
+                                <li><a>Отвертки индикаторы</a></li>
+                                <li><a>Паяльное оборудывание</a></li>
+                            </ul>
+                        </li><!--Инструменты-->
+                        <li>
+                            <input id="orgtechnica" type="checkbox">
+                            <label class="right" for="orgtechnica">Оргтехника</label>
+                            <ul>
+                                <li><a>Принтеры и МФУ</a></li>
+                                <li><a>Проекторы</a></li>
+                                <li><a>Сетевые фильтры и ИБП</a></li>
+                                <li><a>Телефоны проводные</a></li>
+                            </ul>
+                        </li><!--Оргтехника-->
+                        <li>
+                            <input id='link-rashodniki' type='checkbox'>
+                            <label class='right' for='link-rashodniki'>Расходные материалы</label>
+                            <ul>
+                                <li>
+                                    <a>Картриджи</a>
+                                </li>
+                                <li>
+                                    <a>Краски и тонеры</a>
+                                </li>
+                                <li>
+                                    <a>Чистящие средства</a>
+                                </li>
+                                <li>
+                                    <a>Элементы питания</a>
+                                </li>
+                            </ul>
+                        </li><!--Расходные материалы-->
+                        <li>
+                            <a>Радиодетали</a>
+                        </li><!--Радиодетали-->
+                        <li>
+                            <a>Пиротехника</a>
+                        </li><!--Пиротехника-->
+                    </ul>
+                </nav>
+            </main>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li th:class="${menu}=='index'?'active':''"><a href="/index">О магазине</a></li>
-                    <li th:class="${menu}=='shop'?'active':''"><a href="/products">Каталог</a></li>
+                    <!--<li th:class="${menu}=='index'?'active':''"><a href="/index">О магазине</a></li>-->
+                    <li th:class="${menu}=='shop'?'active':''"><a href="/products/list">Каталог</a></li>
                     <li th:class="${menu}=='single-product'?'active':''"><a href="/products?id=0">Страница товара</a></li>
                     <li th:class="${menu}=='fix'?'active':''"><a href="/fix">Мастерская</a></li>
                     <li th:class="${menu}=='status'?'active':''"><a href="/status">Статус заказа/ремонта</a></li>
+                    <li th:if="${isAdmin}">
+                        <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false" href="">Модерация <b class="caret"></b>
+                        </a><ul class="dropdown-menu">
+                        <li><a href="/admin/users" class="waves-effect waves-light">Модерация пользователей</a></li>
+                        <li><a href="/admin/orders" class="waves-effect waves-light">Модерация заказов</a></li></ul>
+                    </li>
                 </ul>
             </div>
         </div>

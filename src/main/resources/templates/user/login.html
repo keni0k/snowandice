@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/header :: header (~{::body},'login')}">
 <body>
+<div class="contacts-area">
+    <div class="zigzag-bottom"></div>
 <div class="container main-block">
     <div class="row">
         <div class="col-md-12 col-lg-8 col-centred">
@@ -14,17 +16,20 @@
                 <br/>
                 <div class="input-group w-full">
                     <span class="input-group-addon">Логин</span>
-                    <input name="username" id="login" autofocus="autofocus" type="text" class="form-control input-lg" placeholder="Логин" aria-label="Логин" required="">
+                    <input name="username" id="login" autofocus="autofocus" type="text" class="form-control input-lg"
+                           placeholder="Логин" aria-label="Логин" required="">
                 </div>
                 <br/>
                 <div class="input-group w-full">
                     <span class="input-group-addon">Пароль</span>
-                    <input name="password" id="pass" type="password" class="form-control input-lg" placeholder="Пароль" aria-label="Пароль" required="">
+                    <input name="password" id="pass" type="password" class="form-control input-lg" placeholder="Пароль"
+                           aria-label="Пароль" required="">
                 </div>
                 <br/>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" id="remember" name="remember" checked="checked" style="margin-left: -20px; visibility: visible; left:20px;"><span>Запомнить меня</span>
+                        <input type="checkbox" id="remember" name="remember" checked="checked"
+                               style="margin-left: -20px; visibility: visible; left:20px;"><span>Запомнить меня</span>
                     </label>
                 </div>
                 <!--<div class="g-recaptcha" data-sitekey="6LduKUEUAAAAACGRmysEPl1Mlp9QAo1CRNe6QWUf"></div>
@@ -35,6 +40,7 @@
             </form>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/header :: header (~{::body},'single-product')}">
   <body>
-    <div class="single-product-area">
+    <div class="single-product-area" th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
         <div class="zigzag-bottom"></div>
-        <div class="container main-block">
+        <div class="container main-block" th:with="isUserOrAdmin = ${isAdmin or isUser}">
             <div class="row">
                 <div class="col-md-10 col-centred">
                     <div class="product-content-right">
@@ -56,12 +56,18 @@
                                                 <p>Mauris placerat vitae lorem gravida viverra. Mauris in fringilla ex. Nulla facilisi. Etiam scelerisque tincidunt quam facilisis lobortis. In malesuada pulvinar neque a consectetur. Nunc aliquam gravida purus, non malesuada sem accumsan in. Morbi vel sodales libero.</p>
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="profile">
-                                                <h2>Reviews</h2>
                                                 <div class="submit-review">
-                                                    <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                    <p><label for="email">Email</label> <input name="email" type="email"></p>
+                                                    <!--/*@thymesVar id="user" type="com.example.user.User"*/-->
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">ФИО</span>
+                                                        <input class="form-control" type="text" name="name" th:value="${isUserOrAdmin?user.getFullName():''}"/>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Email</span>
+                                                        <input class="form-control" type="email" name="email" th:value="${isUserOrAdmin?user.getEmail():''}"/>
+                                                    </div>
                                                     <div class="rating-chooser">
-                                                        <p>Your rating</p>
+                                                        <p>Рейтинг</p>
 
                                                         <div class="rating-wrap-post">
                                                             <i class="fa fa-star"></i>
@@ -71,8 +77,8 @@
                                                             <i class="fa fa-star"></i>
                                                         </div>
                                                     </div>
-                                                    <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                    <p><input type="submit" value="Submit"></p>
+                                                    <p><label for="review">Отзыв</label> <textarea name="review" id="review" cols="30" rows="10"></textarea></p>
+                                                    <p><input type="submit" value="Отправить"></p>
                                                 </div>
                                             </div>
                                         </div>

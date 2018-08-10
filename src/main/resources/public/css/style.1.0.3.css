@@ -738,7 +738,6 @@ form.cart {
     display: block;
 }
 .submit-review input[type="text"], .submit-review input[type="email"], .submit-review textarea {
-    margin-bottom: 20px;
     width: 100%;
 }
 .rating-chooser {
@@ -964,9 +963,12 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     display: block;
     margin-bottom: 5px;
 }
-#login-form-wrap input[type="text"], #login-form-wrap input[type="password"] {
+#login-form-wrap .input-group {
+    width: 100%;
     margin-bottom: 10px;
-    width: 250px;
+}
+#login-form-wrap .input-group-addon {
+    width: 130px;
 }
 #login-form-wrap input[type="submit"] {
     margin-bottom: 15px;

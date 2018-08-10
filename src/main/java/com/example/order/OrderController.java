@@ -36,7 +36,7 @@ public class OrderController {
         return "cart";
     }
 
-    @RequestMapping(value = "/checkout", method = RequestMethod.GET)
+    @RequestMapping(value = "/checkout", method = RequestMethod.POST)
     public String checkout(ModelMap modelMap, Principal principal,
                            @RequestParam("region") String region,
                            @RequestParam("postcode") String postcode){

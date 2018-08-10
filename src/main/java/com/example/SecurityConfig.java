@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.repo.UserRepository;
 import com.example.token.TokenService;
+import com.example.user.UserDetailsService;
 import com.example.user.UserServiceImpl;
 import com.example.utils.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
@@ -17,12 +19,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserServiceImpl personService;
-
+    private UserDetailsService userDetailsService;
     private final TokenService repository;
 
     @Autowired
     public SecurityConfig(UserRepository personRepository, TokenService repository) {
         personService = new UserServiceImpl(personRepository);
+        userDetailsService = new UserDetailsService(personRepository);
         this.repository = repository;
     }
 
@@ -32,12 +35,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/resources/**");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/", "/index", "/resources/**",
-                        "/products", "/products/list", "/css/**", "/js/**", "/img/**", "/orders/cart",
-                        "/orders/checkout", "/orders/add", "/contacts", "/ship_and_pay", "/privacy_policy",
+                .antMatchers(HttpMethod.GET,"/", "/index",
+                        "/products", "/products/list", "/orders/cart",
+                        "/contacts", "/ship_and_pay", "/privacy_policy",
                         "/exchange_and_returns", "/fix").permitAll()
+                .antMatchers(HttpMethod.POST, "/orders/checkout", "/orders/add").permitAll()
                 .antMatchers("/users/registration").anonymous()
                 .antMatchers("/users/account", "/users/edit_data", "/users/edit_address").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/**").hasRole("ADMIN")
@@ -48,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutUrl("/users/logout").logoutSuccessUrl("/users/login").permitAll()
                 .and()
-                .rememberMe().tokenValiditySeconds(1209600).rememberMeParameter("remember-me").rememberMeCookieName("remember_me")
+                .rememberMe().tokenValiditySeconds(1209600).rememberMeParameter("remember-me").rememberMeCookieName("remember_me").userDetailsService(userDetailsService)
                 .tokenRepository(repository)
                 .and()
                 .exceptionHandling().accessDeniedPage("/error/403")

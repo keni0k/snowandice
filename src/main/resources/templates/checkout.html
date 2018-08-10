@@ -22,28 +22,26 @@
                             <p>Если вы покупали раньше в нашем онлайн магазине, то введите, пожалуйста, ваши логин и
                                 пароль в форму ниже.</p>
 
-                            <p class="form-row form-row-first">
-                                <label for="username">Логин или email <span class="required">*</span>
-                                </label>
-                                <input type="text" id="username" name="username" class="input-text">
-                            </p>
-                            <p class="form-row form-row-last">
-                                <label for="password">Пароль <span class="required">*</span>
-                                </label>
-                                <input type="password" id="password" name="password" class="input-text">
-                            </p>
+                            <div class="input-group">
+                                <span class="input-group-addon">Логин или email</span>
+                                <input type="text" class="form-control" id="username" name="username"/>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Пароль</span>
+                                <input type="password" id="password" name="password" class="form-control"/>
+                            </div>
                             <div class="clear"></div>
 
 
                             <p class="form-row">
                                 <input type="submit" value="Login" name="login" class="button">
-                                <label class="inline" for="rememberme"><input type="checkbox" value="forever"
-                                                                              id="rememberme" name="rememberme">
+                                <label class="inline" for="remember-me">
+                                    <input type="checkbox" checked="checked" id="remember-me" name="remember-me">
                                     Запомнить меня </label>
                             </p>
-                            <p class="lost_password">
+                            <!--<p class="lost_password">
                                 <a href="#">Не помните пароль?</a>
-                            </p>
+                            </p>-->
 
                             <div class="clear"></div>
                         </form>
@@ -56,7 +54,7 @@
                             код купона</a>
                         </div>
 
-                        <form id="coupon-collapse-wrap" th:unless="${isHaveACoupon}" method="post" class="checkout_coupon collapse">
+                        <form id="coupon-collapse-wrap" th:unless="${isHaveACoupon}" method="post" action="/orders/set_coupon" class="checkout_coupon collapse">
 
                             <p class="form-row form-row-first">
                                 <input type="text" value="" id="coupon_code" placeholder="Код купона" class="input-text"
@@ -70,7 +68,7 @@
                             <div class="clear"></div>
                         </form>
 
-                        <form enctype="multipart/form-data" action="#" class="checkout" method="post" name="checkout">
+                        <form action="/orders/add" class="checkout" method="post" name="checkout">
 
                             <div id="customer_details">
                                 <!--/*@thymesVar id="user" type="com.example.user.User"*/-->
@@ -84,7 +82,7 @@
                                                                                                    class="required">*</abbr>
                                                 </label>
                                                 <input type="text" th:value="${isUserOrAdmin?user.getFirstName():''}" placeholder="" id="billing_first_name"
-                                                       name="billing_first_name" class="input-text ">
+                                                       name="billing_first_name" class="input-text" required="">
                                             </p>
                                         </div>
                                         <div class="col-sm-6">
@@ -94,7 +92,7 @@
                                                                                                       class="required">*</abbr>
                                                 </label>
                                                 <input type="text" th:value="${isUserOrAdmin?user.getLastName():''}" placeholder="" id="billing_last_name"
-                                                       name="billing_last_name" class="input-text ">
+                                                       name="billing_last_name" class="input-text" required="">
                                             </p>
                                         </div>
                                     </div>
@@ -117,7 +115,7 @@
                                                class="form-row form-row-wide address-field validate-required"
                                                data-o_class="form-row form-row-wide address-field validate-required">
                                                 <input type="text" th:value="${isUserOrAdmin?user.getListOfAddress()[3]:''}" placeholder="Населённый пункт"
-                                                       id="billing_city"
+                                                       id="billing_city" required=""
                                                        name="billing_city" class="input-text ">
                                             </p>
                                         </div>
@@ -125,7 +123,7 @@
 
                                     <p id="billing_address_2_field" class="form-row form-row-wide address-field">
                                         <input type="text" th:value="${isUserOrAdmin?user.getListOfAddress()[4]:''}" placeholder="Улица, дом, квартира"
-                                               id="billing_address_2" name="billing_address_2" class="input-text ">
+                                               id="billing_address_2" name="billing_address_2" class="input-text" required="">
                                     </p>
 
                                     <div class="row">
@@ -137,7 +135,7 @@
                                                         class="required">*</abbr>
                                                 </label>
                                                 <input type="text" th:value="${isUserOrAdmin?user.getPhoneNumber():''}" placeholder="" id="billing_phone"
-                                                       name="billing_phone" class="input-text ">
+                                                       name="billing_phone" class="input-text" required="">
                                             </p>
                                         </div>
                                     </div>
@@ -156,7 +154,7 @@
                                                                                                           class="required">*</abbr>
                                                     </label>
                                                     <input type="text" value="" placeholder="" id="billing_email"
-                                                           name="billing_email" class="input-text ">
+                                                           name="billing_email" class="input-text " required="">
                                                 </p>
                                             </div>
                                             <div class="col-sm-4">
@@ -164,7 +162,7 @@
                                                     <label class="" for="account_password">Пароль к аккаунту <abbr
                                                             title="Обязательное поле" class="required">*</abbr>
                                                     </label>
-                                                    <input type="password" value="" id="account_password"
+                                                    <input type="password" value="" id="account_password" required=""
                                                            name="account_password" class="input-text w-full">
                                                 </p>
                                             </div>

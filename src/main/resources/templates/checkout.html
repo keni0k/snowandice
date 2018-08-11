@@ -68,7 +68,8 @@
                             <div class="clear"></div>
                         </form>
 
-                        <form action="/orders/add" class="checkout" method="post" name="checkout">
+                        <!--/*@thymesVar id="order" type="com.example.order.Order"*/-->
+                        <form action="/orders/add" class="checkout" method="post" name="checkout" th:object="${order}">
 
                             <div id="customer_details">
                                 <!--/*@thymesVar id="user" type="com.example.user.User"*/-->
@@ -82,7 +83,7 @@
                                                                                                    class="required">*</abbr>
                                                 </label>
                                                 <input type="text" th:value="${isUserOrAdmin?user.getFirstName():''}" placeholder="" id="billing_first_name"
-                                                       name="billing_first_name" class="input-text" required="">
+                                                       name="first_name" class="input-text" required="">
                                             </p>
                                         </div>
                                         <div class="col-sm-6">
@@ -92,13 +93,13 @@
                                                                                                       class="required">*</abbr>
                                                 </label>
                                                 <input type="text" th:value="${isUserOrAdmin?user.getLastName():''}" placeholder="" id="billing_last_name"
-                                                       name="billing_last_name" class="input-text" required="">
+                                                       name="last_name" class="input-text" required="">
                                             </p>
                                         </div>
                                     </div>
                                     <div class="clear"></div>
 
-                                    <label class="" for="billing_address_1">Адрес <abbr title="Обязательное поле"
+                                    <label class="" for="address_1">Адрес <abbr title="Обязательное поле"
                                                                                         class="required">*</abbr>
                                     </label>
                                     <div class="row">
@@ -106,8 +107,8 @@
                                             <p id="billing_address_1_field"
                                                class="form-row form-row-wide address-field validate-required">
                                                 <input type="text" th:value="${isUserOrAdmin?user.getListOfAddress()[2]:''}" placeholder="Район (если не город)"
-                                                       id="billing_address_1"
-                                                       name="billing_address_1" class="input-text ">
+                                                       id="address_1"
+                                                       name="district" class="input-text ">
                                             </p>
                                         </div>
                                         <div class="col-sm-6">
@@ -116,14 +117,14 @@
                                                data-o_class="form-row form-row-wide address-field validate-required">
                                                 <input type="text" th:value="${isUserOrAdmin?user.getListOfAddress()[3]:''}" placeholder="Населённый пункт"
                                                        id="billing_city" required=""
-                                                       name="billing_city" class="input-text ">
+                                                       name="city" class="input-text ">
                                             </p>
                                         </div>
                                     </div>
 
                                     <p id="billing_address_2_field" class="form-row form-row-wide address-field">
                                         <input type="text" th:value="${isUserOrAdmin?user.getListOfAddress()[4]:''}" placeholder="Улица, дом, квартира"
-                                               id="billing_address_2" name="billing_address_2" class="input-text" required="">
+                                               id="billing_address_2" name="street-home" class="input-text" required="">
                                     </p>
 
                                     <div class="row">
@@ -135,7 +136,7 @@
                                                         class="required">*</abbr>
                                                 </label>
                                                 <input type="text" th:value="${isUserOrAdmin?user.getPhoneNumber():''}" placeholder="" id="billing_phone"
-                                                       name="billing_phone" class="input-text" required="">
+                                                       name="phone" class="input-text" required="">
                                             </p>
                                         </div>
                                     </div>
@@ -154,7 +155,7 @@
                                                                                                           class="required">*</abbr>
                                                     </label>
                                                     <input type="text" value="" placeholder="" id="billing_email"
-                                                           name="billing_email" class="input-text " required="">
+                                                           name="email" class="input-text " required="">
                                                 </p>
                                             </div>
                                             <div class="col-sm-4">
@@ -163,7 +164,7 @@
                                                             title="Обязательное поле" class="required">*</abbr>
                                                     </label>
                                                     <input type="password" value="" id="account_password" required=""
-                                                           name="account_password" class="input-text w-full">
+                                                           name="password" class="input-text w-full">
                                                 </p>
                                             </div>
                                         </div>
@@ -174,7 +175,7 @@
                                         <label class="" for="order_comments">Комментарий к заказу</label>
                                         <textarea cols="5" rows="2" placeholder="Для пожеланий насчет товара и доставки"
                                                   id="order_comments" class="input-text"
-                                                  name="order_comments"></textarea>
+                                                  name="order_comment"></textarea>
                                     </p>
 
                                 </div>

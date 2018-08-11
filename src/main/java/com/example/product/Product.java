@@ -18,7 +18,6 @@ public class Product {
     private String name;
     private String article;
     private int price;
-    private int oldPrice;
     private int type;
     private int category;
     private int subcategory;
@@ -46,14 +45,6 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public int getOldPrice() {
-        return oldPrice;
-    }
-
-    public void setOldPrice(int oldPrice) {
-        this.oldPrice = oldPrice;
     }
 
     public int getType() {

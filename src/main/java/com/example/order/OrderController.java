@@ -8,6 +8,7 @@ import com.example.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,13 +42,20 @@ public class OrderController {
                            @RequestParam("region") String region,
                            @RequestParam("postcode") String postcode){
         User user = utils.getUser(principal);
+        modelMap.addAttribute("order", new Order());
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("isHaveACoupon", false);
         return "checkout";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addOrder(ModelMap modelMap, Principal principal){
+    public String addOrder(@ModelAttribute("order") Order order,
+                           ModelMap modelMap, Principal principal){
+        User user = utils.getUser(principal);
+        /*if (user==null)
+            user = new User("login", );*/
+        order.setIdOfUser(user.getId());
+        orderService.addOrder(order);
         return "redirect:/users/account";
     }
 

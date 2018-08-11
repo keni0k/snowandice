@@ -12,7 +12,6 @@ import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mailjet.client.resource.Contact;
 import com.mailjet.client.resource.Email;
-import org.joda.time.LocalTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -80,9 +79,7 @@ public class UsersController {
 
         person.setRole("ROLE_USER");
         person.setType(Consts.USER_DISABLED);
-        String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
-        time = time.substring(0, time.indexOf('.'));
-        person.setTime(time);
+        person.setTime(utils.getTime());
         try {
             sendMail(person.getToken(), person.getEmail());
             model.addAttribute("message", new MessageUtil("success", messageSource.getMessage("success.user.registration", null, locale)));

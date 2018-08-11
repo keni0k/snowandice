@@ -1,7 +1,5 @@
 package com.example.token;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 
@@ -61,8 +59,6 @@ public class TokenCookies extends PersistentRememberMeToken {
 
     public TokenCookies(){
         super("","","",new Date());
-        Logger logger = LoggerFactory.getLogger(TokenCookies.class);
-        logger.info("ВЫЗВАЛИ НЕ ТОГО");
     }
 
     public String getTokenValue() {

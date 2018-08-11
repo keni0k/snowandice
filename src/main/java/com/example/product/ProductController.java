@@ -5,6 +5,7 @@ import com.example.repo.UserRepository;
 import com.example.user.User;
 import com.example.user.UserServiceImpl;
 import com.example.utils.Utils;
+import com.example.utils.UtilsForWeb;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,7 @@ public class ProductController {
         if (id == null) return "shop";
         Product p = productService.getById(id);
         modelMap.addAttribute("product", p);
+        modelMap.addAttribute("utils", new UtilsForWeb());
         return "single-product";
     }
 

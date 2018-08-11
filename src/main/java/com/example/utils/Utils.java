@@ -2,11 +2,7 @@ package com.example.utils;
 
 import com.example.user.User;
 import com.example.user.UserServiceImpl;
-/*import com.microsoft.azure.storage.CloudStorageAccount;
-import com.microsoft.azure.storage.StorageException;
-import com.microsoft.azure.storage.blob.CloudBlobClient;
-import com.microsoft.azure.storage.blob.CloudBlobContainer;
-import com.microsoft.azure.storage.blob.CloudBlockBlob;*/
+import org.joda.time.LocalTime;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -23,6 +19,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
+/*import com.microsoft.azure.storage.CloudStorageAccount;
+import com.microsoft.azure.storage.StorageException;
+import com.microsoft.azure.storage.blob.CloudBlobClient;
+import com.microsoft.azure.storage.blob.CloudBlobContainer;
+import com.microsoft.azure.storage.blob.CloudBlockBlob;*/
 
 public class Utils {
 
@@ -129,6 +131,12 @@ public class Utils {
             return user;
         }
         else return null;
+    }
+
+    public String getTime(){
+        String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
+        time = time.substring(0, time.indexOf('.'));
+        return time;
     }
 
 }

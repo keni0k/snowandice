@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="/css/categories.css">
     <link rel="stylesheet" href="/css/owl.carousel.css"/>
-    <link rel="stylesheet" href="/css/style.1.0.3.css"/>
+    <link rel="stylesheet" href="/css/style.1.1.0.css"/>
     <link rel="stylesheet" href="/css/responsive.css"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -119,6 +119,7 @@
 </div> <!-- End site branding area -->
 
 <div class="mainmenu-area">
+    <!--/*@thymesVar id="utils" type="com.example.utils.UtilsForWeb"*/-->
     <div class="container w-full">
         <div class="row">
             <div class="navbar-header">
@@ -137,13 +138,25 @@
                         <h4>Категории</h4>
                     </label>
                     <ul>
-                        <li>
+                        <li th:each="category,categoryStat : ${utils.getCategories()}">
+                            <th:block th:if="${categoryStat.index<8}">
+                                <input th:id='${categoryStat.index}' type='checkbox'>
+                                <label class='right' th:for='${categoryStat.index}' th:text="${category}">%CATEGORY%</label>
+                                <ul>
+                                    <li th:each="subcategory : ${utils.getSubcategories(categoryStat.index)}">
+                                        <a th:text="${subcategory}">%SUBCATEGORY%</a>
+                                    </li>
+                                </ul>
+                            </th:block>
+                            <a th:unless="${categoryStat.index<8}" th:text="${category}">%CATEGORY%</a>
+                        </li>
+                        <!--<li>
                             <input id='link-phones' type='checkbox'>
-                            <label class='right' for='link-phones'>Смартфоны и сотовые телефоны</label>
-                            <ul>
-                                <li>
-                                    <a>Смартфоны</a>
-                                </li>
+                                <label class='right' for='link-phones'>Смартфоны и сотовые телефоны</label>
+                                <ul>
+                                    <li>
+                                        <a>Смартфоны</a>
+                                    </li>
                                 <li>
                                     <a>Сотовые телефоны</a>
                                 </li>
@@ -167,7 +180,7 @@
                                 </li>
                                 <li><a>Комплектующие</a></li>
                             </ul>
-                        </li><!--Смартфоны и сотовые телефоны-->
+                        </li>&lt;!&ndash;Смартфоны и сотовые телефоны&ndash;&gt;
                         <li>
                             <input id='link-laptops' type='checkbox'>
                             <label class='right' for='link-laptops'>Ноутбуки</label>
@@ -188,7 +201,33 @@
                                     <a>Адаптеры и блоки питания</a>
                                 </li>
                             </ul>
-                        </li><!--Ноутбуки-->
+                        </li>&lt;!&ndash;Ноутбуки&ndash;&gt;
+                        <li>
+                            <input id='link-video-audio' type='checkbox'>
+                            <label class='right' for='link-video-audio'>Видео/аудио/ТВ</label>
+                            <ul>
+                                <li><a>Телевизоры</a></li>
+                                <li>
+                                    <a>Спутниковое ТВ</a>
+                                </li>
+                                <li><a>Цифровые ресиверы</a></li>
+                                <li>
+                                    <a>Радиоприемники</a>
+                                </li>
+                                <li>
+                                    <a>Фототехника</a>
+                                </li>
+                                <li>
+                                    <a>Плееры</a>
+                                </li>
+                                <li>
+                                    <a>Портативные колонки</a>
+                                </li>
+                                <li>
+                                    <a>Комплектующие</a>
+                                </li>
+                            </ul>
+                        </li>&lt;!&ndash;Видео/аудио/ТВ&ndash;&gt;
                         <li>
                             <input id='link-auto' type='checkbox'>
                             <label class='right' for='link-auto'>Автотовары</label>
@@ -211,32 +250,7 @@
                                 <li><a>Инверторы</a></li>
                                 <li><a>Автодержатели</a></li>
                             </ul>
-                        </li><!--Автотовары-->
-                        <li>
-                            <input id='link-video-audio' type='checkbox'>
-                            <label class='right' for='link-video-audio'>Видео/аудио/ТВ</label>
-                            <ul>
-                                <li><a>Телевизоры</a></li>
-                                <li>
-                                    <a>Спутниковое ТВ</a>
-                                </li>
-                                <li>
-                                    <a>Радиоприемники</a>
-                                </li>
-                                <li>
-                                    <a>Фототехника</a>
-                                </li>
-                                <li>
-                                    <a>Плееры</a>
-                                </li>
-                                <li>
-                                    <a>Портативные колонки</a>
-                                </li>
-                                <li>
-                                    <a>Комплектующие</a>
-                                </li>
-                            </ul>
-                        </li><!--Видео/аудио/ТВ-->
+                        </li>&lt;!&ndash;Автотовары&ndash;&gt;
                         <li>
                             <input id="pk" type="checkbox">
                             <label class="right" for="pk">Компьютеры</label>
@@ -262,7 +276,7 @@
                                 <li><a>Сетевое оборудование</a></li>
                                 <li><a>Шнуры/Кабели</a></li>
                             </ul>
-                        </li><!--Компьютеры-->
+                        </li>&lt;!&ndash;Компьютеры&ndash;&gt;
                         <li>
                             <input id="intruments" type="checkbox">
                             <label class="right" for="intruments">Инструменты</label>
@@ -273,7 +287,7 @@
                                 <li><a>Отвертки индикаторы</a></li>
                                 <li><a>Паяльное оборудывание</a></li>
                             </ul>
-                        </li><!--Инструменты-->
+                        </li>&lt;!&ndash;Инструменты&ndash;&gt;
                         <li>
                             <input id="orgtechnica" type="checkbox">
                             <label class="right" for="orgtechnica">Оргтехника</label>
@@ -283,7 +297,7 @@
                                 <li><a>Сетевые фильтры и ИБП</a></li>
                                 <li><a>Телефоны проводные</a></li>
                             </ul>
-                        </li><!--Оргтехника-->
+                        </li>&lt;!&ndash;Оргтехника&ndash;&gt;
                         <li>
                             <input id='link-rashodniki' type='checkbox'>
                             <label class='right' for='link-rashodniki'>Расходные материалы</label>
@@ -301,13 +315,13 @@
                                     <a>Элементы питания</a>
                                 </li>
                             </ul>
-                        </li><!--Расходные материалы-->
+                        </li>&lt;!&ndash;Расходные материалы&ndash;&gt;
                         <li>
                             <a>Радиодетали</a>
-                        </li><!--Радиодетали-->
+                        </li>&lt;!&ndash;Радиодетали&ndash;&gt;
                         <li>
                             <a>Пиротехника</a>
-                        </li><!--Пиротехника-->
+                        </li>&lt;!&ndash;Пиротехника&ndash;&gt;-->
                     </ul>
                 </nav>
             </main>
@@ -315,7 +329,7 @@
                 <ul class="nav navbar-nav">
                     <!--<li th:class="${menu}=='index'?'active':''"><a href="/index">О магазине</a></li>-->
                     <li th:class="${menu}=='shop'?'active':''"><a href="/products/list">Каталог</a></li>
-                    <li th:class="${menu}=='single-product'?'active':''"><a href="/products?id=0">Страница товара</a></li>
+                    <li th:class="${menu}=='single-product'?'active':''"><a href="/products?id=1">Страница товара</a></li>
                     <li th:class="${menu}=='fix'?'active':''"><a href="/fix">Мастерская</a></li>
                     <li th:class="${menu}=='status'?'active':''"><a href="/status">Статус заказа/ремонта</a></li>
                     <li th:if="${isAdmin}">

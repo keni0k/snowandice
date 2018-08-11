@@ -3,16 +3,40 @@ package com.example.utils;
 public class UtilsForWeb {
 
     public static Consts consts = new Consts();
+    private static String[] categories = {"СМАРТФОНЫ И СОТОВЫЕ ТЕЛЕФОНЫ", "ВИДЕО/АУДИО/ТВ", "АВТОТОВАРЫ", "КОМПЬЮТЕРЫ", "НОУТБУКИ", "ИНСТРУМЕНТЫ", "ОРГТЕХНИКА", "РАСХОДНЫЕ МАТЕРИАЛЫ", "РАДИОДЕТАЛИ", "ПИРОТЕХНИКА"};
+    private static String[][] subcategories = {
+            /*СМАРТФОНЫ И СОТОВЫЕ ТЕЛЕФОНЫ*/{"СМАРТФОНЫ", "СОТОВЫЕ ТЕЛЕФОНЫ", "ЧЕХЛЫ", "ЗАРЯДНЫЕ УСТРОЙСТВА", "НАУШНИКИ", "АККУМУЛЯТОРЫ", "ЗАЩИТНЫЕ ПЛЁНКИ", "ЗАЩИТНЫЕ СТЁКЛА", "БРЕЛКИ, СТИЛУСЫ", "КОМПЛЕКТУЮЩИЕ"},
+            /*ВИДЕО/АУДИО/ТВ*/{"ТЕЛЕВИЗОРЫ", "ПУЛЬТЫ ДУ", "СПУТНИКОВОЕ ТВ", "ЦИФРОВЫЕ РЕСИВЕРЫ", "РАДИОПРИЕМНИКИ", "ФОТОТЕХНИКА", "ПЛЕЕРЫ", "ПОРТАТИВНЫЕ КОЛОНКИ", "КОМПЛЕКТУЮЩИЕ"},
+            /*АВТОТОВАРЫ*/{"МАГНИТОЛЫ", "GPS НАВИГАТОРЫ", "АКУСТИКА", "АНТЕННЫ", "ВИДЕОРЕГИСТРАТОРЫ", "ИНВЕРТОРЫ", "АВТОДЕРЖАТЕЛИ"},
+            /*КОМПЬЮТЕРЫ*/{"КОМПЬЮТЕРЫ", "МОНИТОРЫ", "ПЕРЕФЕРИЯ", "КОМПЛЕКТУЮЩЕЕ", "ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ", "СЕТЕВОЕ ОБОРУДОВАНИЕ", "ШНУРЫ/КАБЕЛИ"},
+            /*НОУТБУКИ*/{"НОУТБУКИ", "АКСЕССУАРЫ", "СУМКИ И ЧЕХЛЫ", "АККУМУЛЯТОРЫ", "АДАПТЕРЫ И БЛОКИ ПИТАНИЯ", "КОМПЛЕКТУЮЩИЕ"},
+            /*ИНСТРУМЕНТЫ*/{"ИЗМЕРИТЕЛЬНЫЕ ИНСТРУМЕНТЫ", "ИНСТРУМЕНТЫ ДЛЯ РЕМОНТА", "МУЛЬТИМЕТРЫ", "ОТВЕРТКИ ИНДИКАТОРЫ", "ПАЯЛЬНОЕ ОБОРУДЫВАНИЕ"},
+            /*ОРГТЕХНИКА*/{"ПРИНТЕРЫ И МФУ", "ПРОЕКТОРЫ", "СЕТЕВЫЕ ФИЛЬТРЫ И ИБП", "ТЕЛЕФОНЫ ПРОВОДНЫЕ"},
+            /*РАСХОДНЫЕ МАТЕРИАЛЫ*/{"КАРТРИДЖИ", "КРАСКИ И ТОНЕРЫ", "ЧИСТЯЩИЕ СРЕДСТВА", "ЭЛЕМЕНТЫ ПИТАНИЯ"}
+    };
 
-    public static String getCategoryString(int category, int language) {
-        String[] ru = {"Развлечения", "Наука", "История", "Искусство", "Квесты", "Экстрим", "Производство", "Гастрономия"};
-        String[] en = {"Entertainment", "Science", "History", "Art", "Quests", "Extreme", "Manufacture", "Gastronomy"};
-        if (language == 0) return ru[category];
-        else return en[category];
+    public static String getCategoryName(int category) {
+        return categories[category];
     }
 
-    public static int getCategoriesCount() {
-        return 8;
+    public static String[] getCategories(){
+        return categories;
+    }
+
+    public static String[] getSubcategories(int category){
+        return subcategories[category];
+    }
+
+    public static int getCategoriesCount(){
+        return categories.length;
+    }
+
+    public static int getSubcategoriesCount(int category){
+        return subcategories[category].length;
+    }
+
+    public static String getSubcategoryName(int category, int subcategory) {
+        return subcategories[category][subcategory];
     }
 
     public static String getCategoryUrl(int category) {

@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
     public UserDetailsService (UserRepository userRepository){
         this.userService = new UserServiceImpl(userRepository);

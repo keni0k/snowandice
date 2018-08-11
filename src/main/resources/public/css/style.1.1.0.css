@@ -1301,7 +1301,30 @@ main nav h4 {
 .mb-0 {
     margin-bottom: 0;
 }
+
+.contacts-area details {
+    border: 1px solid #999;
+    border-radius: 5px;
+    margin: 1em;
+    cursor: pointer;
+    padding: 1.04%;
+}
+
 .contacts-area details summary {
+    outline: none;
     font-size: 18px;
     font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: -1%;
+    padding: 8px 10px;
+    background: -webkit-linear-gradient(top, #f3f3f3 50%, #e6e6e6 50%);
+}
+
+.contacts-area details:hover{
+    border-color: #05318c;
+}
+
+.contacts-area details table {
+    margin-top: 20px;
 }

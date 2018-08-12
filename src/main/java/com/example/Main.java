@@ -16,40 +16,49 @@
 
 package com.example;
 
+import com.example.utils.UtilsForWeb;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/")
 public class Main {
 
   @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-  String index() {
+  String index(ModelMap modelMap) {
+    modelMap.addAttribute("utils", new UtilsForWeb());
     return "index";
   }
 
   @RequestMapping("/fix")
-  String fix(){
-    return "fix";
+  String fix(ModelMap modelMap){
+    modelMap.addAttribute("utils", new UtilsForWeb());
+    return "other/fix";
   }
 
   @RequestMapping("/contacts")
-  String contacts(){
-    return "contacts";
+  String contacts(ModelMap modelMap){
+    modelMap.addAttribute("utils", new UtilsForWeb());
+    return "other/contacts";
   }
 
   @RequestMapping("/ship_and_pay")
-  String ShipAndPay(){
-    return "ship_and_pay";
+  String ShipAndPay(ModelMap modelMap){
+    modelMap.addAttribute("utils", new UtilsForWeb());
+    return "other/ship_and_pay";
   }
 
   @RequestMapping("/privacy_policy")
-  String privacyPolicy(){
+  String privacyPolicy(ModelMap modelMap){
+    modelMap.addAttribute("utils", new UtilsForWeb());
     return "privacy_policy";
   }
 
   @RequestMapping("/exchange_and_returns")
-  String exchangeAndReturns(){
+  String exchangeAndReturns(ModelMap modelMap){
+    modelMap.addAttribute("utils", new UtilsForWeb());
     return "exchange_and_returns";
   }
 

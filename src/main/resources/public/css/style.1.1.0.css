@@ -437,12 +437,8 @@ padding: 35px 0 180px;}
 }
 .footer-wid-title {
     font-family: raleway, serif;
-  font-size: 30px;
-  font-weight: 100;color: #fff
-}
-
-.footer-about-us h2 {
-  font-weight: 200;
+    font-weight: 100;
+    color: #fff
 }
 .footer-menu ul {
     list-style: outside none none;
@@ -590,7 +586,7 @@ input[type="text"], input[type="password"], input[type="email"], textarea {
     border: 1px solid #ddd;
     padding: 10px;
 }
-input[type="submit"], button[type=submit] {
+input[type="submit"], button[type=submit], a[type=submit] {
     background: none repeat scroll 0 0 #05318c;
     border: 1px solid #ddd;
     color: #fff;
@@ -688,7 +684,8 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #fff;co
     border: 1px solid #05318c;
     padding: 5px;
     height: 44px;
-    width: 60px;
+    width: 40px;
+
 }
 .add_to_cart_button[type=submit] {
     padding: 14px 20px;
@@ -767,9 +764,12 @@ text-transform: uppercase;}
   right: 0;
   top: -56px;
 }
-
-
-
+.product-subtotal {
+    width: 100px;
+}
+.product-price{
+    width: 100px;
+}
 table.shop_table {
     border-bottom: 1px solid #ddd;
     border-right: 1px solid #ddd;
@@ -798,16 +798,15 @@ div.quantity input.plus, div.quantity input.minus {
     background: none repeat scroll 0 0 #05318c;
     border: medium none;
     color: #fff;
-    height: 25px;
-    line-height: 15px;
-    width: 25px;
+    padding: 3px 5px;
 }
 td.product-quantity div.quantity {
     float: none;
     margin: 0;
+    width: 110px;
 }
-td.actions div.coupon {
-    float: left;
+td.actions {
+    padding-top: 15px;
 }
 .cart-collaterals {
     overflow: hidden;
@@ -1327,4 +1326,25 @@ main nav h4 {
 
 .contacts-area details table {
     margin-top: 20px;
+}
+main nav input[type=checkbox][disabled] {
+    cursor: pointer;
+}
+
+.main-page {
+    padding-left: 200px;
+    padding-right: 30px;
+}
+
+.nav-index #link-top {
+    display: none;
+}
+.nav-index .down {
+    display: none;
+}
+.nav-index {
+    top: 60px !important;
+}
+.hid-lg{
+    display: none;
 }

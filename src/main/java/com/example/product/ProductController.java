@@ -34,11 +34,11 @@ public class ProductController {
                          ModelMap modelMap, Principal principal){
         User user = utils.getUser(principal);
         modelMap.addAttribute("user", user);
-        if (id == null) return "shop";
+        modelMap.addAttribute("utils", new UtilsForWeb());
+        if (id == null) return "product/shop";
         Product p = productService.getById(id);
         modelMap.addAttribute("product", p);
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        return "single-product";
+        return "product/single-product";
     }
 
     @RequestMapping("/list")
@@ -50,7 +50,8 @@ public class ProductController {
         else if (subcategory == null) products = productService.getByCategory(category);
         else products = productService.getByCategoryAndSubcategory(category, subcategory);
         modelMap.addAttribute("products", products);
-        return "shop";
+        modelMap.addAttribute("utils", new UtilsForWeb());
+        return "product/shop";
     }
 
 

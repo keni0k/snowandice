@@ -16,7 +16,6 @@ public class Product {
     private long id;
 
     private String name;
-    private String article;
     private int price;
     private int type;
     private int category;
@@ -29,14 +28,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getArticle() {
-        return article;
-    }
-
-    public void setArticle(String article) {
-        this.article = article;
     }
 
     public int getPrice() {

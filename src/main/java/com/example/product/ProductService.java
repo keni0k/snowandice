@@ -1,14 +1,10 @@
 package com.example.product;
 
-import com.example.product.Product;
-
 import java.util.List;
 
 public interface ProductService {
 
     Product getById (long id);
-    Product getByArticle (String article);
-
     List<Product> getByNameContaining(String substring);
 
     List<Product> getByCategory(int category);

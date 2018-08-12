@@ -46,28 +46,6 @@
                             <div class="clear"></div>
                         </form>
 
-                        <!--/*@thymesVar id="isHaveACoupon" type="java.lang.Boolean"*/-->
-                        <div class="woocommerce-info" th:unless="${isHaveACoupon}">У вас есть купон? <a class="showcoupon" data-toggle="collapse"
-                                                                           href="#coupon-collapse-wrap"
-                                                                           aria-expanded="false"
-                                                                           aria-controls="coupon-collapse-wrap">Ввести
-                            код купона</a>
-                        </div>
-
-                        <form id="coupon-collapse-wrap" th:unless="${isHaveACoupon}" method="post" action="/orders/set_coupon" class="checkout_coupon collapse">
-
-                            <p class="form-row form-row-first">
-                                <input type="text" value="" id="coupon_code" placeholder="Код купона" class="input-text"
-                                       name="coupon_code">
-                            </p>
-
-                            <p class="form-row form-row-last">
-                                <input type="submit" value="Активировать" name="apply_coupon" class="button">
-                            </p>
-
-                            <div class="clear"></div>
-                        </form>
-
                         <!--/*@thymesVar id="order" type="com.example.order.Order"*/-->
                         <form action="/orders/add" class="checkout" method="post" name="checkout" th:object="${order}">
 

@@ -8,7 +8,7 @@ public class ProductServiceImpl implements ProductService {
 
     ProductRepository productRepository;
 
-    ProductServiceImpl(ProductRepository productRepository){
+    public ProductServiceImpl(ProductRepository productRepository){
         this.productRepository = productRepository;
     }
 
@@ -20,11 +20,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getByNameContaining(String substring) {
         return productRepository.getProductsByNameContaining(substring);
-    }
-
-    @Override
-    public Product getByArticle(String article) {
-        return productRepository.getProductByArticle(article);
     }
 
     @Override

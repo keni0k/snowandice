@@ -1,4 +1,4 @@
-@media only screen and (min-width: 992px) and (max-width: 1280px) {
+@media only screen and (min-width: 992px) {
 
     main nav label.down{
         height: 60px;
@@ -297,10 +297,24 @@
 
 /* Wide Mobile Layout: 480px. */
 @media only screen and (min-width: 521px) and (max-width: 767px) {
-
+    .shipping_calculator .cart_totals {
+        float: none;
+        margin: 0 auto;
+    }
+    .shipping_calculator .cart_calc {
+        float: none;
+        margin: 0 auto;
+    }
 }
 
-@media only screen and (min-width: 360px) and (max-width: 520px) {
+@media only screen and (max-width: 520px) {
+
+    td.product-quantity div.quantity {
+        width: 100%;
+    }
+    .hid-lg{
+        display: block;}
+    .vis-lg{display: none;}
     .logo img {
         max-width: 230px;
     }
@@ -315,5 +329,29 @@
     }
     nav label, nav a {
         background: #ffffff;
+    }
+    .shipping_calculator .cart_totals {
+        width: 100%;
+        float: none;
+        margin: 0 auto;
+    }
+    .shipping_calculator .cart_calc {
+        width: 100%;
+        float: none;
+        margin: 0 auto;
+    }
+    .product-quantity {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    .quantity .minus {
+        position: absolute;
+        margin-top: 48px;
+        margin-left: 16px;
+    }
+    .quantity .plus {
+        position: absolute;
+        margin-top: -65px;
+        margin-left: -4px;
     }
 }

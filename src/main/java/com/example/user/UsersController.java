@@ -52,6 +52,7 @@ public class UsersController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String persons(ModelMap model) {
         model.addAttribute("insertUser", new User());
+        model.addAttribute("utils", new UtilsForWeb());
         return "user/registration";
     }
 
@@ -62,6 +63,7 @@ public class UsersController {
                          @ModelAttribute("pass2") String pass2,
                          ModelMap model, Locale locale) {
         person.setToken(randomToken(32));
+        model.addAttribute("utils", new UtilsForWeb());
         if (!userService.throwsErrors(person, pass2) || result.hasErrors()) {
             model.addAttribute("error_login", !userService.isLoginFree(person.getLogin()));
             if (!person.getPhoneNumber().equals(""))
@@ -93,6 +95,7 @@ public class UsersController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String signIn(ModelMap modelMap, Principal principal) {
         User user = utils.getUser(principal);
+        modelMap.addAttribute("utils", new UtilsForWeb());
         modelMap.addAttribute("user", user);
         if (user == null)
             return "user/login";
@@ -109,6 +112,7 @@ public class UsersController {
                                        String birthday,
                            @RequestParam(value = "subscription", required = false) Boolean subscription){
         User user = utils.getUser(principal);
+        modelMap.addAttribute("utils", new UtilsForWeb());
         if (user==null) return "user/login";
         if (subscription==null) subscription = false;
         user.setFirstName(firstName);

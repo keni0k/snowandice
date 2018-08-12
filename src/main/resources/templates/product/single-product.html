@@ -11,8 +11,8 @@
                         <div class="product-breadcroumb">
                             <a href="/">Главная</a>
                             <!--/*@thymesVar id="utils" type="com.example.utils.UtilsForWeb"*/-->
-                            <a th:href="@{/products/(category = ${product.getCategory()})}" th:text="${utils.getCategoryName(product.getCategory())}">Название категории</a>
-                            <a th:href="@{/products/(category = ${product.getCategory()}, subcategory = ${product.getSubcategory()})}"
+                            <a th:href="@{/products(category = ${product.getCategory()})}" th:text="${utils.getCategoryName(product.getCategory())}">Название категории</a>
+                            <a th:href="@{/products(category = ${product.getCategory()}, subcategory = ${product.getSubcategory()})}"
                                th:text="${utils.getSubcategoryName(product.getCategory(), product.getSubcategory())}">Название товара</a>
                         </div>
                         
@@ -39,9 +39,9 @@
                                         <ins th:text="${product!=null?product.getPrice()+' ₽':'??? ₽'}">700 ₽</ins>
                                     </div>    
                                     
-                                    <form action="" class="cart">
+                                    <form th:action="@{/orders/buy_product(id=${product.getId()})}" class="cart" method="post">
                                         <div class="quantity">
-                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+                                            <input type="number" size="4" class="input-text qty text" value="1" name="quantity" min="1" step="1">
                                         </div>
                                         <button class="add_to_cart_button" type="submit">В корзину</button>
                                     </form>

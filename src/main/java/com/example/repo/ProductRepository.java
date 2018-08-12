@@ -11,8 +11,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> getProductsByNameContaining(String substring);
 
-    Product getProductByArticle(String article);
-
     List<Product> getProductsByCategory(int category);
 
     List<Product> getProductsByCategoryAndSubcategory(int category, int subcategory);

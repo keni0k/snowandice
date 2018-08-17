@@ -42,6 +42,10 @@ public class User implements UserDetails{
     private boolean subscription = false;
     private int reviewsCount = 0;
 
+//    @OneToMany(mappedBy="user", cascade = CascadeType.ALL,
+//            fetch = FetchType.EAGER, targetEntity = Order.class)
+//    private List<Order> orders;
+
 
     public String getTime() {
         return time;

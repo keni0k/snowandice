@@ -1,22 +1,32 @@
 package com.example.cart;
 
-import com.example.product.Product;
+import javax.persistence.*;
 
+@Entity
+@Table(name="cart_line_info", schema = "public")
 public class CartLineInfo {
 
-    private Product product;
+    public long getId() {
+        return id;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
+
+//    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Order.class)
+//    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+//    private Order order;
+
+    private long orderId;
+    private long productId;
+    private String name;
     private int quantity;
+    private int price;
 
     public CartLineInfo() {
         this.quantity = 0;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product productInfo) {
-        this.product = productInfo;
     }
 
     public int getQuantity() {
@@ -24,15 +34,11 @@ public class CartLineInfo {
     }
 
     public int getPrice() {
-        return product.getPrice();
+        return price;
     }
 
     public String getName(){
-        return product.getName();
-    }
-
-    public long getId(){
-        return product.getId();
+        return name;
     }
 
     public void setQuantity(int quantity) {
@@ -40,7 +46,30 @@ public class CartLineInfo {
     }
 
     public int getAmount() {
-        return this.product.getPrice() * this.quantity;
+        return this.price * this.quantity;
     }
 
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(long productId) {
+        this.productId = productId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
 }

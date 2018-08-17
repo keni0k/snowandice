@@ -4,6 +4,8 @@ import com.example.repo.ProductRepository;
 import com.example.repo.UserRepository;
 import com.example.user.User;
 import com.example.user.UserServiceImpl;
+import com.example.utils.Consts;
+import com.example.utils.Errors;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
 import org.springframework.stereotype.Controller;
@@ -36,7 +38,7 @@ public class ProductController {
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("utils", new UtilsForWeb());
         if (id == null) return "product/shop";
-        Product p = productService.getById(id);
+        Product p = productService.findById(id);
         modelMap.addAttribute("product", p);
         return "product/single-product";
     }
@@ -46,7 +48,7 @@ public class ProductController {
                 @RequestParam(value = "category", required = false) Integer category,
                 @RequestParam(value = "subcategory", required = false) Integer subcategory) {
         List<Product> products;
-        if (category == null) products = productService.getAll();
+        if (category == null) products = productService.findAll();
         else if (subcategory == null) products = productService.getByCategory(category);
         else products = productService.getByCategoryAndSubcategory(category, subcategory);
         modelMap.addAttribute("products", products);
@@ -54,5 +56,17 @@ public class ProductController {
         return "product/shop";
     }
 
+    @RequestMapping(value = "/add_product")
+    public String addProduct(ModelMap modelMap, Principal principal){
+        User user = utils.getUser(principal);
+        if (user==null || user.getType()!= Consts.USER_ADMIN)
+            return "redirect:/users/login";
+        modelMap.addAttribute("isEdit", false);
+        modelMap.addAttribute("inputProduct", new Product());
+        modelMap.addAttribute("errors", new Errors(false));
+        modelMap.addAttribute("utils", new UtilsForWeb());
+        modelMap.addAttribute("photos", null);
+        return "admin/add_product";
+    }
 
 }

@@ -8,7 +8,8 @@ import java.util.List;
 
 public class CartInfo {
 
-    private int orderNum;
+    private int shippingMethod;
+    private int shippingCost;
 
     private CustomerInfo customerInfo;
 
@@ -18,12 +19,12 @@ public class CartInfo {
 
     }
 
-    public int getOrderNum() {
-        return orderNum;
+    public int getShippingMethod() {
+        return shippingMethod;
     }
 
-    public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
+    public void setShippingMethod(int shippingMethod) {
+        this.shippingMethod = shippingMethod;
     }
 
     public CustomerInfo getCustomerInfo() {
@@ -40,7 +41,7 @@ public class CartInfo {
 
     public CartLineInfo findLineById(long id) {
         for (CartLineInfo line : this.cartLines) {
-            if (line.getProduct().getId()==id) {
+            if (line.getProductId()==id) {
                 return line;
             }
         }
@@ -53,7 +54,9 @@ public class CartInfo {
         if (line == null) {
             line = new CartLineInfo();
             line.setQuantity(0);
-            line.setProduct(product);
+            line.setProductId(product.getId());
+            line.setName(product.getName());
+            line.setPrice(product.getPrice());
             this.cartLines.add(line);
         }
         int newQuantity = line.getQuantity() + quantity;
@@ -115,10 +118,17 @@ public class CartInfo {
         if (cartForm != null) {
             List<CartLineInfo> lines = cartForm.getCartLines();
             for (CartLineInfo line : lines) {
-                this.updateProduct(line.getProduct().getId(), line.getQuantity());
+                this.updateProduct(line.getProductId(), line.getQuantity());
             }
         }
 
     }
 
+    public int getShippingCost() {
+        return shippingCost;
+    }
+
+    public void setShippingCost(int shippingCost) {
+        this.shippingCost = shippingCost;
+    }
 }

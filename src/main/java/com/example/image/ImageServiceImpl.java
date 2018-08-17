@@ -1,7 +1,6 @@
 package com.example.image;
 
 import com.example.repo.ImageRepository;
-import com.example.repo.UserRepository;
 
 import java.util.List;
 
@@ -14,17 +13,27 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public void addImage(Image image) {
+    public void add(Image image) {
         imageRepository.saveAndFlush(image);
     }
 
     @Override
-    public void delete(long id) {
+    public void update(Image model) {
+        imageRepository.saveAndFlush(model);
+    }
+
+    @Override
+    public void delete(Image model) {
+        imageRepository.delete(model);
+    }
+
+    @Override
+    public void delete(Long id) {
         imageRepository.deleteById(id);
     }
 
     @Override
-    public Image getById(long id) {
+    public Image findById(Long id) {
         return imageRepository.getImageById(id);
     }
 
@@ -41,7 +50,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public List<Image> getAll() {
+    public List<Image> findAll() {
         return imageRepository.findAll();
     }
 }

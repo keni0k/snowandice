@@ -1,6 +1,7 @@
 package com.example.product;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "product", schema = "public")
@@ -21,6 +22,9 @@ public class Product {
     private int category;
     private int subcategory;
     private String description;
+
+    @Transient
+    public ArrayList<String> pathToPhoto = new ArrayList<>();
 
     public String getName() {
         return name;

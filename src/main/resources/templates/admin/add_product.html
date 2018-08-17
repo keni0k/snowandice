@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/header :: header (~{::body},'add_product')}">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить товар</title>
+</head>
+<body>
+<!--/*@thymesVar id="inputProduct" type="com.example.product.Product"*/-->
+<!--/*@thymesVar id="message" type="com.example.utils.MessageUtil"*/-->
+<!--/*@thymesVar id="errors" type="com.example.utils.Errors"*/-->
+<!--/*@thymesVar id="isEdit" type="java.lang.Boolean"*/-->
+<div class="content"
+     th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
+    <div class="container">
+        <div class="page-header">
+            <h2 th:unless="isEdit">Добавление экскурсии</h2>
+            <h2 th:if="isEdit">Редактирование экскурсии</h2>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-7 col-lg-6">
+                <!-- /* Handling the flash message */-->
+                <th:block th:if="${message != null}">
+                    <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
+                        &nbsp;
+                    </div>
+                </th:block>
+                <form th:object="${inputProduct}" method="POST" th:action="${isEdit?'/events/edit':'/events/add'}"
+                      enctype="multipart/form-data"
+                      autocomplete="off">
+                    <!--/*@thymesVar id="id" type="java.lang.Integer"*/-->
+                    <input th:if="${isEdit}" name="id" th:value="${id}" style="display: none"/>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" th:text="${#messages.msg('words.name')}"></div>
+                        <div class="panel-body">
+                            <input name="name" type="text" class="form-control" id="name"
+                                   th:value="${inputProduct.getName()}" minlength="10" maxlength="35"/>
+                            <label for="name" th:if="${errors.isName()}"
+                                   th:text="${#messages.msg('error.event.name')}" th:class="'error'">Name Error</label>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" th:text="${#messages.msg('words.description')}">Описание</div>
+                        <div class="panel-body">
+<textarea name="description" minlength="150" maxlength="1000" type="text"
+          id="description" style="resize: vertical"
+          class="form-control" th:text="${inputProduct.getDescription()}"></textarea>
+                            <label for="description" th:if="${errors.isDescription()}"
+                                   th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description Error</label>
+                        </div>
+                    </div>
+                    <div class="row ml-0 mr-0">
+                        <div class="panel panel-default left-input col-sm-6">
+                            <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}"></div>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <select name="category" id="category" class="form-control selectpicker"
+                                            th:selected="${inputProduct.getCategory()}?${inputProduct.getCategory()}:0">
+                                        <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
+                                        <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
+                                        <option value="2" th:text="${#messages.msg('category.2')}">История</option>
+                                        <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
+                                        <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
+                                        <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
+                                        <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
+                                        <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default right-input col-sm-5">
+                            <div class="panel-heading">Возрастное ограничение</div>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <select name="subcategory" id="age_limit" class="form-control selectpicker"
+                                            th:selected="${inputProduct.getSubcategory()}?${inputProduct.getSubcategory()}:0">
+                                        <option value="0">0+</option>
+                                        <option value="6">6+</option>
+                                        <option value="12">12+</option>
+                                        <option value="16">16+</option>
+                                        <option value="18">18+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ml-0 mr-0">
+                        <div class="panel panel-default col-sm-6 left-input">
+                            <div class="panel-heading" th:text="${#messages.msg('words.users_count')}">Количество участников</div>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <input name="usersCount" id="type" type="number" class="form-control"
+                                           min="1" max="100" required=""
+                                           th:value="${inputProduct.getType()}?${inputProduct.getType()}"/>
+                                    <span class="input-group-addon">Тип</span>
+                                </div>
+                                <label for="type" th:if="${#fields.hasErrors('type')}"
+                                       th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount Error</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ml-0 mr-0">
+                        <div class="panel panel-default col-sm-6 left-input">
+                            <div class="panel-heading" th:text="${#messages.msg('words.city')}">Город</div>
+                            <div class="panel-body">
+                                <select class="selectpicker form-control" data-live-search="true"
+                                        name="city_and_country">
+                                    <!--/*@thymesVar id="utils" type="com.example.utils.UtilsForWeb"*/-->
+                                    <th:block th:each="j : ${#numbers.sequence(0, utils.getCategoriesCount()-3)}">
+                                        <option th:each="i : ${#numbers.sequence(0, utils.getSubcategoriesCount(j)-1)}"
+                                                th:value="${j}+'.'+${i}"
+                                                th:text="${#messages.msg('city.'+j+'.'+i)}+', '+ ${#messages.msg('country.'+j)}">Москва, Россия
+                                        </option>
+                                    </th:block>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ml-0 mr-0">
+                        <div class="panel panel-default col-sm-6 left-input">
+                            <div class="panel-heading" th:text="${#messages.msg('words.price')}">Цена</div>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <input name="price" id="price" type="number" class="form-control"
+                                           min="10" max="100000" required=""
+                                           th:value="${inputProduct.getPrice()>0}?${inputProduct.getPrice()}"/>
+                                    <span class="input-group-addon">&#8381;</span>
+                                </div>
+                                <label for="price" th:if="${errors.isPrice()}"
+                                       th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" th:text="${#messages.msg('words.photos')}">
+                            Фотографии
+                        </div>
+                        <div class="panel-body">
+                            <input type="file" multiple="multiple" size="30000000"
+                                   accept="image/jpeg,image/png" name="files[]" style="display:none;"
+                                   id="upload_input"/>
+                            <input type="text" name="photos" style="display:none;" id="photos"/>
+                            <div class="result" id="result">
+                                <!--/*@thymesVar id="images" type="java.util.List<com.example.image.Image>"*/-->
+                                <div class="upload-img" th:if="${images!=null}" th:each="photo : ${images}">
+                                    <!--/*@thymesVar id="getData" type="java.lang.String"*/-->
+                                    <img th:src="${photo.getData()}" class="img-rounded"/>
+                                    <div class="closer" onclick="remove_img($(this));"></div>
+                                </div>
+                            </div>
+                            <div id="add-photo" class="upload-img" draggable="false"
+                                 style="cursor: auto;padding-top: 9%;">
+                                <input type="button" value="Добавить" class="btn btn-block" tabindex="9"
+                                       id="upload_button" style="width: auto;margin: auto;"/>
+                            </div>
+                        </div>
+                    </div>
+                    <a th:if="${isEdit}" class="btn btn-default"
+                       data-btn-ok-label="Да" data-btn-ok-icon="glyphicon glyphicon-share-alt"
+                       data-btn-ok-class="btn-success" data-btn-cancel-class="btn-danger"
+                       data-btn-cancel-label="Нет" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
+                       data-title="Изменить?" data-content="Экскурсия снова будет отправлена на модерацию!"
+                       data-toggle="confirmation" data-on-confirm="sbmt">Изменить</a>
+                    <a th:unless="${isEdit}" class="btn btn-default" th:text="${#messages.msg('words.submit')}"
+                       onclick="sbmt();">Отправить</a>
+                    <button type="submit" value="Upload" style="display: none" id="sbmt">Отправить</button>
+                </form>
+            </div>
+            <div class="hidden visible-md visible-lg col-md-5 col-lg-6 demo">
+                <div class="page-header mt-1">
+                    <h3>Таким будет ваш товар</h3>
+                </div>
+                <div class="card card-cascade narrower">
+                    <div class="view overlay hm-white-slight z-depth-1" style="margin-top: 20px;">
+                        <div class="img_crop"><img
+                                th:src="${inputProduct.pathToPhoto.size()>0?inputProduct.pathToPhoto.get(0):'/img/no-img.jpg'}"
+                                class="img-fluid" alt="" id="demo-img"
+                                style="height: 240px; min-width: -webkit-fill-available;"/>
+                        </div>
+                        <div class="mask waves-effect waves-light"></div>
+                    </div>
+                    <div class="card-body pb-0 no-padding text-center"><!--/*Category & Title*/-->
+                        <h4 id="card-category" th:text="${inputProduct.getCategory()}">Развлечения</h4>
+                        <h3 class="card-title">
+                            <strong id="card-title" th:text="${inputProduct.getName()}">%Название экскурсии%</strong>
+                        </h3>
+                        <ul class="rating">
+                            <li th:each="i : ${#numbers.sequence(0, 4)}"><i class="fa fa-star-o"></i></li>
+                            <li><span>(0)</span></li>
+                        </ul>
+                        <p class="card-text" style="font-size: 18px; color: #000000" id="card-text"
+                           align="justify" th:text="${inputProduct.getDescription()}">%Краткое описание%</p>
+                    </div>
+                    <div class="card-footer links-light">
+                        <h3 class="left card-footer-left mt-0 mb-0"><strong id="card-price"
+                                                                            th:text="${inputProduct.getPrice()>0?inputProduct.getPrice()+'₽':'%ЦЕНА%'}">%PRICE%</strong>
+                        </h3>
+                        <a class="btn btn-primary waves-effect waves-light right disabled mt-05">Открыть</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.12.4/dist/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="/js/Sortable.min.js"></script>
+<script th:inline="javascript">/*<![CDATA[*/
+    function setimage() {
+        var max = 5 - $('.upload-img').length;
+        if (max <= 0) {
+            alert('Максимально количество фотографий = 4!');
+            return;
+        }
+        var $input = $("#upload_input");
+        var id = [[${inputProduct.getId()}]];
+        var $url = '/upload_images';
+        var inputFile = document.getElementById('upload_input').files;
+        for (var i = 0; i < inputFile.length; i++) {
+            var fd = new FormData;
+            if (i > max - 1) {
+                alert('Максимально количество фотографий = 4!');
+                break;
+            }
+            fd.append('img', $input.prop('files')[i]);
+            $.ajax({
+                url: $url,
+                data: fd,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                    var final = '<div class="upload-img"><img src="' + data + '" class="img-rounded"/>"' + '"<div class="closer" onclick="remove_img($(this));"></div></div>';
+                    var $result = $('#result');
+                    var $demoImg = $('#demo-img');
+                    if ($result.children().length < 4) $result.append(final);
+                    if ($result.children('.upload-img').length >= 4) $('#add-photo').css('display', 'none');
+                    var src = $result.find('div:first-child img:first-child').attr('src');
+                    if ($demoImg.attr('src') !== src) $demoImg.attr("src", src);
+                },
+                error: function (data) {
+                    alert("Не все фотографии загрузились. Повторите, пожалуйста, попытку.");
+                }
+            });
+        }
+    }
+/*]]>*/
+</script>
+</body>
+</html>

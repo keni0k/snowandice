@@ -1,19 +1,24 @@
 package com.example.order;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class CustomerInfo {
 
-    private String name;
+    private String firstName;
+    private String lastName;
     private String address;
     private String email;
     private String phone;
+    private String comment;
 
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getEmail() {
@@ -40,4 +45,19 @@ public class CustomerInfo {
         this.phone = phone;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

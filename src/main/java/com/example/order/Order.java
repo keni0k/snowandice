@@ -15,9 +15,18 @@ public class Order {
     @Column(name = "id")
     private long id;
 
+//    @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
+//    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+//    private User user;
+
+//    @OneToMany(mappedBy="order", cascade = CascadeType.ALL,
+//            fetch = FetchType.EAGER, targetEntity = CartLineInfo.class)
+//    private List<CartLineInfo> cartLineInfos;
+
+    @Embedded
+    private CustomerInfo customerInfo;
     private long idOfUser;
-    private long idOfProduct;
-    private int priceOfProduct;
+    private int totalPrice;
     private int typeOfShip;
     private int priceOfShip;
     private int type;
@@ -29,22 +38,6 @@ public class Order {
 
     public void setIdOfUser(long idOfUser) {
         this.idOfUser = idOfUser;
-    }
-
-    public long getIdOfProduct() {
-        return idOfProduct;
-    }
-
-    public void setIdOfProduct(long idOfProduct) {
-        this.idOfProduct = idOfProduct;
-    }
-
-    public int getPriceOfProduct() {
-        return priceOfProduct;
-    }
-
-    public void setPriceOfProduct(int priceOfProduct) {
-        this.priceOfProduct = priceOfProduct;
     }
 
     public int getTypeOfShip() {
@@ -77,5 +70,33 @@ public class Order {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public CustomerInfo getCustomerInfo() {
+        return customerInfo;
+    }
+
+    public void setCustomerInfo(CustomerInfo customerInfo) {
+        this.customerInfo = customerInfo;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getTypeOfShipToString(){
+        switch (typeOfShip){
+            case 1: return "Самовывоз";
+            case 2: return "Курьером";
+        }
+        return "Обрабатывается";
+    }
+
+    public String getTypeToString(){
+        return "Обрабатывается";
     }
 }

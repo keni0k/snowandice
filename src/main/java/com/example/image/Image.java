@@ -1,5 +1,7 @@
 package com.example.image;
 
+import com.example.utils.Consts;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,6 +19,10 @@ public class Image {
 
     public String getToken() {
         return token;
+    }
+
+    public String getData() {
+        return Consts.URL_PATH+token;
     }
 
     public void setToken(String token) {

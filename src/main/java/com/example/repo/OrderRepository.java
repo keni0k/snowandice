@@ -9,8 +9,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     Order getOrderById (long id);
 
-    List<Order> getOrdersByIdOfProduct (long id);
-
     List<Order> getOrdersByIdOfUser(long id);
 
     List<Order> getOrdersByType (int type);

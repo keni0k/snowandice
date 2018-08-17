@@ -3,6 +3,11 @@ package com.example.utils;
 import com.example.cart.CartInfo;
 import com.example.user.User;
 import com.example.user.UserServiceImpl;
+import com.microsoft.azure.storage.CloudStorageAccount;
+import com.microsoft.azure.storage.StorageException;
+import com.microsoft.azure.storage.blob.CloudBlobClient;
+import com.microsoft.azure.storage.blob.CloudBlobContainer;
+import com.microsoft.azure.storage.blob.CloudBlockBlob;
 import org.joda.time.LocalTime;
 
 import javax.imageio.IIOImage;
@@ -16,6 +21,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
 import java.security.Principal;
 import java.util.Iterator;
 import java.util.List;
@@ -91,13 +98,13 @@ public class Utils {
         return (double) file.length() / (1024 * 1024);
     }
 
-    /*public static void putImg(String path, String photoToken) throws StorageException, URISyntaxException, IOException, InvalidKeyException {
+    public static void putImg(String path, String photoToken) throws StorageException, URISyntaxException, IOException, InvalidKeyException {
         CloudStorageAccount account = CloudStorageAccount.parse("DefaultEndpointsProtocol=https;AccountName=excursium;AccountKey=fbMSD2cjYX08BJeKQvNM4Wk87I7fGWJShZvdtR3BdwvhXKUFuYv//qtJs9eAKmESG4Ib7CAHDJlgOIxSw5wwfg==;EndpointSuffix=core.windows.net");
         CloudBlobClient client = account.createCloudBlobClient();
         CloudBlobContainer container = client.getContainerReference("img");
         CloudBlockBlob blob1 = container.getBlockBlobReference(photoToken);
         blob1.uploadFromFile(path);
-    }*/
+    }
 
     public static String list(String obj, List arrayList, String authKey, String AUTH_KEY){
         StringBuilder stringBuilder = new StringBuilder("{ \""+obj+"\": [");

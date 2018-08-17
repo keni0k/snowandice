@@ -1,5 +1,7 @@
 package com.example.order;
 
+import com.example.cart.CartLineInfo;
+import com.example.repo.CartLineInfoRepository;
 import com.example.repo.OrderRepository;
 
 import java.util.List;
@@ -7,20 +9,28 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private OrderRepository orderRepository;
+    private CartLineInfoRepository cartLineInfoRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, CartLineInfoRepository cartLineInfoRepository) {
         this.orderRepository = orderRepository;
+        this.cartLineInfoRepository = cartLineInfoRepository;
     }
 
+    public void addCartLine(CartLineInfo cartLineInfo){
+        cartLineInfoRepository.saveAndFlush(cartLineInfo);
+    }
+
+    public List<CartLineInfo> getCartLinesByOrderId(long orderId){
+        return cartLineInfoRepository.getCartLineInfosByOrderId(orderId);
+    }
+
+    public List<CartLineInfo> getAllCartLines(){
+        return cartLineInfoRepository.findAll();
+    }
 
     @Override
-    public Order getById(long id) {
+    public Order findById(Long id) {
         return orderRepository.getOrderById(id);
-    }
-
-    @Override
-    public List<Order> getByIdOfProduct(long id) {
-        return orderRepository.getOrdersByIdOfProduct(id);
     }
 
     @Override
@@ -34,27 +44,27 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void addOrder(Order order) {
+    public void add(Order order) {
         orderRepository.saveAndFlush(order);
     }
 
     @Override
-    public void editOrder(Order order) {
+    public void update(Order order) {
         orderRepository.saveAndFlush(order);
     }
 
     @Override
-    public void deleteOrder(Order order) {
+    public void delete(Order order) {
         orderRepository.delete(order);
     }
 
     @Override
-    public void deleteOrder(long id) {
+    public void delete(Long id) {
         orderRepository.deleteById(id);
     }
 
     @Override
-    public List<Order> getAll() {
+    public List<Order> findAll() {
         return orderRepository.findAll();
     }
 

@@ -29,11 +29,29 @@
 
             <div id="i0" class="tabcontent">
                 <table class="table-history">
-                    <tr><th>№</th><th>Статус</th><th>Доставка</th><th>Дата заказа</th><th>Стоимость</th></tr>
-                    <tr><td><a href="#">0001</a></td><td>Доставлено</td><td>SPSR</td><td>12.08.17</td><td>₽350</td></tr>
+                    <tr>
+                        <th>№</th>
+                        <th>Статус</th>
+                        <th>Доставка</th>
+                        <th>Дата заказа</th>
+                        <th>Стоимость</th>
+                    </tr>
+                    <!--/*@thymesVar id="orders" type="List<com.example.order.Order>"*/-->
+
+                    <tr th:each="order : ${orders}">
+                        <!--/*@thymesVar id="order" type="com.example.order.Order"*/-->
+                        <a th:href="@{/orders/get(id=${order.getId()})}">
+                            <td th:text="${order.getId()}"></td>
+                            <td th:text="${order.getTypeToString()}"></td>
+                            <td th:text="${order.getTypeOfShipToString()}"></td>
+                            <td th:text="${order.getDate()}"></td>
+                            <td th:text="${order.getTotalPrice()} + ' ₽'"></td>
+                        </a>
+                    </tr>
+                    <!--<tr><td><a href="#">0001</a></td><td>Доставлено</td><td>SPSR</td><td>12.08.17</td><td>₽350</td></tr>
                     <tr><td><a href="#">0022</a></td><td>Доставлено</td><td>Курьер</td><td>13.09.17</td><td>₽500</td></tr>
                     <tr><td><a href="#">0043</a></td><td>Отменен</td><td>Самовывоз</td><td>01.12.17</td><td>₽2050</td></tr>
-                    <tr><td><a href="#">0121</a></td><td>В пути</td><td>Почта России</td><td>18.03.18</td><td>₽210</td></tr>
+                    <tr><td><a href="#">0121</a></td><td>В пути</td><td>Почта России</td><td>18.03.18</td><td>₽210</td></tr>-->
                 </table>
             </div>
 
@@ -41,32 +59,40 @@
                 <form action="/users/edit_data" method="post">
                     <div class="input-group">
                         <span class="input-group-addon">E-mail</span>
-                        <input name="first_name" th:value="${user.getEmail()}" type="text" class="form-control input-md" disabled="">
+                        <input name="first_name" th:value="${user.getEmail()}" type="text" class="form-control input-md"
+                               disabled="">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Имя</span>
-                        <input name="first_name" th:value="${user.getFirstName()}" type="text" class="form-control input-md" required="">
+                        <input name="first_name" th:value="${user.getFirstName()}" type="text"
+                               class="form-control input-md" required="">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Фамилия</span>
-                        <input name="last_name" th:value="${user.getLastName()}" type="text" class="form-control input-md" required="">
+                        <input name="last_name" th:value="${user.getLastName()}" type="text"
+                               class="form-control input-md" required="">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Номер телефона</span>
-                        <input name="phone_number" th:value="${user.getPhoneNumber()}" type="text" class="form-control input-md" required="">
+                        <input name="phone_number" th:value="${user.getPhoneNumber()}" type="text"
+                               class="form-control input-md" required="">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Дата рождения</span>
-                        <input name="birthday" th:value="${user.getBirthday()}" type="date" class="form-control input-md">
+                        <input name="birthday" th:value="${user.getBirthday()}" type="date"
+                               class="form-control input-md">
                     </div>
                     <br/>
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="subscription" style="margin-left: -20px; visibility: visible; left:20px;" th:checked="${user.isSubscription()}" value="true"><span>Подписка на новости и акции</span>
+                            <input type="checkbox" name="subscription"
+                                   style="margin-left: -20px; visibility: visible; left:20px;"
+                                   th:checked="${user.isSubscription()}"
+                                   value="true"><span>Подписка на новости и акции</span>
                         </label>
                     </div>
                     <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить">
@@ -78,7 +104,7 @@
                     <!--/*@thymesVar id="address" type="java.lang.String[]"*/-->
                     <div class="input-group">
                         <span class="input-group-addon">Регион *</span>
-                        <input name="region" type="text" class="form-control input-md" 
+                        <input name="region" type="text" class="form-control input-md"
                                required="" th:value="${address[1]}">
                     </div>
                     <br/>
@@ -114,17 +140,20 @@
                 <form action="/users/edit_pass">
                     <div class="input-group">
                         <span class="input-group-addon">Старый пароль</span>
-                        <input autocomplete="off" name="lastPassword" type="password" class="form-control input-md" required="">
+                        <input autocomplete="off" name="lastPassword" type="password" class="form-control input-md"
+                               required="">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Новый пароль</span>
-                        <input autocomplete="off" name="newPassword" type="password" class="form-control input-md" required="">
+                        <input autocomplete="off" name="newPassword" type="password" class="form-control input-md"
+                               required="">
                     </div>
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Новый пароль (еще раз)</span>
-                        <input autocomplete="off" name="newPasswordConfirm" type="password" class="form-control input-md" required="">
+                        <input autocomplete="off" name="newPasswordConfirm" type="password"
+                               class="form-control input-md" required="">
                     </div>
                     <br/>
                     <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить">

@@ -1,5 +1,8 @@
 package com.example.user;
 
+import com.example.order.OrderServiceImpl;
+import com.example.repo.CartLineInfoRepository;
+import com.example.repo.OrderRepository;
 import com.example.repo.UserRepository;
 import com.example.utils.Consts;
 import com.example.utils.MessageUtil;
@@ -39,12 +42,15 @@ public class UsersController {
 
     private Utils utils;
     private UserServiceImpl userService;
+    private OrderServiceImpl orderService;
     private final MessageSource messageSource;
     private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 
     @Autowired
-    public UsersController(UserRepository userRepository, MessageSource messageSource){
+    public UsersController(UserRepository userRepository, MessageSource messageSource,
+                           OrderRepository orderRepository, CartLineInfoRepository cartLineInfoRepository){
         userService = new UserServiceImpl(userRepository);
+        orderService = new OrderServiceImpl(orderRepository, cartLineInfoRepository);
         this.messageSource = messageSource;
         utils = new Utils(userService);
     }
@@ -88,7 +94,7 @@ public class UsersController {
         } catch (MailjetSocketTimeoutException | MailjetException e) {
             model.addAttribute("message", new MessageUtil("danger", messageSource.getMessage("danger.user.registration.mail", null, locale)));
         }
-        userService.addUser(person);
+        userService.add(person);
         return persons(model);
     }
 
@@ -120,7 +126,7 @@ public class UsersController {
         user.setPhoneNumber(phoneNumber);
         user.setBirthday(birthday);
         user.setSubscription(subscription);
-        userService.editUser(user);
+        userService.update(user);
         return account(modelMap, principal);
     }
 
@@ -133,6 +139,7 @@ public class UsersController {
         model.addAttribute("user", user);
         model.addAttribute("consts", new Consts());
         model.addAttribute("utils", new UtilsForWeb());
+        model.addAttribute("orders", orderService.getByIdOfUser(user.getId()));
         model.addAttribute("answersCount", 1);
         model.addAttribute("ordersWaitCount", 2);
         model.addAttribute("ordersCompliteCount", 3);
@@ -182,7 +189,7 @@ public class UsersController {
         User user = utils.getUser(principal);
         if (district == null) district = "";
         user.setAddress(region, district, city, address, postcode);
-        userService.editUser(user);
+        userService.update(user);
         return account(modelMap, principal);
     }
 }

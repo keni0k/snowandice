@@ -18,12 +18,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User user) {
+    public void add(User user) {
         userRepository.saveAndFlush(user);
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
         userRepository.deleteById(id);
     }
 
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         if (firstName==null) firstName = "";
         if (lastName==null) lastName = "";
         if (city==null) city="";
-        List<User> list = getAll();
+        List<User> list = findAll();
 
         List<User> copy = new ArrayList<>();
         for (User aList : list) {
@@ -82,13 +82,18 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User getById(long id) {
+    public User findById(Long id) {
         return userRepository.getOne(id);
     }
 
     @Override
-    public void editUser(User user) {
+    public void update(User user) {
         userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public void delete(User model) {
+        userRepository.delete(model);
     }
 
 
@@ -122,7 +127,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> getAll() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 

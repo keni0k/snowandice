@@ -1,24 +1,15 @@
 package com.example.order;
 
+import com.example.repo.RepoService;
+
 import java.util.List;
 
-public interface OrderService {
-
-    Order getById (long id);
-
-    List<Order> getByIdOfProduct (long id);
+public interface OrderService extends RepoService<Order> {
 
     List<Order> getByIdOfUser(long id);
 
     List<Order> getByType (int type);
 
-    void addOrder(Order order);
-    void editOrder(Order order);
-
-    void deleteOrder(Order order);
-    void deleteOrder(long id);
-
-    List<Order> getAll();
     List<Order> getByFilter();
 
 }

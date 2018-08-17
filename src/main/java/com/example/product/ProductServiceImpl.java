@@ -13,7 +13,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getById(long id) {
+    public Product findById(Long id) {
         return productRepository.getProductById(id);
     }
 
@@ -38,27 +38,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public void add(Product product) {
+        productRepository.saveAndFlush(product);
+    }
+
+    public void update(Product product) {
         productRepository.saveAndFlush(product);
     }
 
     @Override
-    public void editProduct(Product product) {
-        productRepository.saveAndFlush(product);
-    }
-
-    @Override
-    public void deleteProduct(Product product) {
+    public void delete(Product product) {
         productRepository.delete(product);
     }
 
     @Override
-    public void deleteProduct(long id) {
+    public void delete(Long id) {
         productRepository.deleteById(id);
     }
 
     @Override
-    public List<Product> getAll() {
+    public List<Product> findAll() {
         return productRepository.findAll();
     }
 

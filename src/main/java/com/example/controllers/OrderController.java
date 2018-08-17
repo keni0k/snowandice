@@ -1,15 +1,18 @@
-package com.example.order;
+package com.example.controllers;
 
 import com.example.cart.CartInfo;
 import com.example.cart.CartLineInfo;
-import com.example.product.Product;
-import com.example.product.ProductServiceImpl;
+import com.example.jpa_services_impl.OrderServiceImpl;
+import com.example.jpa_services_impl.ProductServiceImpl;
+import com.example.jpa_services_impl.UserServiceImpl;
+import com.example.models.Order;
+import com.example.models.Product;
+import com.example.models.User;
+import com.example.order.CustomerInfo;
 import com.example.repo.CartLineInfoRepository;
 import com.example.repo.OrderRepository;
 import com.example.repo.ProductRepository;
 import com.example.repo.UserRepository;
-import com.example.user.User;
-import com.example.user.UserServiceImpl;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
 import org.slf4j.Logger;
@@ -84,16 +87,16 @@ public class OrderController {
                            @ModelAttribute("street-home") String streetAndHome,
                            @ModelAttribute("city") String city,
                            ModelMap modelMap, Principal principal) {
-        User user = utils.getUser(principal);
+        Optional<User> user = Optional.ofNullable(utils.getUser(principal));
         CartInfo cartInfo = Utils.getCartInSession(request);
-        if (user == null) {
-            user = new User("login", password, customerInfo.getLastName(), 0,
+        if (!user.isPresent()) {
+            user = Optional.of(new User("login", password, customerInfo.getLastName(), 0,
                     customerInfo.getEmail(), customerInfo.getFirstName(), customerInfo.getPhone(),
-                    city, Utils.randomToken(32));
-            userService.add(user);
+                    city, Utils.randomToken(32)));
+            userService.add(user.get());
         }
-        else customerInfo.setEmail(user.getEmail());
-        order.setIdOfUser(user.getId());
+        else customerInfo.setEmail(user.get().getEmail());
+        order.setIdOfUser(user.get().getId());
         setCustomerAddress(customerInfo, region, district, city, streetAndHome, postcode);
         orderPreprocess(order, customerInfo, cartInfo.getAmountTotal(),
                         cartInfo.getShippingCost(), cartInfo.getShippingMethod());
@@ -149,18 +152,12 @@ public class OrderController {
     @RequestMapping("/remove_product_in_cart")
     public String removeProductHandler(HttpServletRequest request,
                                        @RequestParam(value = "id", required = false) Long id) {
-        Product product = null;
-        if (id != null) {
-            product = productService.findById(id);
+        CartInfo cartInfo = Utils.getCartInSession(request);
+        Optional<Product> product = Optional.empty();
+        if (id!=null) {
+            product = Optional.ofNullable(productService.findById(id));
         }
-        if (product != null) {
-
-            // Cart Info stored in Session.
-            CartInfo cartInfo = Utils.getCartInSession(request);
-            cartInfo.removeProduct(product);
-
-        }
-        // Redirect to shoppingCart page.
+        product.ifPresent(cartInfo::removeProduct);
         return "redirect:/orders/cart";
     }
 
@@ -168,25 +165,18 @@ public class OrderController {
     public String listProductHandler(HttpServletRequest request, Model model, //
                                      @RequestParam(value = "id", required = false) Long id,
                                      @RequestParam("quantity") int quantity) {
-
-        Product product = null;
-        if (id != null) {
-            product = productService.findById(id);
+        CartInfo cartInfo = Utils.getCartInSession(request);
+        Optional<Product> product = Optional.empty();
+        if (id!=null) {
+            product = Optional.ofNullable(productService.findById(id));
         }
-        if (product != null) {
-
-            // Cart info stored in Session.
-            CartInfo cartInfo = Utils.getCartInSession(request);
-
-            cartInfo.addProduct(product, quantity);
-        }
+        product.ifPresent(product1 -> cartInfo.addProduct(product1, quantity));
         // Redirect to shoppingCart page.
         return "redirect:/orders/cart";
     }
 
     @RequestMapping(value = {"/cart"}, method = RequestMethod.POST)
-    public String shoppingCartUpdateQty(HttpServletRequest request, //
-                                        Model model, //
+    public String shoppingCartUpdateQty(HttpServletRequest request, Model model,
                                         @ModelAttribute("cartForm") CartInfo cartForm) {
 
         CartInfo cartInfo = Utils.getCartInSession(request);

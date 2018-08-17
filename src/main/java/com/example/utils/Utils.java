@@ -1,13 +1,14 @@
 package com.example.utils;
 
 import com.example.cart.CartInfo;
-import com.example.user.User;
-import com.example.user.UserServiceImpl;
+import com.example.jpa_services_impl.UserServiceImpl;
+import com.example.models.User;
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.joda.time.LocalTime;
 
 import javax.imageio.IIOImage;
@@ -17,10 +18,7 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.Principal;
@@ -173,6 +171,19 @@ public class Utils {
 
     public static CartInfo getLastOrderedCartInSession(HttpServletRequest request) {
         return (CartInfo) request.getSession().getAttribute("lastOrderedCart");
+    }
+
+    public static File streamToFile(String fileExtension, InputStream in) {
+        try {
+            File tempFile = File.createTempFile(System.getProperty("catalina.home") + File.separator + "tmpFiles" + randomToken(10), fileExtension);
+            tempFile.deleteOnExit();
+            FileOutputStream out = new FileOutputStream(tempFile);
+            IOUtils.copy(in, out);
+            return tempFile;
+        } catch (IOException exception){
+            exception.printStackTrace();
+        }
+        return null;
     }
 
 }

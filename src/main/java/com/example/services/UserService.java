@@ -1,6 +1,6 @@
-package com.example.user;
+package com.example.services;
 
-import com.example.repo.RepoService;
+import com.example.models.User;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Keni0k on 25.07.2018.
  */
 
-public interface UserService extends RepoService<User> {
+public interface UserService extends BaseService<User> {
 
     Boolean isLoginFree(String login);
 

@@ -1,10 +1,10 @@
-package com.example.product;
+package com.example.services;
 
-import com.example.repo.RepoService;
+import com.example.models.Product;
 
 import java.util.List;
 
-public interface ProductService extends RepoService<Product> {
+public interface ProductService extends BaseService<Product> {
 
     List<Product> getByNameContaining(String substring);
 

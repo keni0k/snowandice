@@ -1,6 +1,8 @@
-package com.example.user;
+package com.example.jpa_services_impl;
 
+import com.example.models.User;
 import com.example.repo.UserRepository;
+import com.example.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;

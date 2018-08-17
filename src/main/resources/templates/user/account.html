@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/header :: header (~{::body},'account')}">
 <body>
-<!--/*@thymesVar id="user" type="com.example.user.User"*/-->
+<!--/*@thymesVar id="user" type="com.example.models.User"*/-->
 <div class="container main-block">
     <!--<div class="page-header">
         <h2>
@@ -36,10 +36,10 @@
                         <th>Дата заказа</th>
                         <th>Стоимость</th>
                     </tr>
-                    <!--/*@thymesVar id="orders" type="List<com.example.order.Order>"*/-->
+                    <!--/*@thymesVar id="orders" type="List<com.example.models.Order>"*/-->
 
                     <tr th:each="order : ${orders}">
-                        <!--/*@thymesVar id="order" type="com.example.order.Order"*/-->
+                        <!--/*@thymesVar id="order" type="com.example.models.Order"*/-->
                         <a th:href="@{/orders/get(id=${order.getId()})}">
                             <td th:text="${order.getId()}"></td>
                             <td th:text="${order.getTypeToString()}"></td>

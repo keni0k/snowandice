@@ -5,7 +5,7 @@
     <title>Добавить товар</title>
 </head>
 <body>
-<!--/*@thymesVar id="inputProduct" type="com.example.product.Product"*/-->
+<!--/*@thymesVar id="inputProduct" type="com.example.models.Product"*/-->
 <!--/*@thymesVar id="message" type="com.example.utils.MessageUtil"*/-->
 <!--/*@thymesVar id="errors" type="com.example.utils.Errors"*/-->
 <!--/*@thymesVar id="isEdit" type="java.lang.Boolean"*/-->
@@ -140,9 +140,9 @@
                                    id="upload_input"/>
                             <input type="text" name="photos" style="display:none;" id="photos"/>
                             <div class="result" id="result">
-                                <!--/*@thymesVar id="images" type="java.util.List<com.example.image.Image>"*/-->
+                                <!--/*@thymesVar id="images" type="java.util.List<com.example.models.Image>"*/-->
                                 <div class="upload-img" th:if="${images!=null}" th:each="photo : ${images}">
-                                    <!--/*@thymesVar id="getData" type="java.lang.String"*/-->
+                                    <!--/*@thymesVar id="photo" type="com.example.models.Image"*/-->
                                     <img th:src="${photo.getData()}" class="img-rounded"/>
                                     <div class="closer" onclick="remove_img($(this));"></div>
                                 </div>

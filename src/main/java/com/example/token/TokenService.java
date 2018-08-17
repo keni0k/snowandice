@@ -1,5 +1,6 @@
 package com.example.token;
 
+import com.example.models.TokenCookies;
 import com.example.repo.TokenRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

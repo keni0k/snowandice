@@ -1,6 +1,6 @@
 package com.example.repo;
 
-import com.example.image.Image;
+import com.example.models.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

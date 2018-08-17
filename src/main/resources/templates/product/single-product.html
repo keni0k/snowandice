@@ -5,7 +5,7 @@
         <div class="zigzag-bottom"></div>
         <div class="container main-block" th:with="isUserOrAdmin = ${isAdmin or isUser}">
             <div class="row">
-                <!--/*@thymesVar id="product" type="com.example.product.Product"*/-->
+                <!--/*@thymesVar id="product" type="com.example.models.Product"*/-->
                 <div class="col-md-10 col-centred">
                     <div class="product-content-right">
                         <div class="product-breadcroumb">
@@ -59,7 +59,7 @@
                                             </div>
                                             <div role="tabpanel" class="tab-pane fade" id="profile">
                                                 <div class="submit-review">
-                                                    <!--/*@thymesVar id="user" type="com.example.user.User"*/-->
+                                                    <!--/*@thymesVar id="user" type="com.example.models.User"*/-->
                                                     <div class="input-group">
                                                         <span class="input-group-addon">ФИО</span>
                                                         <input class="form-control" type="text" name="name" th:value="${isUserOrAdmin?user.getFullName():''}"/>

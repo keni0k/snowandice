@@ -1,5 +1,6 @@
 package com.example.user;
 
+import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.repo.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

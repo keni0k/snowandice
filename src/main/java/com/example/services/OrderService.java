@@ -1,10 +1,10 @@
-package com.example.order;
+package com.example.services;
 
-import com.example.repo.RepoService;
+import com.example.models.Order;
 
 import java.util.List;
 
-public interface OrderService extends RepoService<Order> {
+public interface OrderService extends BaseService<Order> {
 
     List<Order> getByIdOfUser(long id);
 

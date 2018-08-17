@@ -46,12 +46,12 @@
                             <div class="clear"></div>
                         </form>
 
-                        <!--/*@thymesVar id="order" type="com.example.order.Order"*/-->
+                        <!--/*@thymesVar id="order" type="com.example.models.Order"*/-->
                         <!--/*@thymesVar id="customer_info" type="com.example.order.CustomerInfo"*/-->
                         <form action="/orders/add" class="checkout" method="post" name="checkout" th:object="${customer_info}">
 
                             <div id="customer_details">
-                                <!--/*@thymesVar id="user" type="com.example.user.User"*/-->
+                                <!--/*@thymesVar id="user" type="com.example.models.User"*/-->
                                 <div class="woocommerce-billing-fields">
                                     <h3>Детали доставки</h3>
                                     <div class="row">

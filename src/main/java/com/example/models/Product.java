@@ -1,4 +1,4 @@
-package com.example.product;
+package com.example.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;

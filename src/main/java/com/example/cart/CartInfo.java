@@ -1,7 +1,7 @@
 package com.example.cart;
 
+import com.example.models.Product;
 import com.example.order.CustomerInfo;
-import com.example.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,11 @@
-package com.example.product;
+package com.example.controllers;
 
+import com.example.jpa_services_impl.ProductServiceImpl;
+import com.example.jpa_services_impl.UserServiceImpl;
+import com.example.models.Product;
+import com.example.models.User;
 import com.example.repo.ProductRepository;
 import com.example.repo.UserRepository;
-import com.example.user.User;
-import com.example.user.UserServiceImpl;
 import com.example.utils.Consts;
 import com.example.utils.Errors;
 import com.example.utils.Utils;

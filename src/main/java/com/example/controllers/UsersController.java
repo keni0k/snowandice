@@ -1,6 +1,8 @@
-package com.example.user;
+package com.example.controllers;
 
-import com.example.order.OrderServiceImpl;
+import com.example.jpa_services_impl.OrderServiceImpl;
+import com.example.jpa_services_impl.UserServiceImpl;
+import com.example.models.User;
 import com.example.repo.CartLineInfoRepository;
 import com.example.repo.OrderRepository;
 import com.example.repo.UserRepository;

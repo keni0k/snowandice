@@ -1,8 +1,8 @@
-package com.example.repo;
+package com.example.services;
 
 import java.util.List;
 
-public interface RepoService<T> {
+public interface BaseService<T> {
     T findById (Long id);
     List<T> findAll();
 

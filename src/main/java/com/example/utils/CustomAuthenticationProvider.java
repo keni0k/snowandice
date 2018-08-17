@@ -1,7 +1,7 @@
 package com.example.utils;
 
-import com.example.user.User;
-import com.example.user.UserServiceImpl;
+import com.example.jpa_services_impl.UserServiceImpl;
+import com.example.models.User;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -1,6 +1,8 @@
-package com.example.product;
+package com.example.jpa_services_impl;
 
+import com.example.models.Product;
 import com.example.repo.ProductRepository;
+import com.example.services.ProductService;
 
 import java.util.List;
 

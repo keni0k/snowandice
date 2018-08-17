@@ -1,4 +1,6 @@
-package com.example.order;
+package com.example.models;
+
+import com.example.order.CustomerInfo;
 
 import javax.persistence.*;
 

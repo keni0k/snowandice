@@ -1,11 +1,7 @@
 package com.example.config;
 
 import com.example.cart.CartLineInfo;
-import com.example.image.Image;
-import com.example.order.Order;
-import com.example.product.Product;
-import com.example.token.TokenCookies;
-import com.example.user.User;
+import com.example.models.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;

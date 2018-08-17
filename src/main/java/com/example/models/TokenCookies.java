@@ -1,4 +1,4 @@
-package com.example.token;
+package com.example.models;
 
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;

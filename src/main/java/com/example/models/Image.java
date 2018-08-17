@@ -1,4 +1,4 @@
-package com.example.image;
+package com.example.models;
 
 import com.example.utils.Consts;
 

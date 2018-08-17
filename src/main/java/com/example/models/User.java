@@ -1,4 +1,4 @@
-package com.example.user;
+package com.example.models;
 
 import com.example.utils.Consts;
 import com.example.utils.validation.LoginConstraint;

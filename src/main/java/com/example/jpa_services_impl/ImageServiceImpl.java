@@ -1,6 +1,8 @@
-package com.example.image;
+package com.example.jpa_services_impl;
 
+import com.example.models.Image;
 import com.example.repo.ImageRepository;
+import com.example.services.ImageService;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.example;
 
+import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.repo.UserRepository;
 import com.example.token.TokenService;
 import com.example.user.UserDetailsService;
-import com.example.user.UserServiceImpl;
 import com.example.utils.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

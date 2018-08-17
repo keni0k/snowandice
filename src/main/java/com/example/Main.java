@@ -16,12 +16,11 @@
 
 package com.example;
 
-import com.example.image.Image;
-import com.example.image.ImageServiceImpl;
+import com.example.jpa_services_impl.ImageServiceImpl;
+import com.example.models.Image;
 import com.example.repo.ImageRepository;
 import com.example.utils.Consts;
 import com.example.utils.UtilsForWeb;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -32,9 +31,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 
 import static com.example.utils.Utils.*;
 
@@ -85,14 +83,6 @@ public class Main {
     return "exchange_and_returns";
   }
 
-  private File streamToFile(String fileExtension, InputStream in) throws IOException {
-    File tempFile = File.createTempFile(System.getProperty("catalina.home") + File.separator + "tmpFiles"+randomToken(10), fileExtension);
-    tempFile.deleteOnExit();
-    FileOutputStream out = new FileOutputStream(tempFile);
-    IOUtils.copy(in, out);
-    return tempFile;
-  }
-
   @RequestMapping(value = "/upload_images", method = RequestMethod.POST)
   public @ResponseBody
   String uploadMultipleFileHandler(@RequestParam("img") MultipartFile[] files) {
@@ -100,18 +90,19 @@ public class Main {
     StringBuilder message = new StringBuilder();
     for (MultipartFile file : files) {
       try {
-        String fileName = file.getOriginalFilename();
+        Optional<String> fileName = Optional.ofNullable(file.getOriginalFilename());
         String photoToken = randomToken(32);
         InputStream input = file.getInputStream();
-        File serverFile = streamToFile(getFileExtension(fileName), input);
+        Optional<File> serverFile = Optional.ofNullable(streamToFile(getFileExtension(fileName.orElseThrow(Exception::new)), input));
 
-        if (getFileSizeMegaBytes(serverFile) > 1)
-          serverFile = compress(serverFile, getFileExtension(fileName), getFileSizeMegaBytes(serverFile));
+        if (serverFile.isPresent() && getFileSizeMegaBytes(serverFile.get()) > 1 )
+          serverFile = Optional.of(compress(serverFile.get(), getFileExtension(fileName.get()), getFileSizeMegaBytes(serverFile.get())));
 
         photoToken+=".jpg";
         Image img = new Image();
         img.setToken(photoToken);
-        putImg(serverFile.getAbsolutePath(), photoToken);
+        serverFile.orElseThrow(Exception::new);
+        putImg(serverFile.get().getAbsolutePath(), photoToken);
         imageService.add(img);
         message.append(Consts.URL_PATH).append(photoToken);
       } catch (Exception e) {

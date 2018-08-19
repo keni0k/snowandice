@@ -1,5 +1,6 @@
 package com.example.models;
 
+import com.example.models.order.Order;
 import com.example.utils.Consts;
 import com.example.utils.validation.LoginConstraint;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,9 +43,9 @@ public class User implements UserDetails{
     private boolean subscription = false;
     private int reviewsCount = 0;
 
-//    @OneToMany(mappedBy="user", cascade = CascadeType.ALL,
-//            fetch = FetchType.EAGER, targetEntity = Order.class)
-//    private List<Order> orders;
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER, targetEntity = Order.class)
+    private List<Order> orders;
 
 
     public String getTime() {
@@ -272,5 +273,13 @@ public class User implements UserDetails{
 
     public void setSubscription(boolean subscription) {
         this.subscription = subscription;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public List<Order> getOrders(){
+        return orders;
     }
 }

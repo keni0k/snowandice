@@ -5,10 +5,10 @@ import com.example.cart.CartLineInfo;
 import com.example.jpa_services_impl.OrderServiceImpl;
 import com.example.jpa_services_impl.ProductServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
-import com.example.models.Order;
 import com.example.models.Product;
 import com.example.models.User;
-import com.example.order.CustomerInfo;
+import com.example.models.order.CustomerInfo;
+import com.example.models.order.Order;
 import com.example.repo.CartLineInfoRepository;
 import com.example.repo.OrderRepository;
 import com.example.repo.ProductRepository;
@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -43,17 +42,17 @@ public class OrderController {
                            CartLineInfoRepository cartLineRepository) {
         this.orderService = new OrderServiceImpl(orderRepository, cartLineRepository);
         this.productService = new ProductServiceImpl(productRepository);
-        userService = new UserServiceImpl(userRepository);
-        utils = new Utils(userService);
+        this.userService = new UserServiceImpl(userRepository);
+        this.utils = new Utils(userService);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/cart")
     public String cart(HttpServletRequest request, ModelMap modelMap, Principal principal) {
-        User user = utils.getUser(principal);
+        var user = utils.getUser(principal);
+        var cartInfo = Utils.getCartInSession(request);
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("utils", new UtilsForWeb());
-        CartInfo myCart = Utils.getCartInSession(request);
-        modelMap.addAttribute("cartForm", myCart);
+        modelMap.addAttribute("cartForm", cartInfo);
         return "order/cart";
     }
 
@@ -63,8 +62,8 @@ public class OrderController {
                            @RequestParam("region") String region,
                            @RequestParam("postcode") String postcode,
                            @RequestParam("ship_method") int shippingMethod) {
-        User user = utils.getUser(principal);
-        CartInfo cartInfo = Utils.getCartInSession(request);
+        var user = utils.getUser(principal);
+        var cartInfo = Utils.getCartInSession(request);
         cartInfo.setShippingMethod(shippingMethod);
         modelMap.addAttribute("cart_info", cartInfo);
         modelMap.addAttribute("region", region);
@@ -87,8 +86,8 @@ public class OrderController {
                            @ModelAttribute("street-home") String streetAndHome,
                            @ModelAttribute("city") String city,
                            ModelMap modelMap, Principal principal) {
-        Optional<User> user = Optional.ofNullable(utils.getUser(principal));
-        CartInfo cartInfo = Utils.getCartInSession(request);
+        var user = Optional.ofNullable(utils.getUser(principal));
+        var cartInfo = Utils.getCartInSession(request);
         if (!user.isPresent()) {
             user = Optional.of(new User("login", password, customerInfo.getLastName(), 0,
                     customerInfo.getEmail(), customerInfo.getFirstName(), customerInfo.getPhone(),
@@ -96,13 +95,13 @@ public class OrderController {
             userService.add(user.get());
         }
         else customerInfo.setEmail(user.get().getEmail());
-        order.setIdOfUser(user.get().getId());
+        order.setUser(user.get());
         setCustomerAddress(customerInfo, region, district, city, streetAndHome, postcode);
         orderPreprocess(order, customerInfo, cartInfo.getAmountTotal(),
                         cartInfo.getShippingCost(), cartInfo.getShippingMethod());
         orderService.add(order);
         for(CartLineInfo cartLineInfo : cartInfo.getCartLines()) {
-            cartLineInfo.setOrderId(order.getId());
+            cartLineInfo.setOrder(order);
             orderService.addCartLine(cartLineInfo);
         }
         Utils.removeCartInSession(request);
@@ -121,8 +120,8 @@ public class OrderController {
     @RequestMapping("/get_orders")
     @ResponseBody
     public String getOrders(Principal principal){
-        List<Order> orders = orderService.getByIdOfUser(utils.getUser(principal).getId());
-        StringBuilder stringBuilder = new StringBuilder();
+        var orders = orderService.getByUser(utils.getUser(principal));
+        var stringBuilder = new StringBuilder();
         for (Order order : orders) {
             stringBuilder.append("DATE:").append(order.getDate())
                     .append(" ID: ").append(order.getId());
@@ -133,8 +132,8 @@ public class OrderController {
     @RequestMapping("/get_cartlines")
     @ResponseBody
     public String getCartLines(){
-        List<CartLineInfo> cartLineInfos = orderService.getAllCartLines();
-        StringBuilder stringBuilder = new StringBuilder();
+        var cartLineInfos = orderService.getAllCartLines();
+        var stringBuilder = new StringBuilder();
         for (CartLineInfo cartLine : cartLineInfos)
             stringBuilder.append("ID: ").append(cartLine.getId())
             .append(" NAME: ").append(cartLine.getName());
@@ -144,15 +143,15 @@ public class OrderController {
     @RequestMapping("/get")
     @ResponseBody
     public String getOrder(@RequestParam("id") long id){
-        Optional<Order> order = Optional.ofNullable(orderService.findById(id));
-        List<CartLineInfo> cartLineInfos = orderService.getCartLinesByOrderId(id);
+        var order = Optional.ofNullable(orderService.findById(id));
+        var cartLineInfos = orderService.getCartLinesByOrderId(id);
         return ""+cartLineInfos.size();
     }
 
     @RequestMapping("/remove_product_in_cart")
     public String removeProductHandler(HttpServletRequest request,
                                        @RequestParam(value = "id", required = false) Long id) {
-        CartInfo cartInfo = Utils.getCartInSession(request);
+        var cartInfo = Utils.getCartInSession(request);
         Optional<Product> product = Optional.empty();
         if (id!=null) {
             product = Optional.ofNullable(productService.findById(id));
@@ -165,7 +164,7 @@ public class OrderController {
     public String listProductHandler(HttpServletRequest request, Model model, //
                                      @RequestParam(value = "id", required = false) Long id,
                                      @RequestParam("quantity") int quantity) {
-        CartInfo cartInfo = Utils.getCartInSession(request);
+        var cartInfo = Utils.getCartInSession(request);
         Optional<Product> product = Optional.empty();
         if (id!=null) {
             product = Optional.ofNullable(productService.findById(id));
@@ -179,7 +178,7 @@ public class OrderController {
     public String shoppingCartUpdateQty(HttpServletRequest request, Model model,
                                         @ModelAttribute("cartForm") CartInfo cartForm) {
 
-        CartInfo cartInfo = Utils.getCartInSession(request);
+        var cartInfo = Utils.getCartInSession(request);
         cartInfo.updateQuantity(cartForm);
 
         // Redirect to shoppingCart page.
@@ -191,8 +190,8 @@ public class OrderController {
                                              ModelMap model, @RequestParam("id") long id,
                                              @RequestParam("duration") int duration) {
 
-        CartInfo cartInfo = Utils.getCartInSession(request);
-        CartLineInfo cartLineInfo = cartInfo.findLineById(id);
+        var cartInfo = Utils.getCartInSession(request);
+        var cartLineInfo = cartInfo.findLineById(id);
         if (cartLineInfo != null) {
             cartInfo.updateProduct(id, cartLineInfo.getQuantity() + duration);
         }

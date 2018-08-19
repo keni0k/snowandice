@@ -36,10 +36,10 @@
                         <th>Дата заказа</th>
                         <th>Стоимость</th>
                     </tr>
-                    <!--/*@thymesVar id="orders" type="List<com.example.models.Order>"*/-->
+                    <!--/*@thymesVar id="orders" type="List<com.example.models.order.Order>"*/-->
 
                     <tr th:each="order : ${orders}">
-                        <!--/*@thymesVar id="order" type="com.example.models.Order"*/-->
+                        <!--/*@thymesVar id="order" type="com.example.models.order.Order"*/-->
                         <a th:href="@{/orders/get(id=${order.getId()})}">
                             <td th:text="${order.getId()}"></td>
                             <td th:text="${order.getTypeToString()}"></td>

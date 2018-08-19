@@ -1013,11 +1013,11 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 }
 
 .search-button {
-    height: 43px;
-    width: 43px;
+    height: 41px;
+    width: 41px;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 1.2px;
+    right: 16px;
     cursor: pointer;
     border-radius: 21px;
 }
@@ -1036,7 +1036,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     font-family: FontAwesome, serif;
     font-size: 16px;
     right: 12px;
-    top: 12px;
+    top: 11px;
     position: absolute;
 }
 .search-button:hover {
@@ -1348,3 +1348,8 @@ main nav input[type=checkbox][disabled] {
 .hid-lg{
     display: none;
 }
+.right-input{padding-right: 0!important;padding-left: 0!important;margin-left: calc(100%/12);}
+.left-input{padding-left: 0!important; padding-right: 0!important;}
+
+.mr-0 {margin-right: 0;}
+.ml-0 {margin-left: 0;}

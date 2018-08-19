@@ -1,4 +1,4 @@
-package com.example.order;
+package com.example.models.order;
 
 import javax.persistence.Embeddable;
 

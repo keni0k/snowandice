@@ -1,4 +1,4 @@
-package com.example.user;
+package com.example.utils.security.user;
 
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.repo.UserRepository;

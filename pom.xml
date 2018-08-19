@@ -25,6 +25,7 @@
   </properties>
 
   <dependencies>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
@@ -169,6 +170,14 @@
           </execution>
         </executions>
       </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>10</source>
+                <target>10</target>
+            </configuration>
+        </plugin>
     </plugins>
   </build>
 

@@ -46,8 +46,8 @@
                             <div class="clear"></div>
                         </form>
 
-                        <!--/*@thymesVar id="order" type="com.example.models.Order"*/-->
-                        <!--/*@thymesVar id="customer_info" type="com.example.order.CustomerInfo"*/-->
+                        <!--/*@thymesVar id="order" type="com.example.models.order.Order"*/-->
+                        <!--/*@thymesVar id="customer_info" type="com.example.models.order.CustomerInfo"*/-->
                         <form action="/orders/add" class="checkout" method="post" name="checkout" th:object="${customer_info}">
 
                             <div id="customer_details">

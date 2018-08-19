@@ -1,4 +1,4 @@
-package com.example.token;
+package com.example.utils.security.token;
 
 import com.example.models.TokenCookies;
 import com.example.repo.TokenRepository;

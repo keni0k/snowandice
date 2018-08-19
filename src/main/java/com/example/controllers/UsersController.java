@@ -141,7 +141,7 @@ public class UsersController {
         model.addAttribute("user", user);
         model.addAttribute("consts", new Consts());
         model.addAttribute("utils", new UtilsForWeb());
-        model.addAttribute("orders", orderService.getByIdOfUser(user.getId()));
+        model.addAttribute("orders", orderService.getByUser(user));
         model.addAttribute("answersCount", 1);
         model.addAttribute("ordersWaitCount", 2);
         model.addAttribute("ordersCompliteCount", 3);

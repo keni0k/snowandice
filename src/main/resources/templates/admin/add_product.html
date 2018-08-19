@@ -11,13 +11,13 @@
 <!--/*@thymesVar id="isEdit" type="java.lang.Boolean"*/-->
 <div class="content"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}, lang = ${#locale.getLanguage().toString()=='en'?1:0}">
-    <div class="container">
-        <div class="page-header">
-            <h2 th:unless="isEdit">Добавление экскурсии</h2>
-            <h2 th:if="isEdit">Редактирование экскурсии</h2>
-        </div>
+    <div class="container main-block">
         <div class="row">
             <div class="col-xs-12 col-md-7 col-lg-6">
+                <div class="page-header">
+                    <h2 th:unless="${isEdit}">Добавление товара</h2>
+                    <h2 th:if="${isEdit}">Редактирование товара</h2>
+                </div>
                 <!-- /* Handling the flash message */-->
                 <th:block th:if="${message != null}">
                     <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">
@@ -27,6 +27,7 @@
                 <form th:object="${inputProduct}" method="POST" th:action="${isEdit?'/events/edit':'/events/add'}"
                       enctype="multipart/form-data"
                       autocomplete="off">
+                    <!--/*@thymesVar id="utils" type="com.example.utils.UtilsForWeb"*/-->
                     <!--/*@thymesVar id="id" type="java.lang.Integer"*/-->
                     <input th:if="${isEdit}" name="id" th:value="${id}" style="display: none"/>
                     <div class="panel panel-default">
@@ -45,26 +46,53 @@
           id="description" style="resize: vertical"
           class="form-control" th:text="${inputProduct.getDescription()}"></textarea>
                             <label for="description" th:if="${errors.isDescription()}"
-                                   th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description Error</label>
+                                   th:text="${#messages.msg('error.event.description')}" th:class="'error'">Description
+                                Error</label>
                         </div>
                     </div>
                     <div class="row ml-0 mr-0">
                         <div class="panel panel-default left-input col-sm-6">
-                            <div class="panel-heading" th:text="${#messages.msg('words.type_of_excursion')}"></div>
+                            <div class="panel-heading">Категория</div>
                             <div class="panel-body">
                                 <div class="input-group">
                                     <select name="category" id="category" class="form-control selectpicker"
                                             th:selected="${inputProduct.getCategory()}?${inputProduct.getCategory()}:0">
-                                        <option value="0" th:text="${#messages.msg('category.0')}">Развлечения</option>
-                                        <option value="1" th:text="${#messages.msg('category.1')}">Наука</option>
-                                        <option value="2" th:text="${#messages.msg('category.2')}">История</option>
-                                        <option value="3" th:text="${#messages.msg('category.3')}">Искусство</option>
-                                        <option value="4" th:text="${#messages.msg('category.4')}">Производство</option>
-                                        <option value="5" th:text="${#messages.msg('category.5')}">Гастрономия</option>
-                                        <option value="6" th:text="${#messages.msg('category.6')}">Квесты</option>
-                                        <option value="7" th:text="${#messages.msg('category.7')}">Экстрим</option>
+                                        <option th:each="j : ${#numbers.sequence(0, utils.getCategoriesCount()-1)}"
+                                                th:value="${j}" th:text="${utils.getCategoryName(j)}" th:id="${'category'+j}">Развлечения</option>
                                     </select>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default col-sm-5 right-input">
+                            <div class="panel-heading">Подкатегория</div>
+                            <div class="panel-body">
+                                <select class="selectpicker form-control" data-live-search="true"
+                                        name="subcategory">
+                                    <!--<th:block th:each="j : ${#numbers.sequence(0, utils.getSubcategoriesCount()}">
+                                        <option th:each="i : ${#numbers.sequence(0, utils.getSubcategoriesCount(j)-1)}"
+                                                th:value="${j}+'.'+${i}"
+                                                th:text="${utils.getCategoryName(j)}+' -> '+${utils.getSubcategoryName(j, i)}">
+                                        </option>
+                                    </th:block>-->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ml-0 mr-0">
+                        <div class="panel panel-default col-sm-6 left-input">
+                            <div class="panel-heading" th:text="${#messages.msg('words.users_count')}">Количество
+                                участников
+                            </div>
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <input name="usersCount" id="type" type="number" class="form-control"
+                                           min="1" max="100" required=""
+                                           th:value="${inputProduct.getType()}?${inputProduct.getType()}"/>
+                                    <span class="input-group-addon">Тип</span>
+                                </div>
+                                <label for="type" th:if="${#fields.hasErrors('type')}"
+                                       th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount
+                                    Error</label>
                             </div>
                         </div>
                         <div class="panel panel-default right-input col-sm-5">
@@ -85,38 +113,6 @@
                     </div>
                     <div class="row ml-0 mr-0">
                         <div class="panel panel-default col-sm-6 left-input">
-                            <div class="panel-heading" th:text="${#messages.msg('words.users_count')}">Количество участников</div>
-                            <div class="panel-body">
-                                <div class="input-group">
-                                    <input name="usersCount" id="type" type="number" class="form-control"
-                                           min="1" max="100" required=""
-                                           th:value="${inputProduct.getType()}?${inputProduct.getType()}"/>
-                                    <span class="input-group-addon">Тип</span>
-                                </div>
-                                <label for="type" th:if="${#fields.hasErrors('type')}"
-                                       th:text="${#messages.msg('error.event.users_count')}" th:class="'error'">UsersCount Error</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row ml-0 mr-0">
-                        <div class="panel panel-default col-sm-6 left-input">
-                            <div class="panel-heading" th:text="${#messages.msg('words.city')}">Город</div>
-                            <div class="panel-body">
-                                <select class="selectpicker form-control" data-live-search="true"
-                                        name="city_and_country">
-                                    <!--/*@thymesVar id="utils" type="com.example.utils.UtilsForWeb"*/-->
-                                    <th:block th:each="j : ${#numbers.sequence(0, utils.getCategoriesCount()-3)}">
-                                        <option th:each="i : ${#numbers.sequence(0, utils.getSubcategoriesCount(j)-1)}"
-                                                th:value="${j}+'.'+${i}"
-                                                th:text="${#messages.msg('city.'+j+'.'+i)}+', '+ ${#messages.msg('country.'+j)}">Москва, Россия
-                                        </option>
-                                    </th:block>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row ml-0 mr-0">
-                        <div class="panel panel-default col-sm-6 left-input">
                             <div class="panel-heading" th:text="${#messages.msg('words.price')}">Цена</div>
                             <div class="panel-body">
                                 <div class="input-group">
@@ -126,7 +122,8 @@
                                     <span class="input-group-addon">&#8381;</span>
                                 </div>
                                 <label for="price" th:if="${errors.isPrice()}"
-                                       th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price Error</label>
+                                       th:text="${#messages.msg('error.event.price')}" th:class="'error'">Price
+                                    Error</label>
                             </div>
                         </div>
                     </div>
@@ -201,51 +198,5 @@
         </div>
     </div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.12.4/dist/js/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="/js/Sortable.min.js"></script>
-<script th:inline="javascript">/*<![CDATA[*/
-    function setimage() {
-        var max = 5 - $('.upload-img').length;
-        if (max <= 0) {
-            alert('Максимально количество фотографий = 4!');
-            return;
-        }
-        var $input = $("#upload_input");
-        var id = [[${inputProduct.getId()}]];
-        var $url = '/upload_images';
-        var inputFile = document.getElementById('upload_input').files;
-        for (var i = 0; i < inputFile.length; i++) {
-            var fd = new FormData;
-            if (i > max - 1) {
-                alert('Максимально количество фотографий = 4!');
-                break;
-            }
-            fd.append('img', $input.prop('files')[i]);
-            $.ajax({
-                url: $url,
-                data: fd,
-                processData: false,
-                contentType: false,
-                type: 'POST',
-                success: function (data) {
-                    var final = '<div class="upload-img"><img src="' + data + '" class="img-rounded"/>"' + '"<div class="closer" onclick="remove_img($(this));"></div></div>';
-                    var $result = $('#result');
-                    var $demoImg = $('#demo-img');
-                    if ($result.children().length < 4) $result.append(final);
-                    if ($result.children('.upload-img').length >= 4) $('#add-photo').css('display', 'none');
-                    var src = $result.find('div:first-child img:first-child').attr('src');
-                    if ($demoImg.attr('src') !== src) $demoImg.attr("src", src);
-                },
-                error: function (data) {
-                    alert("Не все фотографии загрузились. Повторите, пожалуйста, попытку.");
-                }
-            });
-        }
-    }
-/*]]>*/
-</script>
 </body>
 </html>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example;
+package com.example.controllers;
 
 import com.example.jpa_services_impl.ImageServiceImpl;
 import com.example.models.Image;
@@ -30,20 +30,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.InputStream;
 import java.util.Optional;
 
 import static com.example.utils.Utils.*;
 
 @Controller
 @RequestMapping("/")
-public class Main {
+public class MainController {
 
   ImageServiceImpl imageService;
 
   @Autowired
-  public Main(ImageRepository imageRepository){
+  public MainController(ImageRepository imageRepository){
     imageService = new ImageServiceImpl(imageRepository);
   }
 
@@ -87,13 +85,13 @@ public class Main {
   public @ResponseBody
   String uploadMultipleFileHandler(@RequestParam("img") MultipartFile[] files) {
 
-    StringBuilder message = new StringBuilder();
+    var message = new StringBuilder();
     for (MultipartFile file : files) {
       try {
-        Optional<String> fileName = Optional.ofNullable(file.getOriginalFilename());
-        String photoToken = randomToken(32);
-        InputStream input = file.getInputStream();
-        Optional<File> serverFile = Optional.ofNullable(streamToFile(getFileExtension(fileName.orElseThrow(Exception::new)), input));
+        var fileName = Optional.ofNullable(file.getOriginalFilename());
+        var photoToken = randomToken(32);
+        var input = file.getInputStream();
+        var serverFile = Optional.ofNullable(streamToFile(getFileExtension(fileName.orElseThrow(Exception::new)), input));
 
         if (serverFile.isPresent() && getFileSizeMegaBytes(serverFile.get()) > 1 )
           serverFile = Optional.of(compress(serverFile.get(), getFileExtension(fileName.get()), getFileSizeMegaBytes(serverFile.get())));

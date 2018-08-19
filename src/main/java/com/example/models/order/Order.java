@@ -1,8 +1,10 @@
-package com.example.models;
+package com.example.models.order;
 
-import com.example.order.CustomerInfo;
+import com.example.cart.CartLineInfo;
+import com.example.models.User;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "order", schema = "public")
@@ -17,30 +19,30 @@ public class Order {
     @Column(name = "id")
     private long id;
 
-//    @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
-//    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
-//    private User user;
+    public User getUser() {
+        return user;
+    }
 
-//    @OneToMany(mappedBy="order", cascade = CascadeType.ALL,
-//            fetch = FetchType.EAGER, targetEntity = CartLineInfo.class)
-//    private List<CartLineInfo> cartLineInfos;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
+    @JoinColumn(name = "id_of_user", nullable = false)
+    private User user;
+
+    @OneToMany(mappedBy="order", cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER, targetEntity = CartLineInfo.class)
+    private List<CartLineInfo> cartLineInfos;
 
     @Embedded
     private CustomerInfo customerInfo;
-    private long idOfUser;
     private int totalPrice;
     private int typeOfShip;
     private int priceOfShip;
     private int type;
     private String date;
 
-    public long getIdOfUser() {
-        return idOfUser;
-    }
-
-    public void setIdOfUser(long idOfUser) {
-        this.idOfUser = idOfUser;
-    }
 
     public int getTypeOfShip() {
         return typeOfShip;
@@ -100,5 +102,13 @@ public class Order {
 
     public String getTypeToString(){
         return "Обрабатывается";
+    }
+
+    public List<CartLineInfo> getCartLineInfos() {
+        return cartLineInfos;
+    }
+
+    public void setCartLineInfos(List<CartLineInfo> cartLineInfos) {
+        this.cartLineInfos = cartLineInfos;
     }
 }

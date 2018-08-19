@@ -36,6 +36,7 @@ public class UtilsForWeb {
     }
 
     public static int getSubcategoriesCount(int category){
+        if (category>=categories.length) return 1;
         return subcategories[category].length;
     }
 

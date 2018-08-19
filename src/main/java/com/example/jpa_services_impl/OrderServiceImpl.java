@@ -1,7 +1,8 @@
 package com.example.jpa_services_impl;
 
 import com.example.cart.CartLineInfo;
-import com.example.models.Order;
+import com.example.models.User;
+import com.example.models.order.Order;
 import com.example.repo.CartLineInfoRepository;
 import com.example.repo.OrderRepository;
 import com.example.services.OrderService;
@@ -36,8 +37,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getByIdOfUser(long id) {
-        return orderRepository.getOrdersByIdOfUser(id);
+    public List<Order> getByUser(User user) {
+        return orderRepository.getOrdersByUser(user);
     }
 
     @Override

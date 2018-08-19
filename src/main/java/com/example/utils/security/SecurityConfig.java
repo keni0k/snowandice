@@ -1,10 +1,10 @@
-package com.example;
+package com.example.utils.security;
 
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.repo.UserRepository;
-import com.example.token.TokenService;
-import com.example.user.UserDetailsService;
 import com.example.utils.CustomAuthenticationProvider;
+import com.example.utils.security.token.TokenService;
+import com.example.utils.security.user.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Configuration;

@@ -101,7 +101,7 @@ public class Order {
     }
 
     public String getDateByRUFormat(){
-        return date.substring(8,9)+date.substring(5,6)+date.substring(2,3);
+        return date.substring(8,10)+'.'+date.substring(5,7)+'.'+date.substring(2,4);
     }
 
     public String getTypeToString(){

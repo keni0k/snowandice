@@ -100,6 +100,10 @@ public class Order {
         return "Обрабатывается";
     }
 
+    public String getDateByRUFormat(){
+        return date.substring(8,9)+date.substring(5,6)+date.substring(2,3);
+    }
+
     public String getTypeToString(){
         return "Обрабатывается";
     }

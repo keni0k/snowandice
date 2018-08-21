@@ -44,7 +44,7 @@
                             <td th:text="${order.getId()}"></td>
                             <td th:text="${order.getTypeToString()}"></td>
                             <td th:text="${order.getTypeOfShipToString()}"></td>
-                            <td th:text="${order.getDate()}"></td>
+                            <td th:text="${order.getDateByRUFormat()}"></td>
                             <td th:text="${order.getTotalPrice()} + ' ₽'"></td>
                         </a>
                     </tr>

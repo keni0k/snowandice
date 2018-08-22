@@ -46,37 +46,37 @@ public class MainController {
   }
 
   @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-  String index(ModelMap modelMap) {
+  public String index(ModelMap modelMap) {
     modelMap.addAttribute("utils", new UtilsForWeb());
     return "index";
   }
 
   @RequestMapping("/fix")
-  String fix(ModelMap modelMap){
+  public String fix(ModelMap modelMap){
     modelMap.addAttribute("utils", new UtilsForWeb());
     return "other/fix";
   }
 
   @RequestMapping("/contacts")
-  String contacts(ModelMap modelMap){
+  public String contacts(ModelMap modelMap){
     modelMap.addAttribute("utils", new UtilsForWeb());
     return "other/contacts";
   }
 
   @RequestMapping("/ship_and_pay")
-  String ShipAndPay(ModelMap modelMap){
+  public String ShipAndPay(ModelMap modelMap){
     modelMap.addAttribute("utils", new UtilsForWeb());
     return "other/ship_and_pay";
   }
 
   @RequestMapping("/privacy_policy")
-  String privacyPolicy(ModelMap modelMap){
+  public String privacyPolicy(ModelMap modelMap){
     modelMap.addAttribute("utils", new UtilsForWeb());
     return "privacy_policy";
   }
 
   @RequestMapping("/exchange_and_returns")
-  String exchangeAndReturns(ModelMap modelMap){
+  public String exchangeAndReturns(ModelMap modelMap){
     modelMap.addAttribute("utils", new UtilsForWeb());
     return "exchange_and_returns";
   }

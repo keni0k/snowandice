@@ -2,8 +2,9 @@
 
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/header :: header (~{::body},'error')}">
 
-  <body>
-    <!--/*@thymesVar id="message" type="java.lang.String"*/-->
+  <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+
+  <!--/*@thymesVar id="message" type="java.lang.String"*/-->
     <p th:text="${message}">Exception message</p>
   </body>
 

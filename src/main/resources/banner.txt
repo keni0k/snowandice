@@ -6,3 +6,5 @@
  |_|  |_|\___|_|  \___/|_|\_\\__,_|
 
 :: Built with Spring Boot :: ${spring-boot.version}
+
+CifraCentr deploy was started!

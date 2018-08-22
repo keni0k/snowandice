@@ -4,8 +4,41 @@
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0"
          metadata-complete="true">
+
     <servlet>
-        <servlet-name>dispatcher</servlet-name>
+        <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>
+                org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+                com.example.config.AppConfig
+            </param-value>
+        </init-param>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+        <url-pattern>/orders/*</url-pattern>
+        <url-pattern>/users/*</url-pattern>
+        <url-pattern>/errors/*</url-pattern>
+        <url-pattern>/products</url-pattern>
+        <url-pattern>/products/*</url-pattern>
+        <url-pattern>/fix</url-pattern>
+        <url-pattern>/contacts</url-pattern>
+        <url-pattern>/status</url-pattern>
+        <url-pattern>/</url-pattern>
+        <url-pattern>/ship_and_pay</url-pattern>
+        <url-pattern>/privacy_policy</url-pattern>
+        <url-pattern>/exchange_and_returns</url-pattern>
+        <url-pattern>/upload_images</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
 </web-app>

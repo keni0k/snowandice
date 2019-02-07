@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/header :: header (~{::body},'order_info')}">
+
+<body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div class="contacts-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container main-block">
+        <div class="row">
+            <!--/*@thymesVar id="order" type="com.example.models.order.Order"*/-->
+            <p th:text="${'FIRST NAME: '+order.getCustomerInfo().getFirstName()}"></p>
+            <p th:text="${'DATE: '+order.getDateByRUFormat()}"></p>
+            <p th:text="${'LOGIN: '+order.getUser().getLogin()}"></p>
+            <br/>
+            <th:block th:each="cartLine: ${order.getCartLineInfos()}">
+                <span th:text="${'NAME: '+cartLine.getName()+
+                ' AMOUNT: '+cartLine.getAmount()}"></span>
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,5 +1,7 @@
 package com.example.models;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 
@@ -17,26 +19,11 @@ public class TokenCookies extends PersistentRememberMeToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String tokenValue = "";
-    private String username = "";
-    private String series = "";
-    private Date date;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getSeries() {
-        return series;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    @Getter private String tokenValue = "";
+    @Getter private String username = "";
+    @Getter private String series = "";
+    @Getter @Setter private Date date;
 
     @PersistenceConstructor
     public TokenCookies(String username, String series, String tokenValue, Date date) {
@@ -61,8 +48,5 @@ public class TokenCookies extends PersistentRememberMeToken {
         super("","","",new Date());
     }
 
-    public String getTokenValue() {
-        return tokenValue;
-    }
 
 }

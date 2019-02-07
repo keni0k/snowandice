@@ -40,13 +40,11 @@
 
                     <tr th:each="order : ${orders}">
                         <!--/*@thymesVar id="order" type="com.example.models.order.Order"*/-->
-                        <a th:href="@{/orders/get(id=${order.getId()})}">
-                            <td th:text="${order.getId()}"></td>
-                            <td th:text="${order.getTypeToString()}"></td>
-                            <td th:text="${order.getTypeOfShipToString()}"></td>
-                            <td th:text="${order.getDateByRUFormat()}"></td>
-                            <td th:text="${order.getTotalPrice()} + ' ₽'"></td>
-                        </a>
+                        <td><a th:href="@{/orders/get(id=${order.getId()})}" th:text="${order.getId()}"></a></td>
+                        <td th:text="${order.getTypeToString()}"></td>
+                        <td th:text="${order.getTypeOfShipToString()}"></td>
+                        <td th:text="${order.getDateByRUFormat()}"></td>
+                        <td th:text="${order.getTotalPrice()} + ' ₽'"></td>
                     </tr>
                     <!--<tr><td><a href="#">0001</a></td><td>Доставлено</td><td>SPSR</td><td>12.08.17</td><td>₽350</td></tr>
                     <tr><td><a href="#">0022</a></td><td>Доставлено</td><td>Курьер</td><td>13.09.17</td><td>₽500</td></tr>

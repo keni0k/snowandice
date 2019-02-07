@@ -17,10 +17,9 @@ import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mailjet.client.resource.Contact;
 import com.mailjet.client.resource.Email;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -38,6 +37,7 @@ import java.util.Locale;
 
 import static com.example.utils.Utils.randomToken;
 
+@Slf4j
 @Controller
 @RequestMapping("/users")
 public class UsersController {
@@ -46,7 +46,6 @@ public class UsersController {
     private UserServiceImpl userService;
     private OrderServiceImpl orderService;
     private final MessageSource messageSource;
-    private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 
     @Autowired
     public UsersController(UserRepository userRepository, MessageSource messageSource,

@@ -21,6 +21,7 @@ import com.example.models.Image;
 import com.example.repo.ImageRepository;
 import com.example.utils.Consts;
 import com.example.utils.UtilsForWeb;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -34,6 +35,7 @@ import java.util.Optional;
 
 import static com.example.utils.Utils.*;
 
+@Slf4j
 @Controller
 @RequestMapping("/")
 public class MainController {

@@ -3,6 +3,10 @@ package com.example.models;
 import com.example.models.order.Order;
 import com.example.utils.Consts;
 import com.example.utils.validation.LoginConstraint;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,9 +16,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "user", schema = "public")
-public class User implements UserDetails{
+public class User implements UserDetails {
 
     public long getId() {
         return id;
@@ -43,162 +51,34 @@ public class User implements UserDetails{
     private boolean subscription = false;
     private int reviewsCount = 0;
 
-    @OneToMany(mappedBy="user", cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
             fetch = FetchType.EAGER, targetEntity = Order.class)
     private List<Order> orders;
 
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public String getStringType(int language){
+    public String getStringType(int language) {
         String[] typesRu = {"Не активирован", "Заблокирован", "Активирован", "Администратор"};
-        if (language==0) {
+        if (language == 0) {
             switch (type) {
-                case Consts.USER_DISABLED: return typesRu[0];
-                case Consts.USER_BLOCKED: return typesRu[1];
-                case Consts.USER_ENABLED:return typesRu[2];
-                case Consts.USER_ADMIN: return typesRu[3];
-                default: return "TYPE NULL";
+                case Consts.USER_DISABLED:
+                    return typesRu[0];
+                case Consts.USER_BLOCKED:
+                    return typesRu[1];
+                case Consts.USER_ENABLED:
+                    return typesRu[2];
+                case Consts.USER_ADMIN:
+                    return typesRu[3];
+                default:
+                    return "TYPE NULL";
             }
         } else
             return "LANGUAGE NULL";
     }
 
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public User() {
-    }
-
-    public String getFullName(){
-        return firstName+" "+lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public int getReviewsCount() {
-        return reviewsCount;
-    }
-
-    public void setReviewsCount(int reviewsCount) {
-        this.reviewsCount = reviewsCount;
-    }
-
-    public User(String login, String pass, String lastName, int type, String email, String firstName, String phoneNumber, String city, String token) {
-        this.login = login;
-        this.pass = pass;
-        this.lastName = lastName;
-        this.type = type;
-        this.email = email;
-        this.firstName = firstName;
-        this.phoneNumber = phoneNumber;
-        this.city = city;
-        this.token = token;
-    }
-
-    @Override
-    public String toString() {
-
-        return "{\n" +
-
-                "\t\"id\":\"" + id + "\",\n" +
-                "\t\"login\":\"" + login + "\",\n" +
-                "\t\"pass\":\"" + pass + "\",\n" +
-                "\t\"lastName\":\"" + lastName + "\",\n" +
-                "\t\"firstName\":\"" + firstName + "\",\n" +
-                "\t\"type\":\"" + type + "\",\n" +
-                "\t\"email\":\"" + email + "\",\n" +
-                "\t\"phoneNumber\":\"" + phoneNumber + "\",\n" +
-                "\t\"city\":\"" + city + "\",\n" +
-                "\t\"token\":\"" + token + "\",\n" +
-                "}";
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> grantedAuths = new ArrayList<>();
-        grantedAuths.add(new SimpleGrantedAuthority(getRole()));
+        grantedAuths.add(new SimpleGrantedAuthority(role));
         return grantedAuths;
     }
 
@@ -217,9 +97,23 @@ public class User implements UserDetails{
         return true;
     }
 
+    public User(String login, String pass, String lastName, String email, String firstName, String phoneNumber, String city, String token, String time, String address, boolean subscription) {
+        this.login = login;
+        this.pass = pass;
+        this.lastName = lastName;
+        this.email = email;
+        this.firstName = firstName;
+        this.phoneNumber = phoneNumber;
+        this.city = city;
+        this.token = token;
+        this.time = time;
+        this.address = address;
+        this.subscription = subscription;
+    }
+
     @Override
     public boolean isAccountNonLocked() {
-        return type!=-3;
+        return type != -3;
     }
 
     @Override
@@ -229,57 +123,21 @@ public class User implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return type>0;
+        return type > 0;
     }
 
-    public String getVk() {
-        return vk;
+    public String getFullName() {
+        return lastName + ' ' + firstName;
     }
 
-    public void setVk(String vk) {
-        this.vk = vk;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setAddress(String region, String district, String city, String address, String postcode){
+    public void setAddress(String region, String district, String city, String address, String postcode) {
         this.address = "РФ" + "$" + region + "$" + district + "$" + city + "$" + address + "$" + postcode;
     }
 
-    public String[] getListOfAddress(){
+    public String[] getListOfAddress() {
         if (address != null && !address.equals(""))
             return address.split("\\$");
         else
-            return new String[]{"","","","","",""};
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public boolean isSubscription() {
-        return subscription;
-    }
-
-    public void setSubscription(boolean subscription) {
-        this.subscription = subscription;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public List<Order> getOrders(){
-        return orders;
+            return new String[]{"", "", "", "", "", ""};
     }
 }

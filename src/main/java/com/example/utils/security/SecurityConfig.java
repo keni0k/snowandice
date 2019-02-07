@@ -43,10 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/", "/index",
-                        "/products", "/products/list", "/orders/cart",
+                        "/products", "/products/*",
                         "/contacts", "/ship_and_pay", "/privacy_policy",
-                        "/exchange_and_returns", "/fix", "/orders/remove_product_in_cart",
-                        "/orders/cart_quantity").permitAll()
+                        "/exchange_and_returns", "/fix", "/orders/*").permitAll()
                 .antMatchers(HttpMethod.POST, "/orders/checkout", "/orders/add",
                         "/orders/buy_product", "/orders/apply_coupon").permitAll()
                 .antMatchers("/users/registration").anonymous()

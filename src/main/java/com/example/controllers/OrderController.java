@@ -15,8 +15,7 @@ import com.example.repo.ProductRepository;
 import com.example.repo.UserRepository;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Optional;
 
+@Slf4j
 @Controller
 @RequestMapping("/orders")
 public class OrderController {
@@ -34,7 +34,6 @@ public class OrderController {
     private OrderServiceImpl orderService;
     private ProductServiceImpl productService;
     private UserServiceImpl userService;
-    private final Logger logger = LoggerFactory.getLogger(OrderController.class);
     private Utils utils;
 
     @Autowired
@@ -88,19 +87,18 @@ public class OrderController {
                            ModelMap modelMap, Principal principal) {
         var user = Optional.ofNullable(utils.getUser(principal));
         var cartInfo = Utils.getCartInSession(request);
-        if (!user.isPresent()) {
-            user = Optional.of(new User("login", password, customerInfo.getLastName(), 0,
-                    customerInfo.getEmail(), customerInfo.getFirstName(), customerInfo.getPhone(),
-                    city, Utils.randomToken(32)));
-            userService.add(user.get());
-        }
-        else customerInfo.setEmail(user.get().getEmail());
-        order.setUser(user.get());
         setCustomerAddress(customerInfo, region, district, city, streetAndHome, postcode);
+        if (!user.isPresent()) {
+            user = Optional.of(new User("withoutLogin", password, customerInfo.getLastName(),
+                    customerInfo.getEmail(), customerInfo.getFirstName(), customerInfo.getPhone(), city,
+                    Utils.randomToken(32), "TIME", customerInfo.getAddress(), false));
+            userService.add(user.get());
+        } else customerInfo.setEmail(user.get().getEmail());
+        order.setUser(user.get());
         orderPreprocess(order, customerInfo, cartInfo.getAmountTotal(),
-                        cartInfo.getShippingCost(), cartInfo.getShippingMethod());
+                cartInfo.getShippingCost(), cartInfo.getShippingMethod());
         orderService.add(order);
-        for(CartLineInfo cartLineInfo : cartInfo.getCartLines()) {
+        for (CartLineInfo cartLineInfo : cartInfo.getCartLines()) {
             cartLineInfo.setOrder(order);
             orderService.addCartLine(cartLineInfo);
         }
@@ -109,7 +107,7 @@ public class OrderController {
     }
 
     private void orderPreprocess(Order order, CustomerInfo customerInfo,
-                                 int totalPrice, int priceOfShip, int typeOfShip){
+                                 int totalPrice, int priceOfShip, int typeOfShip) {
         order.setTypeOfShip(typeOfShip);
         order.setDate(utils.getTime());
         order.setTotalPrice(totalPrice);
@@ -119,7 +117,7 @@ public class OrderController {
 
     @RequestMapping("/get_orders")
     @ResponseBody
-    public String getOrders(Principal principal){
+    public String getOrders(Principal principal) {
         var orders = orderService.getByUser(utils.getUser(principal));
         var stringBuilder = new StringBuilder();
         for (Order order : orders) {
@@ -131,21 +129,30 @@ public class OrderController {
 
     @RequestMapping("/get_cartlines")
     @ResponseBody
-    public String getCartLines(){
+    public String getCartLines() {
         var cartLineInfos = orderService.getAllCartLines();
         var stringBuilder = new StringBuilder();
         for (CartLineInfo cartLine : cartLineInfos)
             stringBuilder.append("ID: ").append(cartLine.getId())
-            .append(" NAME: ").append(cartLine.getName());
+                    .append(" NAME: ").append(cartLine.getName());
         return stringBuilder.toString();
     }
 
-    @RequestMapping("/get")
-    @ResponseBody
-    public String getOrder(@RequestParam("id") long id){
-        var order = Optional.ofNullable(orderService.findById(id));
-        var cartLineInfos = orderService.getCartLinesByOrderId(id);
-        return ""+cartLineInfos.size();
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    public String getOrder(@RequestParam("id") long id, ModelMap modelMap, Principal principal) {
+        var order = orderService.findById(id);
+        var user = utils.getUser(principal);
+
+        if (user == null)
+            return "redirect:/users/login";
+
+        if (order != null && order.getUser().getId() == user.getId()) {
+            modelMap.addAttribute("order", order);
+        } else {
+            modelMap.addAttribute("order", null);
+        }
+        modelMap.addAttribute("utils", new UtilsForWeb());
+        return "order/order_info";
     }
 
     @RequestMapping("/remove_product_in_cart")
@@ -153,7 +160,7 @@ public class OrderController {
                                        @RequestParam(value = "id", required = false) Long id) {
         var cartInfo = Utils.getCartInSession(request);
         Optional<Product> product = Optional.empty();
-        if (id!=null) {
+        if (id != null) {
             product = Optional.ofNullable(productService.findById(id));
         }
         product.ifPresent(cartInfo::removeProduct);
@@ -166,7 +173,7 @@ public class OrderController {
                                      @RequestParam("quantity") int quantity) {
         var cartInfo = Utils.getCartInSession(request);
         Optional<Product> product = Optional.empty();
-        if (id!=null) {
+        if (id != null) {
             product = Optional.ofNullable(productService.findById(id));
         }
         product.ifPresent(product1 -> cartInfo.addProduct(product1, quantity));
@@ -203,6 +210,6 @@ public class OrderController {
         if (district == null || district.equals("")) district = "";
         else district = ", " + district;
         customerInfo.setAddress(region + district + ", " + city + ", " +
-                                streetAndHome + ", " + postcode);
+                streetAndHome + ", " + postcode);
     }
 }

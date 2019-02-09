@@ -1353,3 +1353,8 @@ main nav input[type=checkbox][disabled] {
 
 .mr-0 {margin-right: 0;}
 .ml-0 {margin-left: 0;}
+
+.single-shop-product image.product-img{
+    display: inline;
+    height: 120px;
+}

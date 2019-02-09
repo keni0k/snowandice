@@ -61,6 +61,7 @@ public class ProductController {
         else if (subcategory == null) products = productService.getByCategory(category);
         else products = productService.getByCategoryAndSubcategory(category, subcategory);
         modelMap.addAttribute("products", products);
+        modelMap.addAttribute("page", 0);
         modelMap.addAttribute("utils", new UtilsForWeb());
         return "product/shop";
     }

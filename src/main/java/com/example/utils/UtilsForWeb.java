@@ -51,6 +51,10 @@ public class UtilsForWeb {
         return urls[category];
     }
 
+    public int productsCount(){
+        return 10;
+    }
+
     public static CartInfo getCartInSession(HttpServletRequest request) {
 
         // Get Cart from Session.

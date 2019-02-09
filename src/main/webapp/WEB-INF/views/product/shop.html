@@ -10,7 +10,7 @@
         <!--/*@thymesVar id="utils" type="com.example.utils.UtilsForWeb"*/-->
         <!--/*@thymesVar id="page" type="java.lang.Integer"*/-->
         <th:block
-                th:each="i : ${#numbers.sequence(page * utils.productsCount(), page * utils.productsCount() + utils.productsCount())}">
+                th:each="i : ${#numbers.sequence(page*utils.productsCount(), utils.getProductsCount(page, products.size()))}">
             <div class="single-shop-product" th:with="product = ${products.get(i)}">
                 <div class="row">
                     <div class="col-sm-3">

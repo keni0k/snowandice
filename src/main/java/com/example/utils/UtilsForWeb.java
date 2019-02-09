@@ -55,6 +55,10 @@ public class UtilsForWeb {
         return 10;
     }
 
+    public int getProductsCount(int page, int productsSize){
+        return (page+1)*productsCount()<productsSize?(page+1)*productsCount():productsSize;
+    }
+
     public static CartInfo getCartInSession(HttpServletRequest request) {
 
         // Get Cart from Session.

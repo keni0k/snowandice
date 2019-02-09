@@ -20,6 +20,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
+import javax.servlet.ServletContext;
+
 @Configuration
 //@PropertySource("classpath:appplication.properties")
 @EnableJpaRepositories(basePackages = "com.example.repo")
@@ -28,7 +30,8 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 public class AppConfig implements WebMvcConfigurer {
 
     @Autowired
-    public AppConfig(ApplicationContext applicationContext) {
+    public AppConfig(ApplicationContext applicationContext, ServletContext servletContext) {
+        this.servletContext = servletContext;
         this.applicationContext = applicationContext;
     }
 
@@ -38,11 +41,12 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     private final ApplicationContext applicationContext;
-
+    private final ServletContext servletContext;
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        final SpringResourceTemplateResolver templateResolver =
+                new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");

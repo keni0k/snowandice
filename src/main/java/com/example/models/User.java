@@ -4,7 +4,6 @@ import com.example.models.order.Order;
 import com.example.utils.Consts;
 import com.example.utils.validation.LoginConstraint;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,7 +18,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "user", schema = "public")
 public class User implements UserDetails {

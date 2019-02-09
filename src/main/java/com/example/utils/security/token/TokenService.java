@@ -25,7 +25,7 @@ public class TokenService implements PersistentTokenRepository {
     @Override
     public void createNewToken(PersistentRememberMeToken token) {
 
-        log.info("CREATE_TOKEN: = series" + token.getSeries() + " username= " + token.getUsername() + " value= " + token.getTokenValue());
+        log.debug("CREATE_TOKEN: = username= " + token.getUsername());
 
         repository.save(new TokenCookies(token.getUsername(), token.getSeries(),
                 token.getTokenValue(), token.getDate()));
@@ -41,7 +41,7 @@ public class TokenService implements PersistentTokenRepository {
     public PersistentRememberMeToken getTokenForSeries(String seriesId) {
         TokenCookies token = repository.findBySeries(seriesId);
         if (token!=null)
-            log.info("GET_TOKEN: series= " + seriesId + " username= " + token.getUsername() + " value= " + token.getTokenValue());
+            log.debug("GET_TOKEN: username= " + token.getUsername());
         return token;
     }
 
@@ -50,7 +50,7 @@ public class TokenService implements PersistentTokenRepository {
         List<TokenCookies> tokens = repository.findByUsername(username);
         if (tokens.size()!=0) {
             for (TokenCookies token : tokens) {
-                log.info("REMOVE_TOKEN: series= " + token.getSeries() + " username= " + token.getUsername() + " value= " + token.getTokenValue());
+                log.debug("REMOVE_TOKEN: username= " + token.getUsername());
                 repository.delete(token);
             }
         }

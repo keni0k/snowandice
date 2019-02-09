@@ -32,8 +32,22 @@ public class Product {
     private int subcategory;
     private String description;
     private String dictionary;
+    private String token;
 
     @Transient
     public ArrayList<String> pathToPhoto = new ArrayList<>();
 
+    public Product(String name, int price, int type, int category, int subcategory,
+            String description, String dictionary, String token) {
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.category = category;
+        this.subcategory = subcategory;
+        this.description = description;
+        this.dictionary = dictionary;
+        this.token = token;
+    }
+
+    ;
 }

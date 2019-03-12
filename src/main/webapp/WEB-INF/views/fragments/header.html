@@ -34,7 +34,7 @@
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 
 <div class="header-area" th:with="isUserOrAdmin = ${isUser or isAdmin}">
-    <div class="container" style="width: 80%">
+    <div class="container">
         <div class="row">
             <div class="col-xs-5">
                 <div class="user-menu">
@@ -49,8 +49,8 @@
                         <a href="/users/login">
                             <i class="fa fa-user"></i> Вход
                         </a>
-                        <span>/</span>
-                        <a href="/users/registration"> Регистрация</a>
+                        <!--<span>/</span>
+                        <a href="/users/registration"> Регистрация</a>-->
                     </th:block>
                     <th:block th:if="${isUserOrAdmin}">
                         <a href="/users/account">

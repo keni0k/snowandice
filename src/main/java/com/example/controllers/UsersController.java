@@ -3,7 +3,6 @@ package com.example.controllers;
 import com.example.jpa_services_impl.OrderServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.User;
-import com.example.repo.CartLineInfoRepository;
 import com.example.repo.OrderRepository;
 import com.example.repo.UserRepository;
 import com.example.utils.Consts;
@@ -49,9 +48,9 @@ public class UsersController {
 
     @Autowired
     public UsersController(UserRepository userRepository, MessageSource messageSource,
-                           OrderRepository orderRepository, CartLineInfoRepository cartLineInfoRepository){
+                           OrderRepository orderRepository){
         userService = new UserServiceImpl(userRepository);
-        orderService = new OrderServiceImpl(orderRepository, cartLineInfoRepository);
+        orderService = new OrderServiceImpl(orderRepository);
         this.messageSource = messageSource;
         utils = new Utils(userService);
     }

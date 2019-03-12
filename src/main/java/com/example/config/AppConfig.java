@@ -1,8 +1,6 @@
 package com.example.config;
 
-import com.example.cart.CartLineInfo;
 import com.example.models.Image;
-import com.example.models.Product;
 import com.example.models.TokenCookies;
 import com.example.models.User;
 import com.example.models.order.Order;
@@ -25,7 +23,7 @@ import javax.servlet.ServletContext;
 @Configuration
 //@PropertySource("classpath:appplication.properties")
 @EnableJpaRepositories(basePackages = "com.example.repo")
-@EntityScan(basePackageClasses = {User.class, TokenCookies.class, Product.class, Image.class, Order.class, CartLineInfo.class})
+@EntityScan(basePackageClasses = {User.class, TokenCookies.class, Image.class, Order.class})
 @EnableTransactionManagement
 public class AppConfig implements WebMvcConfigurer {
 

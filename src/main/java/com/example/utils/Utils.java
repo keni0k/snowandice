@@ -1,6 +1,5 @@
 package com.example.utils;
 
-import com.example.cart.CartInfo;
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.User;
 import com.microsoft.azure.storage.CloudStorageAccount;
@@ -16,7 +15,6 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URISyntaxException;
@@ -144,33 +142,6 @@ public class Utils {
         String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
         time = time.substring(0, time.indexOf('.'));
         return time;
-    }
-
-    public static CartInfo getCartInSession(HttpServletRequest request) {
-        // Get Cart from Session.
-        CartInfo cartInfo = (CartInfo) request.getSession().getAttribute("myCart");
-
-        // If null, create it.
-        if (cartInfo == null) {
-            cartInfo = new CartInfo();
-
-            // And store to Session.
-            request.getSession().setAttribute("myCart", cartInfo);
-        }
-
-        return cartInfo;
-    }
-
-    public static void removeCartInSession(HttpServletRequest request) {
-        request.getSession().removeAttribute("myCart");
-    }
-
-    public static void storeLastOrderedCartInSession(HttpServletRequest request, CartInfo cartInfo) {
-        request.getSession().setAttribute("lastOrderedCart", cartInfo);
-    }
-
-    public static CartInfo getLastOrderedCartInSession(HttpServletRequest request) {
-        return (CartInfo) request.getSession().getAttribute("lastOrderedCart");
     }
 
     public static File streamToFile(String fileExtension, InputStream in) {

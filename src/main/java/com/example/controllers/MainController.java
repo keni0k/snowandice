@@ -40,7 +40,7 @@ import static com.example.utils.Utils.*;
 @RequestMapping("/")
 public class MainController {
 
-  ImageServiceImpl imageService;
+  private ImageServiceImpl imageService;
 
   @Autowired
   public MainController(ImageRepository imageRepository){

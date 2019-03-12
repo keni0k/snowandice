@@ -1,9 +1,7 @@
 package com.example.jpa_services_impl;
 
-import com.example.cart.CartLineInfo;
 import com.example.models.User;
 import com.example.models.order.Order;
-import com.example.repo.CartLineInfoRepository;
 import com.example.repo.OrderRepository;
 import com.example.services.OrderService;
 
@@ -12,23 +10,9 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private OrderRepository orderRepository;
-    private CartLineInfoRepository cartLineInfoRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, CartLineInfoRepository cartLineInfoRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.cartLineInfoRepository = cartLineInfoRepository;
-    }
-
-    public void addCartLine(CartLineInfo cartLineInfo){
-        cartLineInfoRepository.saveAndFlush(cartLineInfo);
-    }
-
-    public List<CartLineInfo> getCartLinesByOrderId(long orderId){
-        return cartLineInfoRepository.getCartLineInfosByOrderId(orderId);
-    }
-
-    public List<CartLineInfo> getAllCartLines(){
-        return cartLineInfoRepository.findAll();
     }
 
     @Override

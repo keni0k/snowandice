@@ -2,7 +2,6 @@ package com.example.models;
 
 import com.example.models.order.Order;
 import com.example.utils.Consts;
-import com.example.utils.validation.LoginConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,8 +29,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @LoginConstraint
-    private String login = "";
     //    @PasswordConstraint
     private String pass = "";
     private String lastName = "";
@@ -39,7 +36,6 @@ public class User implements UserDetails {
     private String email = "";
     private String firstName = "";
     private String phoneNumber = "";
-    private String city = "";
     private String token = "";
     private String role = "";
     private String time = "";
@@ -87,7 +83,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
+        return email;
     }
 
     @Override
@@ -95,14 +91,12 @@ public class User implements UserDetails {
         return true;
     }
 
-    public User(String login, String pass, String lastName, String email, String firstName, String phoneNumber, String city, String token, String time, String address, boolean subscription) {
-        this.login = login;
+    public User(String pass, String lastName, String email, String firstName, String phoneNumber, String token, String time, String address, boolean subscription) {
         this.pass = pass;
         this.lastName = lastName;
         this.email = email;
         this.firstName = firstName;
         this.phoneNumber = phoneNumber;
-        this.city = city;
         this.token = token;
         this.time = time;
         this.address = address;

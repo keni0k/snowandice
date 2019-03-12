@@ -29,18 +29,17 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-    public User getByLoginOrEmail(String loginOrEmail) {
-        loginOrEmail = loginOrEmail.toLowerCase();
-        return userRepository.getUserByLoginOrEmail(loginOrEmail, loginOrEmail);
+    public User getByEmail(String email) {
+        email = email.toLowerCase();
+        return userRepository.getUserByEmail(email);
     }
 
     @Override
-    public List<User> getByFilter(Integer type, String firstName, String lastName, String city, Integer sortBy) {
+    public List<User> getByFilter(Integer type, String firstName, String lastName, Integer sortBy) {
 
         if (type==null) type = -1;
         if (firstName==null) firstName = "";
         if (lastName==null) lastName = "";
-        if (city==null) city="";
         List<User> list = findAll();
 
         List<User> copy = new ArrayList<>();
@@ -48,8 +47,7 @@ public class UserServiceImpl implements UserService {
             boolean isEqualsType = aList.getType() == type || type == -1;
             boolean isContainsFirstName = aList.getFirstName().toLowerCase().contains(firstName.toLowerCase());
             boolean isContainsLastName = aList.getLastName().toLowerCase().contains(lastName.toLowerCase());
-            boolean isContainsCity = aList.getCity().toLowerCase().contains(city.toLowerCase());
-            if (isEqualsType && isContainsFirstName && isContainsLastName && isContainsCity)
+            if (isEqualsType && isContainsFirstName && isContainsLastName)
                 copy.add(aList);
         }
         if(sortBy!=null)
@@ -71,10 +69,6 @@ public class UserServiceImpl implements UserService {
                     return o1.getLastName().compareTo(o2.getLastName());
                 case 7:
                     return o2.getLastName().compareTo(o1.getLastName());
-                case 8:
-                    return o1.getCity().compareTo(o2.getCity());
-                case 9:
-                    return o2.getCity().compareTo(o1.getCity());
 
             }
             return Long.compare(o1.getId(), o2.getId());
@@ -100,12 +94,6 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Boolean isLoginFree(String login) {
-        User user = userRepository.getUserByLogin(login);
-        return user == null;
-    }
-
-    @Override
     public Boolean isEmailFree(String email) {
         User user = userRepository.getUserByEmail(email);
         return user == null;
@@ -118,7 +106,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean throwsErrors(User User, String pass2) {
-        return pass2 == null || isEmailCorrect(User.getEmail()) && isLoginFree(User.getLogin()) && (User.getPhoneNumber().equals("") || isPhoneFree(User.getPhoneNumber())) && isEmailFree(User.getEmail()) && User.getPass().equals(pass2);
+        return pass2 == null || isEmailCorrect(User.getEmail()) && (User.getPhoneNumber().equals("") || isPhoneFree(User.getPhoneNumber())) && isEmailFree(User.getEmail()) && User.getPass().equals(pass2);
     }
 
     @Override
@@ -126,7 +114,6 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.getUserByPhoneNumber(phone);
         return user == null;
     }
-
 
     @Override
     public List<User> findAll() {

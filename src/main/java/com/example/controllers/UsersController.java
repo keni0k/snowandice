@@ -3,6 +3,7 @@ package com.example.controllers;
 import com.example.jpa_services_impl.OrderServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.User;
+import com.example.repo.CartLineInfoRepository;
 import com.example.repo.OrderRepository;
 import com.example.repo.UserRepository;
 import com.example.utils.Consts;
@@ -48,9 +49,9 @@ public class UsersController {
 
     @Autowired
     public UsersController(UserRepository userRepository, MessageSource messageSource,
-                           OrderRepository orderRepository){
+                           OrderRepository orderRepository, CartLineInfoRepository cartLineInfoRepository){
         userService = new UserServiceImpl(userRepository);
-        orderService = new OrderServiceImpl(orderRepository);
+        orderService = new OrderServiceImpl(orderRepository, cartLineInfoRepository);
         this.messageSource = messageSource;
         utils = new Utils(userService);
     }
@@ -71,7 +72,6 @@ public class UsersController {
         person.setToken(randomToken(32));
         model.addAttribute("utils", new UtilsForWeb());
         if (!userService.throwsErrors(person, pass2) || result.hasErrors()) {
-            model.addAttribute("error_login", !userService.isLoginFree(person.getLogin()));
             if (!person.getPhoneNumber().equals(""))
                 model.addAttribute("error_phone", !userService.isPhoneFree(person.getPhoneNumber()));
             model.addAttribute("error_pass", !person.getPass().equals(pass2));
@@ -83,7 +83,6 @@ public class UsersController {
             return "user/registration";
         }
         person.setEmail(person.getEmail().toLowerCase());
-        person.setLogin(person.getLogin().toLowerCase());
 
         person.setRole("ROLE_USER");
         person.setType(Consts.USER_DISABLED);
@@ -172,7 +171,7 @@ public class UsersController {
         User nowUser = utils.getUser(principal);
         if (nowUser == null || nowUser.getType() != Consts.USER_ADMIN) return signIn(modelMap, principal);
 
-        User u = userService.getByLoginOrEmail(email);
+        User u = userService.getByEmail(email);
         u.setRole("ROLE_ADMIN");
         u.setType(Consts.USER_ADMIN);
         modelMap.addAttribute("message", new MessageUtil("success", u.getFullName()+" получил роль ADMIN"));

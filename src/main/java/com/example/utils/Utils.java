@@ -131,7 +131,7 @@ public class Utils {
             User user = null;
             String loginOrEmail = principal.getName();
             if (!loginOrEmail.equals("")) {
-                user = userService.getByLoginOrEmail(loginOrEmail);
+                user = userService.getByEmail(loginOrEmail);
             }
             return user;
         }

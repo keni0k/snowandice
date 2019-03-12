@@ -41,24 +41,9 @@
 <div class="header-area" th:with="isUserOrAdmin = ${isUser or isAdmin}">
     <div class="container" style="width: 80%">
         <div class="row">
-            <!--<div class="col-sm-4 col-xs-5">
-                <div class="header-left">
-                    <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">Ваш город: </span><span class="value">Горно-Алтайск </span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Барнаул</a></li>
-                                <li><a href="#">Бийск</a></li>
-                                <li><a href="#">Новосибирск</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>-->
             <div class="col-sm-7 col-xs-12">
                 <div class="user-menu">
                     <ul>
-                        <li><a href="/contacts">Контакты</a></li>
                         <li><a href="/ship_and_pay">Доставка и оплата</a></li>
                     </ul>
                 </div>
@@ -87,9 +72,9 @@
 </div>
 <!--/*@thymesVar id="utils" type="com.example.utils.UtilsForWeb"*/-->
 <div class="site-branding-area">
-    <div class="container w-full">
+    <div class="container">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-7">
                 <div class="logo">
                     <a href="/index">
                         <img src="/resources/img/logo.png"/>
@@ -97,20 +82,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-3 col-xs-8 mt-40">
-                <form action="/search">
-                    <input type="text" placeholder="Поиск товара" class="search-placeholder"/>
-                    <button type="submit" class="search-button"></button>
-                </form>
-            </div>
-
-            <div class="col-sm-2 col-xs-4">
-                <div class="shopping-item">
-                    <a href="/orders/cart"><i class="fa fa-shopping-cart"></i><span class="cart-amunt" th:text="${utils.getCartTotals(#request)}+' ₽'">800 ₽</span>  <span class="product-count">5</span></a>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
+            <div class="col-sm-5">
                 <div class="q-phone-block">
                     <p class="number">+7 (983) 583-2000</p>
                     <div class="headerCallback"><a href="#webform__popup_callback" class="showCallbackPopup" onclick="return false">заказать обратный звонок</a></div>
@@ -122,7 +94,7 @@
 </div> <!-- End site branding area -->
 
 <div class="mainmenu-area">
-    <div class="container w-full">
+    <div class="container">
         <div class="row">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -133,49 +105,11 @@
                 </button>
             </div>
 
-            <main ontouchstart th:unless="${menu=='index'}">
-                <nav>
-                    <input id='link-top' type='checkbox' th:checked="${menu}=='index'">
-                    <label class='down' for='link-top'>
-                        <h4>Категории</h4>
-                    </label>
-                    <ul>
-                        <li th:each="category,categoryStat : ${utils.getCategories()}">
-                            <th:block th:if="${categoryStat.index<8}">
-                                <input th:id='${categoryStat.index}' type='checkbox'>
-                                <label class='right' th:for='${categoryStat.index}' th:text="${category}">%CATEGORY%</label>
-                                <ul>
-                                    <li th:each="subcategory : ${utils.getSubcategories(categoryStat.index)}">
-                                        <a th:text="${subcategory}">%SUBCATEGORY%</a>
-                                    </li>
-                                </ul>
-                            </th:block>
-                            <a th:unless="${categoryStat.index<8}" th:text="${category}">%CATEGORY%</a>
-                        </li>
-                        <!--<li>
-                                <input id="pereferia" type="checkbox">
-                                <label class="right mb-0" for="pereferia">Переферия</label>
-                                <ul>
-                                    <li><a>Мыши</a></li>
-                                    <li><a>Клавиатуры</a></li>
-                                    <li><a>USB HUB</a></li>
-                                    <li><a>Веб-камеры</a></li>
-                                    <li><a>Внешние накопители</a></li>
-                                    <li><a>Картридеры</a></li>
-                                    <li><a>Колонки</a></li>
-                                    <li><a>Микрофоны</a></li>
-                                </ul>
-                            </li>-->
-                    </ul>
-                </nav>
-            </main>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <!--<li th:class="${menu}=='index'?'active':''"><a href="/index">О магазине</a></li>-->
-                    <li th:class="${menu}=='shop'?'active':''"><a href="/products/list">Каталог</a></li>
-                    <li th:class="${menu}=='single-product'?'active':''"><a href="/products?id=1">Страница товара</a></li>
                     <li th:class="${menu}=='fix'?'active':''"><a href="/fix">Мастерская</a></li>
                     <li th:class="${menu}=='status'?'active':''"><a href="/status">Статус заказа/ремонта</a></li>
+                    <li th:class="${menu}=='contacts'?'active':''"><a href="/contacts">Контакты</a></li>
                     <li th:if="${isAdmin}">
                         <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false" href="">Модерация <b class="caret"></b>
                         </a><ul class="dropdown-menu">

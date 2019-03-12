@@ -29,7 +29,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             // You can get the password here
             String password = authentication.getCredentials().toString();
 
-            User user = personService.getByLoginOrEmail(name);
+            User user = personService.getByEmail(name);
 
             // Your custom authentication logic here
             if (user != null) {

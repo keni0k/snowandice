@@ -70,16 +70,16 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="input-group">
-<span class="input-group-addon"
-      th:text="${#messages.msg('words.login')} + ' *'">Логин</span>
-                                <input name="login" id="login" type="text" class="form-control"
-                                       th:value="${insertUser.getLogin()}" required=""/>
-                                <!--/*@thymesVar id="error_login" type="java.lang.Boolean"*/-->
-                                <label for="login" th:if="${error_login}"
-                                       th:text="${#messages.msg('error.user.login.free')}"
-                                       th:class="'error'">Name Error</label>
-                                <label for="login" th:if="${#fields.hasErrors('login')}"
-                                       th:text="${#messages.msg('error.user.login.size')}" th:class="'error'">Name
+                                <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
+                                <input name="phoneNumber" type="text" class="form-control"
+                                       th:value="${insertUser.getPhoneNumber()}"
+                                       minlength="17" id="phone_number"/>
+                                <!--/*@thymesVar id="error_phone" type="java.lang.Boolean"*/-->
+                                <label for="phone_number" th:if="${error_phone}"
+                                       th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
+                                    Error</label>
+                                <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}"
+                                       th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name
                                     Error</label>
                             </div>
                         </div>
@@ -110,35 +110,6 @@
                                 <!--/*@thymesVar id="error_pass" type="java.lang.Boolean"*/-->
                                 <label for="pass2" th:if="${error_pass}" th:text="${#messages.msg('error.user.pass2')}"
                                        th:class="'error'">Name Error</label>
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="input-group">
-                        <span class="input-group-addon"
-                              th:text="${#messages.msg('words.city')} + ' *'">Город *</span>
-                                <input name="city" type="text" class="form-control"
-                                       th:value="${insertUser.getCity()}" required=""/>
-                            </div>
-                        </div>
-                        <div class="visible-xs-block col-xs-12">
-                            <br/>
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="input-group">
-                                <span class="input-group-addon" th:text="${#messages.msg('words.phone')}">Телефон</span>
-                                <input name="phoneNumber" type="text" class="form-control"
-                                       th:value="${insertUser.getPhoneNumber()}"
-                                       minlength="17" id="phone_number"/>
-                                <!--/*@thymesVar id="error_phone" type="java.lang.Boolean"*/-->
-                                <label for="phone_number" th:if="${error_phone}"
-                                       th:text="${#messages.msg('error.user.phone_number.free')}" th:class="'error'">Name
-                                    Error</label>
-                                <label for="phone_number" th:if="${#fields.hasErrors('phoneNumber')}"
-                                       th:text="${#messages.msg('error.user.phone_number.invalid')}" th:class="'error'">Name
-                                    Error</label>
                             </div>
                         </div>
                     </div>

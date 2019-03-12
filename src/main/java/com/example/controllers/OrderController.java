@@ -5,6 +5,7 @@ import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.User;
 import com.example.models.order.CustomerInfo;
 import com.example.models.order.Order;
+import com.example.repo.CartLineInfoRepository;
 import com.example.repo.OrderRepository;
 import com.example.repo.UserRepository;
 import com.example.utils.Utils;
@@ -29,8 +30,8 @@ public class OrderController {
     private Utils utils;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository, UserRepository userRepository) {
-        this.orderService = new OrderServiceImpl(orderRepository);
+    public OrderController(OrderRepository orderRepository, UserRepository userRepository, CartLineInfoRepository cartLineInfoRepository) {
+        this.orderService = new OrderServiceImpl(orderRepository, cartLineInfoRepository);
         this.userService = new UserServiceImpl(userRepository);
         this.utils = new Utils(userService);
     }
@@ -60,8 +61,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addOrder(HttpServletRequest request,
-                           @ModelAttribute("order") Order order,
+    public String addOrder(@ModelAttribute("order") Order order,
                            @ModelAttribute("customer_info") CustomerInfo customerInfo,
                            @ModelAttribute("region") String region,
                            @ModelAttribute("postcode") String postcode,
@@ -69,12 +69,12 @@ public class OrderController {
                            @RequestParam(value = "district", required = false) String district,
                            @ModelAttribute("street-home") String streetAndHome,
                            @ModelAttribute("city") String city,
-                           ModelMap modelMap, Principal principal) {
+                           Principal principal) {
         var user = Optional.ofNullable(utils.getUser(principal));
         setCustomerAddress(customerInfo, region, district, city, streetAndHome, postcode);
         if (!user.isPresent()) {
-            user = Optional.of(new User("withoutLogin", password, customerInfo.getLastName(),
-                    customerInfo.getEmail(), customerInfo.getFirstName(), customerInfo.getPhone(), city,
+            user = Optional.of(new User(password, customerInfo.getLastName(),
+                    customerInfo.getEmail(), customerInfo.getFirstName(), customerInfo.getPhone(),
                     Utils.randomToken(32), "TIME", customerInfo.getAddress(), false));
             userService.add(user.get());
         } else customerInfo.setEmail(user.get().getEmail());

@@ -3,6 +3,7 @@ package com.example.models.order;
 import com.example.models.User;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "order", schema = "public")
@@ -28,6 +29,10 @@ public class Order {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(name = "id_of_user", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy="order", cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER, targetEntity = CartLineInfo.class)
+    private List<CartLineInfo> cartLineInfos;
 
     @Embedded
     private CustomerInfo customerInfo;
@@ -102,4 +107,11 @@ public class Order {
         return "Обрабатывается";
     }
 
+    public List<CartLineInfo> getCartLineInfos() {
+        return cartLineInfos;
+    }
+
+    public void setCartLineInfos(List<CartLineInfo> cartLineInfos) {
+        this.cartLineInfos = cartLineInfos;
+    }
 }

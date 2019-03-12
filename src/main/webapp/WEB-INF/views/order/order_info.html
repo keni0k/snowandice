@@ -10,7 +10,7 @@
             <!--/*@thymesVar id="order" type="com.example.models.order.Order"*/-->
             <p th:text="${'FIRST NAME: '+order.getCustomerInfo().getFirstName()}"></p>
             <p th:text="${'DATE: '+order.getDateByRUFormat()}"></p>
-            <p th:text="${'LOGIN: '+order.getUser().getLogin()}"></p>
+            <p th:text="${'EMAIL: '+order.getUser().getEmail()}"></p>
             <br/>
             <th:block th:each="cartLine: ${order.getCartLineInfos()}">
                 <span th:text="${'NAME: '+cartLine.getName()+

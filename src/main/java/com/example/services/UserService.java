@@ -10,8 +10,6 @@ import java.util.List;
 
 public interface UserService extends BaseService<User> {
 
-    Boolean isLoginFree(String login);
-
     Boolean isEmailFree(String login);
 
     Boolean isEmailCorrect(String login);
@@ -20,6 +18,6 @@ public interface UserService extends BaseService<User> {
 
     Boolean isPhoneFree(String login);
 
-    List<User> getByFilter(Integer type, String firstName, String lastName, String city, Integer sortBy);
+    List<User> getByFilter(Integer type, String firstName, String lastName, Integer sortBy);
 
 }

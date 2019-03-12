@@ -53,6 +53,12 @@ public class MainController {
     return "index";
   }
 
+  @RequestMapping("/status")
+  public String status(ModelMap modelMap){
+    modelMap.addAttribute("utils", new UtilsForWeb());
+    return "other/status";
+  }
+
   @RequestMapping("/fix")
   public String fix(ModelMap modelMap){
     modelMap.addAttribute("utils", new UtilsForWeb());

@@ -1231,7 +1231,6 @@ input#coupon_code.input-text{
 
 .gis2 {
     background-color: #f7f3df;
-    width: 350px;
     height: 350px;
 }
 
@@ -1353,6 +1352,19 @@ main nav input[type=checkbox][disabled] {
 
 .mr-0 {margin-right: 0;}
 .ml-0 {margin-left: 0;}
+
+.centred {
+    height: 20em;
+    position: relative
+}
+
+.centred div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0 -50% 0 0;
+    transform: translate(-50%, -50%)
+}
 
 .single-shop-product image.product-img{
     display: inline;

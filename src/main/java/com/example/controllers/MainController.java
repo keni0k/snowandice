@@ -67,7 +67,7 @@ public class MainController {
         return "index";
     }
 
-    RemOrders getOrders(String phone, Integer page, Integer id) {
+    private RemOrders getOrders(String phone, Integer page, Integer id) {
         try {
             HttpEntity post = Request.Post("https://api.remonline.ru/token/new").connectTimeout(2000).useExpectContinue()
                     .bodyForm(Form.form().add("api_key", "c78e141c0c4247eab658f2a6e39ba920").build())
@@ -103,13 +103,24 @@ public class MainController {
         return g.toJson(remOrders);
     }
 
-    private String digits(String phone){
-        StringBuilder solve = new StringBuilder("");
-        for (int i = 0; i<phone.length(); i++){
-            if (Character.isDigit(phone.charAt(i)))
+    private String digits(String phone) {
+        StringBuilder solve = new StringBuilder();
+        int zeros = 0;
+        for (int i = 0; i < phone.length(); i++) {
+            if (Character.isDigit(phone.charAt(i))) {
                 solve.append(phone.charAt(i));
+            }
         }
         return solve.toString();
+    }
+
+    private boolean isZeros(String phone) {
+        int zeros = 0;
+        for (int i = 0; i < phone.length(); i++) {
+            if (phone.charAt(i) == '0')
+                zeros++;
+        }
+        return zeros==phone.length();
     }
 
     @RequestMapping(value = "/order_widget", method = RequestMethod.GET)
@@ -122,19 +133,26 @@ public class MainController {
         boolean isAdmin = false;
         if (nowUser != null && nowUser.getType() == Consts.USER_ADMIN)
             isAdmin = true;
-        if (phone!=null)
+        if (phone != null)
             phone = digits(phone);
-        if ((phone != null && phone.length()>4) || isAdmin) {
-            if (!isAdmin){
+        if ((phone != null && phone.length() > 4 && !isZeros(phone)) || isAdmin) {
+            if (!isAdmin) {
                 page = null;
                 id = null;
             }
             RemOrders remOrders = getOrders(phone, page, id);
+            if (remOrders != null) {
+                try {
+                    remOrders.data.sort((o1, o2) -> Long.compare(o2.created_at, o1.created_at));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
             modelMap.addAttribute("orders", remOrders);
         } else {
             modelMap.addAttribute("orders", null);
         }
-        modelMap.addAttribute("phone", phone!=null?phone:"");
+        modelMap.addAttribute("phone", phone != null ? phone : "");
         modelMap.addAttribute("utils", new UtilsForWeb());
         return "order/widget";
     }

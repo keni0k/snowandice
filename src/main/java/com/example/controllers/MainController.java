@@ -19,20 +19,12 @@ package com.example.controllers;
 import com.example.jpa_services_impl.ImageServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.Image;
-import com.example.models.User;
 import com.example.repo.ImageRepository;
 import com.example.repo.UserRepository;
 import com.example.utils.Consts;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
-import com.example.utils.remonlineAPI.RemOrders;
-import com.example.utils.remonlineAPI.RemToken;
-import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.fluent.Form;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -42,7 +34,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.security.Principal;
 import java.util.Optional;
 
 import static com.example.utils.Utils.*;
@@ -65,96 +56,6 @@ public class MainController {
     public String index(ModelMap modelMap) {
         modelMap.addAttribute("utils", new UtilsForWeb());
         return "index";
-    }
-
-    private RemOrders getOrders(String phone, Integer page, Integer id) {
-        try {
-            HttpEntity post = Request.Post("https://api.remonline.ru/token/new").connectTimeout(2000).useExpectContinue()
-                    .bodyForm(Form.form().add("api_key", "c78e141c0c4247eab658f2a6e39ba920").build())
-                    .execute()
-                    .returnResponse().getEntity();
-            Gson g = new Gson();
-            RemToken token = g.fromJson(EntityUtils.toString(post), RemToken.class);
-            String url = "https://api.remonline.ru/order/?token=" + token.token;
-            url += (phone != null) ? ("&client_phones[]=" + phone.replaceAll(" ", "")) : "";
-            url += (page != null) ? ("&page=" + page) : "";
-            url += (id != null) ? ("&label_id=" + id) : "";
-            HttpEntity get = Request.Get(url)
-                    .connectTimeout(2000)
-                    .socketTimeout(2000)
-                    .execute()
-                    .returnResponse().getEntity();
-            g = new Gson();
-            return g.fromJson(EntityUtils.toString(get), RemOrders.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @RequestMapping("/status_custom")
-    public @ResponseBody
-    String customStatus(@RequestParam(value = "phone", required = false) String phone,
-                        @RequestParam(value = "page", required = false) Integer page,
-                        @RequestParam(value = "id", required = false) Integer id) {
-        RemOrders remOrders = getOrders(phone, page, id);
-        if (remOrders == null) return "NULL";
-        Gson g = new Gson();
-        return g.toJson(remOrders);
-    }
-
-    private String digits(String phone) {
-        StringBuilder solve = new StringBuilder();
-        int zeros = 0;
-        for (int i = 0; i < phone.length(); i++) {
-            if (Character.isDigit(phone.charAt(i))) {
-                solve.append(phone.charAt(i));
-            }
-        }
-        return solve.toString();
-    }
-
-    private boolean isZeros(String phone) {
-        int zeros = 0;
-        for (int i = 0; i < phone.length(); i++) {
-            if (phone.charAt(i) == '0')
-                zeros++;
-        }
-        return zeros==phone.length();
-    }
-
-    @RequestMapping(value = "/order_widget", method = RequestMethod.GET)
-    public String widgetStatus(ModelMap modelMap,
-                               @RequestParam(value = "phone", required = false) String phone,
-                               @RequestParam(value = "page", required = false) Integer page,
-                               @RequestParam(value = "id", required = false) Integer id,
-                               Principal principal) {
-        User nowUser = utils.getUser(principal);
-        boolean isAdmin = false;
-        if (nowUser != null && nowUser.getType() == Consts.USER_ADMIN)
-            isAdmin = true;
-        if (phone != null)
-            phone = digits(phone);
-        if ((phone != null && phone.length() > 4 && !isZeros(phone)) || isAdmin) {
-            if (!isAdmin) {
-                page = null;
-                id = null;
-            }
-            RemOrders remOrders = getOrders(phone, page, id);
-            if (remOrders != null) {
-                try {
-                    remOrders.data.sort((o1, o2) -> Long.compare(o2.created_at, o1.created_at));
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            }
-            modelMap.addAttribute("orders", remOrders);
-        } else {
-            modelMap.addAttribute("orders", null);
-        }
-        modelMap.addAttribute("phone", phone != null ? phone : "");
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        return "order/widget";
     }
 
     @RequestMapping("/status")

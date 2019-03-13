@@ -1148,7 +1148,9 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .table-history.p-min td strong{
     color: black;
 }
+
 .table-history tr:hover td {background: #ddd;}
+.table-history.backgr-none tr:hover td{background: inherit;}
 
 .table-history a{
     color: #05318c;

@@ -98,17 +98,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li th:class="${menu}=='fix'?'active':''"><a href="/fix">Мастерская</a></li>
-                    <li th:class="${menu}=='status'?'active':''"><a href="/status">Статус заказа/ремонта</a></li>
+                    <li th:class="${menu}=='status'?'active':''"><a href="/orders/widget">Статус заказа/ремонта</a></li>
                     <li th:class="${menu}=='contacts'?'active':''"><a href="/contacts">Контакты</a></li>
-                    <li th:if="${isAdmin}">
-                        <a class="waves-effect waves-light" type="button" data-toggle="dropdown" aria-expanded="false"
-                           href="">Модерация <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/admin/users" class="waves-effect waves-light">Модерация пользователей</a></li>
-                            <li><a href="/admin/orders" class="waves-effect waves-light">Модерация заказов</a></li>
-                        </ul>
-                    </li>
+                    <li th:if="${isAdmin}" th:class="${menu}=='contacts'?'active':''"><a href="/admin">Админка</a></li>
                 </ul>
             </div>
         </div>

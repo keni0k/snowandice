@@ -43,8 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/", "/index",
-                        "/contacts", "/ship_and_pay", "/privacy_policy",
-                        "/exchange_and_returns", "/fix", "/status", "/order_widget").permitAll()
+                        "/contacts", "/privacy_policy", "/exchange_and_returns",
+                        "/fix", "/orders/widget").permitAll()
                 .antMatchers(HttpMethod.POST, "/orders/buy_product").permitAll()
                 .antMatchers("/users/registration").anonymous()
                 .antMatchers("/users/account", "/users/edit_data", "/users/edit_address").hasAnyRole("ADMIN", "USER")

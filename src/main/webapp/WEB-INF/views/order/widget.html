@@ -13,7 +13,7 @@
                     <h3>Узнать статус ремонта по номеру телефона</h3>
                 </div>
                 <div class="row">
-                    <form action="/order_widget" method="get">
+                    <form action="/orders/widget" method="get">
                         <div class="col-xs-8">
                             <div class="input-group">
                                 <span class="input-group-addon">Телефон</span>
@@ -30,21 +30,19 @@
                 </div>
                 <div class="row">
                     <th:block th:unless="${orders==null or orders.data==null or orders.data.size()==0}">
-                        <details th:each="order: ${orders.data}">
+                        <details th:each="order: ${orders.data}" style="cursor: auto;">
                             <summary th:text="${order.brand + ' ' + order.model + ' (' + order.status.name + ')'}"
                                      th:style="${'background: '+ order.status.color}">Ноутбуки</summary>
-                            <table class="table-history p-min">
+                            <table class="table-history p-min backgr-none">
                                 <tr>
                                     <th><strong>ID</strong></th>
-                                    <!--<th style="padding-right: 25px;"><strong>Статус</strong></th>-->
                                     <th><strong>Вердикт</strong></th>
                                     <th><strong>Цена</strong></th>
-                                    <th style="background: lightskyblue;" th:if="${isAdmin}"><strong>О клиенте</strong></th>
+                                    <th style="background: lightskyblue;" th:if="${isAdmin}"><strong>Имя</strong></th>
                                 </tr>
                                 <!--№ Заказа	Устройство	Статус	Цена, руб-->
                                 <tr>
                                     <td th:text="${order.id_label}">%ID%</td>
-                                    <!--<td th:text="${order.status.name}">%STATUS%</td>-->
                                     <td th:text="${order.resume}">%RESUME%</td>
                                     <td th:text="${order.price}">%PRICE%</td>
                                     <td th:text="${order.client.name}" th:if="${isAdmin}">%CLIENT NAME%</td>

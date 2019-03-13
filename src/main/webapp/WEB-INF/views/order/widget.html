@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/header :: header (~{::body},'order_widget')}">
+
+<body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div class="contacts-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container main-block">
+        <div class="row">
+            <!--/*@thymesVar id="orders" type="com.example.utils.remonlineAPI.RemOrders"*/-->
+            <div class="col-md-10 col-lg-8 col-centred">
+                <div class="header mb-2">
+                    <h3>Узнать статус ремонта по номеру телефона</h3>
+                </div>
+                <div class="row">
+                    <form action="/order_widget" method="get">
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                <span class="input-group-addon">Телефон</span>
+                                <!--/*@thymesVar id="phone" type="java.lang.String"*/-->
+                                <input name="phone" id="phone" autofocus="autofocus" type="text"
+                                       class="form-control input-lg" minlength="5" th:value="${phone}"
+                                       placeholder="Телефон" aria-label="Телефон" th:required="${not isAdmin}">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Узнать">
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <th:block th:unless="${orders==null or orders.data==null or orders.data.size()==0}">
+                        <details th:if="${isAdmin}">
+                            <summary style="background: lightskyblue;">О клиенте</summary>
+                            <br/>
+                            <!--/*@thymesVar id="client" type="com.example.utils.remonlineAPI.Client"*/-->
+                            <p th:text="${'FIRST NAME: '+orders.data.get(0).client.name}"></p>
+                            <p th:text="${'EMAIL: '+orders.data.get(0).client.email}"></p>
+                        </details>
+                        <details th:each="order: ${orders.data}">
+                            <summary th:text="${order.brand + ' ' + order.model}">Ноутбуки</summary>
+                            <table class="table-history p-min">
+                                <tr>
+                                    <th><strong>ID</strong></th>
+                                    <th style="padding-right: 25px;"><strong>Статус</strong></th>
+                                    <th><strong>Цена</strong></th>
+                                </tr>
+                                <!--№ Заказа	Устройство	Статус	Цена, руб-->
+                                <tr>
+                                    <td th:text="${order.id_label}">%ID%</td>
+                                    <td th:text="${order.status.name}">%STATUS%</td>
+                                    <td th:text="${order.price}">%PRICE%</td>
+                                </tr>
+                            </table>
+                        </details>
+                    </th:block>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -20,5 +20,4 @@ public class Props {
     @Column(name = "id")
     private long id;
     private int countDigitsForWidget;
-    private int lastPage;
 }

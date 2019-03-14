@@ -45,8 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/", "/index",
                         "/contacts", "/privacy_policy", "/exchange_and_returns",
                         "/fix", "/orders/widget",
-                        "/actuator/*", "/instances", "/healh", "/actuator", "/admin/**", "/admin2/**", "/admin2").permitAll()
-                .antMatchers(HttpMethod.POST, "/actuator", "/admin2/**", "/admin2").permitAll()
+                        "/actuator/**", "/instances", "/health", "/actuator", "/admin").permitAll()
+                .antMatchers(HttpMethod.POST, "/actuator/**", "/actuator", "/instances", "/health", "/admin").permitAll()
                 .antMatchers("/users/registration").anonymous()
                 .antMatchers("/users/account", "/users/edit_data", "/users/edit_address").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/**").hasRole("ADMIN")
@@ -63,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedPage("/error/403")
                 .and()
                 .csrf().disable();
+        http.httpBasic();
     }
 
 }

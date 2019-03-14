@@ -6,8 +6,10 @@ import com.example.utils.CustomAuthenticationProvider;
 import com.example.utils.security.token.TokenService;
 import com.example.utils.security.user.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -35,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/resources/**");
+        web.ignoring().antMatchers(HttpMethod.OPTIONS,"/css/**", "/img/**", "/js/**", "/resources/**", "/**", "/actuator/**");
     }
 
     @Override
@@ -48,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/users/registration").anonymous()
 //                .antMatchers("/users/account", "/users/edit_data", "/users/edit_address").hasAnyRole("ADMIN", "USER")
 //                .antMatchers("/**").hasRole("ADMIN")
+                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .anyRequest().permitAll()//authentificated
                 .and()
                 .formLogin().defaultSuccessUrl("/users/account", false)

@@ -41,17 +41,18 @@ class AdminController {
         this.utils = new Utils(userService);
     }
 
+    private boolean isAdmin(Principal principal){
+        User nowUser = utils.getUser(principal);
+        return nowUser != null && nowUser.getType() == Consts.USER_ADMIN;
+    }
+
     @RequestMapping(value = "/callbacks", method = RequestMethod.GET)
     public String widgetCallback(ModelMap modelMap,
                                @RequestParam(value = "phone", required = false) String phone,
                                @RequestParam(value = "id", required = false) Integer id,
                                @RequestParam(value = "status", required = false) Integer status,
                                Principal principal) {
-        User nowUser = utils.getUser(principal);
-        boolean isAdmin = false;
-        if (nowUser != null && nowUser.getType() == Consts.USER_ADMIN)
-            isAdmin = true;
-        if (isAdmin){
+        if (isAdmin(principal)){
             if (phone!=null){
                 modelMap.addAttribute("callbacks", callbackRepository.getCallbacksByPhone(phone));
             } else if (id!=null) {
@@ -66,11 +67,7 @@ class AdminController {
 
     @RequestMapping(value = "/statuses", method = RequestMethod.GET)
     public String widgetStatus(ModelMap modelMap, Principal principal) {
-        User nowUser = utils.getUser(principal);
-        boolean isAdmin = false;
-        if (nowUser != null && nowUser.getType() == Consts.USER_ADMIN)
-            isAdmin = true;
-        if (isAdmin){
+        if (isAdmin(principal)){
             modelMap.addAttribute("statuses", statusCallbackRepository.findAll());
         }
         modelMap.addAttribute("utils", new UtilsForWeb());
@@ -78,13 +75,17 @@ class AdminController {
     }
 
     @RequestMapping(value = "/add_status", method = RequestMethod.POST)
-    public String addStatus(ModelMap modelMap, Principal principal, @Valid Status status) {
-        User nowUser = utils.getUser(principal);
-        boolean isAdmin = false;
-        if (nowUser != null && nowUser.getType() == Consts.USER_ADMIN)
-            isAdmin = true;
-        if (isAdmin){
+    public String addStatus(Principal principal, @Valid Status status) {
+        if (isAdmin(principal)){
             statusCallbackRepository.save(status);
+        }
+        return "redirect:/admin/statuses";
+    }
+
+    @RequestMapping(value = "/del_status", method = RequestMethod.GET)
+    public String delStatus(Principal principal, @RequestParam("id") long id) {
+        if (isAdmin(principal)){
+            statusCallbackRepository.deleteById(id);
         }
         return "redirect:/admin/statuses";
     }

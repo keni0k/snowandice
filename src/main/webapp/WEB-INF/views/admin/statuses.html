@@ -13,8 +13,9 @@
                 <div class="header mb-2">
                     <h3>Статусы заказов обратного звонка</h3>
                 </div>
-                <div class="row">
-                    <form action="/admin/add_status" method="post">
+
+                <form action="/admin/add_status" method="post">
+                    <div class="row">
                         <div class="col-xs-8">
                             <div class="input-group">
                                 <span class="input-group-addon">Статус</span>
@@ -22,21 +23,30 @@
                                        class="form-control input-lg"
                                        placeholder="Статус" aria-label="Статус">
                             </div>
+                        </div>
+                        <div class="col-xs-4">
                             <div class="input-group">
                                 <span class="input-group-addon">Цвет</span>
                                 <input name="color" autofocus="autofocus" type="text"
                                        class="form-control input-lg"
-                                       placeholder="Цвет" aria-label="Цвет">
+                                       placeholder="#000000" aria-label="#000000">
                             </div>
                         </div>
-                        <div class="col-xs-4">
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-4">
                             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Добавить">
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <br/>
+                </form>
+
                 <div class="row">
                     <th:block th:unless="${statuses==null or statuses.size()==0}">
-                        <div th:each="status: ${statuses}" class="status" th:style="${'background: '+ status.getColor()}">
+                        <div th:each="status: ${statuses}" class="status"
+                             th:style="${'background: '+ status.getColor()}">
                             <p th:text="${status.getName()}">Статус</p>
                             <a th:href="@{/admin/del_status(id=${status.getId()})}" style="color: red">X</a>
                         </div>

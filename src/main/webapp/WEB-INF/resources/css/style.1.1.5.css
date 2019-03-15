@@ -1387,3 +1387,18 @@ div.politics details{
 .inline{
     display: inline;
 }
+summary.without_marker::-webkit-details-marker{
+    display: none;
+}
+div.status {
+    border: 1px solid #999;
+    margin: 1em;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+}
+div.status p{
+    margin: 8px;
+    display: inline-block;
+}

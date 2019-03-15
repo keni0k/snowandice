@@ -18,7 +18,7 @@
                         <div class="col-xs-8">
                             <div class="input-group">
                                 <span class="input-group-addon">Статус</span>
-                                <input name="phone" autofocus="autofocus" type="text"
+                                <input name="name" autofocus="autofocus" type="text"
                                        class="form-control input-lg"
                                        placeholder="Статус" aria-label="Статус">
                             </div>
@@ -36,10 +36,10 @@
                 </div>
                 <div class="row">
                     <th:block th:unless="${statuses==null or statuses.size()==0}">
-                        <details th:each="status: ${statuses}" style="cursor: auto;">
-                            <summary th:text="${status.getName()}"
-                                     th:style="${'background: '+ status.getColor()}">Статус</summary>
-                        </details>
+                        <div th:each="status: ${statuses}" class="status" th:style="${'background: '+ status.getColor()}">
+                            <p th:text="${status.getName()}">Статус</p>
+                            <a th:href="@{/admin/del_status(id=${status.getId()})}" style="color: red">X</a>
+                        </div>
                     </th:block>
                 </div>
             </div>

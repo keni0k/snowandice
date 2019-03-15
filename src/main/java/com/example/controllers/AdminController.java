@@ -86,6 +86,6 @@ class AdminController {
         if (isAdmin){
             statusCallbackRepository.save(status);
         }
-        return widgetStatus(modelMap, principal);
+        return "redirect:/admin/statuses";
     }
 }

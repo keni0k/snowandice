@@ -19,7 +19,10 @@ package com.example.controllers;
 import com.example.jpa_services_impl.ImageServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.Image;
+import com.example.models.callbacks.Callback;
+import com.example.repo.CallbackRepository;
 import com.example.repo.ImageRepository;
+import com.example.repo.StatusCallbackRepository;
 import com.example.repo.UserRepository;
 import com.example.utils.Consts;
 import com.example.utils.Utils;
@@ -34,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 import static com.example.utils.Utils.*;
@@ -45,12 +49,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class MainController {
     private Utils utils;
     private ImageServiceImpl imageService;
+    private CallbackRepository callbackRepository;
+    private StatusCallbackRepository statusCallbackRepository;
 
     @Autowired
-    public MainController(ImageRepository imageRepository, UserRepository userRepository) {
+    public MainController(ImageRepository imageRepository, UserRepository userRepository,
+                          CallbackRepository callbackRepository, StatusCallbackRepository statusCallbackRepository) {
         UserServiceImpl userService = new UserServiceImpl(userRepository);
         imageService = new ImageServiceImpl(imageRepository);
         utils = new Utils(userService);
+        this.callbackRepository = callbackRepository;
+        this.statusCallbackRepository = statusCallbackRepository;
     }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
@@ -97,14 +106,13 @@ public class MainController {
 
 
     @RequestMapping(method = POST, value = "/get_phone")
-    public String getPhone(ModelMap modelMap,
+    public String getPhone(HttpServletRequest request,
                            @RequestParam("phone")String phone) {
         //TODO: need ajax
         if (phone.length()==17){
-            return "/"; //TODO:...
+            callbackRepository.save(new Callback(phone, statusCallbackRepository.getOne(3L)));
         }
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        return "/";
+        return "redirect:" + request.getHeader("referer");
     }
 
 

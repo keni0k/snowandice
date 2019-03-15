@@ -23,4 +23,9 @@ public class Callback {
     @JoinColumn(name = "id_of_status", nullable = false)
     private Status status;
 
+    public Callback(String phone, Status status){
+        this.phone = phone;
+        this.status = status;
+    }
+
 }

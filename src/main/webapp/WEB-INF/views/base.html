@@ -48,7 +48,7 @@
                     </th:block>
                     <th:block th:if="${isUserOrAdmin}">
                         <a th:if="${isAdmin}" href="https://cifraadmin.herokuapp.com" target="_blank">Админка </a>
-                        <span>| </span>
+                        <span>/ </span>
                         <a href="/users/account">
                             <i class="fa fa-user"></i> Аккаунт
                         </a>
@@ -196,6 +196,7 @@
     <script src="/resources/js/masked_input.min.js"></script>
     <script>$(document).ready(function () {
         $("#phone_number").mask("+7 (999) 999-9999");
+        $("#phone_callback").mask("+7 (999) 999-9999");
     });</script>
 <!--</th:block>-->
 

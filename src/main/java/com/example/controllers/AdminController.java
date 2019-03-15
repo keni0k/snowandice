@@ -59,6 +59,8 @@ class AdminController {
                 modelMap.addAttribute("callbacks", new ArrayList<Callback>().add(callbackRepository.getCallbackById(id)));
             } else if (status!=null) {
                 modelMap.addAttribute("callbacks", callbackRepository.getCallbacksByStatus(status));
+            } else {
+                modelMap.addAttribute("callbacks", callbackRepository.findAll());
             }
         }
         modelMap.addAttribute("utils", new UtilsForWeb());
@@ -84,7 +86,7 @@ class AdminController {
 
     @RequestMapping(value = "/del_status", method = RequestMethod.GET)
     public String delStatus(Principal principal, @RequestParam("id") long id) {
-        if (isAdmin(principal)){
+        if (isAdmin(principal) && id!=3){
             statusCallbackRepository.deleteById(id);
         }
         return "redirect:/admin/statuses";

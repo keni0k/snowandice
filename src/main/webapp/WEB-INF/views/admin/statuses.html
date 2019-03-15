@@ -48,7 +48,7 @@
                         <div th:each="status: ${statuses}" class="status"
                              th:style="${'background: '+ status.getColor()}">
                             <p th:text="${status.getName()}">Статус</p>
-                            <a th:href="@{/admin/del_status(id=${status.getId()})}" style="color: red">X</a>
+                            <a th:if="${status.getId()!=3}" th:href="@{/admin/del_status(id=${status.getId()})}" style="color: red">X</a>
                         </div>
                     </th:block>
                 </div>

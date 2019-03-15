@@ -1,7 +1,7 @@
 package com.example.utils;
 
-import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.User;
+import com.example.services.UserService;
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
@@ -33,9 +33,9 @@ import com.microsoft.azure.storage.blob.CloudBlockBlob;*/
 
 public class Utils {
 
-    UserServiceImpl userService;
+    UserService userService;
 
-    public Utils(UserServiceImpl userService) {
+    public Utils(UserService userService) {
         this.userService = userService;
     }
 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: header (~{::body},'admin_callbacks')}">
+
+<body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
+<div class="contacts-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container main-block">
+        <div class="row">
+            <!--/*@thymesVar id="statuses" type="java.util.List<com.example.models.callbacks.Status>"*/-->
+            <!--/*@thymesVar id="status" type="com.example.models.callbacks.Status"*/-->
+            <div class="col-md-10 col-lg-8 col-centred">
+                <div class="header mb-2">
+                    <h3>Статусы заказов обратного звонка</h3>
+                </div>
+                <div class="row">
+                    <form action="/admin/add_status" method="post">
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                <span class="input-group-addon">Статус</span>
+                                <input name="phone" autofocus="autofocus" type="text"
+                                       class="form-control input-lg"
+                                       placeholder="Статус" aria-label="Статус">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Цвет</span>
+                                <input name="color" autofocus="autofocus" type="text"
+                                       class="form-control input-lg"
+                                       placeholder="Цвет" aria-label="Цвет">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Добавить">
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <th:block th:unless="${statuses==null or statuses.size()==0}">
+                        <details th:each="status: ${statuses}" style="cursor: auto;">
+                            <summary th:text="${status.getName()}"
+                                     th:style="${'background: '+ status.getColor()}">Статус</summary>
+                        </details>
+                    </th:block>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

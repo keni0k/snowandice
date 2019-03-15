@@ -18,6 +18,8 @@ public interface UserService extends BaseService<User> {
 
     Boolean isPhoneFree(String login);
 
+    User getByEmail(String email);
+
     List<User> getByFilter(Integer type, String firstName, String lastName, Integer sortBy);
 
 }

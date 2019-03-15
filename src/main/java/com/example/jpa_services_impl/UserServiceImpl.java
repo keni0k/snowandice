@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    @Override
     public User getByEmail(String email) {
         email = email.toLowerCase();
         return userRepository.getUserByEmail(email);

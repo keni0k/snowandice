@@ -37,6 +37,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Optional;
 
 import static com.example.utils.Utils.*;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Slf4j
 @Controller
@@ -94,7 +95,20 @@ public class MainController {
         return "exchange_and_returns";
     }
 
-    @RequestMapping(value = "/upload_images", method = RequestMethod.POST)
+
+    @RequestMapping(method = POST, value = "/get_phone")
+    public String getPhone(ModelMap modelMap,
+                           @RequestParam("phone")String phone) {
+        //TODO: need ajax
+        if (phone.length()==17){
+            return "/"; //TODO:...
+        }
+        modelMap.addAttribute("utils", new UtilsForWeb());
+        return "/";
+    }
+
+
+    @RequestMapping(value = "/upload_images", method = POST)
     public @ResponseBody
     String uploadMultipleFileHandler(@RequestParam("img") MultipartFile[] files) {
 

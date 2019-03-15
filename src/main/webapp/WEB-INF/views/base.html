@@ -100,6 +100,8 @@
                     <li th:class="${menu}=='status'?'active':''"><a href="/orders/widget">Статус заказа/ремонта</a></li>
                     <li th:class="${menu}=='contacts'?'active':''"><a href="/contacts">Контакты</a></li>
                     <li th:if="${isAdmin}"><a href="https://cifraadmin.herokuapp.com" target="_blank">Админка</a></li>
+                    <li th:if="${isAdmin}" th:class="${menu}=='admin_statuses'?'active':''"><a href="/contacts">Сатусы</a></li>
+                    <li th:if="${isAdmin}" th:class="${menu}=='admin_callbacks'?'active':''"><a href="/contacts">Коллбэки</a></li>
                 </ul>
             </div>
         </div>

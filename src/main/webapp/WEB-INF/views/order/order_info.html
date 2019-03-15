@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/header :: header (~{::body},'order_info')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: header (~{::body},'order_info')}">
 
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <div class="contacts-area">

@@ -1065,6 +1065,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     height: 20px;
     text-decoration: none;
     font-size: 11px;
+    cursor: pointer;
 }
 
 .headerCallback a:hover{
@@ -1354,6 +1355,7 @@ main nav input[type=checkbox][disabled] {
 
 .mr-0 {margin-right: 0;}
 .ml-0 {margin-left: 0;}
+.mt-1 {margin-top: 1em;}
 .mb-2 {margin-bottom: 2em;}
 
 .centred {
@@ -1372,4 +1374,16 @@ main nav input[type=checkbox][disabled] {
 .single-shop-product image.product-img{
     display: inline;
     height: 120px;
+}
+
+div.politics details summary{
+    outline: none;
+    cursor: pointer;
+}
+
+div.politics details{
+    padding: 0 15px;
+}
+.inline{
+    display: inline;
 }

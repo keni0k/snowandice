@@ -84,8 +84,7 @@ public class OrderController {
                         .returnResponse().getEntity();
             }
 
-            log.info("Pages count: " + count);
-            log.info("Token: " + token.token);
+            log.info("Pages count: " + count + ", token: " + token.token);
 
             g = new Gson();
             return g.fromJson(EntityUtils.toString(get), RemOrders.class);

@@ -47,6 +47,8 @@
                         <a href="/users/registration"> Регистрация</a>-->
                     </th:block>
                     <th:block th:if="${isUserOrAdmin}">
+                        <a th:if="${isAdmin}" href="https://cifraadmin.herokuapp.com" target="_blank">Админка </a>
+                        <span>| </span>
                         <a href="/users/account">
                             <i class="fa fa-user"></i> Аккаунт
                         </a>
@@ -99,8 +101,7 @@
                     <li th:class="${menu}=='fix'?'active':''"><a href="/fix">Мастерская</a></li>
                     <li th:class="${menu}=='status'?'active':''"><a href="/orders/widget">Статус заказа/ремонта</a></li>
                     <li th:class="${menu}=='contacts'?'active':''"><a href="/contacts">Контакты</a></li>
-                    <li th:if="${isAdmin}"><a href="https://cifraadmin.herokuapp.com" target="_blank">Админка</a></li>
-                    <li th:if="${isAdmin}" th:class="${menu}=='admin_statuses'?'active':''"><a href="/admin/statuses">Сатусы</a></li>
+                    <li th:if="${isAdmin}" th:class="${menu}=='admin_statuses'?'active':''"><a href="/admin/statuses">Статусы</a></li>
                     <li th:if="${isAdmin}" th:class="${menu}=='admin_callbacks'?'active':''"><a href="/admin/callbacks">Коллбэки</a></li>
                 </ul>
             </div>

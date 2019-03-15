@@ -590,7 +590,6 @@ input[type="submit"], button[type=submit], a[type=submit] {
     background: none repeat scroll 0 0 #05318c;
     border: 1px solid #ddd;
     color: #fff;
-    padding: 11px 20px;
     text-transform: uppercase;
 }
 input[type="submit"]:hover, button[type=submit]:hover {background-color: #fff;color:#05318c}
@@ -1401,4 +1400,18 @@ div.status {
 div.status p{
     margin: 8px;
     display: inline-block;
+}
+.gone{
+    display: none;
+}
+.two-btns input.btn-block,a {
+    width: 49%;
+    margin-top: 0;
+    display: inline;
+}
+.actions{
+    text-align: end;
+}
+.actions i.fas{
+    margin: 12px;
 }

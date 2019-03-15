@@ -15,10 +15,6 @@
         width: 100px;
     }
 
-    input[type="submit"], button[type="submit"] {
-        padding: 11px 15px;
-    }
-
     .col-1, .col-2 {
         width: 293px;
     }
@@ -27,10 +23,6 @@
 
 /* Tablet Layout: 768px. */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-
-    .nav.navbar-nav {
-        margin-left: 186px;
-    }
 
     .user-menu, .header-right ul.list-inline {
         text-align: center;

@@ -84,6 +84,16 @@ class AdminController {
         return "redirect:/admin/statuses";
     }
 
+    @RequestMapping(value = "/edit_status", method = RequestMethod.GET)
+    public String editStatus(Principal principal, ModelMap modelMap,
+                             @RequestParam("id") long id) {
+        if (isAdmin(principal)){
+            modelMap.addAttribute("statuses", statusCallbackRepository.findAll());
+            modelMap.addAttribute("status", statusCallbackRepository.getOne(id));
+        }
+        return "admin/statuses";
+    }
+
     @RequestMapping(value = "/del_status", method = RequestMethod.GET)
     public String delStatus(Principal principal, @RequestParam("id") long id) {
         if (isAdmin(principal) && id!=3){

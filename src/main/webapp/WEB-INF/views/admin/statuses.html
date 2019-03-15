@@ -20,24 +20,31 @@
                             <div class="input-group">
                                 <span class="input-group-addon">Статус</span>
                                 <input name="name" autofocus="autofocus" type="text"
-                                       class="form-control input-lg"
+                                       class="form-control input-md" th:value="${status==null?'':status.getName()}"
                                        placeholder="Статус" aria-label="Статус">
                             </div>
                         </div>
                         <div class="col-xs-4">
                             <div class="input-group">
                                 <span class="input-group-addon">Цвет</span>
-                                <input name="color" autofocus="autofocus" type="text"
-                                       class="form-control input-lg"
+                                <input name="color" type="text"
+                                       class="form-control input-md" th:value="${status==null?'':status.getColor()}"
                                        placeholder="#000000" aria-label="#000000">
                             </div>
                         </div>
+                        <th:block th:if="${status!=null and status.getId()>0}">
+                            <input name="id" type="number"
+                                   class="gone" th:value="${status.getId()}">
+                        </th:block>
                     </div>
                     <br/>
                     <div class="row">
                         <div class="col-sm-8"></div>
-                        <div class="col-sm-4">
-                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Добавить">
+                        <div th:class="${(status!=null and status.getId()>0)?'col-sm-4 two-btns':'col-sm-4'}">
+                            <a type="reset" th:if="${status!=null and status.getId()>0}"
+                               class="btn btn-md btn-primary" href="/admin/statuses">Сброс</a>
+                            <input type="submit" class="btn btn-md btn-primary btn-block"
+                                   th:value="${(status!=null and status.getId()>0)?'Обновить':'Добавить'}">
                         </div>
                     </div>
                     <br/>
@@ -45,10 +52,15 @@
 
                 <div class="row">
                     <th:block th:unless="${statuses==null or statuses.size()==0}">
-                        <div th:each="status: ${statuses}" class="status"
+                        <div th:each="status: ${statuses}" class="status row"
                              th:style="${'background: '+ status.getColor()}">
-                            <p th:text="${status.getName()}">Статус</p>
-                            <a th:if="${status.getId()!=3}" th:href="@{/admin/del_status(id=${status.getId()})}" style="color: red">X</a>
+                            <div class="col-xs-7"><p th:text="${status.getName()}">Статус</p></div>
+                            <div class="col-xs-5 actions">
+                                <a th:href="@{/admin/edit_status(id=${status.getId()})}"><i
+                                        class="fas fa-edit"></i></a>
+                                <a th:if="${status.getId()!=3}" th:href="@{/admin/del_status(id=${status.getId()})}"><i
+                                        class="far fa-trash-alt"></i></a>
+                            </div>
                         </div>
                     </th:block>
                 </div>

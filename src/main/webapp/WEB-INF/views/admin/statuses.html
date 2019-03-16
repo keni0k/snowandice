@@ -16,7 +16,7 @@
 
                 <form action="/admin/add_status" method="post">
                     <div class="row">
-                        <div class="col-xs-8">
+                        <div class="col-xs-7">
                             <div class="input-group">
                                 <span class="input-group-addon">Статус</span>
                                 <input name="name" autofocus="autofocus" type="text"
@@ -24,7 +24,7 @@
                                        placeholder="Статус" aria-label="Статус">
                             </div>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-5">
                             <div class="input-group">
                                 <span class="input-group-addon">Цвет</span>
                                 <input name="color" type="text"
@@ -40,7 +40,7 @@
                     <br/>
                     <div class="row">
                         <div class="col-sm-8"></div>
-                        <div th:class="${(status!=null and status.getId()>0)?'col-sm-4 two-btns':'col-sm-4'}">
+                        <div th:class="${(status!=null and status.getId()>0)?'col-sm-5 two-btns':'col-sm-5'}">
                             <a type="reset" th:if="${status!=null and status.getId()>0}"
                                class="btn btn-md btn-primary" href="/admin/statuses">Сброс</a>
                             <input type="submit" class="btn btn-md btn-primary btn-block"
@@ -57,7 +57,7 @@
                             <div class="col-xs-7"><p th:text="${status.getName()}">Статус</p></div>
                             <div class="col-xs-5 actions">
                                 <a th:href="@{/admin/edit_status(id=${status.getId()})}"><i
-                                        class="fas fa-edit"></i></a>
+                                        th:class="${'fas fa-edit ' + (status.getId()==3?'eee':'')}"></i></a>
                                 <a th:if="${status.getId()!=3}" th:href="@{/admin/del_status(id=${status.getId()})}"><i
                                         class="far fa-trash-alt"></i></a>
                             </div>

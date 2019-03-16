@@ -9,7 +9,6 @@ import java.util.List;
 public interface LogRepository extends JpaRepository<Log, Long> {
 
     List<Log> getAllByLevel(int level);
-
     List<Log> getAllByUser(User user);
 
 }

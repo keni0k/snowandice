@@ -1,10 +1,13 @@
 package com.example.controllers;
 
+import com.example.jpa_services_impl.LogServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
+import com.example.models.Log;
 import com.example.models.User;
 import com.example.models.callbacks.Callback;
 import com.example.models.callbacks.Status;
 import com.example.repo.CallbackRepository;
+import com.example.repo.LogRepository;
 import com.example.repo.StatusCallbackRepository;
 import com.example.repo.UserRepository;
 import com.example.services.UserService;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Slf4j
 @Controller
@@ -29,15 +33,18 @@ import java.util.ArrayList;
 class AdminController {
 
     private UserService userService;
+    private LogServiceImpl logService; //TODO: LogService without impl
     private Utils utils;
     private CallbackRepository callbackRepository;
     private StatusCallbackRepository statusCallbackRepository;
 
     @Autowired
-    public AdminController(UserRepository userRepository, CallbackRepository callbackRepository, StatusCallbackRepository statusCallbackRepository) {
+    public AdminController(UserRepository userRepository, CallbackRepository callbackRepository,
+                           StatusCallbackRepository statusCallbackRepository, LogRepository logRepository) {
         this.callbackRepository = callbackRepository;
         this.statusCallbackRepository = statusCallbackRepository;
         this.userService = new UserServiceImpl(userRepository);
+        this.logService = new LogServiceImpl(logRepository);
         this.utils = new Utils(userService);
     }
 
@@ -132,7 +139,16 @@ class AdminController {
     @RequestMapping(value = "/del_status", method = RequestMethod.GET)
     public String delStatus(Principal principal, @RequestParam("id") long id) {
         if (isAdmin(principal) && id != 3) {
-            statusCallbackRepository.deleteById(id);
+            Status status = statusCallbackRepository.getOne(id);
+            String logDescription = "Коллбэк статус " + status.getName() + " (" + status.getId() + ") цвета " + status.getColor() + " был удален.";
+            Log log = Log.builder()
+                    .date(new Date())
+                    .level(Log.DELETE)
+                    .user(utils.getUser(principal))
+                    .description(logDescription)
+                    .build();
+            logService.add(log);
+            statusCallbackRepository.delete(status);
         }
         return "redirect:/admin/statuses";
     }

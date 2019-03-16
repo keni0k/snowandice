@@ -27,4 +27,10 @@ public class Log {
     @JoinColumn(name = "id_of_user", nullable = false)
     private User user;
     private Date date;
+
+    public static final int INFO = 0;
+    public static final int EDIT = 1;
+    public static final int WARN = 2;
+    public static final int DELETE = 3;
+    public static final int ERROR = 4;
 }

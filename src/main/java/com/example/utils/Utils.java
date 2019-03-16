@@ -138,6 +138,11 @@ public class Utils {
         else return null;
     }
 
+    public boolean isAdmin(Principal principal) {
+        User nowUser = getUser(principal);
+        return nowUser != null && nowUser.getType() == Consts.USER_ADMIN;
+    }
+
     public String getTime(){
         String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
         time = time.substring(0, time.indexOf('.'));

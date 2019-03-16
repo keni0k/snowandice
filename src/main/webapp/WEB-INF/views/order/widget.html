@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: header (~{::body},'order_widget')}">
 
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-<div class="contacts-area">
+<div class="contacts-area widget-fix">
     <div class="zigzag-bottom"></div>
     <div class="container main-block">
         <div class="row">
@@ -27,6 +27,21 @@
                             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Узнать">
                         </div>
                     </form>
+                </div>
+                <div class="row" th:if="${isAdmin}">
+                    <div class="col-sm-1 col-xs-2 filter"><span>Фильтр:</span></div>
+                    <div class="col-xs-2 dropdown filter-statuses">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Статусы
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <!--/*@thymesVar id="statuses" type="java.util.List<com.example.utils.remonlineAPI.Status>"*/-->
+                            <!--/*@thymesVar id="status" type="com.example.utils.remonlineAPI.Status"*/-->
+                            <a class="dropdown-item" href="#" th:href="@{/orders/widget}">Все статусы</a>
+                            <a class="dropdown-item" href="#" th:each="status:${statuses}" th:text="${status.getName()}"
+                               th:style="'background:'+${status.getColor()}" th:href="@{/orders/widget(status=${status.getId()})}">Action</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <th:block th:unless="${orders==null or orders.data==null or orders.data.size()==0}">
@@ -56,6 +71,7 @@
         </div>
     </div>
 </div>
+
 </body>
 
 </html>

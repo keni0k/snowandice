@@ -14,7 +14,7 @@
             <!--/*@thymesVar id="statusEditId" type="java.lang.Long"*/-->
             <div class="col-md-10 col-lg-8 col-centred">
                 <div class="header mb-2">
-                    <h3 th:if="${callback==null}">Заказы обратного звонка</h3>
+                    <h3 th:if="${callback==null}">Заказы обратного звонка (<a href="/admin/statuses">статусы коллбэков</a>)</h3>
                     <h3 th:if="${callback!=null}">Редактирование коллбэка</h3>
                 </div>
                 <div class="row" th:if="${callback==null}">
@@ -74,7 +74,22 @@
                 </form>
 
                 <div class="row" th:if="${statuses!=null and callback==null}">
-                    <div class="statuses centred">
+                    <div class="col-sm-1 col-xs-2 filter"><span>Фильтр:</span></div>
+                    <div class="col-xs-2 dropdown filter-statuses">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Статусы
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <!--/*@thymesVar id="statuses" type="java.util.List<com.example.utils.remonlineAPI.Status>"*/-->
+                            <!--/*@thymesVar id="status" type="com.example.utils.remonlineAPI.Status"*/-->
+                            <a class="dropdown-item" href="#" th:href="@{/admin/callbacks}">Все статусы</a>
+                            <a class="dropdown-item" href="#" th:each="status:${statuses}" th:text="${status.getName()}"
+                               th:style="'background:'+${status.getColor()}"
+                               th:href="@{/admin/callbacks(status_id=${status.getId()})}">Action</a>
+                        </div>
+                    </div>
+                    <!--<div class="statuses centred">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label th:class="${'btn btn-secondary'+(statusId==null?' active':'')}"
                                    onclick="location.href='/admin/callbacks'" style="background: #e6e6e6">
@@ -89,7 +104,7 @@
                                        th:checked="${statusId!=null and statusId==status.getId()}">
                             </label>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <th:block th:unless="${callbacks==null or callbacks.size()==0}">
                     <div class="status row" th:each="callback: ${callbacks}"

@@ -3,17 +3,17 @@ package com.example.controllers;
 import com.example.jpa_services_impl.OrderServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.Props;
-import com.example.models.User;
 import com.example.repo.CartLineInfoRepository;
 import com.example.repo.OrderRepository;
 import com.example.repo.PropsRepository;
 import com.example.repo.UserRepository;
 import com.example.services.UserService;
-import com.example.utils.Consts;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
 import com.example.utils.remonlineAPI.RemOrders;
 import com.example.utils.remonlineAPI.RemToken;
+import com.example.utils.remonlineAPI.Status;
+import com.example.utils.remonlineAPI.Statuses;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import lombok.extern.slf4j.Slf4j;
@@ -32,13 +32,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @Slf4j
 @Controller
 @RequestMapping("/orders")
 public class OrderController {
 
-    private static final String BASE_URL = "https://api.remonline.ru/order/?token=";
+    private static final String BASE_URL = "https://api.remonline.ru/";
 
     private OrderServiceImpl orderService;
     private UserService userService;
@@ -54,18 +55,24 @@ public class OrderController {
         props = propsRepository.getPropsById(1);
     }
 
-    private RemOrders getOrders(String phone, Integer page, Integer id) {
+    private String getToken() throws IOException {
+        HttpEntity post = Request.Post("https://api.remonline.ru/token/new").connectTimeout(2000).useExpectContinue()
+                .bodyForm(Form.form().add("api_key", "c78e141c0c4247eab658f2a6e39ba920").build())
+                .execute()
+                .returnResponse().getEntity();
+        Gson g = new Gson();
+        RemToken token = g.fromJson(EntityUtils.toString(post), RemToken.class);
+        return token.token;
+    }
+
+    private RemOrders getOrders(String phone, Integer page, Integer id, Integer statusId) {
         try {
-            HttpEntity post = Request.Post("https://api.remonline.ru/token/new").connectTimeout(2000).useExpectContinue()
-                    .bodyForm(Form.form().add("api_key", "c78e141c0c4247eab658f2a6e39ba920").build())
-                    .execute()
-                    .returnResponse().getEntity();
-            Gson g = new Gson();
-            RemToken token = g.fromJson(EntityUtils.toString(post), RemToken.class);
-            String url = BASE_URL + token.token;
+            String token = getToken();
+            String url = BASE_URL + "order/?token=" + token;
             url += (phone != null) ? ("&client_phones[]=" + phone.replaceAll(" ", "")) : "";
             url += (page != null) ? ("&page=" + page) : "";
             url += (id != null) ? ("&label_id=" + id) : "";
+            url += (statusId != null) ? ("&statuses[]=" + statusId) : "";
             HttpEntity get = Request.Get(url)
                     .connectTimeout(2000)
                     .socketTimeout(2000)
@@ -85,10 +92,26 @@ public class OrderController {
                         .returnResponse().getEntity();
             }
 
-            log.info("Pages count: " + count + ", token: " + token.token);
+            log.info("Orders count: " + count + ", token: " + token);
 
-            g = new Gson();
+            Gson g = new Gson();
             return g.fromJson(EntityUtils.toString(get), RemOrders.class);
+        } catch (JsonSyntaxException | IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private List<Status> getStatuses() {
+        try {
+            String token = getToken();
+            String url = BASE_URL + "statuses/?token=" + token;
+            HttpEntity get = Request.Get(url)
+                    .connectTimeout(2000)
+                    .socketTimeout(2000)
+                    .execute()
+                    .returnResponse().getEntity();
+            return new Gson().fromJson(EntityUtils.toString(get), Statuses.class).data;
         } catch (JsonSyntaxException | IOException | ParseException e) {
             e.printStackTrace();
         }
@@ -99,8 +122,9 @@ public class OrderController {
     @ResponseBody
     public String customStatus(@RequestParam(value = "phone", required = false) String phone,
                                @RequestParam(value = "page", required = false) Integer page,
-                               @RequestParam(value = "id", required = false) Integer id) {
-        RemOrders remOrders = getOrders(phone, page, id);
+                               @RequestParam(value = "id", required = false) Integer id,
+                               @RequestParam(value = "status", required = false) Integer statusId) {
+        RemOrders remOrders = getOrders(phone, page, id, statusId);
         if (remOrders == null) return "NULL";
         Gson g = new Gson();
         return g.toJson(remOrders);
@@ -130,11 +154,9 @@ public class OrderController {
                                @RequestParam(value = "phone", required = false) String phone,
                                @RequestParam(value = "page", required = false) Integer page,
                                @RequestParam(value = "id", required = false) Integer id,
+                               @RequestParam(value = "status", required = false) Integer statusId,
                                Principal principal) {
-        User nowUser = utils.getUser(principal);
-        boolean isAdmin = false;
-        if (nowUser != null && nowUser.getType() == Consts.USER_ADMIN)
-            isAdmin = true;
+        boolean isAdmin = utils.isAdmin(principal);
         if (phone != null)
             phone = digits(phone);
         if ((phone != null && phone.length() >= props.getCountDigitsForWidget() && !isZeros(phone)) || isAdmin) {
@@ -142,7 +164,7 @@ public class OrderController {
                 page = null;
                 id = null;
             }
-            RemOrders remOrders = getOrders(phone, page, id);
+            RemOrders remOrders = getOrders(phone, page, id, statusId);
             if (remOrders != null && remOrders.data != null) {
                 try {
                     remOrders.data.sort((o1, o2) -> Long.compare(o2.created_at, o1.created_at));
@@ -155,6 +177,7 @@ public class OrderController {
             modelMap.addAttribute("orders", null);
         }
         modelMap.addAttribute("phone", phone != null ? phone : "");
+        modelMap.addAttribute("statuses", isAdmin ? getStatuses() : null);
         modelMap.addAttribute("utils", new UtilsForWeb());
         return "order/widget";
     }

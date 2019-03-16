@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-sm-4 col-md-3" style="padding-top: 5px;">
             <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'i0')" id="defaultOpen">История заказов</button>
+                <button class="tablinks" onclick="openCity(event, 'i0')" id="defaultOpen">Логгирование действий</button>
                 <button class="tablinks" onclick="openCity(event, 'i1')">Общая информация</button>
                 <button class="tablinks" onclick="openCity(event, 'i2')">Ваш адрес</button>
                 <button class="tablinks" onclick="openCity(event, 'i3')">Смена пароля</button>
@@ -31,25 +31,22 @@
                 <table class="table-history">
                     <tr>
                         <th>№</th>
-                        <th>Статус</th>
-                        <th>Доставка</th>
-                        <th>Дата заказа</th>
-                        <th>Стоимость</th>
+                        <th>Дата и время события</th>
+                        <th>Событие</th>
                     </tr>
-                    <!--/*@thymesVar id="orders" type="List<com.example.models.order.Order>"*/-->
+                    <tr>
+                        <th>1</th>
+                        <th>16.03.2019 16:22</th>
+                        <th>Какое-то событие (логгирование пока недоступно)</th>
+                    </tr>
 
-                    <tr th:each="order : ${orders}">
-                        <!--/*@thymesVar id="order" type="com.example.models.order.Order"*/-->
-                        <td><a th:href="@{/orders/get(id=${order.getId()})}" th:text="${order.getId()}"></a></td>
-                        <td th:text="${order.getTypeToString()}"></td>
-                        <td th:text="${order.getTypeOfShipToString()}"></td>
-                        <td th:text="${order.getDateByRUFormat()}"></td>
-                        <td th:text="${order.getTotalPrice()} + ' ₽'"></td>
-                    </tr>
-                    <!--<tr><td><a href="#">0001</a></td><td>Доставлено</td><td>SPSR</td><td>12.08.17</td><td>₽350</td></tr>
-                    <tr><td><a href="#">0022</a></td><td>Доставлено</td><td>Курьер</td><td>13.09.17</td><td>₽500</td></tr>
-                    <tr><td><a href="#">0043</a></td><td>Отменен</td><td>Самовывоз</td><td>01.12.17</td><td>₽2050</td></tr>
-                    <tr><td><a href="#">0121</a></td><td>В пути</td><td>Почта России</td><td>18.03.18</td><td>₽210</td></tr>-->
+                    <!--/*@thymesVar id="logs" type="List<com.example.models.Log>"*/-->
+                    <!--<tr th:each="log : ${logs}">
+                        &lt;!&ndash;/*@thymesVar id="log" type="com.example.models.Log"*/&ndash;&gt;
+                        <td th:text="${log.getId()}"></td>
+                        <td th:text="${log.getDateTime()}"></td>
+                        <td th:text="${log.getDescription()}"></td>
+                    </tr>-->
                 </table>
             </div>
 

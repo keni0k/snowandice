@@ -1404,11 +1404,6 @@ div.status p{
 .gone{
     display: none;
 }
-.two-btns input.btn-block,.two-btns a {
-    width: 49%;
-    margin-top: 0;
-    display: inline;
-}
 .actions{
     text-align: end;
 }
@@ -1417,4 +1412,17 @@ div.status p{
 }
 .eee {
     color: #e6e6e6;
+}
+.statuses{
+    height: 4em;
+    position: relative;
+}
+.statuses .btn.active, .edit_callback .btn.active{
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.7);
+}
+.actions-callback a{
+    color: #e6e6e6;
+}
+.edit_callback {
+    margin-top: 1em;
 }

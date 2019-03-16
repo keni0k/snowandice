@@ -8,12 +8,16 @@
     <div class="container main-block">
         <div class="row">
             <!--/*@thymesVar id="callbacks" type="java.util.List<com.example.models.callbacks.Callback>"*/-->
+            <!--/*@thymesVar id="statuses" type="java.util.List<com.example.models.callbacks.Status>"*/-->
             <!--/*@thymesVar id="callback" type="com.example.models.callbacks.Callback"*/-->
+            <!--/*@thymesVar id="statusId" type="java.lang.Long"*/-->
+            <!--/*@thymesVar id="statusEditId" type="java.lang.Long"*/-->
             <div class="col-md-10 col-lg-8 col-centred">
                 <div class="header mb-2">
-                    <h3>Заказы обратного звонка</h3>
+                    <h3 th:if="${callback==null}">Заказы обратного звонка</h3>
+                    <h3 th:if="${callback!=null}">Редактирование коллбэка</h3>
                 </div>
-                <div class="row">
+                <div class="row" th:if="${callback==null}">
                     <form action="/admin/callbacks" method="get">
                         <div class="col-xs-8">
                             <div class="input-group">
@@ -29,14 +33,78 @@
                         </div>
                     </form>
                 </div>
-                <div class="row">
-                    <th:block th:unless="${callbacks==null or callbacks.size()==0}">
-                        <details th:each="callback: ${callbacks}" style="cursor: auto;">
-                            <summary th:text="${callback.getId() + ': ' + callback.getPhone() + ' (' + callback.getStatus().getName() + ')'}"
-                                     th:style="${callback.getStatus().getColor()!=null?'background: '+ callback.getStatus().getColor():''}">Номер телефона</summary>
-                        </details>
-                    </th:block>
+
+                <form action="/admin/edit_callback" method="post" th:if="${callback!=null}" class="edit_callback">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label th:class="${'btn btn-secondary'+(status.getId()==callback.getStatus().getId()?' active':'')}"
+                                       th:each="status: ${statuses}" th:style="${'background: '+status.getColor()}">
+                                    <span th:text="${status.getName()}"></span>
+                                    <input type="radio" name="status" th:id="${'edit'+status.getId()}"
+                                           autocomplete="off"
+                                           th:checked="${callback.getStatus().getId()==status.getId()}"
+                                           th:value="${status.getId()}">
+                                </label>
+                            </div>
+                            <th:block>
+                                <input name="id" type="number"
+                                       class="gone" th:value="${callback.getId()}">
+                            </th:block>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="col-xs-7">
+                        <div class="input-group">
+                            <span class="input-group-addon">Телефон</span>
+                            <input name="phone" autofocus="autofocus" type="text"
+                                   class="form-control input-md" th:value="${callback.getPhone()}"
+                                   placeholder="Телефон" aria-label="Телефон">
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <a type="reset" class="btn btn-md btn-primary btn-block" href="/admin/statuses">Сброс</a>
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="submit"
+                               class="btn btn-md btn-primary btn-block"
+                               value="Обновить">
+                    </div>
+                    <br/>
+                </form>
+
+                <div class="row" th:if="${statuses!=null and callback==null}">
+                    <div class="statuses centred">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label th:class="${'btn btn-secondary'+(statusId==null?' active':'')}"
+                                   onclick="location.href='/admin/callbacks'" style="background: #e6e6e6">
+                                <input type="radio" name="options" id="option" autocomplete="off"
+                                       th:checked="${statusId==null}"> All
+                            </label>
+                            <label th:class="${'btn btn-secondary'+((statusId!=null and status.getId()==statusId)?' active':'')}"
+                                   th:each="status: ${statuses}" th:style="${'background: '+status.getColor()}"
+                                   th:onclick="'location.href=\'/admin/callbacks?status_id='+${status.getId()}+'\''">
+                                <span th:text="${status.getName()}"></span>
+                                <input type="radio" name="options" th:id="${'option'+status.getId()}" autocomplete="off"
+                                       th:checked="${statusId!=null and statusId==status.getId()}">
+                            </label>
+                        </div>
+                    </div>
                 </div>
+                <th:block th:unless="${callbacks==null or callbacks.size()==0}">
+                    <div class="status row" th:each="callback: ${callbacks}"
+                         th:style="${'background: '+ callback.getStatus().getColor()}">
+                        <div class="col-xs-7">
+                            <p th:text="${callback.getPhone() + ' (' + callback.getStatus().getName() + ')'}">
+                                Номер телефона
+                            </p>
+                        </div>
+                        <div class="col-xs-5 actions actions-callback">
+                            <a th:href="@{/admin/edit_callback(id=${callback.getId()})}"><i class="fas fa-edit"></i></a>
+                            <a th:href="@{/admin/del_callback(id=${callback.getId()})}"><i class="far fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </th:block>
             </div>
 
         </div>

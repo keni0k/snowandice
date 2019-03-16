@@ -34,31 +34,33 @@ class AdminController {
     private StatusCallbackRepository statusCallbackRepository;
 
     @Autowired
-    public AdminController(UserRepository userRepository, CallbackRepository callbackRepository, StatusCallbackRepository statusCallbackRepository){
+    public AdminController(UserRepository userRepository, CallbackRepository callbackRepository, StatusCallbackRepository statusCallbackRepository) {
         this.callbackRepository = callbackRepository;
         this.statusCallbackRepository = statusCallbackRepository;
         this.userService = new UserServiceImpl(userRepository);
         this.utils = new Utils(userService);
     }
 
-    private boolean isAdmin(Principal principal){
+    private boolean isAdmin(Principal principal) {
         User nowUser = utils.getUser(principal);
         return nowUser != null && nowUser.getType() == Consts.USER_ADMIN;
     }
 
     @RequestMapping(value = "/callbacks", method = RequestMethod.GET)
     public String widgetCallback(ModelMap modelMap,
-                               @RequestParam(value = "phone", required = false) String phone,
-                               @RequestParam(value = "id", required = false) Integer id,
-                               @RequestParam(value = "status", required = false) Integer status,
-                               Principal principal) {
-        if (isAdmin(principal)){
-            if (phone!=null){
+                                 @RequestParam(value = "phone", required = false) String phone,
+                                 @RequestParam(value = "id", required = false) Integer id,
+                                 @RequestParam(value = "status_id", required = false) Long status,
+                                 Principal principal) {
+        if (isAdmin(principal)) {
+            modelMap.addAttribute("statuses", statusCallbackRepository.findAll());
+            if (phone != null) {
                 modelMap.addAttribute("callbacks", callbackRepository.getCallbacksByPhone(phone));
-            } else if (id!=null) {
+            } else if (id != null) {
                 modelMap.addAttribute("callbacks", new ArrayList<Callback>().add(callbackRepository.getCallbackById(id)));
-            } else if (status!=null) {
-                modelMap.addAttribute("callbacks", callbackRepository.getCallbacksByStatus(status));
+            } else if (status != null) {
+                modelMap.addAttribute("callbacks", callbackRepository.getCallbacksByStatus(statusCallbackRepository.getOne(status)));
+                modelMap.addAttribute("statusId", status);
             } else {
                 modelMap.addAttribute("callbacks", callbackRepository.findAll());
             }
@@ -69,7 +71,7 @@ class AdminController {
 
     @RequestMapping(value = "/statuses", method = RequestMethod.GET)
     public String widgetStatus(ModelMap modelMap, Principal principal) {
-        if (isAdmin(principal)){
+        if (isAdmin(principal)) {
             modelMap.addAttribute("statuses", statusCallbackRepository.findAll());
         }
         modelMap.addAttribute("utils", new UtilsForWeb());
@@ -78,7 +80,7 @@ class AdminController {
 
     @RequestMapping(value = "/add_status", method = RequestMethod.POST)
     public String addStatus(Principal principal, @Valid Status status) {
-        if (isAdmin(principal)){
+        if (isAdmin(principal)) {
             statusCallbackRepository.save(status);
         }
         return "redirect:/admin/statuses";
@@ -87,16 +89,49 @@ class AdminController {
     @RequestMapping(value = "/edit_status", method = RequestMethod.GET)
     public String editStatus(Principal principal, ModelMap modelMap,
                              @RequestParam("id") long id) {
-        if (isAdmin(principal)){
+        if (isAdmin(principal)) {
             modelMap.addAttribute("statuses", statusCallbackRepository.findAll());
             modelMap.addAttribute("status", statusCallbackRepository.getOne(id));
         }
         return "admin/statuses";
     }
 
+    @RequestMapping(value = "/edit_callback", method = RequestMethod.GET)
+    public String editCallback(Principal principal, ModelMap modelMap,
+                               @RequestParam("id") long id) {
+        if (isAdmin(principal)) {
+            modelMap.addAttribute("statuses", statusCallbackRepository.findAll());
+            modelMap.addAttribute("callback", callbackRepository.getOne(id));
+        }
+        return "admin/callbacks";
+    }
+
+    @RequestMapping(value = "/edit_callback", method = RequestMethod.POST)
+    public String editCallbackPost(Principal principal,
+                                   @RequestParam("id") long id,
+                                   @RequestParam("status") long statusId,
+                                   @RequestParam("phone") String phone) {
+        if (isAdmin(principal)) {
+            Callback callback = callbackRepository.getOne(id);
+            callback.setPhone(phone);
+            callback.setStatus(statusCallbackRepository.getOne(statusId));
+            callbackRepository.save(callback);
+        }
+        return "redirect:/admin/callbacks";
+    }
+
+
+    @RequestMapping(value = "/del_callback", method = RequestMethod.GET)
+    public String delCallback(Principal principal, @RequestParam("id") long id) {
+        if (isAdmin(principal)) {
+            callbackRepository.deleteById(id);
+        }
+        return "redirect:/admin/callbacks";
+    }
+
     @RequestMapping(value = "/del_status", method = RequestMethod.GET)
     public String delStatus(Principal principal, @RequestParam("id") long id) {
-        if (isAdmin(principal) && id!=3){
+        if (isAdmin(principal) && id != 3) {
             statusCallbackRepository.deleteById(id);
         }
         return "redirect:/admin/statuses";

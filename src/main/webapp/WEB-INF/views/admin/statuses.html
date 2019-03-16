@@ -39,31 +39,31 @@
                     </div>
                     <br/>
                     <div class="row">
-                        <div class="col-sm-8"></div>
-                        <div th:class="${(status!=null and status.getId()>0)?'col-sm-5 two-btns':'col-sm-5'}">
-                            <a type="reset" th:if="${status!=null and status.getId()>0}"
-                               class="btn btn-md btn-primary" href="/admin/statuses">Сброс</a>
-                            <input type="submit" class="btn btn-md btn-primary btn-block"
+                        <div class="col-sm-7"></div>
+                        <div class="col-sm-2" th:if="${status!=null and status.getId()>0}">
+                            <a type="reset" class="btn btn-md btn-primary btn-block" href="/admin/statuses">Сброс</a>
+                        </div>
+                        <div th:class="${'col-sm-'+((status!=null and status.getId()>0)?'3':'5')}">
+                            <input type="submit"
+                                   class="btn btn-md btn-primary btn-block"
                                    th:value="${(status!=null and status.getId()>0)?'Обновить':'Добавить'}">
                         </div>
                     </div>
                     <br/>
                 </form>
 
-                <div class="row">
-                    <th:block th:unless="${statuses==null or statuses.size()==0}">
-                        <div th:each="status: ${statuses}" class="status row"
-                             th:style="${'background: '+ status.getColor()}">
-                            <div class="col-xs-7"><p th:text="${status.getName()}">Статус</p></div>
-                            <div class="col-xs-5 actions">
-                                <a th:href="@{/admin/edit_status(id=${status.getId()})}"><i
-                                        th:class="${'fas fa-edit ' + (status.getId()==3?'eee':'')}"></i></a>
-                                <a th:if="${status.getId()!=3}" th:href="@{/admin/del_status(id=${status.getId()})}"><i
-                                        class="far fa-trash-alt"></i></a>
-                            </div>
+                <th:block th:unless="${statuses==null or statuses.size()==0}">
+                    <div th:each="status: ${statuses}" class="status row"
+                         th:style="${'background: '+ status.getColor()}">
+                        <div class="col-xs-7"><p th:text="${status.getName()}">Статус</p></div>
+                        <div class="col-xs-5 actions">
+                            <a th:href="@{/admin/edit_status(id=${status.getId()})}"><i
+                                    th:class="${'fas fa-edit ' + (status.getId()==3?'eee':'')}"></i></a>
+                            <a th:if="${status.getId()!=3}" th:href="@{/admin/del_status(id=${status.getId()})}"><i
+                                    class="far fa-trash-alt"></i></a>
                         </div>
-                    </th:block>
-                </div>
+                    </div>
+                </th:block>
             </div>
 
         </div>

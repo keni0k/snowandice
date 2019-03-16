@@ -27,11 +27,4 @@ public class Log {
     @JoinColumn(name = "id_of_user", nullable = false)
     private User user;
     private Date date;
-/*create table log
-(
-	id serial not null,
-	level int default 0 not null,
-	description text not null,
-	date date
-);*/
 }

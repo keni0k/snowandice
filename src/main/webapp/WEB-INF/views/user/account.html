@@ -21,7 +21,6 @@
             <div class="tab">
                 <button class="tablinks" onclick="openCity(event, 'i0')" id="defaultOpen">Логгирование</button>
                 <button class="tablinks" onclick="openCity(event, 'i1')">Общая информация</button>
-                <button class="tablinks" onclick="openCity(event, 'i2')">Ваш адрес</button>
                 <button class="tablinks" onclick="openCity(event, 'i3')">Смена пароля</button>
             </div>
         </div>
@@ -74,57 +73,6 @@
                         <span class="input-group-addon">Номер телефона</span>
                         <input name="phone_number" th:value="${user.getPhoneNumber()}" type="text"
                                class="form-control input-md" required="">
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon">Дата рождения</span>
-                        <input name="birthday" th:value="${user.getBirthday()}" type="date"
-                               class="form-control input-md">
-                    </div>
-                    <br/>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="subscription"
-                                   style="margin-left: -20px; visibility: visible; left:20px;"
-                                   th:checked="${user.isSubscription()}"
-                                   value="true"><span>Подписка на новости и акции</span>
-                        </label>
-                    </div>
-                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить">
-                </form>
-            </div>
-
-            <div id="i2" class="tabcontent">
-                <form action="/users/edit_address" method="post" th:with="address = ${user.getListOfAddress()}">
-                    <!--/*@thymesVar id="address" type="java.lang.String[]"*/-->
-                    <div class="input-group">
-                        <span class="input-group-addon">Регион *</span>
-                        <input name="region" type="text" class="form-control input-md"
-                               required="" th:value="${address[1]}">
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon">Район</span>
-                        <input name="district" type="text" class="form-control input-md"
-                               th:value="${address[2]}">
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon">Населенный пункт *</span>
-                        <input name="city" type="text" class="form-control input-md"
-                               required="" th:value="${address[3]}">
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon">Улица, дом, квартира *</span>
-                        <input name="address" type="text" class="form-control input-md"
-                               required="" th:value="${address[4]}">
-                    </div>
-                    <br/>
-                    <div class="input-group">
-                        <span class="input-group-addon">Индекс *</span>
-                        <input name="postcode" type="text" class="form-control input-md"
-                               required="" th:value="${address[5]}">
                     </div>
                     <br/>
                     <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить">

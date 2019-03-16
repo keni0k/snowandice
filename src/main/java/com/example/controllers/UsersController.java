@@ -113,8 +113,6 @@ public class UsersController {
                            @RequestParam("first_name") String firstName,
                            @RequestParam("last_name") String lastName,
                            @RequestParam("phone_number") String phoneNumber,
-                           @RequestParam(value = "birthday", required = false)
-                                       String birthday,
                            @RequestParam(value = "subscription", required = false) Boolean subscription){
         User user = utils.getUser(principal);
         modelMap.addAttribute("utils", new UtilsForWeb());
@@ -123,7 +121,6 @@ public class UsersController {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setPhoneNumber(phoneNumber);
-        user.setBirthday(birthday);
         user.setSubscription(subscription);
         userService.update(user);
         return account(modelMap, principal);

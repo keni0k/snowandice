@@ -289,6 +289,10 @@
         padding: 0 5px;
     }
 
+    .statuses.centred{
+        margin-top: 2em;
+    }
+
 }
 
 /* Wide Mobile Layout: 480px. */

@@ -33,19 +33,14 @@
                         <th>Дата и время события</th>
                         <th>Событие</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>16.03.2019 16:22</td>
-                        <td>Какое-то событие (логгирование пока недоступно)</td>
-                    </tr>
-
                     <!--/*@thymesVar id="logs" type="List<com.example.models.Log>"*/-->
-                    <!--<tr th:each="log : ${logs}">
-                        &lt;!&ndash;/*@thymesVar id="log" type="com.example.models.Log"*/&ndash;&gt;
+                    <tr th:each="log : ${logs}">
+                        <!--/*@thymesVar id="log" type="com.example.models.Log"*/-->
                         <td th:text="${log.getId()}"></td>
-                        <td th:text="${log.getDateTime()}"></td>
+                        <!--/*@thymesVar id="utils" type="com.example.utils.UtilsForWeb"*/-->
+                        <td th:text="${utils.getDateFormat(log.getDate())}"></td>
                         <td th:text="${log.getDescription()}"></td>
-                    </tr>-->
+                    </tr>
                 </table>
             </div>
 

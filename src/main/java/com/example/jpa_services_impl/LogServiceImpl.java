@@ -35,10 +35,10 @@ public class LogServiceImpl {
         return logRepository.findAll();
     }
 
-    List<Log> getAllByLevel(int level){
+    public List<Log> getAllByLevel(int level){
         return logRepository.getAllByLevel(level);
     }
-    List<Log> getAllByUser(User user){
+    public List<Log> getAllByUser(User user){
         return logRepository.getAllByUser(user);
     }
 

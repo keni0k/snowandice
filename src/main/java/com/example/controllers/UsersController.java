@@ -1,7 +1,9 @@
 package com.example.controllers;
 
+import com.example.jpa_services_impl.LogServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.User;
+import com.example.repo.LogRepository;
 import com.example.repo.UserRepository;
 import com.example.utils.Consts;
 import com.example.utils.MessageUtil;
@@ -42,12 +44,15 @@ public class UsersController {
     private Utils utils;
     private UserServiceImpl userService;
     private final MessageSource messageSource;
+    private LogServiceImpl logService; //TODO: LogService without impl
 
     @Autowired
-    public UsersController(UserRepository userRepository, MessageSource messageSource){
+    public UsersController(UserRepository userRepository, MessageSource messageSource,
+                           LogRepository logRepository){
         userService = new UserServiceImpl(userRepository);
         this.messageSource = messageSource;
         utils = new Utils(userService);
+        this.logService = new LogServiceImpl(logRepository);
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -56,7 +61,7 @@ public class UsersController {
         model.addAttribute("utils", new UtilsForWeb());
         return "user/registration";
     }
-
+    //TODO: log
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String signUp(@ModelAttribute("insertUser") @Valid User person,
                          BindingResult result,
@@ -129,7 +134,7 @@ public class UsersController {
         model.addAttribute("user", user);
         model.addAttribute("consts", new Consts());
         model.addAttribute("utils", new UtilsForWeb());
-        model.addAttribute("logs", 123);//TODO: logService
+        model.addAttribute("logs", logService.getAllByUser(user));//TODO: logService
         return "user/account";
     }
 
@@ -153,7 +158,7 @@ public class UsersController {
         response = client.post(email);
         return response.getData() + " " + response.getStatus();
     }
-
+    //TODO: log
     @RequestMapping(value = "/add_admin", method = RequestMethod.GET)
     public String addAdmin(@RequestParam("email") String email, Principal principal, ModelMap modelMap){
         User nowUser = utils.getUser(principal);

@@ -84,7 +84,7 @@ class AdminController {
         modelMap.addAttribute("utils", new UtilsForWeb());
         return "admin/statuses";
     }
-
+//TODO: log
     @RequestMapping(value = "/add_status", method = RequestMethod.POST)
     public String addStatus(Principal principal, @Valid Status status) {
         if (isAdmin(principal)) {
@@ -112,7 +112,7 @@ class AdminController {
         }
         return "admin/callbacks";
     }
-
+    //TODO: log
     @RequestMapping(value = "/edit_callback", method = RequestMethod.POST)
     public String editCallbackPost(Principal principal,
                                    @RequestParam("id") long id,
@@ -127,7 +127,7 @@ class AdminController {
         return "redirect:/admin/callbacks";
     }
 
-
+    //TODO: log
     @RequestMapping(value = "/del_callback", method = RequestMethod.GET)
     public String delCallback(Principal principal, @RequestParam("id") long id) {
         if (isAdmin(principal)) {
@@ -140,15 +140,15 @@ class AdminController {
     public String delStatus(Principal principal, @RequestParam("id") long id) {
         if (isAdmin(principal) && id != 3) {
             Status status = statusCallbackRepository.getOne(id);
-            String logDescription = "Коллбэк статус " + status.getName() + " (" + status.getId() + ") цвета " + status.getColor() + " был удален.";
+            String logDescription = "Коллбэк статус \"" + status.getName() + "\" (id = " + status.getId() + ") цвета " + status.getColor() + " был удален.";
             Log log = Log.builder()
                     .date(new Date())
                     .level(Log.DELETE)
                     .user(utils.getUser(principal))
                     .description(logDescription)
                     .build();
-            logService.add(log);
             statusCallbackRepository.delete(status);
+            logService.add(log);
         }
         return "redirect:/admin/statuses";
     }

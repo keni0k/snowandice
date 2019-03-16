@@ -1404,7 +1404,7 @@ div.status p{
 .gone{
     display: none;
 }
-.two-btns input.btn-block,a {
+.two-btns input.btn-block,.two-btns a {
     width: 49%;
     margin-top: 0;
     display: inline;

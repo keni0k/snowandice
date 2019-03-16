@@ -1426,3 +1426,7 @@ div.status p{
 .edit_callback {
     margin-top: 1em;
 }
+
+.status.row .col-xs-5.actions{
+    padding: 0 15px;
+}

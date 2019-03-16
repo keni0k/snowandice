@@ -20,9 +20,9 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 /*import com.microsoft.azure.storage.CloudStorageAccount;
@@ -102,30 +102,6 @@ public class Utils {
         blob1.uploadFromFile(path);
     }
 
-    public static String list(String obj, List arrayList, String authKey, String AUTH_KEY){
-        StringBuilder stringBuilder = new StringBuilder("{ \""+obj+"\": [");
-        if (authKey.equals(AUTH_KEY)) {
-            for (int i = 0; i < arrayList.size(); i++) {
-                stringBuilder.append(arrayList.get(i));
-                if (arrayList.size() - i > 1) stringBuilder.append(",\n");
-            }
-        }
-        stringBuilder.append("]}");
-        return stringBuilder.toString();
-    }
-
-    public static int localeToLang(Locale locale){
-        int lang;
-        switch (locale.getLanguage()){
-            case "en": lang = Consts.LANGUAGE_EN; break;
-            case "fr": lang = Consts.LANGUAGE_EN; break;
-            case "de": lang = Consts.LANGUAGE_EN; break;
-            case "it": lang = Consts.LANGUAGE_EN; break;
-            default: lang = Consts.LANGUAGE_RU;
-        }
-        return lang;
-    }
-
     public User getUser(Principal principal){
         if (principal!=null) {
             User user = null;
@@ -160,6 +136,11 @@ public class Utils {
             exception.printStackTrace();
         }
         return null;
+    }
+
+    public String getDateFormat(Date date){
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss a zzz");
+        return formatForDateNow.format(date);
     }
 
 }

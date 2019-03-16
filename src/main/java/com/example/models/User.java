@@ -1,6 +1,5 @@
 package com.example.models;
 
-import com.example.models.order.Order;
 import com.example.utils.Consts;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,9 +45,8 @@ public class User implements UserDetails {
     private int reviewsCount = 0;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER, targetEntity = Order.class)
-    private List<Order> orders;
-
+            fetch = FetchType.EAGER, targetEntity = Log.class)
+    private List<Log> logs;
 
     public String getStringType(int language) {
         String[] typesRu = {"Не активирован", "Заблокирован", "Активирован", "Администратор"};

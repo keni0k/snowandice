@@ -1,13 +1,9 @@
 package com.example.controllers;
 
-import com.example.jpa_services_impl.OrderServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.Props;
-import com.example.repo.CartLineInfoRepository;
-import com.example.repo.OrderRepository;
 import com.example.repo.PropsRepository;
 import com.example.repo.UserRepository;
-import com.example.services.UserService;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
 import com.example.utils.remonlineAPI.RemOrders;
@@ -41,17 +37,12 @@ public class OrderController {
 
     private static final String BASE_URL = "https://api.remonline.ru/";
 
-    private OrderServiceImpl orderService;
-    private UserService userService;
     private Props props;
     private Utils utils;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository, UserRepository userRepository, CartLineInfoRepository cartLineInfoRepository,
-                           PropsRepository propsRepository) {
-        this.orderService = new OrderServiceImpl(orderRepository, cartLineInfoRepository);
-        this.userService = new UserServiceImpl(userRepository);
-        this.utils = new Utils(userService);
+    public OrderController(UserRepository userRepository, PropsRepository propsRepository) {
+        this.utils = new Utils(new UserServiceImpl(userRepository));
         props = propsRepository.getPropsById(1);
     }
 

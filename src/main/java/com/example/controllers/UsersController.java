@@ -1,10 +1,7 @@
 package com.example.controllers;
 
-import com.example.jpa_services_impl.OrderServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.User;
-import com.example.repo.CartLineInfoRepository;
-import com.example.repo.OrderRepository;
 import com.example.repo.UserRepository;
 import com.example.utils.Consts;
 import com.example.utils.MessageUtil;
@@ -44,14 +41,11 @@ public class UsersController {
 
     private Utils utils;
     private UserServiceImpl userService;
-    private OrderServiceImpl orderService;
     private final MessageSource messageSource;
 
     @Autowired
-    public UsersController(UserRepository userRepository, MessageSource messageSource,
-                           OrderRepository orderRepository, CartLineInfoRepository cartLineInfoRepository){
+    public UsersController(UserRepository userRepository, MessageSource messageSource){
         userService = new UserServiceImpl(userRepository);
-        orderService = new OrderServiceImpl(orderRepository, cartLineInfoRepository);
         this.messageSource = messageSource;
         utils = new Utils(userService);
     }
@@ -135,10 +129,7 @@ public class UsersController {
         model.addAttribute("user", user);
         model.addAttribute("consts", new Consts());
         model.addAttribute("utils", new UtilsForWeb());
-        model.addAttribute("orders", orderService.getByUser(user));
-        model.addAttribute("answersCount", 1);
-        model.addAttribute("ordersWaitCount", 2);
-        model.addAttribute("ordersCompliteCount", 3);
+        model.addAttribute("logs", 123);//TODO: logService
         return "user/account";
     }
 

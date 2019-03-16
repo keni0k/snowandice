@@ -19,9 +19,9 @@
     <div class="row">
         <div class="col-sm-4 col-md-3" style="padding-top: 5px;">
             <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'i0')" id="defaultOpen">Логгирование</button>
-                <button class="tablinks" onclick="openCity(event, 'i1')">Общая информация</button>
-                <button class="tablinks" onclick="openCity(event, 'i3')">Смена пароля</button>
+                <button class="tablinks" onclick="openCity(event, 'i0')" id="defaultOpen">Логи</button>
+                <button class="tablinks" onclick="openCity(event, 'i1')">Об аккаунте</button>
+                <button class="tablinks" onclick="openCity(event, 'i2')">Смена пароля</button>
             </div>
         </div>
         <div class="col-sm-8 col-md-6">
@@ -72,14 +72,14 @@
                     <div class="input-group">
                         <span class="input-group-addon">Номер телефона</span>
                         <input name="phone_number" th:value="${user.getPhoneNumber()}" type="text"
-                               class="form-control input-md" required="">
+                               class="form-control input-md">
                     </div>
                     <br/>
                     <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить">
                 </form>
             </div>
 
-            <div id="i3" class="tabcontent">
+            <div id="i2" class="tabcontent">
                 <form action="/users/edit_pass">
                     <div class="input-group">
                         <span class="input-group-addon">Старый пароль</span>

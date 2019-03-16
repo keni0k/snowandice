@@ -3,7 +3,6 @@ package com.example.config;
 import com.example.models.Image;
 import com.example.models.TokenCookies;
 import com.example.models.User;
-import com.example.models.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
@@ -18,18 +17,15 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
-import javax.servlet.ServletContext;
-
 @Configuration
 //@PropertySource("classpath:appplication.properties")
 @EnableJpaRepositories(basePackages = "com.example.repo")
-@EntityScan(basePackageClasses = {User.class, TokenCookies.class, Image.class, Order.class})
+@EntityScan(basePackageClasses = {User.class, TokenCookies.class, Image.class})
 @EnableTransactionManagement
 public class AppConfig implements WebMvcConfigurer {
 
     @Autowired
-    public AppConfig(ApplicationContext applicationContext, ServletContext servletContext) {
-        this.servletContext = servletContext;
+    public AppConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
@@ -39,7 +35,6 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     private final ApplicationContext applicationContext;
-    private final ServletContext servletContext;
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {

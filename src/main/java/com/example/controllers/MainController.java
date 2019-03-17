@@ -27,7 +27,13 @@ import com.example.repo.UserRepository;
 import com.example.utils.Consts;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
+import io.mola.galimatias.GalimatiasParseException;
+import io.mola.galimatias.URL;
+import io.mola.galimatias.URLParsingSettings;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,6 +44,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 import static com.example.utils.Utils.*;
@@ -107,10 +115,42 @@ public class MainController {
 
     @RequestMapping(method = POST, value = "/get_phone")
     public String getPhone(HttpServletRequest request,
-                           @RequestParam("phone")String phone) {
+                           @RequestParam("phone") String phone) {
+        String uri = "https://sms.ru/sms/send?api_id=142B1FE9-02B5-9595-74C6-AD05A4F07EA2&to=79039193100&msg=Новый коллбэк, телефон: " +
+                phone.replace("+7", "8") + "&json=1";
+
         //TODO: need ajax
-        if (phone.length()==17){
+        if (phone.length() == 17) {
+            HttpEntity get;
+            boolean isStatus = false;
+            boolean isStatusSMS = false;
+            try {
+                URLParsingSettings settings = URLParsingSettings.create();
+                URL url = URL.parse(settings, uri);
+                get = Request.Get(url.toJavaURI())
+                        .connectTimeout(2000)
+                        .socketTimeout(2000)
+                        .execute()
+                        .returnResponse().getEntity();
+                String response = EntityUtils.toString(get);
+                int start = response.indexOf("\"status\": \"");
+                int startTwo = response.lastIndexOf("\"status\": \"");
+                isStatus = response.substring(start+11, start+13).equals("OK");
+                isStatusSMS = response.substring(startTwo+11, startTwo+13).equals("OK");
+                log.info("try to send: " + (isStatus?"OK":"ERROR"));
+                log.info("send: "+ (isStatusSMS?"OK":"ERROR"));
+            } catch (IOException e) {
+                log.error(e.getMessage());
+            } catch (GalimatiasParseException e) {
+                log.error(e.getMessage());
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
             callbackRepository.save(new Callback(phone, statusCallbackRepository.getOne(3L)));
+            if (!isStatus || !isStatusSMS){
+                return "redirect:" + request.getHeader("referer") + "?error=dontsend";
+            }
         }
         return "redirect:" + request.getHeader("referer");
     }

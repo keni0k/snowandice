@@ -162,7 +162,7 @@ z-index: 999;}
 .slide-text {display: table-cell;vertical-align: middle}
 
 .zigzag-bottom {
-background: none repeat scroll 0 0 #333333;
+background: none repeat scroll 0 0 #23ADDB;
 bottom: -120px;
 height: 165px;
 left: -5%;
@@ -425,13 +425,13 @@ z-index: 9;
   padding-top: 30px;
 }
 .product-widget-area .zigzag-bottom{background: #333}
-.footer-top-area .zigzag-bottom{background: #000}
-.footer-top-area {background: none repeat scroll 0 0 #333;
+.footer-top-area .zigzag-bottom{background: #05318c}
+.footer-top-area {background: none repeat scroll 0 0 #23ADDB;
 color: #999;
 padding: 35px 0 180px;}
 
 
-.footer-bottom-area {background: #000;color: #fff}
+.footer-bottom-area {background: #05318c;color: #fff}
 .footer-about-us span {
   color: #05318c;
 }
@@ -500,7 +500,7 @@ padding: 35px 0 180px;}
 a {color: #008ec6}
 a:hover, a:focus {color: #05318c;text-decoration: none;}
 .footer-bottom-area {
-  background: none repeat scroll 0 0 #000;
+  background: none repeat scroll 0 0 #05318c;
   color: #fff;
   padding-bottom: 40px;
 }

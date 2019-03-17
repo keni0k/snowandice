@@ -44,9 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/", "/index",
-                        "/contacts", "/privacy_policy", "/exchange_and_returns", "/get_phone",
+                        "/contacts", "/privacy_policy", "/exchange_and_returns",
                         "/fix", "/orders/widget", "/actuator/**", "/actuator").permitAll()
-                .antMatchers(HttpMethod.POST, "/actuator/**", "/instances").permitAll()
+                .antMatchers(HttpMethod.POST, "/actuator/**", "/instances", "/get_phone").permitAll()
                 .antMatchers("/users/registration").anonymous()
                 .antMatchers("/users/account", "/users/edit_data", "/users/edit_address").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/**").hasRole("ADMIN")

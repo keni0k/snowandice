@@ -22,6 +22,7 @@
                 <button class="tablinks" onclick="openCity(event, 'i0')" id="defaultOpen">Логи</button>
                 <button class="tablinks" onclick="openCity(event, 'i1')">Об аккаунте</button>
                 <button class="tablinks" onclick="openCity(event, 'i2')">Смена пароля</button>
+                <button class="tablinks" onclick="openCity(event, 'i3')">Администраторы</button>
             </div>
         </div>
         <div class="col-sm-9 col-md-10">
@@ -101,9 +102,16 @@
             <div id="i3" class="tabcontent">
                 <h3>Добавить администратора</h3>
                 <form action="/users/add_admin" method="get">
-                    <div class="input-group">
-                        <span class="input-group-addon">E-mail</span>
-                        <input name="email" type="text" class="form-control input-md">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                                <span class="input-group-addon">E-mail</span>
+                                <input name="email" type="text" class="form-control input-md">
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <button type="submit">Добавить</button>
+                        </div>
                     </div>
                 </form>
             </div>

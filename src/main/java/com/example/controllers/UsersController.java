@@ -169,7 +169,7 @@ public class UsersController {
         User u = userService.getByEmail(email);
         if (u == null) {
             modelMap.addAttribute("message",
-                    new MessageUtil("error", "Не найден пользователь с email = " + email));
+                    new MessageUtil("danger", "Не найден пользователь с email = " + email));
             return account(modelMap, principal);
         }
         if (u.getRole().equals("ROLE_ADMIN") && u.getType()==Consts.USER_ADMIN) {

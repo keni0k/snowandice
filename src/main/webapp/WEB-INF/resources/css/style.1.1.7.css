@@ -1128,6 +1128,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 }
 
 .table-history {
+    margin-top: 1rem;
     width: 100%;
     font-size: 18px;
 }
@@ -1176,7 +1177,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 #i1, #i1 .input-group, #i2, #i2 .input-group, #i3, #i3 .input-group {
     width: 100%;
 }
-#i1 .btn, #i2 .btn, #i3 .btn {
+#i1 .btn, #i2 .btn {
     width: 40%;
 }
 .contacts-area {
@@ -1354,8 +1355,9 @@ main nav input[type=checkbox][disabled] {
 
 .mr-0 {margin-right: 0;}
 .ml-0 {margin-left: 0;}
-.mt-1 {margin-top: 1em;}
-.mb-2 {margin-bottom: 2em;}
+.mt-1 {margin-top: 1rem;}
+.mt-2 {margin-top: 2rem}
+.mb-2 {margin-bottom: 2rem;}
 
 .centred {
     height: 20em;

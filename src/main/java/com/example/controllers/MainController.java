@@ -120,7 +120,7 @@ public class MainController {
             redirect = URL_PATH + "index";
         }
         redirect += (redirect.contains("?") ? "&" : "?");
-        redirect += "msg="+msg+"&msg_type="+msgType;
+        redirect += "msg=" + msg + "&msg_type=" + msgType;
         log.info(redirect);
         return "redirect:" + redirect;
     }
@@ -145,8 +145,10 @@ public class MainController {
                 String response = EntityUtils.toString(get);
                 int start = response.indexOf("\"status\": \"");
                 int startTwo = response.lastIndexOf("\"status\": \"");
-                isStatus = response.substring(start + 11, start + 13).equals("OK");
-                isStatusSMS = response.substring(startTwo + 11, startTwo + 13).equals("OK");
+                if (start > 0)
+                    isStatus = response.substring(start + 11, start + 13).equals("OK");
+                if (startTwo > 0)
+                    isStatusSMS = response.substring(startTwo + 11, startTwo + 13).equals("OK");
                 log.info("try to send: " + (isStatus ? "OK" : "ERROR"));
                 log.info("send: " + (isStatusSMS ? "OK" : "ERROR"));
             } catch (IOException e) {

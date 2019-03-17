@@ -3,6 +3,7 @@ package com.example.controllers;
 import com.example.jpa_services_impl.UserServiceImpl;
 import com.example.models.Props;
 import com.example.repo.PropsRepository;
+import com.example.repo.StatusCallbackRepository;
 import com.example.repo.UserRepository;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
@@ -37,12 +38,15 @@ public class OrderController {
 
     private static final String BASE_URL = "https://api.remonline.ru/";
 
+    private StatusCallbackRepository statusCallbackRepository;
     private Props props;
     private Utils utils;
 
     @Autowired
-    public OrderController(UserRepository userRepository, PropsRepository propsRepository) {
+    public OrderController(UserRepository userRepository, PropsRepository propsRepository,
+                           StatusCallbackRepository statusCallbackRepository) {
         this.utils = new Utils(new UserServiceImpl(userRepository));
+        this.statusCallbackRepository = statusCallbackRepository;
         props = propsRepository.getPropsById(1);
     }
 
@@ -56,7 +60,7 @@ public class OrderController {
         return token.token;
     }
 
-    private RemOrders getOrders(String phone, Integer page, Integer id, Integer statusId) {
+    private RemOrders getOrders(String phone, Integer page, Integer id, Long statusId) {
         try {
             String token = getToken();
             String url = BASE_URL + "order/?token=" + token;
@@ -114,7 +118,7 @@ public class OrderController {
     public String customStatus(@RequestParam(value = "phone", required = false) String phone,
                                @RequestParam(value = "page", required = false) Integer page,
                                @RequestParam(value = "id", required = false) Integer id,
-                               @RequestParam(value = "status", required = false) Integer statusId) {
+                               @RequestParam(value = "status", required = false) Long statusId) {
         RemOrders remOrders = getOrders(phone, page, id, statusId);
         if (remOrders == null) return "NULL";
         Gson g = new Gson();
@@ -145,9 +149,10 @@ public class OrderController {
                                @RequestParam(value = "phone", required = false) String phone,
                                @RequestParam(value = "page", required = false) Integer page,
                                @RequestParam(value = "id", required = false) Integer id,
-                               @RequestParam(value = "status", required = false) Integer statusId,
+                               @RequestParam(value = "status", required = false) Long statusId,
                                Principal principal) {
         boolean isAdmin = utils.isAdmin(principal);
+        RemOrders remOrders = null;
         if (phone != null)
             phone = digits(phone);
         if ((phone != null && phone.length() >= props.getCountDigitsForWidget() && !isZeros(phone)) || isAdmin) {
@@ -155,7 +160,7 @@ public class OrderController {
                 page = null;
                 id = null;
             }
-            RemOrders remOrders = getOrders(phone, page, id, statusId);
+            remOrders = getOrders(phone, page, id, statusId);
             if (remOrders != null && remOrders.data != null) {
                 try {
                     remOrders.data.sort((o1, o2) -> Long.compare(o2.created_at, o1.created_at));
@@ -169,6 +174,8 @@ public class OrderController {
         }
         modelMap.addAttribute("phone", phone != null ? phone : "");
         modelMap.addAttribute("statuses", isAdmin ? getStatuses() : null);
+        if (remOrders != null && remOrders.data != null && remOrders.data.size() > 0 && isAdmin && statusId != null)
+            modelMap.addAttribute("status", remOrders.data.get(0).status);
         modelMap.addAttribute("utils", new UtilsForWeb());
         return "order/widget";
     }

@@ -10,7 +10,7 @@
             <!--/*@thymesVar id="callbacks" type="java.util.List<com.example.models.callbacks.Callback>"*/-->
             <!--/*@thymesVar id="statuses" type="java.util.List<com.example.models.callbacks.Status>"*/-->
             <!--/*@thymesVar id="callback" type="com.example.models.callbacks.Callback"*/-->
-            <!--/*@thymesVar id="statusId" type="java.lang.Long"*/-->
+            <!--/*@thymesVar id="status" type="com.example.models.callbacks.Status"*/-->
             <!--/*@thymesVar id="statusEditId" type="java.lang.Long"*/-->
             <div class="col-md-10 col-lg-8 col-centred">
                 <div class="header mb-2">
@@ -77,34 +77,19 @@
                     <div class="col-sm-1 col-xs-2 filter"><span>Фильтр:</span></div>
                     <div class="col-xs-2 dropdown filter-statuses">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                th:text="${status!=null?status.getName():'Все статусы'}" th:style="'background: '+${status!=null?status.getColor():'lightgray'}">
                             Статусы
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <!--/*@thymesVar id="statuses" type="java.util.List<com.example.utils.remonlineAPI.Status>"*/-->
-                            <!--/*@thymesVar id="status" type="com.example.utils.remonlineAPI.Status"*/-->
-                            <a class="dropdown-item" href="#" th:href="@{/admin/callbacks}">Все статусы</a>
-                            <a class="dropdown-item" href="#" th:each="status:${statuses}" th:text="${status.getName()}"
-                               th:style="'background:'+${status.getColor()}"
-                               th:href="@{/admin/callbacks(status_id=${status.getId()})}">Action</a>
+                            <!--/*@thymesVar id="statuses" type="java.util.List<com.example.models.callbacks.Status>"*/-->
+                            <a class="dropdown-item" href="#" th:href="@{/admin/callbacks}" th:if="${status!=null}">Все статусы</a>
+                            <a class="dropdown-item" href="#" th:each="each_status:${statuses}" th:text="${each_status.getName()}"
+                               th:style="'background:'+${each_status.getColor()}"
+                               th:if="${status==null or (status!=null and status.getId()!=each_status.getId())}"
+                               th:href="@{/admin/callbacks(status_id=${each_status.getId()})}">Action</a>
                         </div>
                     </div>
-                    <!--<div class="statuses centred">
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label th:class="${'btn btn-secondary'+(statusId==null?' active':'')}"
-                                   onclick="location.href='/admin/callbacks'" style="background: #e6e6e6">
-                                <input type="radio" name="options" id="option" autocomplete="off"
-                                       th:checked="${statusId==null}"> All
-                            </label>
-                            <label th:class="${'btn btn-secondary'+((statusId!=null and status.getId()==statusId)?' active':'')}"
-                                   th:each="status: ${statuses}" th:style="${'background: '+status.getColor()}"
-                                   th:onclick="'location.href=\'/admin/callbacks?status_id='+${status.getId()}+'\''">
-                                <span th:text="${status.getName()}"></span>
-                                <input type="radio" name="options" th:id="${'option'+status.getId()}" autocomplete="off"
-                                       th:checked="${statusId!=null and statusId==status.getId()}">
-                            </label>
-                        </div>
-                    </div>-->
                 </div>
                 <th:block th:unless="${callbacks==null or callbacks.size()==0}">
                     <div class="status row" th:each="callback: ${callbacks}"

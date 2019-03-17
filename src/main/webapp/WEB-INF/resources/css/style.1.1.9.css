@@ -1170,10 +1170,6 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     width: 170px;
 }
 
-#i3 span {
-    width: 180px;
-}
-
 #i1, #i1 .input-group, #i2, #i2 .input-group, #i3, #i3 .input-group {
     width: 100%;
 }

@@ -68,7 +68,7 @@ class AdminController {
                 modelMap.addAttribute("callbacks", new ArrayList<Callback>().add(callbackRepository.getCallbackById(id)));
             } else if (status != null) {
                 modelMap.addAttribute("callbacks", callbackRepository.getCallbacksByStatus(statusCallbackRepository.getOne(status)));
-                modelMap.addAttribute("statusId", status);
+                modelMap.addAttribute("status", statusCallbackRepository.getOne(status));
             } else {
                 modelMap.addAttribute("callbacks", callbackRepository.findAll());
             }

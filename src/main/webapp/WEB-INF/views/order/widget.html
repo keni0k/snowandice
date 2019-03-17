@@ -8,6 +8,7 @@
     <div class="container main-block">
         <div class="row">
             <!--/*@thymesVar id="orders" type="com.example.utils.remonlineAPI.RemOrders"*/-->
+            <!--/*@thymesVar id="status" type="com.example.utils.remonlineAPI.Status"*/-->
             <div class="col-md-10 col-lg-8 col-centred">
                 <div class="header mb-2">
                     <h3>Узнать статус ремонта по номеру телефона</h3>
@@ -31,15 +32,18 @@
                 <div class="row" th:if="${isAdmin}">
                     <div class="col-sm-1 col-xs-2 filter"><span>Фильтр:</span></div>
                     <div class="col-xs-2 dropdown filter-statuses">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                th:text="${status!=null?status.getName():'Все статусы'}" th:style="'background: '+${status!=null?status.getColor():'lightgray'}">
                             Статусы
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <!--/*@thymesVar id="statuses" type="java.util.List<com.example.utils.remonlineAPI.Status>"*/-->
                             <!--/*@thymesVar id="status" type="com.example.utils.remonlineAPI.Status"*/-->
-                            <a class="dropdown-item" href="#" th:href="@{/orders/widget}">Все статусы</a>
-                            <a class="dropdown-item" href="#" th:each="status:${statuses}" th:text="${status.getName()}"
-                               th:style="'background:'+${status.getColor()}" th:href="@{/orders/widget(status=${status.getId()})}">Action</a>
+                            <a class="dropdown-item" href="#" th:href="@{/orders/widget}" th:if="${status!=null}">Все статусы</a>
+                            <a class="dropdown-item" href="#" th:each="each_status:${statuses}" th:text="${each_status.getName()}"
+                               th:style="'background:'+${each_status.getColor()}" th:href="@{/orders/widget(status=${each_status.getId()})}"
+                               th:if="${status==null or (status!=null and status.getId()!=each_status.getId())}">Action</a>
                         </div>
                     </div>
                 </div>

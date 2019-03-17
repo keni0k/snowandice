@@ -3,11 +3,11 @@
 <body>
 <!--/*@thymesVar id="user" type="com.example.models.User"*/-->
 <div class="container main-block">
-    <!--<div class="page-header">
+    <div class="page-header">
         <h2>
             Личный кабинет
         </h2>
-    </div>-->
+    </div>
     <!--/* /* Handling the flash message */-->
     <th:block th:if="${message != null}">
         <!--/*@thymesVar id="message" type="com.example.utils.MessageUtil"*/-->
@@ -95,6 +95,16 @@
                     </div>
                     <br/>
                     <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить">
+                </form>
+            </div>
+
+            <div id="i3" class="tabcontent">
+                <h3>Добавить администратора</h3>
+                <form action="/users/add_admin" method="get">
+                    <div class="input-group">
+                        <span class="input-group-addon">E-mail</span>
+                        <input name="email" type="text" class="form-control input-md">
+                    </div>
                 </form>
             </div>
 

@@ -34,7 +34,7 @@ import java.util.Date;
 class AdminController {
 
     private UserService userService;
-    private LogService logService; //TODO: LogService without impl
+    private LogService logService;
     private Utils utils;
     private CallbackRepository callbackRepository;
     private StatusCallbackRepository statusCallbackRepository;
@@ -85,7 +85,8 @@ class AdminController {
         modelMap.addAttribute("utils", new UtilsForWeb());
         return "admin/statuses";
     }
-//TODO: log
+
+    //TODO: log
     @RequestMapping(value = "/add_status", method = RequestMethod.POST)
     public String addStatus(Principal principal, @Valid Status status) {
         if (isAdmin(principal)) {
@@ -113,7 +114,7 @@ class AdminController {
         }
         return "admin/callbacks";
     }
-    //TODO: log
+
     @RequestMapping(value = "/edit_callback", method = RequestMethod.POST)
     public String editCallbackPost(Principal principal,
                                    @RequestParam("id") long id,
@@ -121,21 +122,42 @@ class AdminController {
                                    @RequestParam("phone") String phone) {
         if (isAdmin(principal)) {
             Callback callback = callbackRepository.getOne(id);
-            callback.setPhone(phone);
-            callback.setStatus(statusCallbackRepository.getOne(statusId));
-            callbackRepository.save(callback);
+            String logDescription = "Коллбэк (id=" + callback.getId() + ") был изменен. ";
+            boolean isActual = true;
+            if (!callback.getPhone().equals(phone)) {
+                logDescription += "Старый номер: " + callback.getPhone() + ", новый номер: " + phone+". ";
+                callback.setPhone(phone);
+                isActual = false;
+            }
+            if (callback.getStatus().getId()!=statusId){
+                Status status = statusCallbackRepository.getOne(statusId);
+                logDescription += "Старый статус: " + callback.getStatus().getName() +
+                        " (id="+callback.getStatus().getId()+"), новый статус: " + status.getName() +
+                        " (id="+status.getId()+").";
+                callback.setStatus(status);
+                isActual = false;
+            }
+            Log log = Log.builder()
+                    .date(new Date())
+                    .level(Log.EDIT)
+                    .user(utils.getUser(principal))
+                    .description(logDescription)
+                    .build();
+            if (!isActual) {
+                callbackRepository.save(callback);
+                logService.add(log);
+            }
         }
         return "redirect:/admin/callbacks";
     }
 
-    //TODO: log
     @RequestMapping(value = "/del_callback", method = RequestMethod.GET)
     public String delCallback(Principal principal, @RequestParam("id") long id) {
         if (isAdmin(principal)) {
             Callback callback = callbackRepository.getCallbackById(id);
             String logDescription = "Коллбэк \"" + callback.getPhone() +
-                    "\" (id=" + callback.getId() + ") со статусом " + callback.getStatus().getName() +
-                    " (id="+callback.getStatus().getId()+") был удален.";
+                    "\" (id=" + callback.getId() + ") со статусом \"" + callback.getStatus().getName() +
+                    "\" (id="+callback.getStatus().getId()+") был удален.";
             Log log = Log.builder()
                     .date(new Date())
                     .level(Log.DELETE)
@@ -152,7 +174,7 @@ class AdminController {
     public String delStatus(Principal principal, @RequestParam("id") long id) {
         if (isAdmin(principal) && id != 3) {
             Status status = statusCallbackRepository.getOne(id);
-            String logDescription = "Коллбэк статус \"" + status.getName() + "\" (id = " + status.getId() + ") цвета " + status.getColor() + " был удален.";
+            String logDescription = "Коллбэк статус \"" + status.getName() + "\" (id=" + status.getId() + ") цвета " + status.getColor() + " был удален.";
             Log log = Log.builder()
                     .date(new Date())
                     .level(Log.DELETE)
@@ -165,7 +187,7 @@ class AdminController {
                 if (e.getMessage().equals("could not execute statement; SQL [n/a]; constraint [callback_status_callback_id_fk]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement")) {
                     log.setLevel(Log.ERROR);
                     log.setDescription("Попытка удалить коллбэк статус \"" + status.getName() +
-                            "\" (id = " + status.getId() + "), но найдены коллбэки с этим статусом");
+                            "\" (id=" + status.getId() + "), но найдены коллбэки с этим статусом");
                 } else e.printStackTrace();
             }
 

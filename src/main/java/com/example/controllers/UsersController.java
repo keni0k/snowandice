@@ -2,9 +2,11 @@ package com.example.controllers;
 
 import com.example.jpa_services_impl.LogServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
+import com.example.models.Log;
 import com.example.models.User;
 import com.example.repo.LogRepository;
 import com.example.repo.UserRepository;
+import com.example.services.LogService;
 import com.example.utils.Consts;
 import com.example.utils.MessageUtil;
 import com.example.utils.Utils;
@@ -28,10 +30,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Date;
 import java.util.Locale;
 
 import static com.example.utils.Utils.randomToken;
@@ -44,11 +46,11 @@ public class UsersController {
     private Utils utils;
     private UserServiceImpl userService;
     private final MessageSource messageSource;
-    private LogServiceImpl logService; //TODO: LogService without impl
+    private LogService logService;
 
     @Autowired
     public UsersController(UserRepository userRepository, MessageSource messageSource,
-                           LogRepository logRepository){
+                           LogRepository logRepository) {
         userService = new UserServiceImpl(userRepository);
         this.messageSource = messageSource;
         utils = new Utils(userService);
@@ -61,11 +63,11 @@ public class UsersController {
         model.addAttribute("utils", new UtilsForWeb());
         return "user/registration";
     }
+
     //TODO: log
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String signUp(@ModelAttribute("insertUser") @Valid User person,
                          BindingResult result,
-                         @RequestParam(value = "file", required = false) MultipartFile file,
                          @ModelAttribute("pass2") String pass2,
                          ModelMap model, Locale locale) {
         person.setToken(randomToken(32));
@@ -112,11 +114,11 @@ public class UsersController {
                            @RequestParam("first_name") String firstName,
                            @RequestParam("last_name") String lastName,
                            @RequestParam("phone_number") String phoneNumber,
-                           @RequestParam(value = "subscription", required = false) Boolean subscription){
+                           @RequestParam(value = "subscription", required = false) Boolean subscription) {
         User user = utils.getUser(principal);
         modelMap.addAttribute("utils", new UtilsForWeb());
-        if (user==null) return "user/login";
-        if (subscription==null) subscription = false;
+        if (user == null) return "user/login";
+        if (subscription == null) subscription = false;
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setPhoneNumber(phoneNumber);
@@ -134,7 +136,7 @@ public class UsersController {
         model.addAttribute("user", user);
         model.addAttribute("consts", new Consts());
         model.addAttribute("utils", new UtilsForWeb());
-        model.addAttribute("logs", logService.getAllByUser(user));//TODO: logService
+        model.addAttribute("logs", logService.getAllByUser(user));
         return "user/account";
     }
 
@@ -158,16 +160,31 @@ public class UsersController {
         response = client.post(email);
         return response.getData() + " " + response.getStatus();
     }
-    //TODO: log
+
     @RequestMapping(value = "/add_admin", method = RequestMethod.GET)
-    public String addAdmin(@RequestParam("email") String email, Principal principal, ModelMap modelMap){
+    public String addAdmin(@RequestParam("email") String email, Principal principal, ModelMap modelMap) {
         User nowUser = utils.getUser(principal);
         if (nowUser == null || nowUser.getType() != Consts.USER_ADMIN) return signIn(modelMap, principal);
 
         User u = userService.getByEmail(email);
+        if (u == null) {
+            modelMap.addAttribute("message",
+                    new MessageUtil("error", "Не найден пользователь с email = " + email));
+            return account(modelMap, principal);
+        }
+        if (u.getRole().equals("ROLE_ADMIN") && u.getType()==Consts.USER_ADMIN) {
+            modelMap.addAttribute("message",
+                    new MessageUtil("danger", u.getFullName() +" уже является администратором"));
+            return account(modelMap, principal);
+        }
         u.setRole("ROLE_ADMIN");
         u.setType(Consts.USER_ADMIN);
-        modelMap.addAttribute("message", new MessageUtil("success", u.getFullName()+" получил роль ADMIN"));
+        userService.update(u);
+        Log log = Log.builder().user(u).level(Log.INFO).date(new Date())
+                .description("Вас назначили администратором! Теперь вам доступны все возможности этого сайта.").build();
+        logService.add(log);
+
+        modelMap.addAttribute("message", new MessageUtil("success", u.getFullName() + " получил роль ADMIN"));
         return account(modelMap, principal);
     }
 
@@ -177,7 +194,7 @@ public class UsersController {
                               @RequestParam(value = "district", required = false) String district,
                               @RequestParam("city") String city,
                               @RequestParam("address") String address,
-                              @RequestParam("postcode") String postcode){
+                              @RequestParam("postcode") String postcode) {
         User user = utils.getUser(principal);
         if (district == null) district = "";
         user.setAddress(region, district, city, address, postcode);

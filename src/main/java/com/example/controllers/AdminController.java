@@ -131,7 +131,18 @@ class AdminController {
     @RequestMapping(value = "/del_callback", method = RequestMethod.GET)
     public String delCallback(Principal principal, @RequestParam("id") long id) {
         if (isAdmin(principal)) {
+            Callback callback = callbackRepository.getCallbackById(id);
+            String logDescription = "Коллбэк \"" + callback.getPhone() +
+                    "\" (id=" + callback.getId() + ") со статусом " + callback.getStatus().getName() +
+                    " (id="+callback.getStatus().getId()+") был удален.";
+            Log log = Log.builder()
+                    .date(new Date())
+                    .level(Log.DELETE)
+                    .user(utils.getUser(principal))
+                    .description(logDescription)
+                    .build();
             callbackRepository.deleteById(id);
+            logService.add(log);
         }
         return "redirect:/admin/callbacks";
     }
@@ -147,7 +158,13 @@ class AdminController {
                     .user(utils.getUser(principal))
                     .description(logDescription)
                     .build();
-            statusCallbackRepository.delete(status);
+            try {
+                statusCallbackRepository.delete(status);
+            } catch (Exception e){
+                log.setLevel(Log.ERROR);
+                log.setDescription(e.toString() + " : " + e.getMessage() + " : " + e.hashCode());
+            }
+
             logService.add(log);
         }
         return "redirect:/admin/statuses";

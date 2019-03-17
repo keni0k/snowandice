@@ -183,7 +183,9 @@ public class UsersController {
         Log log = Log.builder().user(u).level(Log.INFO).date(new Date())
                 .description("Вас назначили администратором! Теперь вам доступны все возможности этого сайта.").build();
         logService.add(log);
-
+        log = Log.builder().user(nowUser).level(Log.INFO).date(new Date())
+                .description("Вы назначили пользователя "+u.getFullName()+" (email="+u.getEmail()+") администратором.").build();
+        logService.add(log);
         modelMap.addAttribute("message", new MessageUtil("success", u.getFullName() + " получил роль ADMIN"));
         return account(modelMap, principal);
     }

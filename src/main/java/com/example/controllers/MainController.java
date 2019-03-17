@@ -44,6 +44,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import static com.example.utils.Consts.URL_PATH;
@@ -111,20 +113,16 @@ public class MainController {
         return "exchange_and_returns";
     }
 
-    @RequestMapping("/test")
-    public String redirect(HttpServletRequest request) {
-        String redir = request.getHeader("referer") != null ? request.getHeader("referer") : "";
-        if (!redir.startsWith("http")) {
-            redir = URL_PATH + "index";
+    private String redirectWithMsg(HttpServletRequest request, String msg, String msgType) {
+        msg = URLEncoder.encode(msg, StandardCharsets.UTF_8);
+        String redirect = request.getHeader("referer") != null ? request.getHeader("referer") : "";
+        if (!redirect.startsWith("http")) {
+            redirect = URL_PATH + "index";
         }
-        redir += "?msg=Запрос передан оператору, он свяжется с вами в ближайшее время&msg_type=success";
-        log.info(redir);
-        try {
-            return "redirect:" + Utils.getUrl(redir);
-        } catch (GalimatiasParseException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return "redirect:" + request.getHeader("referer");
+        redirect += (redirect.contains("?") ? "&" : "?");
+        redirect += "msg="+msg+"&msg_type="+msgType;
+        log.info(redirect);
+        return "redirect:" + redirect;
     }
 
     @RequestMapping(method = POST, value = "/get_phone")
@@ -161,10 +159,11 @@ public class MainController {
             }
             callbackRepository.save(new Callback(phone, statusCallbackRepository.getOne(3L)));
             if (!isStatus || !isStatusSMS) {
-                return "redirect:" + request.getHeader("referer");// + "?error=Не удалось отправить запрос оператору. Пожалуйста, позвоните нам по контактному телефону";
+                return redirectWithMsg(request, "Не удалось отправить запрос оператору. Пожалуйста, позвоните нам по контактному телефону", "danger");
             }
         }
-        return "redirect:" + request.getHeader("referer");// + "?success=Запрос передан оператору, он свяжется с вами в ближайшее время";
+        return redirectWithMsg(request, "Запрос передан оператору, он свяжется с вами в ближайшее время", "success");
+        //"redirect:" + request.getHeader("referer");
     }
 
 

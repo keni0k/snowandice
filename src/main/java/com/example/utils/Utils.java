@@ -7,6 +7,8 @@ import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
+import io.mola.galimatias.GalimatiasParseException;
+import io.mola.galimatias.URLParsingSettings;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.joda.time.LocalTime;
 
@@ -17,6 +19,7 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.Principal;
@@ -141,6 +144,12 @@ public class Utils {
     public static String getDateFormat(Date date){
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yy hh:mm a zzz");
         return formatForDateNow.format(date);
+    }
+
+    public static URI getUrl(String url) throws GalimatiasParseException, URISyntaxException {
+        URLParsingSettings settings = URLParsingSettings.create();
+        io.mola.galimatias.URL myUrl = io.mola.galimatias.URL.parse(settings, url);
+        return myUrl.toJavaURI();
     }
 
 }

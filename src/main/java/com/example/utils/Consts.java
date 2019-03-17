@@ -13,5 +13,6 @@ public class Consts {
     public static final int LANGUAGE_RU = 0;
     public static final int LANGUAGE_EN = 1;
 
-    public static final String URL_PATH = "https://excursium.blob.core.windows.net/img/";
+    public static final String URL_IMG_PATH = "https://excursium.blob.core.windows.net/img/";
+    public static final String URL_PATH = "https://cifracentr.herokuapp.com/";
 }

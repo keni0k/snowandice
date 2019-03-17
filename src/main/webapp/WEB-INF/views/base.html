@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="referrer" content="unsafe-url">
     <title>Магазин-мастерская Цифровой Центр</title>
 
     <!-- Google Fonts -->
@@ -176,6 +177,9 @@
 </div>
 
 <div th:replace="fragments/headerCallback :: model">%%</div>
+<th:block th:if="${#httpServletRequest.getParameter('msg')!=null and #httpServletRequest.getParameter('msg')!=''}">
+    <div th:replace="fragments/response :: modal">%%</div>
+</th:block>
 
 <!-- Latest jQuery form server -->
 <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
@@ -187,6 +191,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
 
+<script type="text/javascript" th:if="${#httpServletRequest.getParameter('msg')!=null and #httpServletRequest.getParameter('msg')!=''}">
+    $(window).on('load',function(){
+        $('#msg_modal').modal('show');
+    });
+</script>
 
 <!-- jQuery sticky menu -->
 <script src="/resources/js/owl.carousel.min.js"></script>

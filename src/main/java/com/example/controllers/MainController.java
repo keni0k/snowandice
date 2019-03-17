@@ -28,8 +28,6 @@ import com.example.utils.Consts;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
 import io.mola.galimatias.GalimatiasParseException;
-import io.mola.galimatias.URL;
-import io.mola.galimatias.URLParsingSettings;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.fluent.Request;
@@ -48,6 +46,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
+import static com.example.utils.Consts.URL_PATH;
 import static com.example.utils.Utils.*;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -112,6 +111,21 @@ public class MainController {
         return "exchange_and_returns";
     }
 
+    @RequestMapping("/test")
+    public String redirect(HttpServletRequest request) {
+        String redir = request.getHeader("referer") != null ? request.getHeader("referer") : "";
+        if (!redir.startsWith("http")) {
+            redir = URL_PATH + "index";
+        }
+        redir += "?msg=Запрос передан оператору, он свяжется с вами в ближайшее время&msg_type=success";
+        log.info(redir);
+        try {
+            return "redirect:" + Utils.getUrl(redir);
+        } catch (GalimatiasParseException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return "redirect:" + request.getHeader("referer");
+    }
 
     @RequestMapping(method = POST, value = "/get_phone")
     public String getPhone(HttpServletRequest request,
@@ -125,9 +139,7 @@ public class MainController {
             boolean isStatus = false;
             boolean isStatusSMS = false;
             try {
-                URLParsingSettings settings = URLParsingSettings.create();
-                URL url = URL.parse(settings, uri);
-                get = Request.Get(url.toJavaURI())
+                get = Request.Get(Utils.getUrl(uri))
                         .connectTimeout(2000)
                         .socketTimeout(2000)
                         .execute()
@@ -135,10 +147,10 @@ public class MainController {
                 String response = EntityUtils.toString(get);
                 int start = response.indexOf("\"status\": \"");
                 int startTwo = response.lastIndexOf("\"status\": \"");
-                isStatus = response.substring(start+11, start+13).equals("OK");
-                isStatusSMS = response.substring(startTwo+11, startTwo+13).equals("OK");
-                log.info("try to send: " + (isStatus?"OK":"ERROR"));
-                log.info("send: "+ (isStatusSMS?"OK":"ERROR"));
+                isStatus = response.substring(start + 11, start + 13).equals("OK");
+                isStatusSMS = response.substring(startTwo + 11, startTwo + 13).equals("OK");
+                log.info("try to send: " + (isStatus ? "OK" : "ERROR"));
+                log.info("send: " + (isStatusSMS ? "OK" : "ERROR"));
             } catch (IOException e) {
                 log.error(e.getMessage());
             } catch (GalimatiasParseException e) {
@@ -148,11 +160,11 @@ public class MainController {
                 e.printStackTrace();
             }
             callbackRepository.save(new Callback(phone, statusCallbackRepository.getOne(3L)));
-            if (!isStatus || !isStatusSMS){
-                return "redirect:" + request.getHeader("referer") + "?error=dontsend";
+            if (!isStatus || !isStatusSMS) {
+                return "redirect:" + request.getHeader("referer");// + "?error=Не удалось отправить запрос оператору. Пожалуйста, позвоните нам по контактному телефону";
             }
         }
-        return "redirect:" + request.getHeader("referer");
+        return "redirect:" + request.getHeader("referer");// + "?success=Запрос передан оператору, он свяжется с вами в ближайшее время";
     }
 
 
@@ -177,7 +189,7 @@ public class MainController {
                 serverFile.orElseThrow(Exception::new);
                 putImg(serverFile.get().getAbsolutePath(), photoToken);
                 imageService.add(img);
-                message.append(Consts.URL_PATH).append(photoToken);
+                message.append(Consts.URL_IMG_PATH).append(photoToken);
             } catch (Exception e) {
                 message.append("<p>").append(e.getMessage()).append("</p>");
             }

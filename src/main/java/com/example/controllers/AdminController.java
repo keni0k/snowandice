@@ -10,6 +10,7 @@ import com.example.repo.CallbackRepository;
 import com.example.repo.LogRepository;
 import com.example.repo.StatusCallbackRepository;
 import com.example.repo.UserRepository;
+import com.example.services.LogService;
 import com.example.services.UserService;
 import com.example.utils.Consts;
 import com.example.utils.Utils;
@@ -33,7 +34,7 @@ import java.util.Date;
 class AdminController {
 
     private UserService userService;
-    private LogServiceImpl logService; //TODO: LogService without impl
+    private LogService logService; //TODO: LogService without impl
     private Utils utils;
     private CallbackRepository callbackRepository;
     private StatusCallbackRepository statusCallbackRepository;
@@ -161,8 +162,11 @@ class AdminController {
             try {
                 statusCallbackRepository.delete(status);
             } catch (Exception e){
-                log.setLevel(Log.ERROR);
-                log.setDescription(e.toString() + " : " + e.getMessage() + " : " + e.hashCode());
+                if (e.getMessage().equals("could not execute statement; SQL [n/a]; constraint [callback_status_callback_id_fk]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement")) {
+                    log.setLevel(Log.ERROR);
+                    log.setDescription("Попытка удалить коллбэк статус \"" + status.getName() +
+                            "\" (id = " + status.getId() + "), но найдены коллбэки с этим статусом");
+                } else e.printStackTrace();
             }
 
             logService.add(log);

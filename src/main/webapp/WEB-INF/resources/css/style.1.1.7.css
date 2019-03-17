@@ -1450,3 +1450,7 @@ div.status p{
 .contacts-area.widget-fix{
     min-height: 700px;
 }
+.h-log{
+    height: 400px;
+    overflow-y: scroll;
+}

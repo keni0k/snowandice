@@ -138,7 +138,7 @@ public class Utils {
         return null;
     }
 
-    public String getDateFormat(Date date){
+    public static String getDateFormat(Date date){
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yy hh:mm a zzz");
         return formatForDateNow.format(date);
     }

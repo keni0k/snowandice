@@ -39,7 +39,7 @@
                         <!--/*@thymesVar id="log" type="com.example.models.Log"*/-->
                         <td th:text="${log.getId()}"></td>
                         <!--/*@thymesVar id="utils" type="com.example.utils.UtilsForWeb"*/-->
-                        <td th:text="${utils.getDateFormat(log.getDate())}"></td>
+                        <td th:text="${log.getDate()}"></td>
                         <td th:text="${log.getDescription()}"></td>
                     </tr>
                 </table>

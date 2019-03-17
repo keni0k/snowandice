@@ -1,5 +1,6 @@
 package com.example.models;
 
+import com.example.utils.Utils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +27,14 @@ public class Log {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinColumn(name = "id_of_user", nullable = false)
     private User user;
-    private Date date;
+    private String date;
+
+    public static class LogBuilder {
+        public LogBuilder date(Date date) {
+            this.date = Utils.getDateFormat(date);
+            return this;
+        }
+    }
 
     public static final int INFO = 0;
     public static final int EDIT = 1;

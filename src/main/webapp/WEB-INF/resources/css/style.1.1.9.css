@@ -1043,6 +1043,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 }
 .search-placeholder{
     border-radius: 21px;
+    /*noinspection CssInvalidPropertyValue*/
     width: -webkit-fill-available;
 }
 

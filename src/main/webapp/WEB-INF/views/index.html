@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: header (~{::body},'index')}">
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-<div class="container" style="height: 300px;">
-    <img src="https://i.imgur.com/UceWR1M.png" />
+<div class="container">
+    <img src="https://i.imgur.com/UceWR1M.png"/>
     <th:block th:replace="order/widget :: widget">%%</th:block>
     <th:block th:replace="other/contacts :: contacts">%%</th:block>
-    <th:block th:replace="other/fix :: fix">%%</th:block>
+    <div class="contacts-area">
+        <div class="container main-block">
+            <th:block th:replace="other/fix :: fix">%%</th:block>
+        </div>
+    </div>
 </div>
 </body>
 </html>

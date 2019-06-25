@@ -30,33 +30,6 @@
 </head>
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 
-<th:block th:with="isUserOrAdmin = ${isUser or isAdmin}">
-    <div class="header-area">
-        <div class="container">
-            <div class="row">
-                <div class="login-registr">
-                    <th:block th:unless="${isUserOrAdmin}">
-                        <a href="/users/login">
-                            <i class="fa fa-user"></i> Вход
-                        </a>
-                        <!--<span>/</span>
-                        <a href="/users/registration"> Регистрация</a>-->
-                    </th:block>
-                    <th:block th:if="${isUserOrAdmin}">
-                        <a th:if="${isAdmin}" href="https://cifraadmin.herokuapp.com" target="_blank">Spring Admin </a>
-                        <span>/ </span>
-                        <a href="/users/account">
-                            <i class="fa fa-user"></i> Аккаунт
-                        </a>
-                        <span>/</span>
-                        <a href="/users/logout"> Выход</a>
-                    </th:block>
-                </div>
-            </div>
-        </div>
-    </div>
-</th:block>
-
 <!--/*@thymesVar id="utils" type="com.example.utils.UtilsForWeb"*/-->
 <div class="site-branding-area">
     <div class="container">
@@ -96,8 +69,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li th:class="${menu}=='index'?'active':''"><a href="/index">Главная</a></li>
-                    <li th:class="${menu}=='fix'?'active':''"><a href="/fix">Цены</a></li>
                     <li th:class="${menu}=='status'?'active':''"><a href="/orders/widget">Статус ремонта</a></li>
+                    <li th:class="${menu}=='fix'?'active':''"><a href="/fix">Цены</a></li>
                     <li th:class="${menu}=='contacts'?'active':''"><a href="/contacts">Контакты</a></li>
                     <li th:if="${isAdmin}" th:class="${menu}=='admin_callbacks'?'active':''"><a href="/admin/callbacks">Коллбэки</a>
                     </li>
@@ -150,7 +123,6 @@
                     <p>&copy; 2018 Cifracentr. Все права защищены.</p>
                 </div>
             </div>
-
             <div class="col-md-4">
                 <div class="footer-card-icon">
                     <i class="fab fa-cc-discover"></i>
@@ -158,6 +130,26 @@
                     <i class="fab fa-cc-paypal"></i>
                     <i class="fab fa-cc-visa"></i>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="login-registr" th:with="isUserOrAdmin = ${isUser or isAdmin}">
+                <th:block th:unless="${isUserOrAdmin}">
+                    <a href="/users/login">
+                        <i class="fa fa-user"></i> Вход
+                    </a>
+                    <!--<span>/</span>
+                    <a href="/users/registration"> Регистрация</a>-->
+                </th:block>
+                <th:block th:if="${isUserOrAdmin}">
+                    <a th:if="${isAdmin}" href="https://cifraadmin.herokuapp.com" target="_blank">Spring Admin </a>
+                    <span>/ </span>
+                    <a href="/users/account">
+                        <i class="fa fa-user"></i> Аккаунт
+                    </a>
+                    <span>/</span>
+                    <a href="/users/logout"> Выход</a>
+                </th:block>
             </div>
         </div>
     </div>

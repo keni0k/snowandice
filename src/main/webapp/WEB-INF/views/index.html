@@ -3,9 +3,9 @@
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <div class="container">
     <img src="https://i.imgur.com/UceWR1M.png"/>
-    <br/>
+    <br/><br/><br/>
     <th:block th:replace="order/widget :: widget(true)">%%</th:block>
-    <br/>
+    <br/><br/><br/>
     <th:block th:replace="other/contacts :: contacts(true)">%%</th:block>
     <div class="contacts-area">
         <div class="container main-block">

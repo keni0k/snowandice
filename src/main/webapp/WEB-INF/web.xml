@@ -28,8 +28,6 @@
         <url-pattern>/orders/*</url-pattern>
         <url-pattern>/users/*</url-pattern>
         <url-pattern>/errors/*</url-pattern>
-        <url-pattern>/products</url-pattern>
-        <url-pattern>/products/*</url-pattern>
         <url-pattern>/fix</url-pattern>
         <url-pattern>/contacts</url-pattern>
         <url-pattern>/status</url-pattern>
@@ -37,9 +35,25 @@
         <url-pattern>/ship_and_pay</url-pattern>
         <url-pattern>/privacy_policy</url-pattern>
         <url-pattern>/exchange_and_returns</url-pattern>
-        <url-pattern>/upload_images</url-pattern>
         <url-pattern>/admin/*</url-pattern>
-        <url-pattern>/search</url-pattern>
     </servlet-mapping>
+
+    <!--Позволяет работать с русскими символами-->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

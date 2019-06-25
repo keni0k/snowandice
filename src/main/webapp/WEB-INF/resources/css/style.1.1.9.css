@@ -1452,3 +1452,8 @@ div.status p{
     height: 400px;
     overflow-y: scroll;
 }
+.goods h4{
+    margin: auto auto 15px;
+    width: max-content;
+    cursor: pointer;
+}

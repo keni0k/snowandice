@@ -110,7 +110,7 @@
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-6 col-sm-6">
                 <div class="footer-about-us">
                     <h2 class="footer-wid-title">Цифровой центр</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam
@@ -125,17 +125,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 col-sm-6">
-                <div class="footer-menu">
-                    <h2 class="footer-wid-title">Навигация пользователя </h2>
-                    <ul>
-                        <li><a href="#">Политика конфидециальности</a></li><!--privacy_policy-->
-                        <li><a href="#">Обмен и возврат товара</a></li><!--exchange_and_returns-->
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6" th:if="${!isUser}">
+            <div class="col-md-6 col-sm-6" th:if="${!isUser}">
                 <div class="footer-newsletter">
                     <h2 class="footer-wid-title">Подписка</h2>
                     <p>Узнавайте о новостях и акциях первыми. Получайте индивидуальные предложения и скидки</p>
@@ -155,7 +145,6 @@
             <div class="col-md-8">
                 <div class="copyright">
                     <p>&copy; 2018 Cifracentr. Все права защищены.</p>
-                    <!--Coded with love by keni0k-->
                 </div>
             </div>
 
@@ -176,15 +165,11 @@
     <div th:replace="fragments/response :: modal">%%</div>
 </th:block>
 
-<!-- Latest jQuery form server -->
-<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
-        <!--integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" th:if="${menu=='order_widget' or menu=='admin_callbacks'}"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>-->
 
 <script type="text/javascript" th:if="${#httpServletRequest.getParameter('msg')!=null and #httpServletRequest.getParameter('msg')!=''}">
     $(window).on('load',function(){

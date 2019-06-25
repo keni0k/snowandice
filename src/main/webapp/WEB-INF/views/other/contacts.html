@@ -6,9 +6,12 @@
     <div class="container main-block">
         <div class="row" th:fragment="contacts(type)">
             <div class="col-sm-6">
-                <h3>Наш телефон:
+                <h3 th:unless="${type}">Наш телефон:
                     +7(983) 583-2000
                 </h3>
+                <h4 th:if="${type}">Наш телефон:
+                    +7(983) 583-2000
+                </h4>
                 <h4>Режим работы:</h4>
                 <p>Ежедневно c 09:00 до 20:00</p>
                 <p>Суббота, Воскресенье с 09:00 до 14:00</p>

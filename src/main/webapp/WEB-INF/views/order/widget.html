@@ -6,12 +6,14 @@
 <div class="contacts-area widget-fix" th:style="${isAdmin}?'':'min-height:300px'">
     <div class="zigzag-bottom"></div>
     <div class="container main-block">
-        <div class="row" th:fragment="widget">
+        <div class="row" th:fragment="widget(type)">
             <!--/*@thymesVar id="orders" type="com.example.utils.remonlineAPI.RemOrders"*/-->
             <!--/*@thymesVar id="status" type="com.example.utils.remonlineAPI.Status"*/-->
             <div class="col-md-10 col-lg-8 col-centred">
                 <div class="header mb-2">
-                    <h3>Узнать статус ремонта по номеру телефона</h3>
+                    <h3 th:unless="${type}">Узнать статус ремонта по номеру телефона</h3>
+                    <h4 th:if="${type}">Узнать статус ремонта по номеру телефона</h4>
+
                 </div>
                 <div class="row">
                     <form action="/orders/widget" method="get">

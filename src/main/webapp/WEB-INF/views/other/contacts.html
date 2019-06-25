@@ -17,7 +17,7 @@
                     с.Кызыл-Озёк, ул. Советская, 51
                 </p>
                 <!--/*@thymesVar id="type" type="java.lang.Boolean"*/-->
-                <th:block th:if="${type}">
+                <th:block th:unless="${type}">
                     <h4>Данные организации:</h4>
                     <p>
                         Наименование организации: ИП "Воронкова Вера Сергеевна"<br/>

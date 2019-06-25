@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: header (~{::body},'index')}">
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <div class="container">
-    <img src="https://i.imgur.com/UceWR1M.png"/>
+
+    <th:block th:replace="fragments/carousel :: carousel">%%</th:block>
     <br/><br/><br/>
     <th:block th:replace="order/widget :: widget(true)">%%</th:block>
     <br/><br/><br/>

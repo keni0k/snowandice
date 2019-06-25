@@ -165,37 +165,6 @@ public class MainController {
             }
         }
         return redirectWithMsg(request, "Запрос передан оператору, он свяжется с вами в ближайшее время", "success");
-        //"redirect:" + request.getHeader("referer");
-    }
-
-
-    @RequestMapping(value = "/upload_images", method = POST)
-    public @ResponseBody
-    String uploadMultipleFileHandler(@RequestParam("img") MultipartFile[] files) {
-
-        var message = new StringBuilder();
-        for (MultipartFile file : files) {
-            try {
-                var fileName = Optional.ofNullable(file.getOriginalFilename());
-                var photoToken = randomToken(32);
-                var input = file.getInputStream();
-                var serverFile = Optional.ofNullable(streamToFile(getFileExtension(fileName.orElseThrow(Exception::new)), input));
-
-                if (serverFile.isPresent() && getFileSizeMegaBytes(serverFile.get()) > 1)
-                    serverFile = Optional.of(compress(serverFile.get(), getFileExtension(fileName.get()), getFileSizeMegaBytes(serverFile.get())));
-
-                photoToken += ".jpg";
-                Image img = new Image();
-                img.setToken(photoToken);
-                serverFile.orElseThrow(Exception::new);
-                putImg(serverFile.get().getAbsolutePath(), photoToken);
-                imageService.add(img);
-                message.append(Consts.URL_IMG_PATH).append(photoToken);
-            } catch (Exception e) {
-                message.append("<p>").append(e.getMessage()).append("</p>");
-            }
-        }
-        return message.toString();
     }
 
 }

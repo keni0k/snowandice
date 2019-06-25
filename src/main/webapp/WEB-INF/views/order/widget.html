@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: header (~{::body},'order_widget')}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: header (~{::body},'widget')}">
 
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <div class="contacts-area widget-fix" th:style="${isAdmin}?'':'min-height:300px'">

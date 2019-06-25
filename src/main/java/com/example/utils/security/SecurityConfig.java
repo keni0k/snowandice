@@ -1,6 +1,7 @@
 package com.example.utils.security;
 
 import com.example.jpa_services_impl.UserServiceImpl;
+import com.example.repo.TokenRepository;
 import com.example.repo.UserRepository;
 import com.example.utils.CustomAuthenticationProvider;
 import com.example.utils.security.token.TokenService;
@@ -24,10 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final TokenService repository;
 
     @Autowired
-    public SecurityConfig(UserRepository personRepository, TokenService repository) {
+    public SecurityConfig(UserRepository personRepository, TokenRepository tokenRepository) {
         personService = new UserServiceImpl(personRepository);
         userDetailsService = new UserDetailsService(personRepository);
-        this.repository = repository;
+        this.repository = new TokenService(tokenRepository);
     }
 
     @Override

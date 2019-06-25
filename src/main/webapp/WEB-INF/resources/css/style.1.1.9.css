@@ -1455,5 +1455,7 @@ div.status p{
 .goods h4{
     margin: auto auto 15px;
     width: max-content;
+}
+.goods {
     cursor: pointer;
 }

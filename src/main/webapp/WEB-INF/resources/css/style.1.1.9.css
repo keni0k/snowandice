@@ -83,7 +83,7 @@ z-index: 999;}
 }
 
 .logo a img {
-    height: 85px;
+    max-height: 85px;
 }
 
 .shopping-item {

@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: header (~{::body},'index')}">
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <div class="container" style="height: 300px;">
-    <div class="row">
-        <h1>Главная страница в процессе разработки</h1>
-    </div>
+    <img src="https://i.imgur.com/UceWR1M.png" />
+    <th:block th:replace="order/widget :: widget">%%</th:block>
+    <th:block th:replace="other/contacts :: contacts">%%</th:block>
+    <th:block th:replace="other/fix :: fix">%%</th:block>
 </div>
 </body>
 </html>

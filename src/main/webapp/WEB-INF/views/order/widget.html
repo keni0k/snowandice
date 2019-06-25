@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: header (~{::body},'order_widget')}">
 
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-<div class="contacts-area widget-fix">
+<div class="contacts-area widget-fix" th:style="${isAdmin}?'height:300px;':''">
     <div class="zigzag-bottom"></div>
     <div class="container main-block">
         <div class="row" th:fragment="widget">

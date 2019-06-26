@@ -11,8 +11,8 @@
                     <span th:text="${good.name}">Смартфоны</span>
                 </div>
             </a>
+            <th:block th:replace="fragments/prices :: modal(${good.name},'Описание работы')">%%</th:block>
         </div>
-        <th:block th:replace="fragments/prices :: modal('Компьютеры','Описание работы')">%%</th:block>
     </div>
 </body>
 </html>

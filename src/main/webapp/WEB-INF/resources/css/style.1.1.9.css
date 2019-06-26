@@ -1827,12 +1827,14 @@ div.status p {
     display: inline-block;
     right: -20px;
     top: 130px;
+    width: 30px;
     position: absolute;
 }
 
 .owl-nav .owl-prev {
     display: inline-block;
     left: -20px;
+    width: 30px;
     top: 130px;
     position: absolute;
 }

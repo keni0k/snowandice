@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
     <div class="row goods" th:fragment="goods">
-        <!--/*@thymesVar id="goods" type="com.example.models.Good"*/-->
+        <!--/*@thymesVar id="goods" type="java.util.List<com.example.models.Good>"*/-->
         <div class="col-xs-3 col-sm-2" th:each="good :${goods}">
-            <a class="thumbnail" href="#"
+            <a class="thumbnail" th:data-name="${good.name}"
                data-target="modalPrices" data-toggle="modal" onclick="return false">
                 <img src="" th:src="${good.imgLink}" alt="...">
                 <div class="caption">

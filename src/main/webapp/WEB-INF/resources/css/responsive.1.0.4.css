@@ -315,7 +315,23 @@
         padding-bottom: 20px;
     }
 }
+@media only screen and (min-width: 600px) {
+    .owl-nav .owl-prev {
+        top: 60px;
+    }
 
+    .owl-nav .owl-next {
+        top: 60px;
+    }
+}
+@media only screen and (min-width: 560px) {
+    .owl-nav .owl-prev {
+        top: 55px;
+    }
+    .owl-nav .owl-next {
+        top: 55px;
+    }
+}
 /* Wide Mobile Layout: 480px. */
 @media only screen and (min-width: 521px) and (max-width: 767px) {
     .shipping_calculator .cart_totals {

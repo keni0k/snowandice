@@ -2,20 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <body>
 <!--/*Modal: headerCallback*/-->
-<div class="modal fade" id="modalPrices" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true" th:fragment="modal(name, desc)">
+<div th:fragment="modal(good)" class="modal fade" th:id="'modalPrices'+good.id" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog cascading-modal" role="document">
         <!--/*Content*/-->
         <div class="modal-content">
             <!--/*Header*/-->
             <div class="modal-header light-blue darken-3 white-text">
-                <h4 class="inline" th:text="${name}"><i class="fa fa-newspaper-o"></i> %Название работы%</h4>
+                <h4 class="inline" th:text="${good.name}"><i class="fa fa-newspaper-o"></i> %Название работы%</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
             </div>
             <!--/*Body*/-->
             <div class="modal-body mb-0">
-                <h4 th:text="${desc}">%Описание работы%</h4>
+                <h4>%Описание работы%</h4>
             </div>
             <!--/*Footer*/-->
             <div class="modal-footer justify-content-center">

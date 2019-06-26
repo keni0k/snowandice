@@ -3,8 +3,7 @@ jQuery(document).ready(function($){
     // jQuery sticky Menu
     
 	$(".mainmenu-area").sticky({topSpacing:0});
-    
-    
+
     // Bootstrap Mobile Menu fix
     $(".navbar-nav li a").click(function(){
         $(".navbar-collapse").removeClass('in');
@@ -29,9 +28,9 @@ jQuery(document).ready(function($){
 
     $('#modalPrices').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        var recipient = button.data('name'); // Extract info from data-* attributes
+        var name = button.data('name');
         var modal = $(this);
-        modal.find('#modal-title').text(recipient);
+        modal.find('#modal-title').text(name);
     });
 
 });

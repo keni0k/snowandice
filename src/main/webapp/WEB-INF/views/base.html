@@ -80,8 +80,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li th:class="${menu}=='index'?'active':''"><a href="/index">Главная</a></li>
-                    <li th:class="${menu}=='contacts'?'active':''"><a href="/contacts">Контакты</a></li>
-                    <li th:class="${menu}=='fix'?'active':''"><a href="/fix">Цены</a></li>
+                    <li th:class="${menu}=='contacts'?'active':''"><a href="#contacts">Контакты</a></li><!--/contacts-->
+                    <li th:class="${menu}=='fix'?'active':''"><a href="#goods">Цены</a></li><!--/fix-->
                     <li th:class="${menu}=='widget'?'active':''"><a href="/orders/widget">Статус ремонта</a></li>
                     <li th:if="${isAdmin}" th:class="${menu}=='admin_callbacks'?'active':''"><a href="/admin/callbacks">Коллбэки</a>
                     </li>

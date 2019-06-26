@@ -5,9 +5,13 @@
 
     <th:block th:replace="fragments/carousel :: carousel">%%</th:block>
     <br/><br/><br/>
-    <th:block th:replace="other/contacts :: contacts(true)">%%</th:block>
+    <section class="contacts" id="contacts">
+        <th:block th:replace="other/contacts :: contacts(true)">%%</th:block>
+    </section>
     <br/><br/>
+    <section class="goods" id="goods">
     <th:block th:replace="other/goods :: goods">%%</th:block>
+    </section>
 </div>
 </body>
 </html>

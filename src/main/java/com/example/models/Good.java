@@ -19,7 +19,7 @@ public class Good {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    private int priority;
+    private Double priority;
     private String name;
     private String imgLink;
 }

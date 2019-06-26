@@ -77,7 +77,7 @@ public class MainController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(ModelMap modelMap) {
         List goods = goodsRepository.findAll();
-        goods.sort(Comparator.comparingInt(Good::getPriority));
+        goods.sort(Comparator.comparingDouble(Good::getPriority));
         modelMap.addAttribute("utils", new UtilsForWeb());
         modelMap.addAttribute("goods", goods);
         return "index";

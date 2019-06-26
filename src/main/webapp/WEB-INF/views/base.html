@@ -57,7 +57,8 @@
             <div class="col-sm-5 col-xs-5">
                 <div class="q-phone-block">
                     <p class="number">+7 (983) 583-2000</p>
-                    <div class="headerCallback"><a data-target="#headerCallback" data-toggle="modal" class="showCallbackPopup" onclick="return false">заказать
+                    <div class="headerCallback"><a data-target="#headerCallback" data-toggle="modal"
+                                                   class="showCallbackPopup" onclick="return false">заказать
                         обратный звонок</a></div>
                 </div>
             </div>
@@ -80,8 +81,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="nav-item" th:classappend="${menu}=='index'?'active':''"><a class="nav-link js-scroll-trigger" href="/index">Главная</a></li>
-                    <li class="nav-item" th:classappend="${menu}=='contacts'?'active':''"><a class="nav-link js-scroll-trigger" href="#contacts_anchor">Контакты</a></li>&lt;!&ndash;/contacts&ndash;&gt;
-                    <li class="nav-item" th:classappend="${menu}=='fix'?'active':''"><a class="nav-link js-scroll-trigger" href="#goods_anchor">Цены</a></li>&lt;!&ndash;/fix&ndash;&gt;
+                    <li class="nav-item" th:classappend="${menu}=='contacts'?'active':''"><a class="nav-link js-scroll-trigger" href="#contacts_anchor">Контакты</a></li>
+                    <li class="nav-item" th:classappend="${menu}=='fix'?'active':''"><a class="nav-link js-scroll-trigger" href="#goods_anchor">Цены</a></li>
                     <li class="nav-item" th:classappend="${menu}=='widget'?'active':''"><a class="nav-link" href="/orders/widget">Статус ремонта</a></li>
                     <li th:if="${isAdmin}" th:class="${menu}=='admin_callbacks'?'active':''"><a class="nav-link" href="/admin/callbacks">Коллбэки</a>
                     </li>
@@ -92,16 +93,20 @@
 </div>--> <!-- End mainmenu area -->
 
 <div class="container">
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li class="nav-item" th:classappend="${menu}=='index'?'active':''"><a class="nav-link js-scroll-trigger" href="/index">Главная</a></li>
-            <li class="nav-item" th:classappend="${menu}=='contacts'?'active':''"><a class="nav-link js-scroll-trigger" href="#contacts_anchor">Контакты</a></li>&lt;!&ndash;/contacts&ndash;&gt;
-            <li class="nav-item" th:classappend="${menu}=='fix'?'active':''"><a class="nav-link js-scroll-trigger" href="#goods_anchor">Цены</a></li>&lt;!&ndash;/fix&ndash;&gt;
-            <li class="nav-item" th:classappend="${menu}=='widget'?'active':''"><a class="nav-link" href="/orders/widget">Статус ремонта</a></li>
-            <li th:if="${isAdmin}" th:class="${menu}=='admin_callbacks'?'active':''"><a class="nav-link" href="/admin/callbacks">Коллбэки</a>
-            </li>
-        </ul>
-    </div>
+    <ul class="nav navbar-nav">
+        <li class="nav-item"><a class="nav-link js-scroll-trigger"
+                                href="/index">Главная</a></li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger"
+                                href="#contacts_anchor">Контакты</a>
+        </li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger"
+                                href="#goods_anchor">Цены</a></li>
+        <li class="nav-item"><a class="nav-link" href="/orders/widget">Статус
+            ремонта</a></li>
+        <li th:if="${isAdmin}"><a class="nav-link"
+                                  href="/admin/callbacks">Коллбэки</a>
+        </li>
+    </ul>
 </div>
 
 <div th:replace="${template}"></div>
@@ -211,22 +216,22 @@
 <script src="/resources/js/main.js"></script>
 <script src="/resources/js/masked_input.min.js"></script>
 <script>
-$(document).ready(function () {
-    $("#phone_number").mask("+7 (999) 999-9999");
-    $("#phone_callback").mask("+7 (999) 999-9999");
+    $(document).ready(function () {
+        $("#phone_number").mask("+7 (999) 999-9999");
+        $("#phone_callback").mask("+7 (999) 999-9999");
 
-    // noinspection SpellCheckingInspection
-    $('.owl-carousel').owlCarousel({
-        loop:true,
-        margin:0,
-        nav:true,
-        items:1,
-        autoplay:true,
-        autoplayTimeout:4000,
-        navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"]
-    });
+        // noinspection SpellCheckingInspection
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: true,
+            items: 1,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"]
+        });
 
-});</script>
+    });</script>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function (m, e, t, r, i, k, a) {

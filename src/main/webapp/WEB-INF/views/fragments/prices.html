@@ -9,7 +9,7 @@
         <div class="modal-content">
             <!--/*Header*/-->
             <div class="modal-header light-blue darken-3 white-text">
-                <h4 class="inline" th:text="${good.name}"><i class="fa fa-newspaper-o"></i> %Название работы%</h4>
+                <h4 class="inline modal-title">%Название работы%</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
             </div>
@@ -26,6 +26,13 @@
         </div>
         <!--/*End-of-Content*/-->
     </div>
+    <script>
+        $('#modalPrices').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var recipient = button.data('name'); // Extract info from data-* attributes
+        var modal = $(this);
+        modal.find('.modal-title').text(recipient);
+    })</script>
 </div>
 <!--/*End-of-Modal: headerCallback*/-->
 </body>

@@ -3,9 +3,9 @@
 <body>
     <div class="row goods" th:fragment="goods">
         <!--/*@thymesVar id="goods" type="com.example.models.Good"*/-->
-        <div class="col-xs-3 col-sm-2 col-md-1" th:each="good :${goods}">
+        <div class="col-xs-3 col-sm-2" th:each="good :${goods}">
             <a class="thumbnail">
-                <img src="https://cdn.elkor.lv/media/catalog/product/cache/0/image/9df78eab33525d08d6e5fb8d27136e95/z/e/ze554kl_white_1.png" alt="...">
+                <img src="" th:src="${good.imgLink}" alt="...">
                 <div class="caption">
                     <span th:text="${good.name}">Смартфоны</span>
                 </div>

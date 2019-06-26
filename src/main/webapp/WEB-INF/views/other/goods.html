@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
     <div class="row goods" th:fragment="goods">
-        <div class="col-xs-4 col-sm-3 col-md-2" th:each="i : ${#numbers.sequence(0,5)}">
+        <!--/*@thymesVar id="goods" type="com.example.models.Good"*/-->
+        <div class="col-xs-3 col-sm-2 col-md-1" th:each="good :${goods}">
             <a class="thumbnail">
                 <img src="https://cdn.elkor.lv/media/catalog/product/cache/0/image/9df78eab33525d08d6e5fb8d27136e95/z/e/ze554kl_white_1.png" alt="...">
                 <div class="caption">
-                    <span th:text="${'smarty'+i}">Смартфоны</span>
+                    <span th:text="${good.name}">Смартфоны</span>
                 </div>
             </a>
         </div>

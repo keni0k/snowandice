@@ -18,12 +18,10 @@ package com.example.controllers;
 
 import com.example.jpa_services_impl.ImageServiceImpl;
 import com.example.jpa_services_impl.UserServiceImpl;
+import com.example.models.Good;
 import com.example.models.Image;
 import com.example.models.callbacks.Callback;
-import com.example.repo.CallbackRepository;
-import com.example.repo.ImageRepository;
-import com.example.repo.StatusCallbackRepository;
-import com.example.repo.UserRepository;
+import com.example.repo.*;
 import com.example.utils.Consts;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
@@ -46,6 +44,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 import static com.example.utils.Consts.URL_PATH;
@@ -60,20 +61,25 @@ public class MainController {
     private ImageServiceImpl imageService;
     private CallbackRepository callbackRepository;
     private StatusCallbackRepository statusCallbackRepository;
+    private GoodsRepository goodsRepository;
 
     @Autowired
-    public MainController(ImageRepository imageRepository, UserRepository userRepository,
+    public MainController(ImageRepository imageRepository, UserRepository userRepository, GoodsRepository goodsRepository,
                           CallbackRepository callbackRepository, StatusCallbackRepository statusCallbackRepository) {
         UserServiceImpl userService = new UserServiceImpl(userRepository);
         imageService = new ImageServiceImpl(imageRepository);
         utils = new Utils(userService);
         this.callbackRepository = callbackRepository;
         this.statusCallbackRepository = statusCallbackRepository;
+        this.goodsRepository = goodsRepository;
     }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(ModelMap modelMap) {
+        List goods = goodsRepository.findAll();
+        goods.sort(Comparator.comparingInt(Good::getPriority));
         modelMap.addAttribute("utils", new UtilsForWeb());
+        modelMap.addAttribute("goods", goods);
         return "index";
     }
 

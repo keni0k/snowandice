@@ -1822,3 +1822,17 @@ div.status p {
     padding-top: 40px;
     padding-bottom: 40px;
 }
+
+.owl-nav .owl-next {
+    display: inline-block;
+    right: -20px;
+    top: 75px;
+    position: absolute;
+}
+
+.owl-nav .owl-prev {
+    display: inline-block;
+    left: -20px;
+    top: 75px;
+    position: absolute;
+}

@@ -199,11 +199,15 @@ $(document).ready(function () {
     $("#phone_number").mask("+7 (999) 999-9999");
     $("#phone_callback").mask("+7 (999) 999-9999");
 
+    // noinspection SpellCheckingInspection
     $('.owl-carousel').owlCarousel({
         loop:true,
-        margin:10,
+        margin:0,
         nav:true,
-        items:1
+        items:1,
+        autoplay:true,
+        autoplayTimeout:3000,
+        navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"]
     });
 
 });</script>

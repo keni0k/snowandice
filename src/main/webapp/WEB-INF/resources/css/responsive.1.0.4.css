@@ -298,6 +298,14 @@
         padding-bottom: 20px;
     }
 
+
+    .owl-nav .owl-next {
+        top: 75px;
+    }
+
+    .owl-nav .owl-prev {
+        top: 75px;
+    }
 }
 
 /* Wide Mobile Layout: 480px. */

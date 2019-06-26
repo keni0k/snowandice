@@ -1826,13 +1826,13 @@ div.status p {
 .owl-nav .owl-next {
     display: inline-block;
     right: -20px;
-    top: 75px;
+    top: 130px;
     position: absolute;
 }
 
 .owl-nav .owl-prev {
     display: inline-block;
     left: -20px;
-    top: 75px;
+    top: 130px;
     position: absolute;
 }

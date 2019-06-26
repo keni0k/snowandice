@@ -5,7 +5,7 @@
         <!--/*@thymesVar id="goods" type="com.example.models.Good"*/-->
         <div class="col-xs-3 col-sm-2" th:each="good :${goods}">
             <a class="thumbnail" th:data-name="${good.name}"
-               th:data-target="'#modalPrices'+${good.id}" data-toggle="modal" onclick="return false">
+               data-target="modalPrices" data-toggle="modal" onclick="return false">
                 <img src="" th:src="${good.imgLink}" alt="...">
                 <div class="caption">
                     <span th:text="${good.name}">Смартфоны</span>

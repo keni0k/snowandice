@@ -315,7 +315,7 @@
         padding-bottom: 20px;
     }
 }
-@media only screen and (min-width: 600px) {
+@media only screen and (max-width: 600px) {
     .owl-nav .owl-prev {
         top: 60px;
     }
@@ -324,11 +324,8 @@
         top: 60px;
     }
 }
-@media only screen and (min-width: 560px) {
-    .owl-nav .owl-prev {
-        top: 55px;
-    }
-    .owl-nav .owl-next {
+@media only screen and (max-width: 560px) {
+    .owl-nav .owl-prev, .owl-nav .owl-next {
         top: 55px;
     }
 }

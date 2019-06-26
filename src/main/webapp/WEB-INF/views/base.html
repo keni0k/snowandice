@@ -187,13 +187,16 @@
 
 
 <!-- jQuery sticky menu -->
-<!--<script src="/resources/js/owl.carousel.min.js"></script>-->
+<script src="/resources/js/owl.carousel.min.js"></script>
 <script src="/resources/js/jquery.sticky.js"></script>
 
 <!-- Main Script -->
 <script src="/resources/js/main.js"></script>
 <script src="/resources/js/masked_input.min.js"></script>
-<script>$('.carousel').carousel();
+<script>$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true});
 $(document).ready(function () {
     $("#phone_number").mask("+7 (999) 999-9999");
     $("#phone_callback").mask("+7 (999) 999-9999");

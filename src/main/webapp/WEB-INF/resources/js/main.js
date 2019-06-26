@@ -25,6 +25,14 @@ jQuery(document).ready(function($){
     $('body').scrollspy({ 
         target: '.navbar-collapse',
         offset: 95
-    })      
+    });
+
+    $('#modalPrices').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var recipient = button.data('name'); // Extract info from data-* attributes
+        var modal = $(this);
+        modal.find('#modal-title').text(recipient);
+    });
+
 });
 

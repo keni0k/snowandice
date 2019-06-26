@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<body>
+<!--/*Modal: headerCallback*/-->
+<div class="modal fade" id="modalPrices" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" th:fragment="modal(name, desc)">
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--/*Content*/-->
+        <div class="modal-content">
+            <!--/*Header*/-->
+            <div class="modal-header light-blue darken-3 white-text">
+                <h4 class="inline" th:text="${name}"><i class="fa fa-newspaper-o"></i> %Название работы%</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+            </div>
+            <!--/*Body*/-->
+            <div class="modal-body mb-0">
+                <h4 th:text="${desc}">%Описание работы%</h4>
+            </div>
+            <!--/*Footer*/-->
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-outline-primary waves-effect waves-light"
+                        data-dismiss="modal">Закрыть
+                </button>
+            </div>
+        </div>
+        <!--/*End-of-Content*/-->
+    </div>
+</div>
+<!--/*End-of-Modal: headerCallback*/-->
+</body>
+</html>

@@ -24,6 +24,13 @@
 /* Tablet Layout: 768px. */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
+    .owl-nav .owl-next {
+        top: 75px;
+    }
+
+    .owl-nav .owl-prev {
+        top: 75px;
+    }
     .user-menu, .header-right ul.list-inline {
         text-align: center;
     }
@@ -71,7 +78,13 @@
 
 /* Mobile Layout: 320px. */
 @media only screen and (max-width: 767px) {
+    .owl-nav .owl-next {
+        top: 75px;
+    }
 
+    .owl-nav .owl-prev {
+        top: 75px;
+    }
     main {
         top: 0;
     }
@@ -296,15 +309,6 @@
     .header-widget {
         padding-top: 20px;
         padding-bottom: 20px;
-    }
-
-
-    .owl-nav .owl-next {
-        top: 75px;
-    }
-
-    .owl-nav .owl-prev {
-        top: 75px;
     }
 }
 

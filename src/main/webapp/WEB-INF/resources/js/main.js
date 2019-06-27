@@ -42,8 +42,19 @@ jQuery(document).ready(function($){
     });
 
     $('#modalWidget').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
         var phone = $('#phone_top').val();
+        $.get(
+            "/orders/widget_html",
+            {
+                phone: phone
+            },
+            onAjaxSuccess
+        );
+
+        function onAjaxSuccess(data) {
+            alert(data);
+        }
+        var button = $(event.relatedTarget);
         var modal = $(this);
         modal.find('#phone_widget').val(phone);
     });

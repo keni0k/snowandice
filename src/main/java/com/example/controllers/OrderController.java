@@ -144,14 +144,8 @@ public class OrderController {
         return zeros == phone.length();
     }
 
-    @RequestMapping(value = "/widget", method = RequestMethod.GET)
-    public String widgetStatus(ModelMap modelMap,
-                               @RequestParam(value = "phone", required = false) String phone,
-                               @RequestParam(value = "page", required = false) Integer page,
-                               @RequestParam(value = "id", required = false) Integer id,
-                               @RequestParam(value = "status", required = false) Long statusId,
-                               Principal principal) {
-        boolean isAdmin = utils.isAdmin(principal);
+    private RemOrders getOrders(String phone, Integer page,
+                                Integer id, Long statusId, boolean isAdmin) {
         RemOrders remOrders = null;
         if (phone != null)
             phone = digits(phone);
@@ -168,16 +162,40 @@ public class OrderController {
                     e.printStackTrace();
                 }
             }
-            modelMap.addAttribute("orders", remOrders);
-        } else {
-            modelMap.addAttribute("orders", null);
         }
+        return remOrders;
+    }
+
+    @RequestMapping(value = "/widget", method = RequestMethod.GET)
+    public String widgetStatus(ModelMap modelMap,
+                               @RequestParam(value = "phone", required = false) String phone,
+                               @RequestParam(value = "page", required = false) Integer page,
+                               @RequestParam(value = "id", required = false) Integer id,
+                               @RequestParam(value = "status", required = false) Long statusId,
+                               Principal principal) {
+        boolean isAdmin = utils.isAdmin(principal);
+        RemOrders remOrders = getOrders(phone, page, id, statusId, isAdmin);
+        modelMap.addAttribute("orders", remOrders);
         modelMap.addAttribute("phone", phone != null ? phone : "");
         modelMap.addAttribute("statuses", isAdmin ? getStatuses() : null);
         if (remOrders != null && remOrders.data != null && remOrders.data.size() > 0 && isAdmin && statusId != null)
             modelMap.addAttribute("status", remOrders.data.get(0).status);
         modelMap.addAttribute("utils", new UtilsForWeb());
         return "order/widget";
+    }
+
+    @RequestMapping(value = "/widget_html", method = RequestMethod.GET)
+    @ResponseBody
+    public String widgetToModal(ModelMap modelMap,
+                                @RequestParam(value = "phone", required = false) String phone,
+                                @RequestParam(value = "page", required = false) Integer page,
+                                @RequestParam(value = "id", required = false) Integer id,
+                                @RequestParam(value = "status", required = false) Long statusId,
+                                Principal principal){
+        boolean isAdmin = utils.isAdmin(principal);
+        RemOrders remOrders = getOrders(phone, page, id, statusId, isAdmin);
+
+        return remOrders.data.get(0).toString();
     }
 
 }

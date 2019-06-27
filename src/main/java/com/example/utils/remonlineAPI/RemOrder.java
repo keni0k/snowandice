@@ -1,7 +1,10 @@
 package com.example.utils.remonlineAPI;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 
+@Data
 public class RemOrder {
     public long id;
     public String brand;

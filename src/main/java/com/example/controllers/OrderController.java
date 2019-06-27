@@ -184,8 +184,7 @@ public class OrderController {
         return "order/widget";
     }
 
-    @RequestMapping(value = "/widget_html", method = RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value = "/widget_html", method = RequestMethod.POST)
     public String widgetToModal(ModelMap modelMap,
                                 @RequestParam(value = "phone", required = false) String phone,
                                 @RequestParam(value = "page", required = false) Integer page,
@@ -194,8 +193,9 @@ public class OrderController {
                                 Principal principal){
         boolean isAdmin = utils.isAdmin(principal);
         RemOrders remOrders = getOrders(phone, page, id, statusId, isAdmin);
-
-        return remOrders.data.get(0).toString();
+        modelMap.addAttribute("orders", remOrders);
+        modelMap.addAttribute("utils", new UtilsForWeb());
+        return "fragments/results_widget";
     }
 
 }

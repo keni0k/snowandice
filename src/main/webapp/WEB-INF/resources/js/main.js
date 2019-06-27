@@ -60,7 +60,7 @@ jQuery(document).ready(function($){
             onAjaxSuccess
         );
         function onAjaxSuccess(data) {
-            alert(data);
+            $('#for_widget_response').html(data);
         }
     });
 

@@ -1849,3 +1849,7 @@ div.status p {
 .thumbnail .caption {
     height: 50px;
 }
+
+.pa-5{
+    padding: 0 5px;
+}

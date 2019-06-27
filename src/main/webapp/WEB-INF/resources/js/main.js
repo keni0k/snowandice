@@ -50,12 +50,9 @@ jQuery(document).ready(function($){
                 $('#for_widget_response').html(msg);
             })
             .fail(function(xhr, status, error) {
+                $('.lds-ellipsis').css("display", "none");
                 $('#for_widget_response').html('<h4>Произошла ошибка. Повторите запрос позже.</h4>');
             });
-        function onAjaxSuccess(data) {
-            $('.lds-ellipsis').css("display", "none");
-            $('#for_widget_response').html(data);
-        }
         var button = $(event.relatedTarget);
         var modal = $(this);
         modal.find('#phone_widget').val(phone);
@@ -64,13 +61,15 @@ jQuery(document).ready(function($){
     $('#find_modal').click(function () {
         var phone = $('#phone_widget').val();
         $('.lds-ellipsis').css("display", "block");
-        $.post("/orders/widget_html", {phone: phone},
-            onAjaxSuccess
-        );
-        function onAjaxSuccess(data) {
-            $('.lds-ellipsis').css("display", "none");
-            $('#for_widget_response').html(data);
-        }
+        $.post("/orders/widget_html", {phone: phone})
+            .done(function(msg){
+                $('.lds-ellipsis').css("display", "none");
+                $('#for_widget_response').html(msg);
+            })
+            .fail(function(xhr, status, error) {
+                $('.lds-ellipsis').css("display", "none");
+                $('#for_widget_response').html('<h4>Произошла ошибка. Повторите запрос позже.</h4>');
+            });
     });
 
 });

@@ -6,20 +6,21 @@
 <div class="contacts-area widget-fix" th:style="${isAdmin}?'':'min-height:300px'">
     <div class="zigzag-bottom"></div>
     <div class="container main-block">
-        <div class="row" th:fragment="widget(type)">
+        <div class="row">
             <!--/*@thymesVar id="orders" type="com.example.utils.remonlineAPI.RemOrders"*/-->
             <!--/*@thymesVar id="status" type="com.example.utils.remonlineAPI.Status"*/-->
             <div class="col-md-10 col-lg-8 col-centred">
                 <div class="header mb-2">
-                    <h3 th:unless="${type}">Узнать статус ремонта по номеру телефона</h3>
+                    <h3>Узнать статус ремонта по номеру телефона</h3>
                 </div>
-                <div class="row">
+                <div class="row" th:fragment="widget(type)">
                     <form action="/orders/widget" method="get">
                         <div class="col-xs-8">
                             <div class="input-group">
                                 <span class="input-group-addon">Телефон</span>
                                 <!--/*@thymesVar id="phone" type="java.lang.String"*/-->
-                                <input name="phone" th:id="${type}?'phone_widget':'phone'" autofocus="autofocus" type="text"
+                                <input name="phone" th:id="${type}?'phone_widget':'phone'" autofocus="autofocus"
+                                       type="text"
                                        class="form-control input-lg" th:minlength="${isAdmin?0:5}" th:value="${phone}"
                                        placeholder="Телефон" aria-label="Телефон" th:required="${not isAdmin}">
                             </div>
@@ -34,15 +35,19 @@
                     <div class="col-xs-2 dropdown filter-statuses">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                th:text="${status!=null?status.getName():'Все статусы'}" th:style="'background: '+${status!=null?status.getColor():'lightgray'}">
+                                th:text="${status!=null?status.getName():'Все статусы'}"
+                                th:style="'background: '+${status!=null?status.getColor():'lightgray'}">
                             Статусы
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <!--/*@thymesVar id="statuses" type="java.util.List<com.example.utils.remonlineAPI.Status>"*/-->
                             <!--/*@thymesVar id="status" type="com.example.utils.remonlineAPI.Status"*/-->
-                            <a class="dropdown-item" href="#" th:href="@{/orders/widget}" th:if="${status!=null}">Все статусы</a>
-                            <a class="dropdown-item" href="#" th:each="each_status:${statuses}" th:text="${each_status.getName()}"
-                               th:style="'background:'+${each_status.getColor()}" th:href="@{/orders/widget(status=${each_status.getId()})}"
+                            <a class="dropdown-item" href="#" th:href="@{/orders/widget}" th:if="${status!=null}">Все
+                                статусы</a>
+                            <a class="dropdown-item" href="#" th:each="each_status:${statuses}"
+                               th:text="${each_status.getName()}"
+                               th:style="'background:'+${each_status.getColor()}"
+                               th:href="@{/orders/widget(status=${each_status.getId()})}"
                                th:if="${status==null or (status!=null and status.getId()!=each_status.getId())}">Action</a>
                         </div>
                     </div>
@@ -51,7 +56,8 @@
                     <th:block th:unless="${orders==null or orders.data==null or orders.data.size()==0}">
                         <details th:each="order: ${orders.data}" style="cursor: auto;">
                             <summary th:text="${order.brand + ' ' + order.model + ' (' + order.status.name + ')'}"
-                                     th:style="${'background: '+ order.status.color}">Ноутбуки</summary>
+                                     th:style="${'background: '+ order.status.color}">Ноутбуки
+                            </summary>
                             <table class="table-history p-min backgr-none">
                                 <tr>
                                     <th><strong>ID</strong></th>

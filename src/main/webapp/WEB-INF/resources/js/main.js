@@ -37,6 +37,11 @@ jQuery(document).ready(function($){
     $('#modalPrices').on('show.bs.modal', function (event) {
         var item = $(event.relatedTarget);
         var name = item.data('name');
+        var enName = item.data('en');
+        $.get("/fix", {name: enName})
+            .done(function(msg){
+                $('#for_ajax').html(msg);
+            });
         var modal = $(this);
         modal.find('#modal-title').text(name);
     });

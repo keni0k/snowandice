@@ -4,7 +4,7 @@
     <div class="row goods" th:fragment="goods">
         <!--/*@thymesVar id="goods" type="java.util.List<com.example.models.Good>"*/-->
         <div class="col-xs-3 col-sm-2 pa-5" th:each="good :${goods}">
-            <a class="thumbnail" th:data-name="${good.name}"
+            <a class="thumbnail" th:data-name="${good.name}" th:data-en="${good.enName}"
                data-target="#modalPrices" data-toggle="modal" onclick="return false">
                 <img src="" th:src="${good.imgLink}" alt="...">
                 <div class="caption">

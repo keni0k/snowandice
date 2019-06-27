@@ -90,9 +90,15 @@ public class MainController {
     }
 
     @RequestMapping("/fix")
-    public String fix(ModelMap modelMap) {
+    public String fix(ModelMap modelMap,
+                      @RequestParam(value = "name", required = false) String name) {
         modelMap.addAttribute("utils", new UtilsForWeb());
+        if (name==null)
         return "other/fix";
+        else {
+            modelMap.addAttribute("name", name);
+            return "fragments/good";
+        }
     }
 
     @RequestMapping("/contacts")

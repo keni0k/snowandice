@@ -21,5 +21,6 @@ public class Good {
     private long id;
     private Double priority;
     private String name;
+    private String enName;
     private String imgLink;
 }

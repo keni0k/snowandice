@@ -1,14 +1,14 @@
-jQuery(document).ready(function($){
-    
+jQuery(document).ready(function ($) {
+
     // jQuery sticky Menu
-    
-	$(".mainmenu-area").sticky({topSpacing:0});
+
+    $(".mainmenu-area").sticky({topSpacing: 0});
 
     // Bootstrap Mobile Menu fix
-    $(".navbar-nav li a").click(function(){
+    $(".navbar-nav li a").click(function () {
         $(".navbar-collapse").removeClass('in');
-    });    
-    
+    });
+
     // jQuery Scroll effect
     var scroll = new SmoothScroll('a[href*="#"]', {header: '.nav-offset'});
 
@@ -19,17 +19,17 @@ jQuery(document).ready(function($){
 
     // Carousel in index
     $('.owl-carousel').owlCarousel({
-        loop:true,
-        margin:0,
-        nav:true,
-        items:1,
-        autoplay:true,
-        autoplayTimeout:4000,
-        navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"]
+        loop: true,
+        margin: 0,
+        nav: true,
+        items: 1,
+        autoplay: true,
+        autoplayTimeout: 4000,
+        navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"]
     });
 
     // Bootstrap ScrollPSY
-    $('body').scrollspy({ 
+    $('body').scrollspy({
         target: '.navbar-collapse',
         offset: 95
     });
@@ -41,13 +41,13 @@ jQuery(document).ready(function($){
         $('.lds-ellipsis').css("display", "block");
         $('#for_ajax').html('');
         $.get("/fix", {name: enName})
-            .done(function(msg){
+            .done(function (msg) {
                 $('.lds-ellipsis').css("display", "none");
                 $('#for_ajax').html(msg);
             })
-            .fail(function(xhr, status, error) {
+            .fail(function (xhr, status, error) {
                 $('.lds-ellipsis').css("display", "none");
-                $('#for_ajax').html('<h4>Информация  будет добавлена позже. Вы можете позвонить нам или заказать обратный звонок</h4>');
+                $('#for_ajax').html('<b>Информация  будет добавлена позже. Вы можете позвонить нам или заказать обратный звонок</b>');
             });
         var modal = $(this);
         modal.find('#modal-title').text(name);
@@ -57,11 +57,11 @@ jQuery(document).ready(function($){
         var phone = $('#phone_top').val();
         $('.lds-ellipsis').css("display", "block");
         $.post("/orders/widget_html", {phone: phone})
-            .done(function(msg){
+            .done(function (msg) {
                 $('.lds-ellipsis').css("display", "none");
                 $('#for_widget_response').html(msg);
             })
-            .fail(function(xhr, status, error) {
+            .fail(function (xhr, status, error) {
                 $('.lds-ellipsis').css("display", "none");
                 $('#for_widget_response').html('<h4>Произошла ошибка. Повторите запрос позже.</h4>');
             });
@@ -74,11 +74,11 @@ jQuery(document).ready(function($){
         var phone = $('#phone_widget').val();
         $('.lds-ellipsis').css("display", "block");
         $.post("/orders/widget_html", {phone: phone})
-            .done(function(msg){
+            .done(function (msg) {
                 $('.lds-ellipsis').css("display", "none");
                 $('#for_widget_response').html(msg);
             })
-            .fail(function(xhr, status, error) {
+            .fail(function (xhr, status, error) {
                 $('.lds-ellipsis').css("display", "none");
                 $('#for_widget_response').html('<h4>Произошла ошибка. Повторите запрос позже.</h4>');
             });

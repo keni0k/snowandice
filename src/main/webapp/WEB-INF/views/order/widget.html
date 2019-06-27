@@ -12,8 +12,6 @@
             <div class="col-md-10 col-lg-8 col-centred">
                 <div class="header mb-2">
                     <h3 th:unless="${type}">Узнать статус ремонта по номеру телефона</h3>
-                    <h4 th:if="${type}">Узнать статус ремонта по номеру телефона</h4>
-
                 </div>
                 <div class="row">
                     <form action="/orders/widget" method="get">
@@ -21,7 +19,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon">Телефон</span>
                                 <!--/*@thymesVar id="phone" type="java.lang.String"*/-->
-                                <input name="phone" id="phone" autofocus="autofocus" type="text"
+                                <input name="phone" th:id="${type}?'phone_widget':'phone'" autofocus="autofocus" type="text"
                                        class="form-control input-lg" th:minlength="${isAdmin?0:5}" th:value="${phone}"
                                        placeholder="Телефон" aria-label="Телефон" th:required="${not isAdmin}">
                             </div>

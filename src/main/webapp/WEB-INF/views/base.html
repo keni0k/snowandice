@@ -83,7 +83,6 @@
                     <li class="nav-item" th:classappend="${menu}=='index'?'active':''"><a class="nav-link js-scroll-trigger" href="#top">Главная</a></li>
                     <li class="nav-item" th:classappend="${menu}=='contacts'?'active':''"><a class="nav-link js-scroll-trigger" href="#contacts_anchor">Контакты</a></li><!--/contacts-->
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#goods_anchor">Цены</a></li><!--/fix-->
-                    <li th:unless="${isAdmin}" class="nav-item"><a class="nav-link" data-target="#modalWidget" data-toggle="modal">Статус ремонта</a></li>
                     <li th:if="${isAdmin}" class="nav-item" th:classappend="${menu}=='widget'?'active':''"><a class="nav-link" href="/orders/widget">Статус ремонта</a></li>
                     <li th:if="${isAdmin}" th:class="${menu}=='admin_callbacks'?'active':''"><a class="nav-link" href="/admin/callbacks">Коллбэки</a>
                     </li>

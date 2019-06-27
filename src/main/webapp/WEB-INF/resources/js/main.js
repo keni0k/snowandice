@@ -43,14 +43,9 @@ jQuery(document).ready(function($){
 
     $('#modalWidget').on('show.bs.modal', function (event) {
         var phone = $('#phone_top').val();
-        $.get(
-            "/orders/widget_html",
-            {
-                phone: phone
-            },
+        $.get("/orders/widget_html", {phone: phone},
             onAjaxSuccess
         );
-
         function onAjaxSuccess(data) {
             alert(data);
         }

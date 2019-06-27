@@ -39,7 +39,7 @@ jQuery(document).ready(function($){
         var name = item.data('name');
         var enName = item.data('en');
         $('.lds-ellipsis').css("display", "block");
-        $('#for_widget_response').html('');
+        $('#for_ajax').html('');
         $.get("/fix", {name: enName})
             .done(function(msg){
                 $('.lds-ellipsis').css("display", "none");

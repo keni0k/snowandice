@@ -45,7 +45,7 @@ jQuery(document).ready(function($){
         var button = $(event.relatedTarget);
         var phone = $('#phone_top').val();
         var modal = $(this);
-        modal.find('#phone_widget').value(phone);
+        modal.find('#phone_widget').val(phone);
     });
 
 });

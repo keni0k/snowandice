@@ -43,7 +43,7 @@ jQuery(document).ready(function($){
 
     $('#modalWidget').on('show.bs.modal', function (event) {
         var phone = $('#phone_top').val();
-        $.get("/orders/widget_html", {phone: phone},
+        $.post("/orders/widget_html", {phone: phone},
             onAjaxSuccess
         );
         function onAjaxSuccess(data) {
@@ -56,7 +56,7 @@ jQuery(document).ready(function($){
 
     $('#find_modal').click(function () {
         var phone = $('#phone_widget').val();
-        $.get("/orders/widget_html", {phone: phone},
+        $.post("/orders/widget_html", {phone: phone},
             onAjaxSuccess
         );
         function onAjaxSuccess(data) {

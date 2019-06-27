@@ -1853,3 +1853,10 @@ div.status p {
 .pa-5{
     padding: 0 5px;
 }
+
+.caption h5 {
+    text-align: center;
+}
+.nav-offset {
+    height: 50px;
+}

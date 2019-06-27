@@ -47,7 +47,7 @@ jQuery(document).ready(function($){
             })
             .fail(function(xhr, status, error) {
                 $('.lds-ellipsis').css("display", "none");
-                $('#for_widget_response').html('<h4>Информация  будет добавлена позже. Вы можете позвонить нам или заказать обратный звонок</h4>');
+                $('#for_ajax').html('<h4>Информация  будет добавлена позже. Вы можете позвонить нам или заказать обратный звонок</h4>');
             });
         var modal = $(this);
         modal.find('#modal-title').text(name);

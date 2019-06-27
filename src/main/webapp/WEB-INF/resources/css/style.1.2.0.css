@@ -1837,3 +1837,10 @@ div.status p {
     top: 130px;
     position: absolute;
 }
+
+.anchor {
+    padding-top: 55px;
+    margin-top: -55px;
+    -webkit-background-clip: content-box;
+    background-clip: content-box;
+}

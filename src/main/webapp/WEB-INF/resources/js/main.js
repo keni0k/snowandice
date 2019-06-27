@@ -54,7 +54,7 @@ jQuery(document).ready(function($){
         modal.find('#phone_widget').val(phone);
     });
 
-    $('#find_modal').onclick(function (event) {
+    $('#find_modal').click(function () {
         var phone = $('#phone_widget').val();
         $.get("/orders/widget_html", {phone: phone},
             onAjaxSuccess

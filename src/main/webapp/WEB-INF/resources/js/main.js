@@ -26,10 +26,10 @@ jQuery(document).ready(function($){
             event.preventDefault();
             //calculate destination place
             var dest = 0;
-            if ($(this.hash).offset().top > $(document).height() - $(window).height()) {
+            if ($(this).offset().top > $(document).height() - $(window).height()) {
                 dest = $(document).height() - $(window).height();
             } else {
-                dest = $(this.hash).offset().top;
+                dest = $(this);
             }
             //go to destination
             $('html,body').animate({

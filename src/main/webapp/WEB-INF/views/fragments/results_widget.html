@@ -1,5 +1,3 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
-<body>
 <!--/*@thymesVar id="orders" type="com.example.utils.remonlineAPI.RemOrders"*/-->
 <div class="row" th:fragment="results"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}"
@@ -31,5 +29,3 @@
         <p>Проверьте правильность введенного номера телефона</p>
     </th:block>
 </div>
-</body>
-</html>

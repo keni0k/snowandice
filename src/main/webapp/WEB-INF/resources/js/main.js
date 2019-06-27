@@ -38,9 +38,16 @@ jQuery(document).ready(function($){
         var item = $(event.relatedTarget);
         var name = item.data('name');
         var enName = item.data('en');
+        $('.lds-ellipsis').css("display", "block");
+        $('#for_widget_response').html('');
         $.get("/fix", {name: enName})
             .done(function(msg){
+                $('.lds-ellipsis').css("display", "none");
                 $('#for_ajax').html(msg);
+            })
+            .fail(function(xhr, status, error) {
+                $('.lds-ellipsis').css("display", "none");
+                $('#for_widget_response').html('<h4>Информация  будет добавлена позже. Вы можете позвонить нам или заказать обратный звонок</h4>');
             });
         var modal = $(this);
         modal.find('#modal-title').text(name);

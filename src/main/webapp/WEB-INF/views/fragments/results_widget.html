@@ -1,3 +1,5 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<body>
 <!--/*@thymesVar id="orders" type="com.example.utils.remonlineAPI.RemOrders"*/-->
 <div class="row" th:fragment="results"
      th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}"
@@ -24,4 +26,10 @@
             </table>
         </details>
     </th:block>
+    <th:block th:if="${orders==null or orders.data==null or orders.data.size()==0}">
+        <h4 style="text-align: center">Не найдено заказов.</h4>
+        <p>Проверьте правильность введенного номера телефона</p>
+    </th:block>
 </div>
+</body>
+</html>

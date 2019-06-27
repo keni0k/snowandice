@@ -10,15 +10,23 @@ jQuery(document).ready(function($){
     });    
     
     // jQuery Scroll effect
-    /*$('.navbar-nav li a, .scroll-to-up').bind('click', function(event) {
-        var $anchor = $(this);
-        var headerH = $('.header-area').outerHeight();
-        $('html, body').stop().animate({
-            scrollTop : $($anchor.attr('href')).offset().top - headerH + "px"
-        }, 1200, 'easeInOutExpo');
+    var scroll = new SmoothScroll('a[href*="#"]', {header: '.nav-offset'});
 
-        event.preventDefault();
-    });*/
+    //
+    $("#phone_number").mask("+7 (999) 999-9999");
+    $("#phone_callback").mask("+7 (999) 999-9999");
+
+
+    // Carousel in index
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:0,
+        nav:true,
+        items:1,
+        autoplay:true,
+        autoplayTimeout:4000,
+        navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"]
+    });
 
     // Bootstrap ScrollPSY
     $('body').scrollspy({ 
@@ -27,10 +35,17 @@ jQuery(document).ready(function($){
     });
 
     $('#modalPrices').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var name = button.data('name');
+        var item = $(event.relatedTarget);
+        var name = item.data('name');
         var modal = $(this);
         modal.find('#modal-title').text(name);
+    });
+
+    $('#modalWidget').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var phone = $('#phone_top').val();
+        var modal = $(this);
+        modal.find('#phone_widget').value(phone);
     });
 
 });

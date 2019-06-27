@@ -46,7 +46,7 @@
                 <div style="display: -webkit-inline-box;">
                     <div class="input-group">
                         <label style="position: absolute;top: -20px;">Узнать статус ремонта</label>
-                        <input name="phone" id="phone" autofocus="autofocus" type="text" class="form-control input-lg"
+                        <input name="phone" id="phone_top" autofocus="autofocus" type="text" class="form-control input-lg"
                                minlength="5" value="" placeholder="Телефон" aria-label="Телефон" required="required"
                                style="border-right-width: 0; border-radius: 6px 0 0 6px;">
                     </div>
@@ -201,25 +201,6 @@
 <script src="/resources/js/masked_input.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0/dist/smooth-scroll.polyfills.min.js"></script>
 
-<script>
-$(document).ready(function () {
-    $("#phone_number").mask("+7 (999) 999-9999");
-    $("#phone_callback").mask("+7 (999) 999-9999");
-    var scroll = new SmoothScroll('a[href*="#"]',
-        {header: '.nav-offset'});
-
-    // noinspection SpellCheckingInspection
-    $('.owl-carousel').owlCarousel({
-        loop:true,
-        margin:0,
-        nav:true,
-        items:1,
-        autoplay:true,
-        autoplayTimeout:4000,
-        navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"]
-    });
-
-});</script>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function (m, e, t, r, i, k, a) {

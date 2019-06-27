@@ -44,9 +44,14 @@ jQuery(document).ready(function($){
     $('#modalWidget').on('show.bs.modal', function (event) {
         var phone = $('#phone_top').val();
         $('.lds-ellipsis').css("display", "block");
-        $.post("/orders/widget_html", {phone: phone},
-            onAjaxSuccess
-        );
+        $.post("/orders/widget_html", {phone: phone})
+            .done(function(msg){
+                $('.lds-ellipsis').css("display", "none");
+                $('#for_widget_response').html(msg);
+            })
+            .fail(function(xhr, status, error) {
+                $('#for_widget_response').html('<h4>Произошла ошибка. Повторите запрос позже.</h4>');
+            });
         function onAjaxSuccess(data) {
             $('.lds-ellipsis').css("display", "none");
             $('#for_widget_response').html(data);

@@ -4,6 +4,10 @@
         height: 60px;
     }
 
+    .nav-offset {
+        height: 65px;
+    }
+
     div.cart-collaterals ul.products li.product {
         float: left;
         margin-left: 30px;
@@ -23,6 +27,10 @@
 
 /* Tablet Layout: 768px. */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+
+    .nav-offset {
+        height: 55px;
+    }
 
     .owl-nav .owl-next {
         top: 75px;

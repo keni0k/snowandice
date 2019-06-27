@@ -1860,8 +1860,8 @@ div.status p {
 .nav-offset {
     height: 0;
 }
-.pb-0{
-    padding-bottom: 0;
+.orders-result {
+    padding: 0 5px;
 }
 
 /*loading indication*/

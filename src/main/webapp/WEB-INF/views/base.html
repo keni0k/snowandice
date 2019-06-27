@@ -30,7 +30,7 @@
 
 </head>
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
-
+<a id="top"></a>
 <!--/*@thymesVar id="utils" type="com.example.utils.UtilsForWeb"*/-->
 <div class="site-branding-area">
     <div class="container">
@@ -79,7 +79,7 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item" th:classappend="${menu}=='index'?'active':''"><a class="nav-link js-scroll-trigger" href="/index">Главная</a></li>
+                    <li class="nav-item" th:classappend="${menu}=='index'?'active':''"><a class="nav-link js-scroll-trigger" href="#top">Главная</a></li>
                     <li class="nav-item" th:classappend="${menu}=='contacts'?'active':''"><a class="nav-link js-scroll-trigger" href="#contacts_anchor">Контакты</a></li><!--/contacts-->
                     <li class="nav-item" th:classappend="${menu}=='fix'?'active':''"><a class="nav-link js-scroll-trigger" href="#goods_anchor">Цены</a></li><!--/fix-->
                     <li class="nav-item" th:classappend="${menu}=='widget'?'active':''"><a class="nav-link" href="/orders/widget">Статус ремонта</a></li>
@@ -203,7 +203,7 @@ $(document).ready(function () {
     $("#phone_number").mask("+7 (999) 999-9999");
     $("#phone_callback").mask("+7 (999) 999-9999");
     var scroll = new SmoothScroll('a[href*="#"]',
-        {header: '.mainmenu-area'});
+        {header: '[.navbar-header, .navbar-collapse]'});
 
     // noinspection SpellCheckingInspection
     $('.owl-carousel').owlCarousel({

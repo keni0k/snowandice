@@ -43,10 +43,12 @@ jQuery(document).ready(function($){
 
     $('#modalWidget').on('show.bs.modal', function (event) {
         var phone = $('#phone_top').val();
+        $('.lds-ellipsis').css("display", "block");
         $.post("/orders/widget_html", {phone: phone},
             onAjaxSuccess
         );
         function onAjaxSuccess(data) {
+            $('.lds-ellipsis').css("display", "none");
             $('#for_widget_response').html(data);
         }
         var button = $(event.relatedTarget);
@@ -56,10 +58,12 @@ jQuery(document).ready(function($){
 
     $('#find_modal').click(function () {
         var phone = $('#phone_widget').val();
+        $('.lds-ellipsis').css("display", "block");
         $.post("/orders/widget_html", {phone: phone},
             onAjaxSuccess
         );
         function onAjaxSuccess(data) {
+            $('.lds-ellipsis').css("display", "none");
             $('#for_widget_response').html(data);
         }
     });

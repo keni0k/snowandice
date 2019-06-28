@@ -90,7 +90,7 @@
 @media only screen and (max-width: 767px) {
     .owl-nav .owl-next {
         top: 75px;
-        right: -10px;
+        right: -20px;
     }
 
     .owl-nav .owl-prev {

@@ -1838,13 +1838,10 @@ div.status p {
     position: absolute;
 }
 
-/*.anchor {
-    border-top: 65px solid transparent;
-    margin-top: -65px;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-}*/
+.owl-next .fa, .owl-prev .fa {
+    font-size: 24px;
+    color: #05318c;
+}
 
 .thumbnail .caption {
     height: 50px;

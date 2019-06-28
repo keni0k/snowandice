@@ -34,12 +34,12 @@
 
     .owl-nav .owl-next {
         top: 75px;
-        right: -15px;
+        right: -30px;
     }
 
     .owl-nav .owl-prev {
         top: 75px;
-        right: -15px;
+        right: -30px;
     }
     .user-menu, .header-right ul.list-inline {
         text-align: center;
@@ -95,7 +95,7 @@
 
     .owl-nav .owl-prev {
         top: 75px;
-        left: -10px;
+        left: -20px;
     }
     main {
         top: 0;

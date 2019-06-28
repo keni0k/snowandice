@@ -105,9 +105,9 @@
                         eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis
                         magni at?</p>
                     <div class="footer-social">
-                        <a href="#" target="_blank"><i class="fab fa-vk"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-odnoklassniki"></i></a>
-                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="icon-vkontakte"></i></a>
+                        <a href="#" target="_blank"><i class="icon-odnoklassniki"></i></a>
+                        <a href="#" target="_blank"><i class="icon-instagram"></i></a>
                     </div>
                 </div>
             </div>
@@ -135,32 +135,24 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="footer-card-icon">
-                    <i class="fab fa-cc-discover"></i>
-                    <i class="fab fa-cc-mastercard"></i>
-                    <i class="fab fa-cc-paypal"></i>
-                    <i class="fab fa-cc-visa"></i>
+                <div class="login-registr" th:with="isUserOrAdmin = ${isUser or isAdmin}">
+                    <th:block th:unless="${isUserOrAdmin}">
+                        <a href="/users/login">
+                            <i class="fa fa-user"></i> Вход
+                        </a>
+                        <!--<span>/</span>
+                        <a href="/users/registration"> Регистрация</a>-->
+                    </th:block>
+                    <th:block th:if="${isUserOrAdmin}">
+                        <a th:if="${isAdmin}" href="https://cifraadmin.herokuapp.com" target="_blank">Spring Admin </a>
+                        <span>/ </span>
+                        <a href="/users/account">
+                            <i class="fa fa-user"></i> Аккаунт
+                        </a>
+                        <span>/</span>
+                        <a href="/users/logout"> Выход</a>
+                    </th:block>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="login-registr" th:with="isUserOrAdmin = ${isUser or isAdmin}">
-                <th:block th:unless="${isUserOrAdmin}">
-                    <a href="/users/login">
-                        <i class="fa fa-user"></i> Вход
-                    </a>
-                    <!--<span>/</span>
-                    <a href="/users/registration"> Регистрация</a>-->
-                </th:block>
-                <th:block th:if="${isUserOrAdmin}">
-                    <a th:if="${isAdmin}" href="https://cifraadmin.herokuapp.com" target="_blank">Spring Admin </a>
-                    <span>/ </span>
-                    <a href="/users/account">
-                        <i class="fa fa-user"></i> Аккаунт
-                    </a>
-                    <span>/</span>
-                    <a href="/users/logout"> Выход</a>
-                </th:block>
             </div>
         </div>
     </div>

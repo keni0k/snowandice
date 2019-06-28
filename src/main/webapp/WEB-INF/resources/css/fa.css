@@ -57,10 +57,10 @@
  
 .fa-edit:before { content: '\e800'; } /* '' */
 .fa-trash-empty:before { content: '\e801'; } /* '' */
-.fa-angle-circled-left:before { content: '\f137'; } /* '' */
-.fa-angle-circled-right:before { content: '\f138'; } /* '' */
-.fa-angle-circled-up:before { content: '\f139'; } /* '' */
-.fa-angle-circled-down:before { content: '\f13a'; } /* '' */
+.fa-chevron-left:before { content: '\f137'; } /* '' */
+.fa-chevron-right:before { content: '\f138'; } /* '' */
+.fa-chevron-up:before { content: '\f139'; } /* '' */
+.fa-chevron-down:before { content: '\f13a'; } /* '' */
 .fa-instagram:before { content: '\f16d'; } /* '' */
 .fa-vkontakte:before { content: '\f189'; } /* '' */
 .fa-odnoklassniki:before { content: '\f263'; } /* '' */

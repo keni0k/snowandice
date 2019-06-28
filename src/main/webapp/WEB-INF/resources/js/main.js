@@ -1,7 +1,6 @@
 jQuery(document).ready(function ($) {
 
     // jQuery sticky Menu
-
     $(".mainmenu-area").sticky({topSpacing: 0});
 
     // Bootstrap Mobile Menu fix
@@ -85,6 +84,23 @@ jQuery(document).ready(function ($) {
                 $('.lds-ellipsis').css("display", "none");
                 $('#for_widget_response').html('<h4>Произошла ошибка. Повторите запрос позже.</h4>');
             });
+    });
+
+// YANDEX METRICA
+    (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(54206233, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true
     });
 
 });

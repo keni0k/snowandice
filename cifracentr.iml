@@ -138,5 +138,6 @@
     <orderEntry type="library" name="Maven: io.mola.galimatias:galimatias:0.2.1" level="project" />
     <orderEntry type="library" name="Maven: com.ibm.icu:icu4j:53.1" level="project" />
     <orderEntry type="library" name="smooth-scroll.polyfills" level="application" />
+    <orderEntry type="library" name="5f7272251c" level="application" />
   </component>
 </module>

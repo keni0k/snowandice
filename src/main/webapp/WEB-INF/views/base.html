@@ -87,6 +87,7 @@
     </div>
 </div> <!-- End mainmenu area -->
 
+<!--/*@thymesVar id="template" type="java.lang.String"*/-->
 <div th:replace="${template}"></div>
 
 <div class="footer-top-area">
@@ -161,8 +162,9 @@
     <div th:replace="fragments/response :: modal">%%</div>
 </th:block>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--/*@thymesVar id="menu" type="java.lang.String"*/-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        th:if="${menu=='order_widget' or menu=='admin_callbacks'}"
+        th:if="${menu}=='order_widget' or ${menu}=='admin_callbacks'"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
 
@@ -190,6 +192,5 @@
 <noscript>
     <div><img src="https://mc.yandex.ru/watch/54206233" style="position:absolute; left:-9999px;" alt=""/></div>
 </noscript>
-<!-- /Yandex.Metrika counter -->
 </body>
 </html>

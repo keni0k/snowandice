@@ -2,7 +2,12 @@
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <dependency>web dispatcherServlet servlet context</dependency>
+          <file>file://$MODULE_DIR$/src/main/java/com/example/Application.java</file>
+        </fileset>
+      </configuration>
     </facet>
     <facet type="web" name="Web2">
       <configuration>

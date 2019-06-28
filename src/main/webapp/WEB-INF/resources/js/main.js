@@ -12,6 +12,9 @@ jQuery(document).ready(function ($) {
     // jQuery Scroll effect
     var scroll = new SmoothScroll('a[href*="#"]', {header: '.nav-offset'});
 
+    // blazy download images
+    var bLazy = new Blazy();
+
     //
     $("#phone_number").mask("+7 (999) 999-9999");
     $("#phone_callback").mask("+7 (999) 999-9999");

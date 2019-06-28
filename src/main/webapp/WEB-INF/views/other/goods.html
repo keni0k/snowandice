@@ -6,7 +6,11 @@
         <div class="col-xs-3 col-sm-2 pa-5" th:each="good :${goods}">
             <a class="thumbnail" th:data-name="${good.name}" th:data-en="${good.enName}"
                data-target="#modalPrices" data-toggle="modal" onclick="return false">
-                <img src="" th:src="${good.imgLink}" alt="...">
+                <img class="b-lazy"
+                     src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+                     th:data-src="${good.imgLink}+'.jpg'"
+                     alt="alt-text"
+                />
                 <div class="caption">
                     <h5 th:text="${good.name}">Смартфоны</h5>
                 </div>

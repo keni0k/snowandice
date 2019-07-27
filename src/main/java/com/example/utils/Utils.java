@@ -1,7 +1,5 @@
 package com.example.utils;
 
-import com.example.models.User;
-import com.example.services.UserService;
 import io.mola.galimatias.GalimatiasParseException;
 import io.mola.galimatias.URLParsingSettings;
 import org.joda.time.LocalTime;
@@ -17,12 +15,6 @@ import java.util.Random;
 
 public class Utils {
 
-    UserService userService;
-
-    public Utils(UserService userService) {
-        this.userService = userService;
-    }
-
     public static String randomToken(int length) {
         final String mCHAR = "qwertyuioplkjhgfdsazxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
@@ -35,23 +27,6 @@ public class Utils {
         }
 
         return builder.toString();
-    }
-
-    public User getUser(Principal principal){
-        if (principal!=null) {
-            User user = null;
-            String loginOrEmail = principal.getName();
-            if (!loginOrEmail.equals("")) {
-                user = userService.getByEmail(loginOrEmail);
-            }
-            return user;
-        }
-        else return null;
-    }
-
-    public boolean isAdmin(Principal principal) {
-        User nowUser = getUser(principal);
-        return nowUser != null && nowUser.getType() == Consts.USER_ADMIN;
     }
 
     public String getTime(){

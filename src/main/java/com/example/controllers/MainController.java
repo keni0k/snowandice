@@ -16,12 +16,6 @@
 
 package com.example.controllers;
 
-import com.example.jpa_services_impl.ImageServiceImpl;
-import com.example.jpa_services_impl.UserServiceImpl;
-import com.example.models.Good;
-import com.example.models.Image;
-import com.example.models.callbacks.Callback;
-import com.example.repo.*;
 import com.example.utils.Consts;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
@@ -44,13 +38,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
 
 import static com.example.utils.Consts.URL_PATH;
-import static com.example.utils.Utils.*;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Slf4j
@@ -58,28 +47,18 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/")
 public class MainController {
     private Utils utils;
-    private ImageServiceImpl imageService;
-    private CallbackRepository callbackRepository;
-    private StatusCallbackRepository statusCallbackRepository;
-    private GoodsRepository goodsRepository;
 
     @Autowired
-    public MainController(ImageRepository imageRepository, UserRepository userRepository, GoodsRepository goodsRepository,
-                          CallbackRepository callbackRepository, StatusCallbackRepository statusCallbackRepository) {
-        UserServiceImpl userService = new UserServiceImpl(userRepository);
-        imageService = new ImageServiceImpl(imageRepository);
-        utils = new Utils(userService);
-        this.callbackRepository = callbackRepository;
-        this.statusCallbackRepository = statusCallbackRepository;
-        this.goodsRepository = goodsRepository;
+    public MainController() {
+
     }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(ModelMap modelMap) {
-        List goods = goodsRepository.findAll();
-        goods.sort(Comparator.comparingDouble(Good::getPriority));
+//        List goods = goodsRepository.findAll();
+//        goods.sort(Comparator.comparingDouble(Good::getPriority));
         modelMap.addAttribute("utils", new UtilsForWeb());
-        modelMap.addAttribute("goods", goods);
+//        modelMap.addAttribute("goods", goods);
         return "index";
     }
 
@@ -89,41 +68,6 @@ public class MainController {
         return "other/status";
     }
 
-    @RequestMapping("/fix")
-    public String fix(ModelMap modelMap,
-                      @RequestParam(value = "name", required = false) String name) {
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        if (name==null)
-        return "other/fix";
-        else {
-            modelMap.addAttribute("name", name);
-            return "fragments/good";
-        }
-    }
-
-    @RequestMapping("/contacts")
-    public String contacts(ModelMap modelMap) {
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        return "other/contacts";
-    }
-
-    @RequestMapping("/ship_and_pay")
-    public String ShipAndPay(ModelMap modelMap) {
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        return "other/ship_and_pay";
-    }
-
-    @RequestMapping("/privacy_policy")
-    public String privacyPolicy(ModelMap modelMap) {
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        return "privacy_policy";
-    }
-
-    @RequestMapping("/exchange_and_returns")
-    public String exchangeAndReturns(ModelMap modelMap) {
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        return "exchange_and_returns";
-    }
 
     private String redirectWithMsg(HttpServletRequest request, String msg, String msgType) {
         msg = URLEncoder.encode(msg, StandardCharsets.UTF_8);
@@ -133,7 +77,6 @@ public class MainController {
         }
         redirect += (redirect.contains("?") ? "&" : "?");
         redirect += "msg=" + msg + "&msg_type=" + msgType;
-        log.info(redirect);
         return "redirect:" + redirect;
     }
 
@@ -161,17 +104,11 @@ public class MainController {
                     isStatus = response.substring(start + 11, start + 13).equals("OK");
                 if (startTwo > 0)
                     isStatusSMS = response.substring(startTwo + 11, startTwo + 13).equals("OK");
-                log.info("try to send: " + (isStatus ? "OK" : "ERROR"));
-                log.info("send: " + (isStatusSMS ? "OK" : "ERROR"));
-            } catch (IOException e) {
-                log.error(e.getMessage());
-            } catch (GalimatiasParseException e) {
-                log.error(e.getMessage());
-                e.printStackTrace();
-            } catch (URISyntaxException e) {
+            } catch (IOException ignored) {
+            } catch (GalimatiasParseException | URISyntaxException e) {
                 e.printStackTrace();
             }
-            callbackRepository.save(new Callback(phone, statusCallbackRepository.getOne(3L)));
+//            callbackRepository.save(new Callback(phone, statusCallbackRepository.getOne(3L)));
             if (!isStatus || !isStatusSMS) {
                 return redirectWithMsg(request, "Не удалось отправить запрос оператору. Пожалуйста, позвоните нам по контактному телефону", "danger");
             }

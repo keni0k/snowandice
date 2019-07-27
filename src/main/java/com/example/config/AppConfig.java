@@ -1,8 +1,5 @@
 package com.example.config;
 
-import com.example.models.Image;
-import com.example.models.TokenCookies;
-import com.example.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
@@ -19,8 +16,8 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
 //@PropertySource("classpath:appplication.properties")
-@EnableJpaRepositories(basePackages = "com.example.repo")
-@EntityScan(basePackageClasses = {User.class, TokenCookies.class, Image.class})
+//@EnableJpaRepositories(basePackages = "com.example.repo")
+//@EntityScan(basePackageClasses = {User.class, TokenCookies.class, Image.class})
 @EnableTransactionManagement
 public class AppConfig implements WebMvcConfigurer {
 

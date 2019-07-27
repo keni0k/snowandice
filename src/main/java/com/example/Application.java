@@ -1,6 +1,5 @@
 package com.example;
 
-import com.example.utils.security.SecurityConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
@@ -10,7 +9,6 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication(scanBasePackages = {"com.example"},
         exclude = {ErrorMvcAutoConfiguration.class})
-@Import({SecurityConfig.class })
 public class Application extends SpringBootServletInitializer {
 
     @Override

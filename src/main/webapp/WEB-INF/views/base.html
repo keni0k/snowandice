@@ -133,12 +133,6 @@
     </div>
 </div>
 
-<div th:replace="fragments/headerCallback :: model">%%</div>
-<div th:replace="fragments/modal_widget :: modal">%%</div>
-
-<th:block th:if="${#httpServletRequest.getParameter('msg')!=null and #httpServletRequest.getParameter('msg')!=''}">
-    <div th:replace="fragments/response :: modal">%%</div>
-</th:block>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--/*@thymesVar id="menu" type="java.lang.String"*/-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -148,27 +142,7 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!--3.3.7-->
 
-<script type="text/javascript"
-        th:if="${#httpServletRequest.getParameter('msg')!=null and #httpServletRequest.getParameter('msg')!=''}">
-    $(window).on('load', function () {
-        $('#msg_modal').modal('show');
-    });
-</script>
-
-<!-- jQuery easing -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-<!-- jQuery sticky menu -->
-<script src="/resources/js/owl.carousel.min.js"></script>
-<script src="/resources/js/jquery.sticky.js"></script>
-<script src="/resources/js/blazy.min.js"></script>
 <!-- Main Script -->
 <script src="/resources/js/main.js"></script>
-<script src="/resources/js/masked_input.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0/dist/smooth-scroll.polyfills.min.js"></script>
-
-<!-- Yandex.Metrika counter -->
-<noscript>
-    <div><img src="https://mc.yandex.ru/watch/54206233" style="position:absolute; left:-9999px;" alt=""/></div>
-</noscript>
 </body>
 </html>

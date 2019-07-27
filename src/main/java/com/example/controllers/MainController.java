@@ -68,10 +68,8 @@ public class MainController {
     @RequestMapping(value = "/do_class", method = RequestMethod.GET)
     public String algorithm(ModelMap modelMap,
                             @RequestParam(value = "cars") Integer cars) {
-
         modelMap.addAttribute("utils", new UtilsForWeb());
         modelMap.addAttribute("result", algorithmMorning(cars));
-
         return "index";
     }
 

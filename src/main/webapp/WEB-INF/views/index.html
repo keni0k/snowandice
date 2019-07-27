@@ -2,14 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: header (~{::body},'index')}">
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <div class="container">
-
-    <th:block th:replace="fragments/carousel :: carousel">%%</th:block>
-    <a id="contacts_anchor" class="anchor"></a>
-    <br/><br/><br/>
-    <th:block th:replace="other/contacts :: contacts(true)">%%</th:block>
-    <a id="goods_anchor" class="anchor"></a>
-    <br/><br/>
-    <th:block th:replace="other/goods :: goods">%%</th:block>
+    <div class="row">
+        <h1>
+            It's comming!
+        </h1>
+    </div>
 </div>
 </body>
 </html>

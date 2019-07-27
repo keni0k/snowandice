@@ -6,10 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,23 +38,6 @@
         <option value="HTML File" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>isU</find>
-      <find>mainmenu-area</find>
-      <find>owl</find>
-      <find>modalPrices</find>
-      <find>myModalLabel</find>
-      <find>phone</find>
-      <find>id</find>
-      <find>1/2/3 категори</find>
-      <find>категории</find>
-      <find>&amp;#39;&amp;#39;</find>
-      <find>icon-</find>
-      <find>che</find>
-      <find>owl-nex</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <favorite-branches>
@@ -268,14 +248,7 @@
       <workItem from="1561698176200" duration="31000" />
       <workItem from="1561698299562" duration="4585000" />
       <workItem from="1564207797040" duration="1410000" />
-      <workItem from="1564209248990" duration="1266000" />
-    </task>
-    <task id="LOCAL-00095" summary="anchors smooth scroll">
-      <created>1561625474774</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1561625474774</updated>
+      <workItem from="1564209248990" duration="1540000" />
     </task>
     <task id="LOCAL-00096" summary="Widget in modal">
       <created>1561626123905</created>
@@ -613,7 +586,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564210256063</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL-00144" summary="StaRT!">
+      <created>1564210544602</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1564210544602</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

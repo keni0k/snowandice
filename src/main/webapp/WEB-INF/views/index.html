@@ -3,7 +3,8 @@
 <body th:with="isUser = ${#httpServletRequest.isUserInRole('USER')}, isAdmin = ${#httpServletRequest.isUserInRole('ADMIN')}">
 <div class="container">
     <div class="row">
-        <h1>
+        <!--/*@thymesVar id="result" type="java.lang.Integer"*/-->
+        <h1 th:text="${result}">
             It's comming!
         </h1>
     </div>

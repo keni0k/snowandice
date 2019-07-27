@@ -1,43 +1,88 @@
 package com.example.utils;
 
+import com.example.models.Car;
+import com.example.models.Coord;
+import com.example.models.Segment;
 import io.mola.galimatias.GalimatiasParseException;
 import io.mola.galimatias.URLParsingSettings;
-import org.joda.time.LocalTime;
 
-import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.security.Principal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 
 public class Utils {
 
-    public static String randomToken(int length) {
-        final String mCHAR = "qwertyuioplkjhgfdsazxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
-        Random random = new Random();
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            int number = random.nextInt(mCHAR.length());
-            char ch = mCHAR.charAt(number);
-            builder.append(ch);
+    private static void clear(ArrayList<Car> cars, ArrayList<Segment> segments) {
+        for (Car car : cars) {
+            car.setFree();
         }
-
-        return builder.toString();
+        for (Segment segment : segments) {
+            segment.setClean(false);
+            segment.setCountOfCars(0);
+        }
     }
 
-    public String getTime(){
-        String time = new LocalTime().toDateTimeToday().toString().replace('T', ' ');
-        time = time.substring(0, time.indexOf('.'));
-        return time;
+    private static Segment getMinDistFreeSegment(ArrayList<Segment> segments, Car car) {
+        if (car == null || segments == null || segments.size() == 0)
+            return null;
+        Segment minDistFreeSegment = segments.get(0);
+        double minDist = Coord.dist(segments.get(0).getStart(), car.getCoord());
+
+        for (Segment segment : segments) {
+            if (segment.getCountOfNeedCars() - segment.getCountOfCars() > 0 && !segment.isClean()) {
+                if (Coord.dist(segment.getStart(), car.getCoord()) < minDist) {
+                    minDistFreeSegment = segment;
+                    minDist = Coord.dist(segment.getStart(), car.getCoord());
+                }
+            }
+        }
+        return minDistFreeSegment;
     }
 
-    public static String getDateFormat(Date date){
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yy hh:mm a zzz");
-        return formatForDateNow.format(date);
+    private static void carsTicksDec(ArrayList<Car> cars) {
+        for (Car car : cars) {
+            car.decTicks();
+            if (car.isFree())
+                car.getSegments()
+                        .get(car.getSegments().size() - 1).setClean(true);
+        }
+    }
+
+    public static int algorithm(int tick, ArrayList<Car> cars, ArrayList<Segment> segments) {
+        if (tick == 0)
+            clear(cars, segments);
+        carsTicksDec(cars);
+        boolean isFinish = true;
+        for (Segment segment : segments) {
+            if (!segment.isClean()) {
+                isFinish = false;
+                break;
+            }
+        }
+        segments.sort((segment, t1) -> Integer.compare(t1.getCountOfNeedCars(), segment.getCountOfNeedCars()));
+        if (isFinish) return tick;
+        tick++;
+        for (Car car : cars) {
+            if (car.isFree()) {
+                Segment segment = getMinDistFreeSegment(segments, car);
+                car.setTicks((int) (segment.getLength() / car.getAvgSpeedWithKOVSH() / 60));
+                car.getSegments().add(segment);
+                segment.getCars().add(car);
+            }
+        }
+        for (Segment segment : segments) {
+            if (segment.getCountOfCars() > 0)
+                while (segment.getCountOfNeedCars() - segment.getCountOfCars() < segment.getMinDistAloneCars(cars).size() &&
+                        segment.getMinDistAloneCar(cars) != null) {
+                    Car car = segment.getMinDistAloneCar(cars);
+                    segment.getCars().add(car);
+                    car.getSegments().remove(car.getSegments().size() - 1);
+                    car.getSegments().add(segment);
+                }
+        }
+        return algorithm(tick, cars, segments);
     }
 
     public static URI getUrl(String url) throws GalimatiasParseException, URISyntaxException {

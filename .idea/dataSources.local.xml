@@ -5,5 +5,11 @@
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0.0" />
       <schema-mapping />
     </data-source>
+    <data-source name="PostgreSQL - jdbc:postgresql://ec2-54-228-246-214.eu-west-1.compute.amazonaws.com :5432/d1bdhfm96a55g0" uuid="42b0178f-a975-4538-9745-39299a64736c">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>ptrvkizsbbtkoh</user-name>
+      <schema-mapping />
+    </data-source>
   </component>
 </project>

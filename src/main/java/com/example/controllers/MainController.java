@@ -16,7 +16,9 @@
 
 package com.example.controllers;
 
-import com.example.utils.Consts;
+import com.example.models.Car;
+import com.example.models.Coord;
+import com.example.models.Segment;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
 import io.mola.galimatias.GalimatiasParseException;
@@ -30,14 +32,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Random;
 
 import static com.example.utils.Consts.URL_PATH;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -60,6 +63,26 @@ public class MainController {
         modelMap.addAttribute("utils", new UtilsForWeb());
 //        modelMap.addAttribute("goods", goods);
         return "index";
+    }
+
+    @RequestMapping(value = "/do_class", method = RequestMethod.GET)
+    public String algorithm(ModelMap modelMap,
+                            @RequestParam(value = "cars") Integer cars) {
+
+        modelMap.addAttribute("utils", new UtilsForWeb());
+        modelMap.addAttribute("result", algorithmMorning(cars));
+
+        return "index";
+    }
+
+    int algorithmMorning(Integer countOfCars) {
+        ArrayList<Car> cars = new ArrayList<>();
+        for (int i = 0; i < countOfCars; i++)
+            cars.add(new Car(30, new Coord(52.2797298616311, 104.34527349498241)));
+        ArrayList<Segment> segments = new ArrayList<>();
+        segments.add(new Segment("Lenina", new Coord(52.28576568355886, 104.28068161010744),
+                new Coord(52.28209020513799, 104.28089618682863), 10, 10.5, 3));
+        return Utils.algorithm(0, cars, segments);
     }
 
     @RequestMapping("/status")
@@ -92,7 +115,7 @@ public class MainController {
             boolean isStatus = false;
             boolean isStatusSMS = false;
             try {
-                get = Request.Get(Utils.getUrl(uri))
+                get = Request.Get(Utils.getUrl(uri))//smotret
                         .connectTimeout(2000)
                         .socketTimeout(2000)
                         .execute()

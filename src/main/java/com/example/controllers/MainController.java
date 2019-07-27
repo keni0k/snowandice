@@ -75,7 +75,7 @@ public class MainController {
         return "index";
     }
 
-    int algorithmMorning(Integer countOfCars) {
+    private int algorithmMorning(Integer countOfCars) {
         ArrayList<Car> cars = new ArrayList<>();
         for (int i = 0; i < countOfCars; i++)
             cars.add(new Car(30, new Coord(52.2797298616311, 104.34527349498241)));
@@ -133,10 +133,10 @@ public class MainController {
             }
 //            callbackRepository.save(new Callback(phone, statusCallbackRepository.getOne(3L)));
             if (!isStatus || !isStatusSMS) {
-                return redirectWithMsg(request, "Не удалось отправить запрос оператору. Пожалуйста, позвоните нам по контактному телефону", "danger");
+                return redirectWithMsg(request, "Не удалось отправить запрос водителю. Пожалуйста, позвоните ему контактному телефону", "danger");
             }
         }
-        return redirectWithMsg(request, "Запрос передан оператору, он свяжется с вами в ближайшее время", "success");
+        return redirectWithMsg(request, "Запрос передан водителю!", "success");
     }
 
 }

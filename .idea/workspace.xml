@@ -7,55 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/cifracentr_Web2_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/cifracentr_Web2_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cifracentr.iml" beforeDir="false" afterPath="$PROJECT_DIR$/snowandice.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controllers/AdminController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controllers/OrderController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controllers/UsersController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/jpa_services_impl/ImageServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/jpa_services_impl/LogServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/jpa_services_impl/UserServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/Good.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/Image.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/Log.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/Props.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/TokenCookies.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/callbacks/Callback.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/callbacks/Status.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repo/CallbackRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repo/GoodsRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repo/ImageRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repo/LogRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repo/PropsRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repo/StatusCallbackRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repo/TokenRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repo/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/services/BaseService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/services/ImageService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/services/LogService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/services/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/Consts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/Consts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/CustomAuthenticationProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/UtilsForWeb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/UtilsForWeb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/remonlineAPI/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/remonlineAPI/RemOrder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/remonlineAPI/RemOrders.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/remonlineAPI/RemToken.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/remonlineAPI/Status.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/remonlineAPI/Statuses.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/security/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/security/token/TokenService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/security/user/UserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -107,18 +60,6 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="PREVIOUS_COMMIT_AUTHORS">
-      <list>
-        <option value="keni0k &lt;dima-vers0@rambler.ru&gt;" />
-      </list>
-    </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
-    <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
     <favorite-branches>
       <branch-storage>
         <map>
@@ -132,6 +73,19 @@
         </map>
       </branch-storage>
     </favorite-branches>
+    <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Keni0k &lt;dima-vers0@rambler.ru&gt;" />
+        <option value="keni0k &lt;dima-vers0@rambler.ru&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpServers">
     <servers />
@@ -314,14 +268,7 @@
       <workItem from="1561698176200" duration="31000" />
       <workItem from="1561698299562" duration="4585000" />
       <workItem from="1564207797040" duration="1410000" />
-      <workItem from="1564209248990" duration="977000" />
-    </task>
-    <task id="LOCAL-00094" summary="anchors smooth scroll">
-      <created>1561625225992</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1561625225996</updated>
+      <workItem from="1564209248990" duration="1266000" />
     </task>
     <task id="LOCAL-00095" summary="anchors smooth scroll">
       <created>1561625474774</created>
@@ -659,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1561702135828</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="StaRT!">
+      <created>1564210256062</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1564210256063</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -692,7 +646,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="carousel" />
     <MESSAGE value="prev, next" />
     <MESSAGE value="goods (each);" />
     <MESSAGE value="goods (each);+1" />
@@ -717,7 +670,8 @@
     <MESSAGE value="Clear head" />
     <MESSAGE value="goods" />
     <MESSAGE value="next, prev" />
-    <option name="LAST_COMMIT_MESSAGE" value="next, prev" />
+    <MESSAGE value="StaRT!" />
+    <option name="LAST_COMMIT_MESSAGE" value="StaRT!" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

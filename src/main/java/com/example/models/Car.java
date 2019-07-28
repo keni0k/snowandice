@@ -11,8 +11,8 @@ import java.util.ArrayList;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(appliesTo = "car")
+//@Entity
+//@Table(appliesTo = "car")
 public class Car {
 
     /* It will use in production version */

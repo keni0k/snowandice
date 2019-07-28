@@ -7,19 +7,19 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-@Entity
-@Table(appliesTo = "segment")
+//@Entity
+//@Table(appliesTo = "segment")
 public class Segment {
     private String nameOfStreet;
     @Column
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column
-    @OneToOne(targetEntity=Coord.class, mappedBy="segment", fetch=FetchType.EAGER)
+//    @Column
+//    @OneToOne(targetEntity=Coord.class, mappedBy="segment", fetch=FetchType.EAGER)
     private Coord start;
-    @Column
-    @OneToOne(targetEntity=Coord.class, mappedBy="segment", fetch=FetchType.EAGER)
+//    @Column
+//    @OneToOne(targetEntity=Coord.class, mappedBy="segment", fetch=FetchType.EAGER)
     private Coord end;
     @Column
     private int priority;

@@ -5,9 +5,10 @@ import org.hibernate.annotations.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-@Entity
-@Table(appliesTo = "coord")
+//@Entity
+//@Table(appliesTo = "coord")
 public class Coord {
     @Column
     private double lat;

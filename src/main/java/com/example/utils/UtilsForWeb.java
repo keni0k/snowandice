@@ -25,11 +25,11 @@ public class UtilsForWeb {
                 new Coord(52.2797298616311, 104.34527349498241), 10, 10.5, 1, 3));
         segments.add(new Segment("Sovetskya", new Coord(52.2797298616311, 104.34527349498241),
                 new Coord(52.2806094257078, 104.34774112727611), 10, 10.5, 1, 4));
-        segments.add(new Segment("Lenina", new Coord(52.285766, 104.280682), new Coord(52.285766, 104.280682), 10, 10.5, 1, 5));
-        segments.add(new Segment("Lenina", new Coord(52.282090, 104.280896), new Coord(52.282090, 104.280896), 10, 10.5,2, 6));
+//        segments.add(new Segment("Lenina", new Coord(52.285766, 104.280682), new Coord(52.285766, 104.280682), 10, 10.5, 1, 5));
+//        segments.add(new Segment("Lenina", new Coord(52.282090, 104.280896), new Coord(52.282090, 104.280896), 10, 10.5,2, 6));
         segments.add(new Segment("Marksa", new Coord(52.290984, 104.295882), new Coord(52.290984, 104.295882), 10, 10.5,2, 7));
         segments.add(new Segment("Sovetskya", new Coord(52.276348, 104.303543), new Coord(52.276348, 104.303543), 10, 10.5,2, 8));
-        segments.add(new Segment("Sovetskya", new Coord(52.279919, 104.323713), new Coord(52.279919, 104.323713), 10, 10.5,2, 9));
+//        segments.add(new Segment("Sovetskya", new Coord(52.279919, 104.323713), new Coord(52.279919, 104.323713), 10, 10.5,2, 9));
 //        segments.add(new Segment("Sovetskya", new Coord(52.279730, 104.345273), new Coord(52.279730, 104.345273), 10, 10.5,2, 10));
 //        segments.add(new Segment("Sovetskya", new Coord(52.280609, 104.347741), new Coord(52.280609, 104.347741), 10, 10.5,2, 11));
 //        segments.add(new Segment("Sovetskya", new Coord(52.280670, 104.355374), new Coord(52.280670, 104.355374), 10, 10.5,2, 12));
@@ -144,7 +144,7 @@ public class UtilsForWeb {
 //        segments.add(new Segment("Airport-Shiryamova_Koljo", new Coord(52.254100, 104.342780), new Coord(52.254100, 104.342780), 10, 10.5,2, 121));
 //        segments.add(new Segment("Airport-Shiryamova_Koljo", new Coord(52.254040, 104.342670), new Coord(52.254040, 104.342670), 10, 10.5,2, 122));
 //        segments.add(new Segment("Airport-Shiryamova_Koljo", new Coord(52.253970, 104.342500), new Coord(52.253970, 104.342500), 10, 10.5,2, 123));
-//        return Utils.algorithm(cars, segments);
+        return Utils.algorithm(cars, segments);
     }
 
 }

@@ -15,7 +15,7 @@ public class ApiController {
 
     @RequestMapping("/routes")
     @ResponseBody
-    public String routes(@RequestParam(value = "machineCount") Integer machineCount) {
+    public String routes(@RequestParam(value = "machinesCount") Integer machineCount) {
         UtilsForWeb utilsForWeb = new UtilsForWeb();
         return utilsForWeb.algorithmMorning(machineCount);
     }

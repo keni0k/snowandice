@@ -61,7 +61,7 @@ public class Utils {
         }
     }
 
-    public static String algorithm(int tick, ArrayList<Car> cars, ArrayList<Segment> segments) {
+    static String algorithm(ArrayList<Car> cars, ArrayList<Segment> segments) {
         clear(cars, segments);
         while (true) {
             carsTicksDec(cars);
@@ -75,13 +75,14 @@ public class Utils {
             if (isFinish) {
                 Logger logger = Logger.getLogger("SnowAndIce");
                 for (Car car : cars) {
-                    logger.info("Car id: " + car.getId() + ", name: " + car.getName());
+                    logger.info("Car id: " + car.getId());
                     for (Segment segment : car.getSegments())
                         logger.info(segment.toString());
                 }
                 StringBuilder sb = new StringBuilder("[[");
-                for (Car car : cars) {
-                    sb.append("[");
+//                for (Car car : cars) {
+                Car car = cars.get(0);
+//                    sb.append("[");
                     sb.append(car.getCoord().getLat())
                             .append(",").append(car.getCoord().getLng()).append("]");
                     for (Segment segment : car.getSegments()) {
@@ -89,12 +90,11 @@ public class Utils {
                                 .append(segment.getStart().getLng()).append("],[")
                                 .append(segment.getEnd().getLat()).append(",")
                                 .append(segment.getEnd().getLng()).append("]");
-                    }
-                    sb.append("]");
+//                    }
+//                    sb.append("]");
                 }
                 return sb.append("]").toString();
             }
-            tick++;
             for (Car car : cars) {
                 if (car.isFree()) {
                     Segment segment = getMinDistFreeSegment(segments, car);

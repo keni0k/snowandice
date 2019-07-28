@@ -8,8 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/UtilsForWeb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/UtilsForWeb.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -269,14 +269,7 @@
       <workItem from="1564207797040" duration="1410000" />
       <workItem from="1564209248990" duration="22069000" />
       <workItem from="1564277973294" duration="378000" />
-      <workItem from="1564278449940" duration="13882000" />
-    </task>
-    <task id="LOCAL-00115" summary="Verdikt-&gt;Zakluchenie">
-      <created>1561644308738</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1561644308738</updated>
+      <workItem from="1564278449940" duration="14899000" />
     </task>
     <task id="LOCAL-00116" summary="Verdikt-&gt;Zakluchenie">
       <created>1561644825573</created>
@@ -614,7 +607,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564294563463</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="Routes">
+      <created>1564295224202</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1564295224202</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -647,7 +647,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="goods (each);+1" />
     <MESSAGE value="prices models" />
     <MESSAGE value="prev,next" />
     <MESSAGE value="good name 1 modal" />
@@ -672,7 +671,8 @@
     <MESSAGE value="StaRT!" />
     <MESSAGE value="Comment repos" />
     <MESSAGE value="Much updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Much updates" />
+    <MESSAGE value="Routes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Routes" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

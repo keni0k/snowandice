@@ -3,14 +3,16 @@ package com.example.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Table;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(appliesTo = "car")
 public class Car {
 
     /* It will use in production version */
@@ -22,10 +24,14 @@ public class Car {
         this.avgSpeedWithKOVSH = avgSpeedWithKOVSH;
         this.coord = coord;
     }
-
+    @Column(name = "car_id")
+    @Id
     private long id;
     private int ticks;
+
+    @Column(name = "avg_speed")
     private float avgSpeedWithKOVSH;
+    @Column(name = "coord")
     private Coord coord;
     private ArrayList<Segment> segments;
 
@@ -68,5 +74,9 @@ public class Car {
 
     public void setAvgSpeedWithKOVSH(float avgSpeedWithKOVSH) {
         this.avgSpeedWithKOVSH = avgSpeedWithKOVSH;
+    }
+
+    public long getId() {
+        return id;
     }
 }

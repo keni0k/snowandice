@@ -1,8 +1,21 @@
 package com.example.models;
 
+import org.hibernate.annotations.Table;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+@Table(appliesTo = "coord")
 public class Coord {
+    @Column
     private double lat;
+    @Column
     private double lng;
+    @Id
+    @Column(name = "id")
+    private long id;
 
     public Coord(double lat, double lng) {
         this.lat = lat;

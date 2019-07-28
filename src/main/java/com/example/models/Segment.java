@@ -1,21 +1,35 @@
 package com.example.models;
 
+import org.hibernate.annotations.Table;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.function.Predicate;
 
+@Entity
+@Table(appliesTo = "segment")
 public class Segment {
     private String nameOfStreet;
-
+    @Column
+    @Id
+    private int id;
+    @Column
     private Coord start;
+    @Column
     private Coord end;
+    @Column
     private int priority;
+    @Column
     private double length;
+    @Column
     private int countOfNeedCars;
     private int countOfCars = 0;
+    @Column
     private boolean isClean = false;
+    @Column
     private ArrayList<Car> cars;
 
     /* It will use in production version */

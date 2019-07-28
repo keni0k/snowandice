@@ -91,7 +91,6 @@ public class Utils {
                     else
                         sb.append("]");
                 }
-                sb.deleteCharAt(sb.length() - 1);
                 return sb.append("]").toString();
             }
             for (Car car : cars) {

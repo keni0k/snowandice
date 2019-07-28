@@ -6,10 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="segments">
+    <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,6 +92,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="sqlserver&#10;postgresql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -270,14 +269,7 @@
       <workItem from="1564209248990" duration="22069000" />
       <workItem from="1564277973294" duration="378000" />
       <workItem from="1564278449940" duration="21320000" />
-      <workItem from="1564303613265" duration="952000" />
-    </task>
-    <task id="LOCAL-00126" summary="Goods images">
-      <created>1561690164688</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1561690164688</updated>
+      <workItem from="1564303613265" duration="1725000" />
     </task>
     <task id="LOCAL-00127" summary="Goods images">
       <created>1561690974827</created>
@@ -615,7 +607,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564302110707</updated>
     </task>
-    <option name="localTasksCounter" value="175" />
+    <task id="LOCAL-00175" summary="segments">
+      <created>1564305143596</created>
+      <option name="number" value="00175" />
+      <option name="presentableId" value="LOCAL-00175" />
+      <option name="project" value="LOCAL" />
+      <updated>1564305143597</updated>
+    </task>
+    <option name="localTasksCounter" value="176" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

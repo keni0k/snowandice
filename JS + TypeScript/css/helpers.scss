@@ -1,0 +1,261 @@
+@import "theme";
+
+.blended{
+  opacity: .6;
+}
+
+.text{
+  &-ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-break{
+    white-space: normal;
+    word-break: break-all;
+  }
+
+  &-align{
+    &--center{
+      text-align: center;
+    }
+    &--left{
+      text-align: left;
+    }
+    &--right{
+      text-align: right;
+    }
+    &--justify{
+      text-align: justify;
+    }
+  }
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.context{
+  &-background{
+    &--grey{
+      background-color: #f5f5f5;
+    }
+    &--main{
+      background-color: white;
+    }
+    &--dark{
+      background-color: #333333;
+      color: white;
+    }
+    &--light-dark{
+      background-color: #424242;
+      color: white;
+    }
+    &--primary{
+      background-color: #0D87E8;
+      color: white;
+    }
+    &--secondary{
+      background-color: #00bfa5;
+      color: white;
+    }
+  }
+  &-color{
+    &--white{
+      color: white;
+    }
+    &--warning{
+      color: $warning-color;
+    }
+    &--error{
+      color: $error-color;
+    }
+    &--alert{
+      color: $alert-color;
+    }
+    &--success{
+      color: $success-color;
+    }
+    &--info{
+      color: $info-color;
+    }
+    &--now{
+      color: $current-time-color;
+    }
+    &--inactive{
+      color: #949494
+    }
+  }
+}
+
+
+$pluses: "";
+@for $i from 1 through 4 {
+
+  @if ($i != 1) {
+    $pluses: "#{$pluses}" + "#{\+}";
+  }
+  .p#{$pluses}{
+    padding: #{$measure-unit * $i}px;
+  }
+  .m#{$pluses}{
+    margin: #{$measure-unit * $i}px;
+  }
+}
+$pluses: "";
+@for $i from 1 through 4 {
+
+  @if ($i != 1) {
+    $pluses: "#{$pluses}" + "#{\+}";
+  }
+  .pv#{$pluses}{
+    padding-top: #{$measure-unit * $i}px;
+    padding-bottom: #{$measure-unit * $i}px;
+  }
+  .ph#{$pluses}{
+    padding-left: #{$measure-unit * $i}px;
+    padding-right: #{$measure-unit * $i}px;
+  }
+  .mv#{$pluses}{
+    margin-top: #{$measure-unit * $i}px;
+    margin-bottom: #{$measure-unit * $i}px;
+  }
+  .mh#{$pluses}{
+    margin-left: #{$measure-unit * $i}px;
+    margin-right: #{$measure-unit * $i}px;
+  }
+}
+$pluses: "";
+@for $i from 1 through 4 {
+
+  @if($i != 1){
+    $pluses: "#{$pluses}" + "#{\+}";
+  }
+  .pt#{$pluses}{
+    padding-top: #{$measure-unit * $i}px;
+  }
+  .pb#{$pluses}{
+    padding-bottom: #{$measure-unit * $i}px;
+  }
+  .pl#{$pluses}{
+    padding-left: #{$measure-unit * $i}px;
+  }
+  .pr#{$pluses}{
+    padding-right: #{$measure-unit * $i}px;
+  }
+  .mt#{$pluses}{
+    margin-top: #{$measure-unit * $i}px;
+  }
+  .mb#{$pluses}{
+    margin-bottom: #{$measure-unit * $i}px;
+  }
+  .ml#{$pluses}{
+    margin-left: #{$measure-unit * $i}px;
+  }
+  .mr#{$pluses}{
+    margin-right: #{$measure-unit * $i}px;
+  }
+}
+
+.flex {
+  &-container {
+    display: flex;
+    &--centered {
+      justify-content: center;
+      align-items: center;
+    }
+    &--vertical {
+      flex-direction: column;
+    }
+    &--space-between{
+      justify-content: space-between;
+    }
+    &--reversed{
+      flex-direction: row-reverse;
+      place-content: flex-end;
+      place-items: baseline;
+    }
+    &--filled>*{
+      flex-grow: 1;
+    }
+  }
+  &-item{
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    &--fixed{
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+
+    &--flexible{
+      flex-grow: 1;
+    }
+
+    &--greedy{
+      flex-basis: 100%;
+    }
+
+    &--scrollable{
+      overflow: auto;
+      &-y{
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      &-x{
+        overflow-y: hidden;
+        overflow-x: auto;
+      }
+    }
+  }
+}
+.inline{
+  &-block{
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.fill-parent{
+  height: 100%;
+  width: 100%;
+  &-width{
+    width: 100%;
+    height: auto;
+  }
+  &-height{
+    height: auto;
+    width: 100%;
+  }
+}
+
+.fit-parent{
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.cursor{
+  &-pointer{
+    cursor: pointer;
+  }
+}
+
+@media print {
+  .print-hidden{
+    display: none;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .print-area, .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+}

@@ -1,0 +1,21 @@
+body, html{
+  font-family: Roboto, sans-serif;
+  height: 100%
+}
+
+.app-container, #react-app{
+  height: 100%
+}
+
+.app-section{
+  height: calc(100% - 64px);
+  background: #f5f5f5;
+}
+
+b, strong{
+  font-weight: bold;
+}
+
+td, th{
+    vertical-align: middle;
+}

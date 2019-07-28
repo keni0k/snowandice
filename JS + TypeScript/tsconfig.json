@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "target": "es5",
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "skipDefaultLibCheck": true,
+    "strict": true,
+    "lib": ["es2015", "es2015.core", "es2015.collection", "dom", "es6", "es7", "es2017"],
+    "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": false,
+    "strictFunctionTypes": false,
+    "skipLibCheck": true
+  },
+  "include": [
+    "./ClientApp/**/*"
+  ],
+  "exclude": [
+      "bin",
+      "./node_modules/*"
+  ]
+}

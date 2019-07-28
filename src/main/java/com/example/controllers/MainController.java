@@ -32,6 +32,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -42,6 +43,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import static com.example.utils.Consts.URL_PATH;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Log4j
@@ -49,17 +51,18 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/")
 public class MainController {
     private Utils utils;
-    @Autowired
-    public MainController() {
-
-    }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(ModelMap modelMap) {
-//        List goods = goodsRepository.findAll();
-//        goods.sort(Comparator.comparingDouble(Good::getPriority));
         modelMap.addAttribute("utils", new UtilsForWeb());
         return "index";
+    }
+
+    @RequestMapping(value = "/api/routes", method = GET)
+    @ResponseBody
+    public String routes(@RequestParam(value = "machinesCount") Integer machineCount) {
+        UtilsForWeb utilsForWeb = new UtilsForWeb();
+        return utilsForWeb.algorithmMorning(machineCount);
     }
 
     @RequestMapping(value = "/do_class", method = RequestMethod.GET)

@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/controllers/ApiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/Consts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/Consts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/UtilsForWeb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/UtilsForWeb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -270,14 +267,7 @@
       <workItem from="1564207797040" duration="1410000" />
       <workItem from="1564209248990" duration="22069000" />
       <workItem from="1564277973294" duration="378000" />
-      <workItem from="1564278449940" duration="12365000" />
-    </task>
-    <task id="LOCAL-00112" summary="Loading indication">
-      <created>1561635387210</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1561635387210</updated>
+      <workItem from="1564278449940" duration="12715000" />
     </task>
     <task id="LOCAL-00113" summary="Loading indication">
       <created>1561635601151</created>
@@ -615,7 +605,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564293217443</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL-00161" summary="Much updates">
+      <created>1564293661557</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1564293661557</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

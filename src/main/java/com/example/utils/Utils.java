@@ -72,7 +72,6 @@ public class Utils {
                     break;
                 }
             }
-//        segments.sort((segment, t1) -> Integer.compare(t1.getCountOfNeedCars(), segment.getCountOfNeedCars()));
             if (isFinish) {
                 Logger logger = Logger.getLogger("SnowAndIce");
                 for (Car car : cars) {
@@ -81,17 +80,19 @@ public class Utils {
                         logger.info(segment.toString());
                 }
                 StringBuilder sb = new StringBuilder("[[");
-                Car car = cars.get(0);
-                sb.append(car.getCoord().getLat())
-                        .append(",").append(car.getCoord().getLng()).append("]");
-                for (Segment segment:car.getSegments()) {
-                    sb.append(",[").append(segment.getStart().getLat()).append(",")
-                            .append(segment.getStart().getLng()).append("],[")
-                            .append(segment.getEnd().getLat()).append(",")
-                            .append(segment.getEnd().getLng()).append("]");
+                for (Car car : cars) {
+                    sb.append("[");
+                    sb.append(car.getCoord().getLat())
+                            .append(",").append(car.getCoord().getLng()).append("]");
+                    for (Segment segment : car.getSegments()) {
+                        sb.append(",[").append(segment.getStart().getLat()).append(",")
+                                .append(segment.getStart().getLng()).append("],[")
+                                .append(segment.getEnd().getLat()).append(",")
+                                .append(segment.getEnd().getLng()).append("]");
+                    }
+                    sb.append("]");
                 }
-                sb.append("]");
-                return sb.toString();
+                return sb.append("]").toString();
             }
             tick++;
             for (Car car : cars) {

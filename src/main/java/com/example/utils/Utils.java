@@ -74,10 +74,10 @@ public class Utils {
                 }
             }
             if (isFinish) {
-                StringBuilder sb = new StringBuilder("[[");
+                StringBuilder sb = new StringBuilder("[");
                 for (int i = 0; i < cars.size(); i++) {
                     Car car = cars.get(i);
-                    sb.append("[");
+                    sb.append("[[");
                     sb.append(car.getCoord().getLat())
                             .append(",").append(car.getCoord().getLng()).append("]");
                     for (Segment segment : car.getSegments()) {

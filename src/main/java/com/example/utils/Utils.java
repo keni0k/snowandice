@@ -85,7 +85,7 @@ public class Utils {
                                 .append(segment.getEnd().getLat()).append(",")
                                 .append(segment.getEnd().getLng()).append("]");
                     }
-                    sb.append("]");
+                    sb.append("],");
                 }
                 return sb.append("]").toString();
             }

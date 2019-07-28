@@ -6,9 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="">
+    <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="segments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/UtilsForWeb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/UtilsForWeb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -268,21 +269,8 @@
       <workItem from="1564207797040" duration="1410000" />
       <workItem from="1564209248990" duration="22069000" />
       <workItem from="1564277973294" duration="378000" />
-      <workItem from="1564278449940" duration="20393000" />
-    </task>
-    <task id="LOCAL-00124" summary="Goods description">
-      <created>1561649590708</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1561649590708</updated>
-    </task>
-    <task id="LOCAL-00125" summary="Goods description">
-      <created>1561650556695</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1561650556695</updated>
+      <workItem from="1564278449940" duration="21320000" />
+      <workItem from="1564303613265" duration="952000" />
     </task>
     <task id="LOCAL-00126" summary="Goods images">
       <created>1561690164688</created>
@@ -613,7 +601,21 @@
       <option name="project" value="LOCAL" />
       <updated>1564301623650</updated>
     </task>
-    <option name="localTasksCounter" value="173" />
+    <task id="LOCAL-00173" summary="Config">
+      <created>1564302039984</created>
+      <option name="number" value="00173" />
+      <option name="presentableId" value="LOCAL-00173" />
+      <option name="project" value="LOCAL" />
+      <updated>1564302039984</updated>
+    </task>
+    <task id="LOCAL-00174" summary="segments">
+      <created>1564302110707</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1564302110707</updated>
+    </task>
+    <option name="localTasksCounter" value="175" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -646,7 +648,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="good name 1 modal" />
     <MESSAGE value="Without cifraadmin" />
     <MESSAGE value="nav-menu-downgrade" />
     <MESSAGE value="anchors" />
@@ -671,7 +672,8 @@
     <MESSAGE value="Routes" />
     <MESSAGE value="," />
     <MESSAGE value="Config" />
-    <option name="LAST_COMMIT_MESSAGE" value="Config" />
+    <MESSAGE value="segments" />
+    <option name="LAST_COMMIT_MESSAGE" value="segments" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

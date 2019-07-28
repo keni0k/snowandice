@@ -75,9 +75,8 @@ public class Utils {
             }
             if (isFinish) {
                 StringBuilder sb = new StringBuilder("[");
-                for (int i = 0; i < cars.size(); i++) {
-                    Car car = cars.get(i);
-                    sb.append("[[");
+                    Car car = cars.get(0);
+                    sb.append("[");
                     sb.append(car.getCoord().getLat())
                             .append(",").append(car.getCoord().getLng()).append("]");
                     for (Segment segment : car.getSegments()) {
@@ -86,11 +85,6 @@ public class Utils {
                                 .append(segment.getEnd().getLat()).append(",")
                                 .append(segment.getEnd().getLng()).append("]");
                     }
-                    if (i != cars.size() - 1)
-                        sb.append("],");
-                    else
-                        sb.append("]");
-                }
                 return sb.append("]").toString();
             }
             for (Car car : cars) {

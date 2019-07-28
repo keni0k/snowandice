@@ -7,7 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/Config.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -267,14 +267,7 @@
       <workItem from="1564207797040" duration="1410000" />
       <workItem from="1564209248990" duration="22069000" />
       <workItem from="1564277973294" duration="378000" />
-      <workItem from="1564278449940" duration="18428000" />
-    </task>
-    <task id="LOCAL-00119" summary="Bug deleted. Test passed">
-      <created>1561647000079</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1561647000079</updated>
+      <workItem from="1564278449940" duration="18814000" />
     </task>
     <task id="LOCAL-00120" summary="Goods description">
       <created>1561648575467</created>
@@ -612,7 +605,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564299083455</updated>
     </task>
-    <option name="localTasksCounter" value="168" />
+    <task id="LOCAL-00168" summary=",">
+      <created>1564300069388</created>
+      <option name="number" value="00168" />
+      <option name="presentableId" value="LOCAL-00168" />
+      <option name="project" value="LOCAL" />
+      <updated>1564300069389</updated>
+    </task>
+    <option name="localTasksCounter" value="169" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +645,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="prices models" />
     <MESSAGE value="prev,next" />
     <MESSAGE value="good name 1 modal" />
     <MESSAGE value="Without cifraadmin" />
@@ -670,7 +669,8 @@
     <MESSAGE value="Comment repos" />
     <MESSAGE value="Much updates" />
     <MESSAGE value="Routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Routes" />
+    <MESSAGE value="," />
+    <option name="LAST_COMMIT_MESSAGE" value="," />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

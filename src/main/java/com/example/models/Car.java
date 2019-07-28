@@ -14,15 +14,16 @@ import java.util.ArrayList;
 public class Car {
 
     /* It will use in production version */
-    float avgSpeedWithoutKOVSH;
+    /*float avgSpeedWithoutKOVSH;
     String name;
-    String phone;
+    String phone;*/
 
     public Car(float avgSpeedWithKOVSH, Coord coord) {
         this.avgSpeedWithKOVSH = avgSpeedWithKOVSH;
         this.coord = coord;
     }
 
+    private long id;
     private int ticks;
     private float avgSpeedWithKOVSH;
     private Coord coord;

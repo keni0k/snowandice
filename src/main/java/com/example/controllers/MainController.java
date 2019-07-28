@@ -65,28 +65,10 @@ public class MainController {
     @RequestMapping(value = "/do_class", method = RequestMethod.GET)
     public String algorithm(ModelMap modelMap,
                             @RequestParam(value = "cars") Integer cars) {
-        modelMap.addAttribute("utils", new UtilsForWeb());
-        modelMap.addAttribute("result", algorithmMorning(cars));
+        UtilsForWeb utilsForWeb = new UtilsForWeb();
+        modelMap.addAttribute("utils", utilsForWeb);
+        modelMap.addAttribute("result", utilsForWeb.algorithmMorning(cars));
         return "index";
-    }
-
-    private String algorithmMorning(Integer countOfCars) {
-        ArrayList<Car> cars = new ArrayList<>();
-        for (int i = 0; i < countOfCars; i++) {
-            cars.add(new Car(30, new Coord(52.2797298616311, 104.34527349498241), i));
-        }
-        ArrayList<Segment> segments = new ArrayList<>();
-        segments.add(new Segment("Lenina", new Coord(52.28576568355886, 104.28068161010744),
-                new Coord(52.28209020513799, 104.28089618682863), 10, 10.5, 3, 0));
-        segments.add(new Segment("Lenina", new Coord(52.28209020513799, 104.28089618682863),
-                new Coord(52.27599874106406, 104.28626060485841), 10, 10.5, 2, 1));
-        segments.add(new Segment("Sovetskya", new Coord(52.27634797179878, 104.30354261385219),
-                new Coord(52.27991890346087, 104.32371282564418), 10, 10.5, 1, 2));
-        segments.add(new Segment("Sovetskya", new Coord(52.27991890346087, 104.32371282564418),
-                new Coord(52.2797298616311, 104.34527349498241), 10, 10.5, 1, 3));
-        segments.add(new Segment("Sovetskya", new Coord(52.2797298616311, 104.34527349498241),
-                new Coord(52.2806094257078, 104.34774112727611), 10, 10.5, 1, 4));
-        return Utils.algorithm(0, cars, segments);
     }
 
     @RequestMapping("/status")
@@ -94,7 +76,6 @@ public class MainController {
         modelMap.addAttribute("utils", new UtilsForWeb());
         return "other/status";
     }
-
 
     private String redirectWithMsg(HttpServletRequest request, String msg, String msgType) {
         msg = URLEncoder.encode(msg, StandardCharsets.UTF_8);

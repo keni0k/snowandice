@@ -7,16 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/controllers/ApiController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/models/Car.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/Coord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/models/Coord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/Segment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/models/Segment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repo/CarRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/repo/CarRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/Consts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/Consts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/UtilsForWeb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/UtilsForWeb.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -276,14 +270,7 @@
       <workItem from="1564207797040" duration="1410000" />
       <workItem from="1564209248990" duration="22069000" />
       <workItem from="1564277973294" duration="378000" />
-      <workItem from="1564278449940" duration="11945000" />
-    </task>
-    <task id="LOCAL-00111" summary="BETA widget in modal">
-      <created>1561634417217</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1561634417217</updated>
+      <workItem from="1564278449940" duration="12365000" />
     </task>
     <task id="LOCAL-00112" summary="Loading indication">
       <created>1561635387210</created>
@@ -621,7 +608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564275480912</updated>
     </task>
-    <option name="localTasksCounter" value="160" />
+    <task id="LOCAL-00160" summary="Much updates">
+      <created>1564293217439</created>
+      <option name="number" value="00160" />
+      <option name="presentableId" value="LOCAL-00160" />
+      <option name="project" value="LOCAL" />
+      <updated>1564293217443</updated>
+    </task>
+    <option name="localTasksCounter" value="161" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,7 +648,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="goods (each);" />
     <MESSAGE value="goods (each);+1" />
     <MESSAGE value="prices models" />
     <MESSAGE value="prev,next" />
@@ -679,7 +672,8 @@
     <MESSAGE value="next, prev" />
     <MESSAGE value="StaRT!" />
     <MESSAGE value="Comment repos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Comment repos" />
+    <MESSAGE value="Much updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Much updates" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

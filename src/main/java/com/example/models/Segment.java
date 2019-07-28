@@ -5,6 +5,7 @@ import org.hibernate.annotations.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Comparator;

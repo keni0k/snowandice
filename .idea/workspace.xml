@@ -7,7 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controllers/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/models/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/Coord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/models/Coord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/Segment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/models/Segment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repo/CarRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/repo/CarRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/utils/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +114,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.20654045" />
   </component>
   <component name="RecentsManager">
@@ -265,14 +274,9 @@
       <workItem from="1561698176200" duration="31000" />
       <workItem from="1561698299562" duration="4585000" />
       <workItem from="1564207797040" duration="1410000" />
-      <workItem from="1564209248990" duration="19800000" />
-    </task>
-    <task id="LOCAL-00110" summary="BETA widget in modal">
-      <created>1561634005728</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1561634005728</updated>
+      <workItem from="1564209248990" duration="22069000" />
+      <workItem from="1564277973294" duration="378000" />
+      <workItem from="1564278449940" duration="11945000" />
     </task>
     <task id="LOCAL-00111" summary="BETA widget in modal">
       <created>1561634417217</created>
@@ -610,7 +614,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564275274407</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <task id="LOCAL-00159" summary="Comment repos">
+      <created>1564275480911</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1564275480912</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

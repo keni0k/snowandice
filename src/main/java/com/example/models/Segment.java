@@ -1,23 +1,29 @@
 package com.example.models;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Table;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-//@Entity
-//@Table(appliesTo = "segment")
+@Entity
+@Table(appliesTo = "segment")
+@NoArgsConstructor
+@Data
 public class Segment {
     private String nameOfStreet;
     @Column
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-//    @Column
-//    @OneToOne(targetEntity=Coord.class, mappedBy="segment", fetch=FetchType.EAGER)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @OneToOne(mappedBy = "segment", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
     private Coord start;
-//    @Column
-//    @OneToOne(targetEntity=Coord.class, mappedBy="segment", fetch=FetchType.EAGER)
+    @OneToOne(mappedBy = "segment", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
     private Coord end;
     @Column
     private int priority;
@@ -29,7 +35,7 @@ public class Segment {
     @Column
     private boolean isClean = false;
     @Column
-    private ArrayList<Car> cars;
+    private ArrayList<Car> cars = new ArrayList<>();
 
     /* It will use in production version */
     private Time lastCleaning;
@@ -39,13 +45,14 @@ public class Segment {
 
 
     public Segment(String nameOfStreet, Coord start, Coord end, int priority,
-                   double length, int countOfNeedCars) {
+                   double length, int countOfNeedCars, long id) {
         this.nameOfStreet = nameOfStreet;
         this.start = start;
         this.end = end;
         this.priority = priority;
         this.length = length;
         this.countOfNeedCars = countOfNeedCars;
+        this.id = id;
     }
 
     public Segment(Coord start, Coord end) {
@@ -57,6 +64,7 @@ public class Segment {
         if (cars == null || cars.size() == 0)
             return null;
         ArrayList<Car> clearCars = (ArrayList<Car>) cars.clone();
+        clearCars.removeIf(car -> car.getSegments().size()==0);
         clearCars.removeIf(
                 car -> car.getSegments().get(car.getSegments().size() - 1)
                         .getCountOfNeedCars() != 1

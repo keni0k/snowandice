@@ -1,22 +1,28 @@
 package com.example.models;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Table;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
-//@Entity
-//@Table(appliesTo = "coord")
+@Entity
+@Table(appliesTo = "coord")
+@NoArgsConstructor
+@Data
 public class Coord {
     @Column
     private double lat;
     @Column
     private double lng;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "segment_id")
+    Segment segment;
 
     public Coord(double lat, double lng) {
         this.lat = lat;

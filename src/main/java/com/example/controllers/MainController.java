@@ -21,8 +21,8 @@ import com.example.models.Coord;
 import com.example.models.Segment;
 import com.example.utils.Utils;
 import com.example.utils.UtilsForWeb;
+import groovy.util.logging.Log4j;
 import io.mola.galimatias.GalimatiasParseException;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.util.EntityUtils;
@@ -40,17 +40,15 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Random;
 
 import static com.example.utils.Consts.URL_PATH;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-@Slf4j
+@Log4j
 @Controller
 @RequestMapping("/")
 public class MainController {
     private Utils utils;
-
     @Autowired
     public MainController() {
 
@@ -61,7 +59,6 @@ public class MainController {
 //        List goods = goodsRepository.findAll();
 //        goods.sort(Comparator.comparingDouble(Good::getPriority));
         modelMap.addAttribute("utils", new UtilsForWeb());
-//        modelMap.addAttribute("goods", goods);
         return "index";
     }
 
@@ -73,13 +70,22 @@ public class MainController {
         return "index";
     }
 
-    private int algorithmMorning(Integer countOfCars) {
+    private String algorithmMorning(Integer countOfCars) {
         ArrayList<Car> cars = new ArrayList<>();
-        for (int i = 0; i < countOfCars; i++)
-            cars.add(new Car(30, new Coord(52.2797298616311, 104.34527349498241)));
+        for (int i = 0; i < countOfCars; i++) {
+            cars.add(new Car(30, new Coord(52.2797298616311, 104.34527349498241), i));
+        }
         ArrayList<Segment> segments = new ArrayList<>();
         segments.add(new Segment("Lenina", new Coord(52.28576568355886, 104.28068161010744),
-                new Coord(52.28209020513799, 104.28089618682863), 10, 10.5, 3));
+                new Coord(52.28209020513799, 104.28089618682863), 10, 10.5, 3, 0));
+        segments.add(new Segment("Lenina", new Coord(52.28209020513799, 104.28089618682863),
+                new Coord(52.27599874106406, 104.28626060485841), 10, 10.5, 2, 1));
+        segments.add(new Segment("Sovetskya", new Coord(52.27634797179878, 104.30354261385219),
+                new Coord(52.27991890346087, 104.32371282564418), 10, 10.5, 1, 2));
+        segments.add(new Segment("Sovetskya", new Coord(52.27991890346087, 104.32371282564418),
+                new Coord(52.2797298616311, 104.34527349498241), 10, 10.5, 1, 3));
+        segments.add(new Segment("Sovetskya", new Coord(52.2797298616311, 104.34527349498241),
+                new Coord(52.2806094257078, 104.34774112727611), 10, 10.5, 1, 4));
         return Utils.algorithm(0, cars, segments);
     }
 

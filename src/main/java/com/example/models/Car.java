@@ -3,6 +3,7 @@ package com.example.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
@@ -11,29 +12,36 @@ import java.util.ArrayList;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@Entity
-//@Table(appliesTo = "car")
+@Entity
+@Table(appliesTo = "car")
 public class Car {
 
     /* It will use in production version */
-    /*float avgSpeedWithoutKOVSH;
+    /*float avgSpeedWithoutKOVSH;*/
+    @Column(name = "name")
     String name;
-    String phone;*/
+    @Column(name = "phone")
+    String phone;
 
-    public Car(float avgSpeedWithKOVSH, Coord coord) {
+    public Car(float avgSpeedWithKOVSH, Coord coord, long id) {
         this.avgSpeedWithKOVSH = avgSpeedWithKOVSH;
         this.coord = coord;
+        this.id = id;
     }
-    @Column(name = "car_id")
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Transient
     private int ticks;
 
     @Column(name = "avg_speed")
     private float avgSpeedWithKOVSH;
-    @Column(name = "coord")
+    @Transient
     private Coord coord;
-    private ArrayList<Segment> segments;
+    @ToString.Exclude
+    @Transient
+    private ArrayList<Segment> segments = new ArrayList<>();
 
     public boolean isFree() {
         return ticks == 0;

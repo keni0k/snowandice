@@ -58,7 +58,7 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/api/routes", method = GET)
+    @RequestMapping(value = "/api/routes", method = GET, produces = "application/json")
     @ResponseBody
     public String routes(@RequestParam(value = "machinesCount") Integer machineCount) {
         UtilsForWeb utilsForWeb = new UtilsForWeb();

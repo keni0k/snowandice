@@ -7,7 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1977a3d0-607c-4299-9a58-b07d52abfe76" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/models/Segment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/models/Segment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -265,21 +266,7 @@
       <workItem from="1561698176200" duration="31000" />
       <workItem from="1561698299562" duration="4585000" />
       <workItem from="1564207797040" duration="1410000" />
-      <workItem from="1564209248990" duration="18255000" />
-    </task>
-    <task id="LOCAL-00104" summary="Widget in modal">
-      <created>1561631551186</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1561631551186</updated>
-    </task>
-    <task id="LOCAL-00105" summary="Widget in modal">
-      <created>1561632622157</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1561632622158</updated>
+      <workItem from="1564209248990" duration="18765000" />
     </task>
     <task id="LOCAL-00106" summary="Widget in modal">
       <created>1561632815005</created>
@@ -610,7 +597,21 @@
       <option name="project" value="LOCAL" />
       <updated>1564273687368</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="Comment repos">
+      <created>1564273940348</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1564273940348</updated>
+    </task>
+    <task id="LOCAL-00154" summary="Comment repos">
+      <created>1564274167003</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1564274167003</updated>
+    </task>
+    <option name="localTasksCounter" value="155" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -5,6 +5,7 @@ import com.example.models.Coord;
 import com.example.models.Segment;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class UtilsForWeb {
 
@@ -143,7 +144,6 @@ public class UtilsForWeb {
         segments.add(new Segment("Airport-Shiryamova_Koljo", new Coord(52.254100, 104.342780), new Coord(52.254100, 104.342780), 10, 10.5,2, 121));
         segments.add(new Segment("Airport-Shiryamova_Koljo", new Coord(52.254040, 104.342670), new Coord(52.254040, 104.342670), 10, 10.5,2, 122));
         segments.add(new Segment("Airport-Shiryamova_Koljo", new Coord(52.253970, 104.342500), new Coord(52.253970, 104.342500), 10, 10.5,2, 123));
-
         return Utils.algorithm(cars, segments);
     }
 

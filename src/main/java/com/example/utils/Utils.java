@@ -64,6 +64,7 @@ public class Utils {
     static String algorithm(ArrayList<Car> cars, ArrayList<Segment> segments) {
         clear(cars, segments);
         while (true) {
+            Logger logger = Logger.getLogger("SnowANdIce");
             carsTicksDec(cars);
             boolean isFinish = true;
             for (Segment segment : segments) {
@@ -73,16 +74,9 @@ public class Utils {
                 }
             }
             if (isFinish) {
-                Logger logger = Logger.getLogger("SnowAndIce");
-                for (Car car : cars) {
-                    logger.info("Car id: " + car.getId());
-                    for (Segment segment : car.getSegments())
-                        logger.info(segment.toString());
-                }
                 StringBuilder sb = new StringBuilder("[[");
-//                for (Car car : cars) {
-                Car car = cars.get(0);
-//                    sb.append("[");
+                for (Car car : cars) {
+                    sb.append("[");
                     sb.append(car.getCoord().getLat())
                             .append(",").append(car.getCoord().getLng()).append("]");
                     for (Segment segment : car.getSegments()) {
@@ -90,15 +84,15 @@ public class Utils {
                                 .append(segment.getStart().getLng()).append("],[")
                                 .append(segment.getEnd().getLat()).append(",")
                                 .append(segment.getEnd().getLng()).append("]");
-//                    }
-//                    sb.append("]");
+                    }
+                    sb.append("]");
                 }
                 return sb.append("]").toString();
             }
             for (Car car : cars) {
                 if (car.isFree()) {
                     Segment segment = getMinDistFreeSegment(segments, car);
-                    if (segment!=null) {
+                    if (segment != null) {
                         car.setTicks((int) (segment.getLength() / car.getAvgSpeedWithKOVSH() / 60));
                         car.getSegments().add(segment);
                         segment.getCars().add(car);
@@ -106,7 +100,7 @@ public class Utils {
                     }
                 }
             }
-            for (Segment segment : segments) {
+            /*for (Segment segment : segments) {
                 if (segment.getCountOfCars() > 0)
                     while (segment.getCountOfNeedCars() - segment.getCountOfCars() < segment.getMinDistAloneCars(cars).size() &&
                             segment.getMinDistAloneCar(cars) != null) {
@@ -115,7 +109,7 @@ public class Utils {
                         car.getSegments().remove(car.getSegments().size() - 1);
                         car.getSegments().add(segment);
                     }
-            }
+            }*/
         }
     }
 

@@ -2,10 +2,7 @@ package com.example.models;
 
 import org.hibernate.annotations.Table;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,10 +13,13 @@ public class Segment {
     private String nameOfStreet;
     @Column
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column
+    @OneToOne(targetEntity=Coord.class, mappedBy="segment", fetch=FetchType.EAGER)
     private Coord start;
     @Column
+    @OneToOne(targetEntity=Coord.class, mappedBy="segment", fetch=FetchType.EAGER)
     private Coord end;
     @Column
     private int priority;

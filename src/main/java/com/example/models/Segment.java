@@ -1,7 +1,5 @@
 package com.example.models;
 
-import org.hibernate.annotations.Table;
-
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.ArrayList;

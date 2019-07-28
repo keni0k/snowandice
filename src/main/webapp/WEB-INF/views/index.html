@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <!--/*@thymesVar id="result" type="java.lang.Integer"*/-->
-        <h1 th:if="${#httpServletRequest.getParameter('msg')!=''}" th:text="${result}">
+        <h1 th:if="${result}" th:text="${result}">
             It's comming!
         </h1>
         <h1>
